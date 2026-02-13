@@ -81,23 +81,29 @@ export default async function Programs() {
   const displayPrograms = programs.length > 0 ? programs : dummyPrograms;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-rose-50 to-pink-50 py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">Our Programs</h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Comprehensive initiatives supporting every aspect of rural women's empowerment
+      <section className="bg-white border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-6 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full mx-auto">
+            <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+            <span className="text-xs font-semibold text-teal-900 tracking-wide">OUR PROGRAMS</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Our programs</h1>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            Comprehensive initiatives supporting every aspect of rural women's empowerment.
           </p>
         </div>
       </section>
 
       {/* Program Cards */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Education Programs</h2>
-            <p className="text-gray-700 mb-8">Building knowledge and confidence through quality education</p>
+      <section className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-12">
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Education programs</h2>
+              <p className="text-slate-600 mt-2">Building knowledge and confidence through quality education.</p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
                 .filter(p => p.category === 'education')
@@ -107,9 +113,11 @@ export default async function Programs() {
             </div>
           </div>
 
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Health Programs</h2>
-            <p className="text-gray-700 mb-8">Ensuring health, wellness, and medical care for rural women</p>
+          <div className="border-t border-slate-200 pt-12 space-y-6">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Health programs</h2>
+              <p className="text-slate-600 mt-2">Ensuring health, wellness, and medical care for rural women.</p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
                 .filter(p => p.category === 'health')
@@ -119,9 +127,11 @@ export default async function Programs() {
             </div>
           </div>
 
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Skill Development</h2>
-            <p className="text-gray-700 mb-8">Vocational training for economic independence</p>
+          <div className="border-t border-slate-200 pt-12 space-y-6">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Skill development</h2>
+              <p className="text-slate-600 mt-2">Vocational training for economic independence.</p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
                 .filter(p => p.category === 'training')
@@ -131,9 +141,11 @@ export default async function Programs() {
             </div>
           </div>
 
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Other Initiatives</h2>
-            <p className="text-gray-700 mb-8">Additional empowerment programs and community services</p>
+          <div className="border-t border-slate-200 pt-12 space-y-6">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Other initiatives</h2>
+              <p className="text-slate-600 mt-2">Additional empowerment programs and community services.</p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
                 .filter(p => p.category === 'other')
@@ -146,9 +158,9 @@ export default async function Programs() {
       </section>
 
       {/* Impact Stats */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Program Impact</h2>
+      <section className="bg-white border-t border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">Program impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
               { label: 'Girls Educated', value: '250+' },
@@ -156,9 +168,9 @@ export default async function Programs() {
               { label: 'Health Services', value: '1000+' },
               { label: 'Communities Served', value: '50+' },
             ].map((stat, idx) => (
-              <div key={idx} className="bg-white rounded-lg p-8 text-center shadow-md">
-                <div className="text-4xl font-bold text-rose-600 mb-2">{stat.value}</div>
-                <div className="text-gray-700 font-medium">{stat.label}</div>
+              <div key={idx} className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200">
+                <div className="text-3xl font-bold text-teal-700 mb-2">{stat.value}</div>
+                <div className="text-slate-700 font-medium text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -166,13 +178,18 @@ export default async function Programs() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Support Our Programs</h2>
-          <p className="text-lg mb-8">Your donation enables us to continue and expand these life-changing programs.</p>
-          <button className="px-8 py-3 bg-white text-rose-600 font-bold rounded-lg hover:bg-gray-100 transition">
-            Donate Now
-          </button>
+      <section className="bg-slate-50 border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Support our programs</h2>
+          <p className="text-lg text-slate-600">
+            Your donation enables us to continue and expand these life-changing programs.
+          </p>
+          <a
+            href="/donate"
+            className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+          >
+            Donate now
+          </a>
         </div>
       </section>
     </div>

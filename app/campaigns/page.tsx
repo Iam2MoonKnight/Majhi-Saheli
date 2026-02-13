@@ -1,126 +1,122 @@
-import { getCampaigns } from '@/lib/supabase-functions';
 import Link from 'next/link';
+import { getCampaigns } from '@/lib/supabase-functions';
+import { fallbackCampaigns, mapSupabaseCampaigns } from '@/lib/campaigns';
+
+const statusStyles: Record<string, string> = {
+  ongoing: 'bg-teal-100 text-teal-800 border-teal-200',
+  completed: 'bg-slate-200 text-slate-700 border-slate-300',
+  upcoming: 'bg-amber-100 text-amber-800 border-amber-200',
+};
 
 export default async function CampaignsPage() {
-  const campaigns = await getCampaigns(false); // Only active campaigns
+  let campaigns = fallbackCampaigns;
+
+  try {
+    const supabaseCampaigns = await getCampaigns(true);
+    if (supabaseCampaigns.length > 0) {
+      campaigns = mapSupabaseCampaigns(supabaseCampaigns);
+    }
+  } catch (error) {
+    console.error('Error fetching campaigns:', error);
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-violet-600 to-purple-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full mb-6">
-              <span className="text-sm font-semibold tracking-wide">ACTIVE CAMPAIGNS</span>
-            </div>
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">Support Our Campaigns</h1>
-            <p className="text-xl text-violet-100 max-w-2xl mx-auto">
-              Join us in making a direct impact through our targeted fundraising campaigns
-            </p>
+    <div className="min-h-screen bg-slate-50">
+      {/* Intro */}
+      <section className="bg-white border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
+            <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+            <span className="text-xs font-semibold text-teal-900 tracking-wide">CAMPAIGNS</span>
           </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Support our campaigns</h1>
+          <p className="text-lg text-slate-600 max-w-2xl">
+            Targeted fundraising efforts to meet urgent needs in education, health, and training for rural women.
+          </p>
         </div>
-      </div>
+      </section>
 
       {/* Campaigns Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {campaigns.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {campaigns.map((campaign) => {
-              const progress = (campaign.raised_amount / campaign.goal_amount) * 100;
-              const daysLeft = campaign.end_date 
-                ? Math.max(0, Math.ceil((new Date(campaign.end_date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)))
-                : null;
+              const progress = campaign.goalAmount > 0 ? (campaign.raisedAmount / campaign.goalAmount) * 100 : 0;
 
               return (
                 <div
                   key={campaign.id}
-                  className="group bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all"
                 >
-                  {campaign.featured_image ? (
-                    <div className="h-56 overflow-hidden bg-gray-200">
-                      <img
-                        src={campaign.featured_image}
-                        alt={campaign.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                  <div className="p-6 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span
+                        className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
+                          statusStyles[campaign.status]
+                        }`}
+                      >
+                        {campaign.status}
+                      </span>
+                      <span className="text-xs text-slate-500 capitalize">{campaign.category}</span>
                     </div>
-                  ) : (
-                    <div className="h-56 bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center">
-                      <span className="text-7xl">🎯</span>
-                    </div>
-                  )}
-                  
-                  <div className="p-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-3 line-clamp-2">
-                      {campaign.title}
-                    </h2>
-                    <p className="text-gray-600 mb-6 line-clamp-3">{campaign.description}</p>
-                    
-                    {/* Progress Bar */}
-                    <div className="mb-6">
-                      <div className="flex items-center justify-between text-sm mb-2">
-                        <span className="font-semibold text-gray-900">
-                          ₹{campaign.raised_amount?.toLocaleString() || 0}
+                    <h2 className="text-xl font-bold text-slate-900">{campaign.title}</h2>
+                    <p className="text-sm text-slate-600 line-clamp-3">{campaign.description}</p>
+                    <p className="text-xs text-slate-500">{campaign.location}</p>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="font-semibold text-slate-900">
+                          ₹{campaign.raisedAmount.toLocaleString()}
                         </span>
-                        <span className="text-gray-600">
-                          of ₹{campaign.goal_amount?.toLocaleString()}
+                        <span className="text-slate-600">
+                          of ₹{campaign.goalAmount.toLocaleString()}
                         </span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div className="w-full bg-slate-200 rounded-full h-2">
                         <div
-                          className="bg-gradient-to-r from-violet-600 to-purple-600 h-3 rounded-full transition-all duration-500"
+                          className="bg-gradient-to-r from-teal-500 to-emerald-500 h-2 rounded-full"
                           style={{ width: `${Math.min(progress, 100)}%` }}
                         ></div>
                       </div>
-                      <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
-                        <span>{Math.round(progress)}% funded</span>
-                        {daysLeft !== null && (
-                          <span>{daysLeft} days left</span>
-                        )}
-                      </div>
                     </div>
 
-                    <Link
-                      href={`/donate?campaign=${campaign.slug}`}
-                      className="block w-full px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition text-center shadow-lg"
-                    >
-                      Donate Now
-                    </Link>
+                    <div className="flex items-center gap-3 pt-2">
+                      <Link
+                        href={`/campaigns/${campaign.id}`}
+                        className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+                      >
+                        View details
+                      </Link>
+                      <Link
+                        href={`/donate?campaign=${campaign.id}`}
+                        className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:opacity-90"
+                      >
+                        Donate
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
-        ) : (
-          <div className="text-center py-20">
-            <div className="text-6xl mb-6">🎯</div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">No active campaigns</h3>
-            <p className="text-gray-600 mb-8">Check back soon for new fundraising campaigns!</p>
-            <Link
-              href="/donate"
-              className="inline-block px-8 py-4 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition shadow-lg"
-            >
-              Make a General Donation
-            </Link>
-          </div>
-        )}
-      </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-violet-600 to-purple-600 text-white py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Want to Create Your Own Campaign?</h2>
-          <p className="text-xl text-violet-100 mb-8">
-            Partner with us to launch a targeted campaign for a specific cause or community
+      <section className="bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Want to create your own campaign?</h2>
+          <p className="text-lg text-slate-600">
+            Partner with us to launch a targeted campaign for a specific cause or community.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-4 bg-white text-violet-600 font-semibold rounded-lg hover:bg-violet-50 transition shadow-xl"
+            className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
           >
-            Get in Touch
+            Get in touch
           </Link>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

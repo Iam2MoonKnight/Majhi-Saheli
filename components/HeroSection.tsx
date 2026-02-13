@@ -17,35 +17,35 @@ export default async function HeroSection() {
   }
 
   return (
-    <section className="relative bg-gradient-to-b from-neutral-50 via-white to-neutral-50 py-20 lg:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-b from-slate-50 via-white to-teal-50 min-h-[70vh] py-16 lg:py-24 overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.15) 1px, transparent 0)',
         backgroundSize: '40px 40px'
       }}></div>
       
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 rounded-full">
-              <div className="w-2 h-2 bg-violet-600 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold text-violet-900 tracking-wide">TRANSFORMING RURAL INDIA</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
+              <div className="w-2 h-2 bg-teal-600 rounded-full animate-pulse"></div>
+              <span className="text-sm font-semibold text-teal-900 tracking-wide">TRANSFORMING RURAL INDIA</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-[1.1]">
               {heroContent.title}
-              <span className="block text-violet-600 mt-2">{heroContent.subtitle}</span>
+              <span className="block text-teal-700 mt-2">{heroContent.subtitle}</span>
             </h1>
             
-            <p className="text-xl text-neutral-600 leading-relaxed max-w-xl">
+            <p className="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-xl">
               {heroContent.description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link
                 href={heroContent.cta_link}
-                className="group inline-flex items-center justify-center px-8 py-4 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-all duration-200 shadow-lg shadow-violet-600/30 hover:shadow-xl hover:shadow-violet-600/40 hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
               >
                 {heroContent.cta_text}
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -54,7 +54,7 @@ export default async function HeroSection() {
               </Link>
               <Link
                 href="/programs"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-violet-600 font-semibold rounded-lg border-2 border-violet-200 hover:border-violet-300 hover:bg-violet-50 transition-all duration-200"
+                className="inline-flex items-center justify-center rounded-lg border border-teal-200 bg-white px-6 py-3 text-sm font-semibold text-teal-700 shadow-sm transition hover:bg-teal-50"
               >
                 Explore Programs
               </Link>
@@ -63,15 +63,15 @@ export default async function HeroSection() {
             {/* Professional Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8 border-t border-neutral-200">
               <div>
-                <div className="text-3xl font-bold text-violet-600">2,500+</div>
+                <div className="text-3xl font-bold text-teal-700">2,500+</div>
                 <div className="text-sm text-neutral-600 font-medium mt-1">Lives Impacted</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-violet-600">50+</div>
+                <div className="text-3xl font-bold text-teal-700">50+</div>
                 <div className="text-sm text-neutral-600 font-medium mt-1">Villages</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-violet-600">15+</div>
+                <div className="text-3xl font-bold text-teal-700">15+</div>
                 <div className="text-sm text-neutral-600 font-medium mt-1">Programs</div>
               </div>
             </div>
@@ -80,10 +80,10 @@ export default async function HeroSection() {
           {/* Right Visual - Professional Image */}
           <div className="relative lg:h-[600px] h-96">
             {/* Background accent */}
-            <div className="absolute top-8 left-8 right-0 bottom-0 bg-gradient-to-br from-violet-600 to-pink-600 rounded-2xl opacity-10"></div>
+            <div className="absolute top-8 left-8 right-0 bottom-0 bg-gradient-to-br from-teal-600 to-rose-500 rounded-2xl opacity-10"></div>
             
             {/* Main image container */}
-            <div className="relative h-full bg-gradient-to-br from-violet-100 to-pink-100 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="relative h-full bg-gradient-to-br from-teal-100 to-rose-100 rounded-2xl shadow-2xl overflow-hidden">
               {heroContent.image_url ? (
                 <img 
                   src={heroContent.image_url} 
@@ -93,7 +93,7 @@ export default async function HeroSection() {
               ) : (
                 <>
                   {/* Image placeholder with overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 to-pink-600/20"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-600/20 to-rose-500/20"></div>
                   
                   {/* Decorative pattern */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 opacity-20">

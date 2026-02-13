@@ -3,15 +3,26 @@ import ProgramCard from '@/components/ProgramCard';
 import StatCard from '@/components/StatCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import Link from 'next/link';
-import { getPrograms } from '@/lib/supabase-functions';
+import { getCampaigns, getPrograms } from '@/lib/supabase-functions';
+import { fallbackCampaigns, getFeaturedCampaign, mapSupabaseCampaigns } from '@/lib/campaigns';
 
 export default async function Home() {
   let programs = [];
-  
+  let campaigns = fallbackCampaigns;
+
   try {
     programs = await getPrograms();
   } catch (error) {
     console.error('Error fetching programs:', error);
+  }
+
+  try {
+    const supabaseCampaigns = await getCampaigns(true);
+    if (supabaseCampaigns.length > 0) {
+      campaigns = mapSupabaseCampaigns(supabaseCampaigns);
+    }
+  } catch (error) {
+    console.error('Error fetching campaigns:', error);
   }
 
   // Dummy programs data if fetch fails
@@ -47,25 +58,85 @@ export default async function Home() {
   ];
 
   const displayPrograms = programs.length > 0 ? programs : dummyPrograms;
+  const featuredCampaign = getFeaturedCampaign(campaigns);
+  const progress = featuredCampaign.goalAmount > 0 ? (featuredCampaign.raisedAmount / featuredCampaign.goalAmount) * 100 : 0;
 
   return (
     <div>
-      {/* Hero Section */}
       <HeroSection />
 
-      {/* Programs Section */}
-      <section className="bg-neutral-50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 lg:mb-20 space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 rounded-full">
-              <div className="w-2 h-2 bg-violet-600 rounded-full"></div>
-              <span className="text-sm font-semibold text-violet-900 tracking-wide">OUR PROGRAMS</span>
+      {/* Featured Campaign */}
+      <section className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
+                <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+                <span className="text-xs font-semibold text-teal-900 tracking-wide">LATEST CAMPAIGN</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Featured campaign</h2>
+              <p className="text-slate-600 max-w-2xl">
+                Direct, time-bound initiatives that bring immediate support to women and communities.
+              </p>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-neutral-900">Making Impact Together</h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">Comprehensive initiatives supporting rural women's growth and sustainable community development</p>
+            <Link
+              href="/campaigns"
+              className="inline-flex items-center justify-center rounded-lg border border-teal-200 bg-white px-4 py-2 text-sm font-medium text-teal-700 shadow-sm transition hover:bg-teal-50"
+            >
+              View all campaigns
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="bg-white rounded-2xl border border-slate-200 p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-4">
+              <h3 className="text-2xl font-bold text-slate-900">{featuredCampaign.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{featuredCampaign.description}</p>
+              <p className="text-sm font-medium text-slate-500">{featuredCampaign.location}</p>
+            </div>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="font-semibold text-slate-900">
+                    ₹{featuredCampaign.raisedAmount.toLocaleString()}
+                  </span>
+                  <span className="text-slate-600">
+                    of ₹{featuredCampaign.goalAmount.toLocaleString()}
+                  </span>
+                </div>
+                <div className="w-full bg-slate-200 rounded-full h-3">
+                  <div
+                    className="bg-gradient-to-r from-teal-500 to-emerald-500 h-3 rounded-full"
+                    style={{ width: `${Math.min(progress, 100)}%` }}
+                  ></div>
+                </div>
+                <div className="text-xs text-slate-500">{Math.round(progress)}% funded</div>
+              </div>
+              <Link
+                href={`/campaigns/${featuredCampaign.id}`}
+                className="inline-flex w-full items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+              >
+                Support this campaign
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Programs Section */}
+      <section className="bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
+              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+              <span className="text-xs font-semibold text-teal-900 tracking-wide">OUR PROGRAMS</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Making impact together</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Comprehensive initiatives supporting rural women's growth and sustainable community development.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {displayPrograms.map((program) => (
               <ProgramCard key={program.id} program={program} />
             ))}
@@ -74,27 +145,26 @@ export default async function Home() {
           <div className="flex items-center justify-center">
             <Link
               href="/programs"
-              className="group inline-flex items-center justify-center px-8 py-4 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-all duration-200 shadow-lg shadow-violet-600/30 hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
             >
-              Explore All Programs
-              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              Explore all programs
             </Link>
           </div>
         </div>
       </section>
 
       {/* Impact Section */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 lg:mb-20 space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 rounded-full">
-              <div className="w-2 h-2 bg-violet-600 rounded-full"></div>
-              <span className="text-sm font-semibold text-violet-900 tracking-wide">OUR IMPACT</span>
+      <section className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
+              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+              <span className="text-xs font-semibold text-teal-900 tracking-wide">OUR IMPACT</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-neutral-900">Creating Lasting Change</h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">Transforming lives in rural communities through education, health, and empowerment</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Creating lasting change</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Transforming lives in rural communities through education, health, and empowerment.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -107,15 +177,17 @@ export default async function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="bg-neutral-50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 lg:mb-20 space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 rounded-full">
-              <div className="w-2 h-2 bg-violet-600 rounded-full"></div>
-              <span className="text-sm font-semibold text-violet-900 tracking-wide">SUCCESS STORIES</span>
+      <section className="bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
+              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+              <span className="text-xs font-semibold text-teal-900 tracking-wide">SUCCESS STORIES</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-neutral-900">Voices of Change</h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">Real stories from women whose lives have been transformed</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Voices of change</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Real stories from women whose lives have been transformed.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -139,26 +211,26 @@ export default async function Home() {
       </section>
 
       {/* Partners Section */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 rounded-full">
-              <div className="w-2 h-2 bg-violet-600 rounded-full"></div>
-              <span className="text-sm font-semibold text-violet-900 tracking-wide">PARTNERSHIPS</span>
+      <section className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
+              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+              <span className="text-xs font-semibold text-teal-900 tracking-wide">PARTNERSHIPS</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-neutral-900">Trusted Partners</h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">Collaborating for sustainable social impact</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Trusted partners</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Collaborating for sustainable social impact.</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="bg-neutral-50 rounded-lg p-8 flex items-center justify-center h-32 border border-neutral-200 hover:border-neutral-300 hover:shadow-md transition-all"
+                className="bg-white rounded-lg p-8 flex items-center justify-center h-32 border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all"
               >
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-neutral-300">Partner</div>
-                  <p className="text-xs text-neutral-400 mt-1">Logo</p>
+                  <div className="text-3xl font-bold text-slate-300">Partner</div>
+                  <p className="text-xs text-slate-400 mt-1">Logo</p>
                 </div>
               </div>
             ))}
@@ -167,30 +239,33 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-gradient-to-br from-violet-600 via-violet-700 to-purple-800 overflow-hidden">
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }}></div>
-        
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center relative z-10">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">Be Part of the Change</h2>
-          <p className="text-lg lg:text-xl text-violet-100 mb-10 leading-relaxed max-w-2xl mx-auto">
-            Every contribution helps transform the lives of rural women. Join us in creating lasting impact in communities across rural India.
+      <section className="relative bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
+            backgroundSize: '40px 40px',
+          }}
+        ></div>
+
+        <div className="max-w-4xl mx-auto px-4 py-16 text-center relative z-10 space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Be part of the change</h2>
+          <p className="text-lg text-teal-100 max-w-2xl mx-auto">
+            Every contribution helps transform the lives of rural women. Join us in creating lasting impact in
+            communities across rural India.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-violet-600 font-semibold rounded-lg hover:bg-neutral-50 transition-all duration-200 shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-teal-700 shadow-sm transition hover:opacity-90"
             >
-              Support Our Mission
+              Support our mission
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-violet-600 transition-all duration-200"
+              className="inline-flex items-center justify-center rounded-lg border border-white px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-white hover:text-teal-700"
             >
-              Get in Touch
+              Get in touch
             </Link>
           </div>
         </div>

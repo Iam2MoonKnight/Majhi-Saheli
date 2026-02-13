@@ -1,29 +1,33 @@
 export default function SaheliCircle() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-rose-50 to-pink-50 py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">Saheli Circle</h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            A community initiative creating peer support, mutual learning, and collective empowerment for rural women
+      <section className="bg-white border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-6 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full mx-auto">
+            <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
+            <span className="text-xs font-semibold text-teal-900 tracking-wide">COMMUNITY</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Saheli Circle</h1>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            A community initiative creating peer support, mutual learning, and collective empowerment for rural women.
           </p>
         </div>
       </section>
 
       {/* What is Saheli Circle */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-8">What is Saheli Circle?</h2>
+      <section className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">What is Saheli Circle?</h2>
 
-          <div className="prose prose-lg text-gray-700 space-y-6">
+          <div className="prose prose-lg text-slate-700 space-y-6 max-w-none">
             <p>
               Saheli Circle is our community initiative that creates spaces for rural women to come together, support
               each other, and learn collectively. It's more than a program—it's a movement of women supporting women.
             </p>
 
-            <div className="bg-rose-50 border-l-4 border-rose-500 p-6 rounded">
-              <p className="font-semibold text-gray-900 mb-2">Core Concept:</p>
+            <div className="bg-white border border-slate-200 p-6 rounded-2xl">
+              <p className="font-semibold text-slate-900 mb-2">Core Concept</p>
               <p>
                 Saheli Circle brings women together in small groups (10-15 members) to share experiences, solve
                 problems collectively, and work towards individual and community goals. Each circle meets regularly and
@@ -49,10 +53,10 @@ export default function SaheliCircle() {
                   desc: 'Work together to solve community problems',
                 },
               ].map((item, idx) => (
-                <div key={idx} className="bg-gray-50 rounded-lg p-6 text-center">
+                <div key={idx} className="bg-white rounded-2xl p-6 text-center border border-slate-200">
                   <div className="text-4xl mb-3">{item.icon}</div>
-                  <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-700 text-sm">{item.desc}</p>
+                  <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-slate-600 text-sm">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -61,9 +65,9 @@ export default function SaheliCircle() {
       </section>
 
       {/* Upcoming Activities */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Upcoming Activities</h2>
+      <section className="bg-white border-t border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">Upcoming activities</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
@@ -96,14 +100,14 @@ export default function SaheliCircle() {
                 attendees: '500+ women',
               },
             ].map((activity, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                <div className="bg-gradient-to-r from-rose-500 to-pink-600 p-4 text-white">
+              <div key={idx} className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition">
+                <div className="bg-gradient-to-r from-teal-600 to-emerald-600 p-4 text-white">
                   <div className="text-sm font-semibold">{activity.date}</div>
                   <h3 className="text-xl font-bold mt-2">{activity.title}</h3>
                 </div>
                 <div className="p-6">
-                  <p className="text-gray-700 mb-4">{activity.desc}</p>
-                  <div className="space-y-2 text-sm text-gray-600">
+                  <p className="text-slate-700 mb-4">{activity.desc}</p>
+                  <div className="space-y-2 text-sm text-slate-600">
                     <p>
                       <span className="font-semibold">📍</span> {activity.location}
                     </p>
@@ -111,7 +115,7 @@ export default function SaheliCircle() {
                       <span className="font-semibold">👥</span> {activity.attendees}
                     </p>
                   </div>
-                  <button className="mt-4 w-full px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition">
+                  <button className="mt-4 w-full inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90">
                     Learn More
                   </button>
                 </div>
@@ -122,9 +126,9 @@ export default function SaheliCircle() {
       </section>
 
       {/* Resources */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Resources</h2>
+      <section className="bg-slate-50 border-t border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">Resources</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
@@ -149,14 +153,14 @@ export default function SaheliCircle() {
                 items: ['Stories & Case Studies', 'Success Examples', 'FAQs'],
               },
             ].map((resource, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-lg p-6">
+              <div key={idx} className="bg-white rounded-2xl p-6 border border-slate-200">
                 <div className="text-4xl mb-4">{resource.icon}</div>
-                <h3 className="text-lg font-bold text-gray-900 mb-4">{resource.title}</h3>
+                <h3 className="text-lg font-bold text-slate-900 mb-4">{resource.title}</h3>
                 <ul className="space-y-2">
                   {resource.items.map((item, i) => (
-                    <li key={i} className="text-gray-700 flex items-center gap-2">
-                      <span className="text-rose-500">→</span>
-                      <a href="#" className="hover:text-rose-600 transition">
+                    <li key={i} className="text-slate-700 flex items-center gap-2">
+                      <span className="text-teal-600">→</span>
+                      <a href="#" className="hover:text-teal-700 transition">
                         {item}
                       </a>
                     </li>
@@ -169,9 +173,9 @@ export default function SaheliCircle() {
       </section>
 
       {/* Circle Stories */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Circle Stories</h2>
+      <section className="bg-white border-t border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">Circle stories</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -197,11 +201,11 @@ export default function SaheliCircle() {
                 impact: 'Educational access',
               },
             ].map((circle, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-lg p-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{circle.title}</h3>
-                <p className="text-sm text-gray-600 mb-4">📍 {circle.location}</p>
-                <p className="text-gray-700 mb-6 leading-relaxed">{circle.story}</p>
-                <div className="bg-rose-100 text-rose-700 px-4 py-2 rounded inline-block font-semibold text-sm">
+              <div key={idx} className="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{circle.title}</h3>
+                <p className="text-sm text-slate-500 mb-4">📍 {circle.location}</p>
+                <p className="text-slate-700 mb-6 leading-relaxed">{circle.story}</p>
+                <div className="bg-teal-100 text-teal-700 px-4 py-2 rounded inline-block font-semibold text-xs">
                   {circle.impact}
                 </div>
               </div>
@@ -211,9 +215,9 @@ export default function SaheliCircle() {
       </section>
 
       {/* Join Saheli Circle */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">How to Join Saheli Circle</h2>
+      <section className="bg-slate-50 border-t border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 py-16 space-y-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">How to join Saheli Circle</h2>
 
           <div className="space-y-8">
             {[
@@ -240,24 +244,24 @@ export default function SaheliCircle() {
             ].map((step, idx) => (
               <div key={idx} className="flex gap-6">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold text-lg">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold text-lg">
                     {step.step}
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                  <p className="text-gray-700">{step.desc}</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
+                  <p className="text-slate-600">{step.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-12 bg-rose-50 border-2 border-rose-300 rounded-lg p-8 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Join?</h3>
-            <p className="text-gray-700 mb-6">
+          <div className="bg-white border border-teal-200 rounded-2xl p-8 text-center">
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">Ready to join?</h3>
+            <p className="text-slate-600 mb-6">
               Reach out to us today to find a circle near you or form a new one in your community.
             </p>
-            <button className="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-lg hover:shadow-lg transition">
+            <button className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90">
               Contact Us Now
             </button>
           </div>

@@ -50,7 +50,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-violet-600 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-violet-600/30 group-hover:shadow-xl group-hover:shadow-violet-600/40 transition-all">
+            <div className="w-10 h-10 bg-gradient-to-br from-teal-600 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg shadow-teal-600/30 group-hover:shadow-xl group-hover:shadow-teal-600/40 transition-all">
               <span className="text-white font-bold text-xl">S</span>
             </div>
             <span className="text-2xl font-bold text-neutral-900">Saheli</span>
@@ -58,76 +58,82 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-8">
-            <Link href="/" className="text-neutral-700 hover:text-violet-600 transition-colors font-medium">
+            <Link href="/" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
               Home
             </Link>
-            <Link href="/about" className="text-neutral-700 hover:text-violet-600 transition-colors font-medium">
+            <Link href="/about" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
               About
             </Link>
-            <Link href="/programs" className="text-neutral-700 hover:text-violet-600 transition-colors font-medium">
+            <Link href="/programs" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
               Programs
             </Link>
-            <Link href="/blog" className="text-neutral-700 hover:text-violet-600 transition-colors font-medium">
+            <Link href="/blog" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
               Blog
             </Link>
-            <Link href="/saheli-circle" className="text-neutral-700 hover:text-violet-600 transition-colors font-medium">
+            <Link href="/campaigns" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
+              Campaigns
+            </Link>
+            <Link href="/saheli-circle" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
               Community
             </Link>
-            <Link href="/impact" className="text-neutral-700 hover:text-violet-600 transition-colors font-medium">
+            <Link href="/impact" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
               Impact
             </Link>
-            <Link href="/contact" className="text-neutral-700 hover:text-violet-600 transition-colors font-medium">
+            <Link href="/contact" className="text-neutral-700 hover:text-teal-700 transition-colors font-medium">
               Contact
             </Link>
 
             {isLoggedIn ? (
-                <div className="relative group">
-                  <button
-                    type="button"
-                    aria-label="Open user menu"
-                    className="w-10 h-10 rounded-full bg-neutral-100 text-neutral-700 flex items-center justify-center font-semibold hover:bg-neutral-200 transition-colors"
-                  >
-                    {userName ? userName.trim().charAt(0).toUpperCase() : 'U'}
-                  </button>
+              <div className="relative group">
+                <button
+                  type="button"
+                  aria-label="Open user menu"
+                  className="w-10 h-10 rounded-full bg-neutral-100 text-neutral-700 flex items-center justify-center font-semibold hover:bg-neutral-200 transition-colors"
+                >
+                  {userName ? userName.trim().charAt(0).toUpperCase() : 'U'}
+                </button>
 
-                  <div className="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
-                    <div className="px-4 py-3 border-b border-neutral-200">
-                      <p className="text-sm text-neutral-500">Signed in</p>
-                      <p className="text-sm font-semibold text-neutral-900 truncate">
-                        {userName || 'User'}
-                      </p>
-                    </div>
-                    <div className="py-2">
-                      <Link
-                        href="/profile"
-                        className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
-                      >
-                        Profile
-                      </Link>
-                      <Link
-                        href="/dashboard"
-                        className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
-                      >
-                        Dashboard
-                      </Link>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
-                      >
-                        Logout
-                      </button>
-                    </div>
+                <div className="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
+                  <div className="px-4 py-3 border-b border-neutral-200">
+                    <p className="text-sm text-neutral-500">Signed in</p>
+                    <p className="text-sm font-semibold text-neutral-900 truncate">
+                      {userName || 'User'}
+                    </p>
+                  </div>
+                  <div className="py-2">
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      href="/dashboard"
+                      className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+                    >
+                      Logout
+                    </button>
                   </div>
                 </div>
-              ) : (
-              <Link href="/login" className="px-5 py-2 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-colors shadow-lg shadow-violet-600/30">
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="px-5 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:opacity-90 transition-colors shadow-sm"
+              >
                 Login
               </Link>
             )}
 
             <Link
               href="/donate"
-              className="px-6 py-2.5 bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg shadow-pink-600/30 hover:shadow-xl"
+              className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
             >
               Donate
             </Link>
@@ -147,34 +153,37 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="lg:hidden pb-4 space-y-1 border-t border-neutral-200 pt-4 mt-2">
-            <Link href="/" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+            <Link href="/" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
               Home
             </Link>
-            <Link href="/about" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+            <Link href="/about" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
               About
             </Link>
-            <Link href="/programs" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+            <Link href="/programs" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
               Programs
             </Link>
-            <Link href="/blog" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+            <Link href="/blog" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
               Blog
             </Link>
-            <Link href="/saheli-circle" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+            <Link href="/campaigns" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
+              Campaigns
+            </Link>
+            <Link href="/saheli-circle" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
               Community
             </Link>
-            <Link href="/impact" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+            <Link href="/impact" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
               Impact
             </Link>
-            <Link href="/contact" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+            <Link href="/contact" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
               Contact
             </Link>
 
             {isLoggedIn ? (
               <>
-                <Link href="/profile" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+                <Link href="/profile" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
                   Profile
                 </Link>
-                <Link href="/dashboard" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-violet-600 rounded-lg transition-colors font-medium">
+                <Link href="/dashboard" className="block px-4 py-3 text-neutral-700 hover:bg-neutral-50 hover:text-teal-700 rounded-lg transition-colors font-medium">
                   Dashboard
                 </Link>
                 <button
@@ -185,12 +194,15 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
-              <Link href="/login" className="block px-4 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors font-semibold text-center">
+              <Link
+                href="/login"
+                className="block px-4 py-3 bg-teal-600 text-white rounded-lg hover:opacity-90 transition-colors font-semibold text-center"
+              >
                 Login
               </Link>
             )}
 
-            <Link href="/donate" className="block px-4 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all font-semibold text-center shadow-lg">
+            <Link href="/donate" className="block px-4 py-3 bg-teal-600 text-white rounded-lg hover:opacity-90 transition-all font-semibold text-center shadow-sm">
               Donate
             </Link>
           </div>

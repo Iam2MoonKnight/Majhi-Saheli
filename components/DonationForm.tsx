@@ -6,19 +6,22 @@ import { supabase } from '@/lib/supabase';
 
 interface DonationFormProps {
   onSuccess?: () => void;
+  campaignLabel?: string | null;
+  initialMessage?: string;
 }
 
-export default function DonationForm({ onSuccess }: DonationFormProps) {
+export default function DonationForm({ onSuccess, campaignLabel, initialMessage }: DonationFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const defaultMessage = initialMessage ?? '';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     amount: '',
     currency: 'INR',
     frequency: 'one_time',
-    message: '',
+    message: defaultMessage,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -52,7 +55,7 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
         amount: '',
         currency: 'INR',
         frequency: 'one_time',
-        message: '',
+        message: defaultMessage,
       });
 
       setTimeout(() => {
@@ -69,6 +72,12 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
   return (
     <div className="bg-white rounded-lg shadow-lg p-8">
       <h2 className="text-3xl font-bold text-gray-900 mb-6">Make a Donation</h2>
+
+      {campaignLabel && (
+        <div className="mb-6 rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-800">
+          Supporting campaign: <span className="font-semibold">{campaignLabel}</span>
+        </div>
+      )}
 
       {success && (
         <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
@@ -96,7 +105,7 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
               placeholder="Your name"
             />
           </div>
@@ -113,7 +122,7 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
               placeholder="your@email.com"
             />
           </div>
@@ -134,7 +143,7 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
               required
               min="1"
               step="0.01"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
               placeholder="500"
             />
           </div>
@@ -149,7 +158,7 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
               name="currency"
               value={formData.currency}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
             >
               <option value="INR">INR</option>
               <option value="USD">USD</option>
@@ -200,7 +209,7 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
             value={formData.message}
             onChange={handleChange}
             rows={4}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none resize-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none resize-none"
             placeholder="Share why you're supporting Saheli (optional)"
           />
         </div>
@@ -209,7 +218,7 @@ export default function DonationForm({ onSuccess }: DonationFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Processing...' : `Donate ${formData.currency} ${formData.amount || '0'}`}
         </button>
