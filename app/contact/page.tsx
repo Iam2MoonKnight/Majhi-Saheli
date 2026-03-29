@@ -2,79 +2,75 @@ import ContactForm from '@/components/ContactForm';
 
 export default function Contact() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-rose-50 to-pink-50 py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">Get in Touch</h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+    <div className="min-h-screen overflow-hidden">
+      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)] py-16">
+        <div className="editorial-section text-center space-y-6">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(232_131_74_/_0.14)] px-4 py-2">
+            <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+            <span className="section-eyebrow text-[var(--navy)]">Contact</span>
+          </div>
+          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Get in touch</h1>
+          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
             Have questions or want to collaborate? We'd love to hear from you!
           </p>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-16">
+        <div className="editorial-section">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contact Information */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">Contact Information</h2>
+              <h2 className="font-heading text-2xl font-bold text-[var(--navy)] mb-8">Contact Information</h2>
 
               <div className="space-y-8">
-                {/* Email */}
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <h3 className="font-bold text-[var(--navy)] mb-2 flex items-center gap-2">
                     <span className="text-2xl">📧</span> Email
                   </h3>
-                  <p className="text-gray-700">hello@saheli.org</p>
-                  <p className="text-sm text-gray-600 mt-1">We respond within 24 hours</p>
+                  <p className="text-[var(--text)]">hello@saheli.org</p>
+                  <p className="text-sm text-[var(--text-muted)] mt-1">We respond within 24 hours</p>
                 </div>
 
-                {/* Phone */}
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <h3 className="font-bold text-[var(--navy)] mb-2 flex items-center gap-2">
                     <span className="text-2xl">📱</span> Phone
                   </h3>
-                  <p className="text-gray-700">+91 XXXX-XXXX-XX</p>
-                  <p className="text-sm text-gray-600 mt-1">Monday-Friday, 10 AM - 5 PM IST</p>
+                  <p className="text-[var(--text)]">+91 XXXX-XXXX-XX</p>
+                  <p className="text-sm text-[var(--text-muted)] mt-1">Monday-Friday, 10 AM - 5 PM IST</p>
                 </div>
 
-                {/* Address */}
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <h3 className="font-bold text-[var(--navy)] mb-2 flex items-center gap-2">
                     <span className="text-2xl">📍</span> Office Address
                   </h3>
-                  <p className="text-gray-700">Main Office</p>
-                  <p className="text-gray-600 text-sm">Rural Development Block</p>
-                  <p className="text-gray-600 text-sm">District, State, India</p>
+                  <p className="text-[var(--text)]">Main Office</p>
+                  <p className="text-sm text-[var(--text-muted)]">Rural Development Block</p>
+                  <p className="text-sm text-[var(--text-muted)]">District, State, India</p>
                 </div>
 
-                {/* Social Media */}
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <h3 className="font-bold text-[var(--navy)] mb-4 flex items-center gap-2">
                     <span className="text-2xl">🌐</span> Follow Us
                   </h3>
                   <div className="flex gap-4">
-                    <a href="#" className="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 hover:bg-rose-600 hover:text-white transition">
+                    <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:rgb(232_131_74_/_0.14)] text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-white">
                       f
                     </a>
-                    <a href="#" className="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 hover:bg-rose-600 hover:text-white transition">
+                    <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:rgb(232_131_74_/_0.14)] text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-white">
                       𝕏
                     </a>
-                    <a href="#" className="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 hover:bg-rose-600 hover:text-white transition">
+                    <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:rgb(232_131_74_/_0.14)] text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-white">
                       📷
                     </a>
-                    <a href="#" className="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 hover:bg-rose-600 hover:text-white transition">
+                    <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:rgb(232_131_74_/_0.14)] text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-white">
                       in
                     </a>
                   </div>
                 </div>
               </div>
 
-              {/* Map */}
-              <div className="mt-12 bg-gray-200 rounded-lg h-64 flex items-center justify-center border-2 border-gray-300">
-                <div className="text-center text-gray-600">
+              <div className="mt-12 flex h-64 items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
+                <div className="text-center text-[var(--text-muted)]">
                   <p className="text-4xl mb-2">📍</p>
                   <p>Map placeholder</p>
                   <p className="text-sm">Add your Google Map embed here</p>
@@ -82,7 +78,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="lg:col-span-2">
               <ContactForm />
             </div>
@@ -90,10 +85,9 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Office Locations */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Our Field Offices</h2>
+      <section className="bg-[color:rgb(30_58_95_/_0.06)] py-16">
+        <div className="editorial-section">
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-5xl mb-12">Our field offices</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -116,9 +110,9 @@ export default function Contact() {
                 phone: '+91 XXXX-XXXX-XX',
               },
             ].map((office, idx) => (
-              <div key={idx} className="bg-white rounded-lg p-8 shadow-md">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{office.name}</h3>
-                <div className="space-y-2 text-gray-700">
+              <div key={idx} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+                <h3 className="font-heading text-xl font-bold text-[var(--navy)] mb-4">{office.name}</h3>
+                <div className="space-y-2 text-[var(--text)]">
                   <p>
                     <span className="font-semibold">Location:</span> {office.location}
                   </p>
@@ -135,55 +129,53 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <section className="py-16">
+        <div className="editorial-section max-w-4xl">
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-5xl mb-12">Frequently asked questions</h2>
 
           <div className="space-y-6">
             {[
               {
                 q: 'How can I volunteer with Saheli?',
-                a: 'We welcome volunteers! Please send us an email with your interests and skills, and we\'ll connect you with relevant opportunities.',
+                a: 'We welcome volunteers. Email your interests and skills, and our team will connect you to relevant opportunities.',
               },
               {
                 q: 'Can I partner with Saheli for a project?',
-                a: 'Absolutely! We\'re open to collaborations with organizations, businesses, and government agencies. Contact us to discuss partnership opportunities.',
+                a: 'Yes. We collaborate with institutions, companies, and public agencies. Contact us to explore partnerships.',
               },
               {
                 q: 'How can I sponsor a girl\'s education?',
-                a: 'You can sponsor a girl\'s education through our education program. One-time or recurring sponsorships are available.',
+                a: 'You can support education through one-time or recurring sponsorships in our program pipeline.',
               },
               {
                 q: 'Can I visit Saheli\'s programs?',
-                a: 'Yes! We welcome visitors to meet beneficiaries and see our work firsthand. Please contact us to schedule a visit.',
+                a: 'Yes, program visits can be scheduled in advance to ensure smooth coordination with field teams.',
               },
               {
                 q: 'Do you accept in-kind donations?',
-                a: 'Yes! We accept educational materials, medical supplies, clothing, and other items needed for our programs.',
+                a: 'Yes. We accept relevant educational and health-related materials based on current field requirements.',
               },
             ].map((faq, idx) => (
-              <div key={idx} className="border-l-4 border-rose-500 pl-6">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-700">{faq.a}</p>
+              <div key={idx} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <h3 className="text-lg font-bold text-[var(--navy)] mb-2">{faq.q}</h3>
+                <p className="text-[var(--text-muted)]">{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="py-16 px-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Stay Connected</h2>
-          <p className="text-lg mb-8">Subscribe to receive updates about our programs, success stories, and impact reports.</p>
+      <section className="bg-gradient-to-r from-[var(--navy)] to-[var(--teal)] py-16 text-white">
+        <div className="editorial-section max-w-4xl text-center">
+          <h2 className="font-heading text-4xl font-bold mb-6">Stay connected</h2>
+          <p className="mb-8 text-lg text-white/85">Subscribe to receive updates about our programs, impact, and stories from the field.</p>
           <div className="flex gap-2 max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-2 rounded text-gray-900 focus:outline-none"
+              className="flex-1 rounded px-4 py-2 text-[var(--text)] focus:outline-none"
             />
-            <button className="px-6 py-2 bg-white text-rose-600 font-bold rounded hover:bg-gray-100 transition">
+            <button className="rounded bg-[var(--accent)] px-6 py-2 font-bold text-white transition hover:bg-[var(--accent-warm)]">
               Subscribe
             </button>
           </div>

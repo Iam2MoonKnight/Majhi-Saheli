@@ -1,173 +1,106 @@
+import Link from 'next/link';
+
 export default function About() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-rose-50 to-pink-50 py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">About Saheli</h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Empowering rural women through education, health, and vocational training since our inception.
+    <div className="min-h-screen overflow-hidden">
+      <section className="relative border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.55)] py-16">
+        <div className="editorial-section space-y-6 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(30_58_95_/_0.12)] px-4 py-2">
+            <span className="h-2 w-2 rounded-full bg-[var(--blue)]" />
+            <span className="section-eyebrow text-[var(--navy)]">About Mazi Saheli</span>
+          </div>
+          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Empowering women, strengthening communities</h1>
+          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
+            We work across rural Maharashtra to improve education, health access, and economic opportunity for women and girls.
           </p>
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-8">Our Story</h2>
-          <div className="prose prose-lg text-gray-700 space-y-6">
-            <p>
-              Saheli was founded with a simple vision: to transform the lives of rural women through education,
-              healthcare, and skills development. We began our journey in a small village where we saw the tremendous
-              potential of rural women being held back by lack of opportunities and access to resources.
-            </p>
-
-            <p>
-              Today, Saheli has grown into a comprehensive NGO working across multiple villages, touching the lives of
-              hundreds of women and their families. We remain committed to our core mission of empowering rural women
-              to become agents of change in their communities.
-            </p>
-
-            <p>
-              Our work is guided by the belief that when we invest in women, we invest in the future of entire
-              communities. Every program we run, every woman we train, and every life we touch is a step towards a more
-              equitable and just society.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Mission */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h3 className="text-2xl font-bold text-rose-600 mb-4">Our Mission</h3>
-              <p className="text-gray-700 leading-relaxed">
-                To empower rural women through quality education, accessible healthcare, and skill development
-                programs, enabling them to achieve economic independence, health security, and social dignity.
+      <section className="py-16">
+        <div className="editorial-section grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div className="rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 lg:col-span-2">
+            <p className="section-eyebrow">Our Story</p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">From local action to regional impact</h2>
+            <div className="mt-6 space-y-5 text-[var(--text-muted)]">
+              <p>
+                Mazi Saheli began with a clear purpose: rural women deserve equal access to opportunity, dignity, and decision-making.
+                What started with small education and health interventions has grown into an integrated empowerment movement.
               </p>
-            </div>
-
-            {/* Vision */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h3 className="text-2xl font-bold text-pink-600 mb-4">Our Vision</h3>
-              <p className="text-gray-700 leading-relaxed">
-                A world where rural women and girls are educated, healthy, economically empowered, and respected as
-                equal contributors to society and development of their communities.
+              <p>
+                Today, we partner with local leaders, schools, healthcare workers, and volunteers to deliver practical, measurable impact.
+                Every initiative is designed to help women become confident earners, informed caregivers, and community leaders.
+              </p>
+              <p>
+                Our long-term approach focuses on sustainability, local ownership, and transparent implementation so progress lasts across generations.
               </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Core Values */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Our Core Values</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              {
-                icon: '❤️',
-                title: 'Compassion',
-                desc: 'We deeply care about the wellbeing of the women we serve',
-              },
-              {
-                icon: '💪',
-                title: 'Empowerment',
-                desc: 'We believe in building strength and agency in every woman',
-              },
-              {
-                icon: '🤝',
-                title: 'Equality',
-                desc: 'We advocate for equal rights and opportunities for all',
-              },
-              {
-                icon: '🌱',
-                title: 'Sustainability',
-                desc: 'We create lasting change that benefits future generations',
-              },
-            ].map((value, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-5xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h3>
-                <p className="text-gray-600">{value.desc}</p>
-              </div>
-            ))}
+          <div className="rounded-3xl border border-[var(--border-soft)] bg-gradient-to-b from-[var(--navy)] to-[var(--blue)] p-8 text-white">
+            <p className="font-mono-eyebrow text-xs uppercase text-[var(--accent)]">Coverage</p>
+            <h3 className="mt-3 font-heading text-2xl font-semibold">Where we work</h3>
+            <ul className="mt-5 space-y-2 text-sm text-white/85">
+              <li>Thane</li>
+              <li>Palghar</li>
+              <li>Raigad</li>
+              <li>Ratnagiri</li>
+              <li>Satara</li>
+              <li>Osmanabad</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Our Team</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Priya Sharma',
-                role: 'Founder & Executive Director',
-                bio: 'Social entrepreneur with 15+ years of experience in rural development',
-              },
-              {
-                name: 'Geeta Patel',
-                role: 'Program Director',
-                bio: 'Dedicated to creating sustainable educational programs for underserved communities',
-              },
-              {
-                name: 'Anjali Desai',
-                role: 'Health & Wellness Coordinator',
-                bio: 'Healthcare professional committed to bringing quality health services to rural areas',
-              },
-            ].map((member, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-md p-8 text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center text-4xl text-white">
-                  {member.name.charAt(0)}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-rose-600 font-semibold mb-3">{member.role}</p>
-                <p className="text-gray-600 text-sm">{member.bio}</p>
-              </div>
-            ))}
+      <section className="bg-[color:rgb(30_58_95_/_0.06)] py-16">
+        <div className="editorial-section grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+            <p className="section-eyebrow">Mission</p>
+            <h3 className="font-heading text-2xl font-bold text-[var(--navy)]">Our Mission</h3>
+            <p className="mt-4 text-[var(--text-muted)]">
+              To equip rural women with education, healthcare support, and livelihood skills so they can build secure, self-directed lives.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+            <p className="section-eyebrow">Vision</p>
+            <h3 className="font-heading text-2xl font-bold text-[var(--navy)]">Our Vision</h3>
+            <p className="mt-4 text-[var(--text-muted)]">
+              A just future where every rural woman and girl is educated, healthy, economically independent, and heard.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Why Support Saheli?</h2>
-
-          <div className="space-y-6">
+      <section className="py-16">
+        <div className="editorial-section space-y-10">
+          <div className="text-center">
+            <p className="section-eyebrow">Core Values</p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">How we lead our work</h2>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
-              {
-                title: 'Direct Impact',
-                desc: '100% of funds go directly to programs and beneficiaries',
-              },
-              {
-                title: 'Proven Results',
-                desc: 'Our programs have helped 500+ women achieve economic empowerment',
-              },
-              {
-                title: 'Transparency',
-                desc: 'We maintain complete transparency in our operations and finances',
-              },
-              {
-                title: 'Sustainable Change',
-                desc: 'We focus on long-term solutions that create lasting impact',
-              },
-            ].map((item, idx) => (
-              <div key={idx} className="flex gap-4">
-                <div className="text-3xl text-rose-600 flex-shrink-0">✓</div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-700">{item.desc}</p>
-                </div>
+              { title: 'Compassion', desc: 'Human dignity and empathy at every touchpoint.' },
+              { title: 'Equity', desc: 'Equal opportunities regardless of geography or income.' },
+              { title: 'Agency', desc: 'Women leading decisions for their own future.' },
+              { title: 'Sustainability', desc: 'Solutions designed to outlast short-term funding.' },
+            ].map((value) => (
+              <div key={value.title} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <h3 className="font-heading text-xl font-bold text-[var(--navy)]">{value.title}</h3>
+                <p className="mt-2 text-sm text-[var(--text-muted)]">{value.desc}</p>
               </div>
             ))}
+          </div>
+
+          <div className="rounded-3xl bg-gradient-to-r from-[var(--navy)] to-[var(--teal)] p-10 text-center">
+            <h3 className="font-heading text-3xl font-bold text-white">Join the mission</h3>
+            <p className="mx-auto mt-3 max-w-2xl text-white/85">
+              Every contribution helps us reach more villages with education support, health services, and skills training.
+            </p>
+            <Link
+              href="/donate"
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
+            >
+              Support our work
+            </Link>
           </div>
         </div>
       </section>

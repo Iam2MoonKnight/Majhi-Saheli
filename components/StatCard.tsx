@@ -6,23 +6,22 @@ interface StatCardProps {
 }
 
 export default function StatCard({ icon, number, label, description }: StatCardProps) {
-  // Map emojis to SVG icons or keep minimal design
+  const labelInitial = icon?.toString().charAt(0) || 'S';
+
   const renderIcon = () => {
     return (
-      <div className="w-14 h-14 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center mb-4">
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
+      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[color:rgb(232_131_74_/_0.12)] text-xl font-semibold text-[var(--accent)]">
+        {labelInitial}
       </div>
     );
   };
 
   return (
-    <div className="bg-white rounded-xl border border-neutral-200 shadow-sm hover:shadow-lg transition-all duration-300 p-8 text-center group hover:-translate-y-1">
+    <div className="group rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       {renderIcon()}
-      <div className="text-4xl font-bold text-violet-600 mb-2 group-hover:scale-110 transition-transform">{number}</div>
-      <div className="text-lg font-semibold text-neutral-900 mb-1">{label}</div>
-      {description && <div className="text-sm text-neutral-600">{description}</div>}
+      <div className="mb-2 font-heading text-4xl font-bold text-[var(--navy)] transition-transform group-hover:scale-110">{number}</div>
+      <div className="mb-1 text-lg font-semibold text-[var(--navy)]">{label}</div>
+      {description && <div className="text-sm text-[var(--text-muted)]">{description}</div>}
     </div>
   );
 }

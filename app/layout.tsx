@@ -1,28 +1,40 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { DM_Sans, Playfair_Display, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({
-  variable: "--font-inter",
+const bodyFont = DM_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "700"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const headingFont = Playfair_Display({
+  variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
-  weight: ["700", "800", "900"],
+  weight: ["600", "700", "900"],
+});
+
+const monoFont = Space_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Saheli - Women Empowerment NGO",
-  description: "Empowering rural women through education, health, and vocational training",
+  title: "Mazi Saheli Charitable Trust",
+  description: "Empowering rural women through education, health, and sustainable community leadership",
   keywords: "NGO, women empowerment, education, health, rural women, skills development",
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -33,7 +45,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased bg-white text-gray-900`}
+        className={`${bodyFont.variable} ${headingFont.variable} ${monoFont.variable} antialiased`}
+        suppressHydrationWarning
       >
         <Navbar />
         <main className="min-h-screen w-full">

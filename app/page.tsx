@@ -62,58 +62,58 @@ export default async function Home() {
   const progress = featuredCampaign.goalAmount > 0 ? (featuredCampaign.raisedAmount / featuredCampaign.goalAmount) * 100 : 0;
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <HeroSection />
 
       {/* Featured Campaign */}
-      <section className="bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+      <section className="bg-transparent">
+        <div className="editorial-section space-y-8 py-16">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
-                <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-                <span className="text-xs font-semibold text-teal-900 tracking-wide">LATEST CAMPAIGN</span>
+              <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(30_58_95_/_0.12)] px-4 py-2">
+                <div className="h-2 w-2 rounded-full bg-[var(--blue)]"></div>
+                <span className="section-eyebrow text-[var(--navy)]">Latest Campaign</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Featured campaign</h2>
-              <p className="text-slate-600 max-w-2xl">
+              <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Featured campaign</h2>
+              <p className="max-w-2xl text-[var(--text-muted)]">
                 Direct, time-bound initiatives that bring immediate support to women and communities.
               </p>
             </div>
             <Link
               href="/campaigns"
-              className="inline-flex items-center justify-center rounded-lg border border-teal-200 bg-white px-4 py-2 text-sm font-medium text-teal-700 shadow-sm transition hover:bg-teal-50"
+              className="inline-flex items-center justify-center rounded-full border border-[var(--navy)] bg-[var(--surface)] px-5 py-2.5 text-sm font-medium text-[var(--navy)] transition hover:bg-[var(--navy)] hover:text-white"
             >
               View all campaigns
             </Link>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 lg:grid-cols-3">
             <div className="lg:col-span-2 space-y-4">
-              <h3 className="text-2xl font-bold text-slate-900">{featuredCampaign.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{featuredCampaign.description}</p>
-              <p className="text-sm font-medium text-slate-500">{featuredCampaign.location}</p>
+              <h3 className="font-heading text-2xl font-bold text-[var(--navy)]">{featuredCampaign.title}</h3>
+              <p className="leading-relaxed text-[var(--text-muted)]">{featuredCampaign.description}</p>
+              <p className="text-sm font-medium text-[var(--text-muted)]">{featuredCampaign.location}</p>
             </div>
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="font-semibold text-slate-900">
+                  <span className="font-semibold text-[var(--navy)]">
                     ₹{featuredCampaign.raisedAmount.toLocaleString()}
                   </span>
-                  <span className="text-slate-600">
+                  <span className="text-[var(--text-muted)]">
                     of ₹{featuredCampaign.goalAmount.toLocaleString()}
                   </span>
                 </div>
-                <div className="w-full bg-slate-200 rounded-full h-3">
+                <div className="h-3 w-full rounded-full bg-[color:rgb(30_58_95_/_0.12)]">
                   <div
-                    className="bg-gradient-to-r from-teal-500 to-emerald-500 h-3 rounded-full"
+                    className="h-3 rounded-full bg-gradient-to-r from-[var(--blue)] to-[var(--accent)]"
                     style={{ width: `${Math.min(progress, 100)}%` }}
                   ></div>
                 </div>
-                <div className="text-xs text-slate-500">{Math.round(progress)}% funded</div>
+                <div className="text-xs text-[var(--text-muted)]">{Math.round(progress)}% funded</div>
               </div>
               <Link
                 href={`/campaigns/${featuredCampaign.id}`}
-                className="inline-flex w-full items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
               >
                 Support this campaign
               </Link>
@@ -123,15 +123,15 @@ export default async function Home() {
       </section>
 
       {/* Programs Section */}
-      <section className="bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+      <section className="bg-[color:rgb(255_255_255_/_0.5)]">
+        <div className="editorial-section space-y-8 py-16">
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
-              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-              <span className="text-xs font-semibold text-teal-900 tracking-wide">OUR PROGRAMS</span>
+            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.12)] px-4 py-2">
+              <div className="h-2 w-2 rounded-full bg-[var(--teal)]"></div>
+              <span className="section-eyebrow text-[var(--navy)]">Our Programs</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Making impact together</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Making impact together</h2>
+            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">
               Comprehensive initiatives supporting rural women's growth and sustainable community development.
             </p>
           </div>
@@ -145,7 +145,7 @@ export default async function Home() {
           <div className="flex items-center justify-center">
             <Link
               href="/programs"
-              className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+              className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
             >
               Explore all programs
             </Link>
@@ -154,15 +154,15 @@ export default async function Home() {
       </section>
 
       {/* Impact Section */}
-      <section className="bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+      <section className="bg-[color:rgb(30_58_95_/_0.06)]">
+        <div className="editorial-section space-y-8 py-16">
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
-              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-              <span className="text-xs font-semibold text-teal-900 tracking-wide">OUR IMPACT</span>
+            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(232_131_74_/_0.12)] px-4 py-2">
+              <div className="h-2 w-2 rounded-full bg-[var(--accent)]"></div>
+              <span className="section-eyebrow text-[var(--navy)]">Our Impact</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Creating lasting change</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Creating lasting change</h2>
+            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">
               Transforming lives in rural communities through education, health, and empowerment.
             </p>
           </div>
@@ -177,15 +177,15 @@ export default async function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+      <section className="bg-transparent">
+        <div className="editorial-section space-y-8 py-16">
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
-              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-              <span className="text-xs font-semibold text-teal-900 tracking-wide">SUCCESS STORIES</span>
+            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(212_168_67_/_0.16)] px-4 py-2">
+              <div className="h-2 w-2 rounded-full bg-[var(--gold)]"></div>
+              <span className="section-eyebrow text-[var(--navy)]">Success Stories</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Voices of change</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Voices of change</h2>
+            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">
               Real stories from women whose lives have been transformed.
             </p>
           </div>
@@ -211,26 +211,26 @@ export default async function Home() {
       </section>
 
       {/* Partners Section */}
-      <section className="bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
+      <section className="bg-[color:rgb(42_123_111_/_0.06)]">
+        <div className="editorial-section space-y-8 py-16">
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
-              <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-              <span className="text-xs font-semibold text-teal-900 tracking-wide">PARTNERSHIPS</span>
+            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(30_58_95_/_0.12)] px-4 py-2">
+              <div className="h-2 w-2 rounded-full bg-[var(--blue)]"></div>
+              <span className="section-eyebrow text-[var(--navy)]">Partnerships</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Trusted partners</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Collaborating for sustainable social impact.</p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Trusted partners</h2>
+            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">Collaborating for sustainable social impact.</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="bg-white rounded-lg p-8 flex items-center justify-center h-32 border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all"
+                className="flex h-32 items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 transition-all hover:-translate-y-1 hover:shadow-md"
               >
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-slate-300">Partner</div>
-                  <p className="text-xs text-slate-400 mt-1">Logo</p>
+                  <div className="font-heading text-3xl font-bold text-[color:rgb(26_26_46_/_0.38)]">Partner</div>
+                  <p className="mt-1 text-xs text-[color:rgb(26_26_46_/_0.45)]">Logo</p>
                 </div>
               </div>
             ))}
@@ -239,7 +239,7 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[var(--navy)] via-[var(--blue)] to-[var(--teal)]">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -248,22 +248,22 @@ export default async function Home() {
           }}
         ></div>
 
-        <div className="max-w-4xl mx-auto px-4 py-16 text-center relative z-10 space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Be part of the change</h2>
-          <p className="text-lg text-teal-100 max-w-2xl mx-auto">
+        <div className="relative z-10 mx-auto max-w-4xl space-y-6 px-4 py-16 text-center">
+          <h2 className="font-heading text-4xl font-bold text-white md:text-5xl">Be part of the change</h2>
+          <p className="mx-auto max-w-2xl text-lg text-white/85">
             Every contribution helps transform the lives of rural women. Join us in creating lasting impact in
             communities across rural India.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-teal-700 shadow-sm transition hover:opacity-90"
+              className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(232,131,74,0.35)] transition hover:bg-[var(--accent-warm)]"
             >
               Support our mission
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-lg border border-white px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-white hover:text-teal-700"
+              className="inline-flex items-center justify-center rounded-full border border-white px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[var(--navy)]"
             >
               Get in touch
             </Link>

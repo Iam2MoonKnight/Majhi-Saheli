@@ -43,9 +43,12 @@ export default function SignupForm() {
           email: formData.email,
           role: 'donor',
         });
+        // User is already confirmed, redirect to dashboard
+        router.push('/dashboard?message=signup_success');
+      } else {
+        // User needs to confirm email
+        router.push(`/login?message=check_email&email=${formData.email}`);
       }
-
-      router.push(session?.user ? '/login?message=signup_success' : '/login?message=check_email');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Signup failed');
     } finally {
@@ -54,11 +57,11 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Create Account</h2>
+    <div className="mx-auto max-w-md rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 shadow-sm">
+      <h2 className="mb-6 text-center font-heading text-3xl font-bold text-[var(--navy)]">Create Account</h2>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="mb-6 rounded border border-red-300 bg-red-50 p-4 text-red-700">
           ✕ {error}
         </div>
       )}
@@ -66,7 +69,7 @@ export default function SignupForm() {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="name" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Full Name
           </label>
           <input
@@ -76,14 +79,14 @@ export default function SignupForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+            className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             placeholder="Your name"
           />
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Email Address
           </label>
           <input
@@ -93,14 +96,14 @@ export default function SignupForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+            className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             placeholder="your@email.com"
           />
         </div>
 
         {/* Password */}
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="password" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Password
           </label>
           <input
@@ -110,14 +113,14 @@ export default function SignupForm() {
             value={formData.password}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+            className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             placeholder="••••••••"
           />
         </div>
 
         {/* Confirm Password */}
         <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="confirmPassword" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Confirm Password
           </label>
           <input
@@ -127,7 +130,7 @@ export default function SignupForm() {
             value={formData.confirmPassword}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+            className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             placeholder="••••••••"
           />
         </div>
@@ -136,15 +139,15 @@ export default function SignupForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-6 py-2 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full rounded-lg bg-[var(--accent)] px-6 py-2.5 font-bold text-white transition hover:bg-[var(--accent-warm)] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? 'Creating Account...' : 'Sign Up'}
         </button>
       </form>
 
-      <div className="mt-6 text-center text-gray-600">
+      <div className="mt-6 text-center text-[var(--text-muted)]">
         Already have an account?{' '}
-        <Link href="/login" className="text-rose-600 font-bold hover:underline">
+        <Link href="/login" className="font-bold text-[var(--accent)] hover:underline">
           Login
         </Link>
       </div>

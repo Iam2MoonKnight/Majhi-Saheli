@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession } from '@/lib/supabase';
 import { getUserProfile, getCampaigns, deleteCampaign, updateCampaign } from '@/lib/supabase-functions';
 import Link from 'next/link';
 
@@ -16,7 +16,7 @@ export default function CampaignsManagement() {
   }, [router]);
 
   const loadCampaigns = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
+    const session = await getSafeSession();
     
     if (!session?.user) {
       router.push('/login');
@@ -58,29 +58,29 @@ export default function CampaignsManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 animate-pulse"></div>
-          <p className="text-gray-600">Loading campaigns...</p>
+          <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
+          <p className="text-[var(--text-muted)]">Loading campaigns...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+    <div className="min-h-screen overflow-hidden">
+      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+        <div className="editorial-section py-6">
           <div className="flex items-center justify-between">
             <div>
-              <Link href="/admin" className="text-violet-600 hover:text-violet-700 text-sm font-medium mb-2 inline-block">
+              <Link href="/admin" className="mb-2 inline-block text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
                 ← Back to Dashboard
               </Link>
-              <h1 className="text-3xl font-bold text-gray-900">Campaign Management</h1>
+              <h1 className="font-heading text-4xl font-bold text-[var(--navy)]">Campaign Management</h1>
             </div>
             <Link
               href="/admin/campaigns/new"
-              className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition shadow-lg"
+              className="rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
             >
               + Create New Campaign
             </Link>
@@ -88,67 +88,67 @@ export default function CampaignsManagement() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="editorial-section py-12">
         {campaigns.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {campaigns.map((campaign) => {
               const progress = (campaign.raised_amount / campaign.goal_amount) * 100;
               return (
-                <div key={campaign.id} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
+                <div key={campaign.id} className="overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] transition hover:-translate-y-1 hover:shadow-md">
                   {campaign.featured_image && (
-                    <div className="h-48 bg-gray-200 overflow-hidden">
+                    <div className="h-48 overflow-hidden bg-[color:rgb(30_58_95_/_0.1)]">
                       <img src={campaign.featured_image} alt={campaign.title} className="w-full h-full object-cover" />
                     </div>
                   )}
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
-                      <h2 className="text-xl font-bold text-gray-900 flex-1">{campaign.title}</h2>
+                      <h2 className="flex-1 font-heading text-2xl font-bold text-[var(--navy)]">{campaign.title}</h2>
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ml-2 ${
-                        campaign.status === 'active' ? 'bg-green-100 text-green-700' :
-                        campaign.status === 'completed' ? 'bg-blue-100 text-blue-700' :
-                        'bg-yellow-100 text-yellow-700'
+                        campaign.status === 'active' ? 'bg-[color:rgb(42_123_111_/_0.16)] text-[var(--teal)]' :
+                        campaign.status === 'completed' ? 'bg-[color:rgb(74_118_168_/_0.15)] text-[var(--blue)]' :
+                        'bg-[color:rgb(217_119_77_/_0.14)] text-[var(--accent)]'
                       }`}>
                         {campaign.status}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4 line-clamp-2">{campaign.description}</p>
+                    <p className="mb-4 line-clamp-2 text-[var(--text-muted)]">{campaign.description}</p>
                     
                     <div className="mb-4">
                       <div className="flex items-center justify-between text-sm mb-2">
-                        <span className="text-gray-600">Progress</span>
-                        <span className="font-semibold text-gray-900">
+                        <span className="text-[var(--text-muted)]">Progress</span>
+                        <span className="font-semibold text-[var(--navy)]">
                           ₹{campaign.raised_amount?.toLocaleString() || 0} / ₹{campaign.goal_amount?.toLocaleString()}
                         </span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div className="h-3 w-full rounded-full bg-[color:rgb(30_58_95_/_0.14)]">
                         <div
-                          className="bg-gradient-to-r from-violet-600 to-purple-600 h-3 rounded-full transition-all"
+                          className="h-3 rounded-full bg-gradient-to-r from-[var(--navy)] to-[var(--blue)] transition-all"
                           style={{ width: `${Math.min(progress, 100)}%` }}
                         ></div>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">{Math.round(progress)}% funded</p>
+                      <p className="mt-1 text-xs text-[var(--text-muted)]">{Math.round(progress)}% funded</p>
                     </div>
 
-                    <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-2 border-t border-[var(--border-soft)] pt-4">
                       <Link
                         href={`/admin/campaigns/edit/${campaign.id}`}
-                        className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium text-center"
+                        className="flex-1 rounded-full bg-[var(--blue)] px-4 py-2 text-center text-sm font-medium text-white transition hover:bg-[var(--navy)]"
                       >
                         Edit
                       </Link>
                       <button
                         onClick={() => handleToggleStatus(campaign)}
-                        className={`flex-1 px-4 py-2 rounded-lg transition text-sm font-medium ${
+                        className={`flex-1 rounded-full px-4 py-2 text-sm font-medium transition ${
                           campaign.status === 'active'
-                            ? 'bg-yellow-600 text-white hover:bg-yellow-700'
-                            : 'bg-green-600 text-white hover:bg-green-700'
+                            ? 'bg-[var(--accent)] text-white hover:bg-[var(--accent-warm)]'
+                            : 'bg-[var(--teal)] text-white hover:opacity-90'
                         }`}
                       >
                         {campaign.status === 'active' ? 'Pause' : 'Activate'}
                       </button>
                       <button
                         onClick={() => handleDelete(campaign.id)}
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm font-medium"
+                        className="rounded-full bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
                       >
                         Delete
                       </button>
@@ -159,13 +159,13 @@ export default function CampaignsManagement() {
             })}
           </div>
         ) : (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-12 text-center">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-12 text-center">
             <div className="text-6xl mb-4">🎯</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">No campaigns yet</h3>
-            <p className="text-gray-600 mb-6">Create your first fundraising campaign to get started!</p>
+            <h3 className="font-heading text-3xl font-bold text-[var(--navy)]">No campaigns yet</h3>
+            <p className="mb-6 mt-2 text-[var(--text-muted)]">Create your first fundraising campaign to get started.</p>
             <Link
               href="/admin/campaigns/new"
-              className="inline-block px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition"
+              className="inline-block rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
             >
               Create New Campaign
             </Link>

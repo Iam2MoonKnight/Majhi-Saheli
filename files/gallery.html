@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery – Mazi Saheli Charitable Trust</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp;</span>
+    <span>DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp;</span>
+  </div>
+</div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2"/><path d="M12 24c2-4 4-8 8-8s6 4 8 8" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="14" r="3" fill="var(--accent)"/></svg></div>
+      <div class="logo-text"><span class="logo-main">Mazi Saheli</span><span class="logo-sub">Charitable Trust</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="donate.html" class="nav-link nav-donate">Donate</a></li>
+    </ul>
+    <a href="tel:+910000000000" class="nav-phone">+91 0000000000</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="donate.html">Donate</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="ph-bg-shapes"><div class="shape shape-1"></div><div class="shape shape-2"></div></div>
+  <div class="container">
+    <div class="ph-content">
+      <div class="section-eyebrow reveal">From the Field</div>
+      <h1 class="reveal delay-1">Stories Told Through <em>Images</em></h1>
+      <p class="reveal delay-2">A visual journey through our work — from health camps in Thane to kitchen gardens in Ratnagiri, every photograph tells the story of resilience and hope.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER -->
+<section class="gallery-filter-bar">
+  <div class="container">
+    <div class="filter-pills">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="health">Health Camps</button>
+      <button class="filter-pill" data-filter="education">Education</button>
+      <button class="filter-pill" data-filter="livelihood">Livelihood</button>
+      <button class="filter-pill" data-filter="women">Women Empowerment</button>
+      <button class="filter-pill" data-filter="community">Community</button>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY MASONRY -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="gallery-masonry" id="galleryGrid">
+
+      <div class="gal-item tall" data-cat="health">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80" alt="Health Camp" />
+        <div class="gal-overlay"><div class="gal-label">Health Camp<br/><small>Thane District, 2024</small></div></div>
+      </div>
+      <div class="gal-item" data-cat="education">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="Education" />
+        <div class="gal-overlay"><div class="gal-label">Digital Learning<br/><small>Palghar District</small></div></div>
+      </div>
+      <div class="gal-item" data-cat="women">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Women" />
+        <div class="gal-overlay"><div class="gal-label">Women's Circle<br/><small>Satara District</small></div></div>
+      </div>
+      <div class="gal-item wide" data-cat="community">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=900&q=80" alt="Community" />
+        <div class="gal-overlay"><div class="gal-label">Community Gathering<br/><small>Osmanabad</small></div></div>
+      </div>
+      <div class="gal-item" data-cat="livelihood">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80" alt="Livelihood" />
+        <div class="gal-overlay"><div class="gal-label">Livelihood Training<br/><small>Raigad District</small></div></div>
+      </div>
+      <div class="gal-item tall" data-cat="health">
+        <img src="https://images.unsplash.com/photo-1578357078586-491adf1aa5ba?w=600&q=80" alt="Health" />
+        <div class="gal-overlay"><div class="gal-label">Medical Screening<br/><small>Ratnagiri District</small></div></div>
+      </div>
+      <div class="gal-item" data-cat="education">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Education" />
+        <div class="gal-overlay"><div class="gal-label">Library Programme<br/><small>Thane District</small></div></div>
+      </div>
+      <div class="gal-item" data-cat="community">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80" alt="Community" />
+        <div class="gal-overlay"><div class="gal-label">Field Team Meeting<br/><small>Palghar</small></div></div>
+      </div>
+      <div class="gal-item wide" data-cat="women">
+        <img src="https://images.unsplash.com/photo-1617854818583-09e7f077a156?w=900&q=80" alt="Women" />
+        <div class="gal-overlay"><div class="gal-label">Mazi Saheli Mahilavarga<br/><small>Raigad District, 2023</small></div></div>
+      </div>
+      <div class="gal-item" data-cat="livelihood">
+        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80" alt="Nutrition" />
+        <div class="gal-overlay"><div class="gal-label">Kitchen Garden<br/><small>Satara District</small></div></div>
+      </div>
+      <div class="gal-item" data-cat="health">
+        <img src="https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=600&q=80" alt="Health" />
+        <div class="gal-overlay"><div class="gal-label">Wellness Session<br/><small>Thane District</small></div></div>
+      </div>
+      <div class="gal-item tall" data-cat="education">
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Education" />
+        <div class="gal-overlay"><div class="gal-label">Skill Building Workshop<br/><small>Osmanabad</small></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-prev" id="lbPrev">‹</button>
+  <button class="lb-next" id="lbNext">›</button>
+  <div class="lb-img-wrap"><img id="lbImg" src="" alt="" /><div id="lbCaption" class="lb-caption"></div></div>
+</div>
+
+<!-- VIDEO SECTION -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-eyebrow center">Field Stories</div>
+    <h2 class="section-title center">From the <span class="highlight">Field</span></h2>
+    <div class="video-grid">
+      <div class="video-thumb reveal">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80" alt="Video 1" />
+        <div class="vt-overlay"><div class="play-btn">▶</div><div class="vt-title">Health Camp – Thane 2024</div></div>
+      </div>
+      <div class="video-thumb reveal delay-1">
+        <img src="https://images.unsplash.com/photo-1617854818583-09e7f077a156?w=600&q=80" alt="Video 2" />
+        <div class="vt-overlay"><div class="play-btn">▶</div><div class="vt-title">Women Empowerment Stories</div></div>
+      </div>
+      <div class="video-thumb reveal delay-2">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80" alt="Video 3" />
+        <div class="vt-overlay"><div class="play-btn">▶</div><div class="vt-title">Annual Impact Report 2023</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- READY CTA -->
+<section class="ready-cta">
+  <div class="container">
+    <h2>Ready to Make a <span class="highlight">Difference?</span></h2>
+    <p>Every contribution funds the programmes you've seen here. Join us in building a resilient rural India.</p>
+    <div class="ready-btns">
+      <a href="donate.html" class="btn btn-primary">Donate Now</a>
+      <a href="contact.html" class="btn btn-outline-light">Become a Partner</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2"/><path d="M12 24c2-4 4-8 8-8s6 4 8 8" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="14" r="3" fill="var(--accent)"/></svg></div><div class="logo-text"><span class="logo-main">Mazi Saheli</span><span class="logo-sub">Charitable Trust</span></div></a>
+        <p>A grassroots NGO transforming lives across 6 districts of Maharashtra.</p>
+        <div class="social-links"><a href="#" class="social">f</a><a href="#" class="social">in</a><a href="#" class="social">𝕏</a><a href="#" class="social">▶</a></div>
+      </div>
+      <div class="footer-nav"><h4>Navigate</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="donate.html">Donate</a></div>
+      <div class="footer-nav"><h4>Focus Areas</h4><a href="#">Health &amp; Hygiene</a><a href="#">Nutrition</a><a href="#">Financial Literacy</a><a href="#">Skill Building</a><a href="#">Women Empowerment</a></div>
+      <div class="footer-nav"><h4>Contact</h4><a href="#">Thane, Maharashtra – 400001</a><a href="tel:+910000000000">+91 90745 42210</a><a href="mailto:info@mazisaheli.org">info@mazisaheli.org</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 Mazi Saheli Charitable Trust. All rights reserved.</p><p>80G Registered &nbsp;|&nbsp; FCRA Approved &nbsp;|&nbsp; Niti Aayog Registered</p></div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

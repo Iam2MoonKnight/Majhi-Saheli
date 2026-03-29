@@ -17,99 +17,74 @@ export default async function HeroSection() {
   }
 
   return (
-    <section className="relative bg-gradient-to-b from-slate-50 via-white to-teal-50 min-h-[70vh] py-16 lg:py-24 overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.15) 1px, transparent 0)',
-        backgroundSize: '40px 40px'
-      }}></div>
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full">
-              <div className="w-2 h-2 bg-teal-600 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold text-teal-900 tracking-wide">TRANSFORMING RURAL INDIA</span>
+    <section className="relative overflow-hidden pb-20 pt-14 lg:pt-20">
+      <div className="absolute -left-16 top-10 h-52 w-52 rounded-full bg-[color:rgb(42_123_111_/_0.12)] blur-2xl" />
+      <div className="absolute right-6 top-16 h-64 w-64 rounded-full bg-[color:rgb(232_131_74_/_0.2)] blur-3xl" />
+
+      <div className="editorial-section relative z-10">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div className="space-y-8 reveal-up">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(232_131_74_/_0.16)] px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+              <span className="section-eyebrow text-[var(--navy)]">Empowering Rural Maharashtra</span>
             </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-[1.1]">
+
+            <h1 className="font-heading text-5xl font-bold leading-[1.02] text-[var(--navy)] md:text-6xl xl:text-7xl">
               {heroContent.title}
-              <span className="block text-teal-700 mt-2">{heroContent.subtitle}</span>
+              <span className="mt-3 block text-4xl md:text-5xl xl:text-6xl text-outline">{heroContent.subtitle}</span>
             </h1>
-            
-            <p className="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-xl">
+
+            <p className="max-w-xl text-lg leading-relaxed text-[var(--text-muted)] md:text-xl">
               {heroContent.description}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col gap-4 pt-1 sm:flex-row">
               <Link
                 href={heroContent.cta_link}
-                className="group inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(232,131,74,0.33)] transition hover:bg-[var(--accent-warm)]"
               >
                 {heroContent.cta_text}
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
               </Link>
               <Link
                 href="/programs"
-                className="inline-flex items-center justify-center rounded-lg border border-teal-200 bg-white px-6 py-3 text-sm font-semibold text-teal-700 shadow-sm transition hover:bg-teal-50"
+                className="inline-flex items-center justify-center rounded-full border border-[var(--navy)] bg-[var(--surface)] px-7 py-3.5 text-sm font-semibold text-[var(--navy)] transition hover:bg-[var(--navy)] hover:text-white"
               >
                 Explore Programs
               </Link>
             </div>
 
-            {/* Professional Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-neutral-200">
+            <div className="grid grid-cols-3 gap-4 border-t border-[var(--border-soft)] pt-7">
               <div>
-                <div className="text-3xl font-bold text-teal-700">2,500+</div>
-                <div className="text-sm text-neutral-600 font-medium mt-1">Lives Impacted</div>
+                <p className="font-heading text-3xl font-bold text-[var(--accent)]">2,500+</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Lives impacted</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-teal-700">50+</div>
-                <div className="text-sm text-neutral-600 font-medium mt-1">Villages</div>
+                <p className="font-heading text-3xl font-bold text-[var(--accent)]">50+</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Villages</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-teal-700">15+</div>
-                <div className="text-sm text-neutral-600 font-medium mt-1">Programs</div>
+                <p className="font-heading text-3xl font-bold text-[var(--accent)]">15+</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Programs</p>
               </div>
             </div>
           </div>
 
-          {/* Right Visual - Professional Image */}
-          <div className="relative lg:h-[600px] h-96">
-            {/* Background accent */}
-            <div className="absolute top-8 left-8 right-0 bottom-0 bg-gradient-to-br from-teal-600 to-rose-500 rounded-2xl opacity-10"></div>
-            
-            {/* Main image container */}
-            <div className="relative h-full bg-gradient-to-br from-teal-100 to-rose-100 rounded-2xl shadow-2xl overflow-hidden">
+          <div className="relative h-[420px] reveal-up lg:h-[560px]">
+            <div className="float-soft absolute -left-6 top-8 h-20 w-20 rounded-2xl border border-[var(--accent)]/40 bg-[color:rgb(232_131_74_/_0.16)]" />
+            <div className="absolute -right-4 bottom-14 h-28 w-28 rounded-full border border-[var(--teal)]/50 bg-[color:rgb(42_123_111_/_0.14)]" />
+
+            <div className="absolute left-8 top-10 h-full w-full rounded-[2rem] bg-[color:rgb(13_27_42_/_0.12)]" />
+            <div className="relative h-full overflow-hidden rounded-[2rem] border border-[var(--border-soft)] bg-[var(--surface)] shadow-[0_24px_54px_rgba(13,27,42,0.18)]">
               {heroContent.image_url ? (
-                <img 
-                  src={heroContent.image_url} 
-                  alt={heroContent.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                <img src={heroContent.image_url} alt={heroContent.title} className="h-full w-full object-cover" />
               ) : (
-                <>
-                  {/* Image placeholder with overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-teal-600/20 to-rose-500/20"></div>
-                  
-                  {/* Decorative pattern */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 opacity-20">
-                    <div className="w-full h-full border-8 border-white rounded-full"></div>
-                    <div className="absolute inset-8 border-8 border-white rounded-full"></div>
-                  </div>
-                </>
+                <div className="h-full w-full bg-gradient-to-br from-[color:rgb(30_58_95_/_0.2)] via-[color:rgb(42_123_111_/_0.2)] to-[color:rgb(232_131_74_/_0.2)]" />
               )}
-              
-              {/* Text overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent">
-                <div className="text-white">
-                  <p className="text-sm font-semibold mb-2 tracking-wide">FEATURED STORY</p>
-                  <h3 className="text-2xl font-bold leading-tight">From Beneficiary to Community Leader</h3>
-                  <p className="text-sm opacity-90 mt-2">How Sunita transformed her village through education</p>
-                </div>
+
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[color:rgb(13_27_42_/_0.86)] via-[color:rgb(13_27_42_/_0.58)] to-transparent p-7 text-white">
+                <p className="font-mono-eyebrow text-[11px] uppercase text-[var(--accent)]">Featured Story</p>
+                <h3 className="mt-2 font-heading text-2xl font-semibold text-white">From Beneficiary to Community Leader</h3>
+                <p className="mt-1 text-sm text-white/85">How Sunita transformed her village through education</p>
               </div>
             </div>
           </div>

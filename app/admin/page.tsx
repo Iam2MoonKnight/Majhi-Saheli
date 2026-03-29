@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession } from '@/lib/supabase';
 import { getUserProfile, getDonationStats, getBlogs, getCampaigns } from '@/lib/supabase-functions';
 import Link from 'next/link';
 
@@ -15,7 +15,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const session = await getSafeSession();
       
       if (!session?.user) {
         router.push('/login');
@@ -47,28 +47,28 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 animate-pulse"></div>
-          <p className="text-gray-600">Loading admin dashboard...</p>
+          <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
+          <p className="text-[var(--text-muted)]">Loading admin dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-violet-600 to-purple-600 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-8">
+    <div className="min-h-screen overflow-hidden">
+      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+        <div className="editorial-section py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
-              <p className="text-violet-100">Manage your NGO website content and campaigns</p>
+              <p className="section-eyebrow text-[var(--navy)]">Control Center</p>
+              <h1 className="mt-2 font-heading text-4xl font-bold text-[var(--navy)] md:text-5xl">Admin Dashboard</h1>
+              <p className="mt-2 text-[var(--text-muted)]">Manage content, campaigns, and public messaging.</p>
             </div>
             <Link
               href="/dashboard"
-              className="px-6 py-3 bg-white text-violet-600 font-semibold rounded-lg hover:bg-violet-50 transition"
+              className="rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
             >
               User Dashboard
             </Link>
@@ -76,88 +76,86 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Quick Stats */}
+      <div className="editorial-section py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(30_58_95_/_0.12)]">
                 <span className="text-2xl">💰</span>
               </div>
             </div>
-            <p className="text-gray-600 text-sm font-medium mb-1">Total Donations</p>
-            <p className="text-3xl font-bold text-gray-900">{stats?.totalDonations || 0}</p>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Donations</p>
+            <p className="font-heading text-3xl font-bold text-[var(--navy)]">{stats?.totalDonations || 0}</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(42_123_111_/_0.16)]">
                 <span className="text-2xl">₹</span>
               </div>
             </div>
-            <p className="text-gray-600 text-sm font-medium mb-1">Total Amount</p>
-            <p className="text-3xl font-bold text-gray-900">₹{stats?.totalAmount?.toLocaleString() || 0}</p>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Amount</p>
+            <p className="font-heading text-3xl font-bold text-[var(--accent)]">₹{stats?.totalAmount?.toLocaleString() || 0}</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(74_118_168_/_0.15)]">
                 <span className="text-2xl">📝</span>
               </div>
             </div>
-            <p className="text-gray-600 text-sm font-medium mb-1">Total Blogs</p>
-            <p className="text-3xl font-bold text-gray-900">{recentBlogs.length}</p>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Blogs</p>
+            <p className="font-heading text-3xl font-bold text-[var(--navy)]">{recentBlogs.length}</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(217_119_77_/_0.15)]">
                 <span className="text-2xl">🎯</span>
               </div>
             </div>
-            <p className="text-gray-600 text-sm font-medium mb-1">Active Campaigns</p>
-            <p className="text-3xl font-bold text-gray-900">{activeCampaigns.length}</p>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Active Campaigns</p>
+            <p className="font-heading text-3xl font-bold text-[var(--navy)]">{activeCampaigns.length}</p>
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mb-12 border border-gray-100">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h2>
+        <div className="mb-12 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+          <h2 className="mb-6 font-heading text-3xl font-bold text-[var(--navy)]">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/admin/blogs/new"
-              className="group p-6 bg-gradient-to-br from-violet-50 to-purple-50 rounded-lg border-2 border-violet-200 hover:border-violet-400 transition-all hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">✍️</div>
-              <h3 className="font-semibold text-gray-900 mb-1">Create Blog Post</h3>
-              <p className="text-sm text-gray-600">Write and publish new content</p>
+              <h3 className="mb-1 font-semibold text-[var(--navy)]">Create Blog Post</h3>
+              <p className="text-sm text-[var(--text-muted)]">Write and publish new content</p>
             </Link>
 
             <Link
               href="/admin/campaigns/new"
-              className="group p-6 bg-gradient-to-br from-pink-50 to-rose-50 rounded-lg border-2 border-pink-200 hover:border-pink-400 transition-all hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(217_119_77_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">🎯</div>
-              <h3 className="font-semibold text-gray-900 mb-1">New Campaign</h3>
-              <p className="text-sm text-gray-600">Launch a fundraising campaign</p>
+              <h3 className="mb-1 font-semibold text-[var(--navy)]">New Campaign</h3>
+              <p className="text-sm text-[var(--text-muted)]">Launch a fundraising campaign</p>
             </Link>
 
             <Link
               href="/admin/hero"
-              className="group p-6 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-200 hover:border-blue-400 transition-all hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(74_118_168_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">🖼️</div>
-              <h3 className="font-semibold text-gray-900 mb-1">Update Hero</h3>
-              <p className="text-sm text-gray-600">Change homepage hero section</p>
+              <h3 className="mb-1 font-semibold text-[var(--navy)]">Update Hero</h3>
+              <p className="text-sm text-[var(--text-muted)]">Change homepage hero section</p>
             </Link>
 
             <Link
               href="/dashboard"
-              className="group p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border-2 border-green-200 hover:border-green-400 transition-all hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(42_123_111_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">📊</div>
-              <h3 className="font-semibold text-gray-900 mb-1">View Reports</h3>
-              <p className="text-sm text-gray-600">Check donation analytics</p>
+              <h3 className="mb-1 font-semibold text-[var(--navy)]">View Reports</h3>
+              <p className="text-sm text-[var(--text-muted)]">Check donation analytics</p>
             </Link>
           </div>
         </div>
@@ -165,10 +163,10 @@ export default function AdminDashboard() {
         {/* Content Overview */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Blogs */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">Recent Blogs</h2>
-              <Link href="/admin/blogs" className="text-violet-600 hover:text-violet-700 font-medium text-sm">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
+            <div className="flex items-center justify-between border-b border-[var(--border-soft)] p-6">
+              <h2 className="font-heading text-2xl font-bold text-[var(--navy)]">Recent Blogs</h2>
+              <Link href="/admin/blogs" className="text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
                 View All →
               </Link>
             </div>
@@ -176,12 +174,12 @@ export default function AdminDashboard() {
               {recentBlogs.length > 0 ? (
                 <div className="space-y-4">
                   {recentBlogs.map((blog) => (
-                    <div key={blog.id} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <div key={blog.id} className="flex items-start gap-4 rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-1">{blog.title}</h3>
-                        <p className="text-sm text-gray-600 mb-2 line-clamp-1">{blog.excerpt}</p>
-                        <div className="flex items-center gap-3 text-xs text-gray-500">
-                          <span className={`px-2 py-1 rounded-full ${blog.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                        <h3 className="mb-1 font-semibold text-[var(--navy)]">{blog.title}</h3>
+                        <p className="mb-2 line-clamp-1 text-sm text-[var(--text-muted)]">{blog.excerpt}</p>
+                        <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
+                          <span className={`rounded-full px-2 py-1 ${blog.status === 'published' ? 'bg-[color:rgb(42_123_111_/_0.16)] text-[var(--teal)]' : 'bg-[color:rgb(217_119_77_/_0.14)] text-[var(--accent)]'}`}>
                             {blog.status}
                           </span>
                           <span>{new Date(blog.created_at).toLocaleDateString()}</span>
@@ -191,16 +189,16 @@ export default function AdminDashboard() {
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-500 text-center py-8">No blogs yet. Create your first one!</p>
+                <p className="py-8 text-center text-[var(--text-muted)]">No blogs yet. Create your first one.</p>
               )}
             </div>
           </div>
 
           {/* Active Campaigns */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">Active Campaigns</h2>
-              <Link href="/admin/campaigns" className="text-violet-600 hover:text-violet-700 font-medium text-sm">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
+            <div className="flex items-center justify-between border-b border-[var(--border-soft)] p-6">
+              <h2 className="font-heading text-2xl font-bold text-[var(--navy)]">Active Campaigns</h2>
+              <Link href="/admin/campaigns" className="text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
                 View All →
               </Link>
             </div>
@@ -208,30 +206,30 @@ export default function AdminDashboard() {
               {activeCampaigns.length > 0 ? (
                 <div className="space-y-4">
                   {activeCampaigns.map((campaign) => (
-                    <div key={campaign.id} className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                      <h3 className="font-semibold text-gray-900 mb-2">{campaign.title}</h3>
+                    <div key={campaign.id} className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
+                      <h3 className="mb-2 font-semibold text-[var(--navy)]">{campaign.title}</h3>
                       <div className="mb-3">
                         <div className="flex items-center justify-between text-sm mb-1">
-                          <span className="text-gray-600">Progress</span>
-                          <span className="font-semibold text-gray-900">
+                          <span className="text-[var(--text-muted)]">Progress</span>
+                          <span className="font-semibold text-[var(--navy)]">
                             ₹{campaign.raised_amount?.toLocaleString() || 0} / ₹{campaign.goal_amount?.toLocaleString()}
                           </span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div className="h-2 w-full rounded-full bg-[color:rgb(30_58_95_/_0.14)]">
                           <div
-                            className="bg-gradient-to-r from-violet-600 to-purple-600 h-2 rounded-full transition-all"
+                            className="h-2 rounded-full bg-gradient-to-r from-[var(--navy)] to-[var(--blue)] transition-all"
                             style={{ width: `${Math.min((campaign.raised_amount / campaign.goal_amount) * 100, 100)}%` }}
                           ></div>
                         </div>
                       </div>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-[var(--text-muted)]">
                         {Math.round((campaign.raised_amount / campaign.goal_amount) * 100)}% funded
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-500 text-center py-8">No active campaigns. Create one to start fundraising!</p>
+                <p className="py-8 text-center text-[var(--text-muted)]">No active campaigns. Create one to start fundraising.</p>
               )}
             </div>
           </div>

@@ -2,17 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession } from '@/lib/supabase';
 import { getUserProfile, getAllHeroContent, createHeroContent, updateHeroContent, setActiveHeroContent, deleteHeroContent } from '@/lib/supabase-functions';
+import { uploadImage, validateImageFile } from '@/lib/upload-image';
 import Link from 'next/link';
 
 export default function HeroManagement() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [heroContents, setHeroContents] = useState<any[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
   const [formData, setFormData] = useState({
     title: '',
     subtitle: '',
@@ -27,7 +31,7 @@ export default function HeroManagement() {
   }, [router]);
 
   const loadHeroContent = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
+    const session = await getSafeSession();
     
     if (!session?.user) {
       router.push('/login');
@@ -52,15 +56,50 @@ export default function HeroManagement() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const validation = validateImageFile(file);
+    if (!validation.valid) {
+      alert(validation.error || 'Invalid image file');
+      return;
+    }
+
+    setImageFile(file);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreview('');
+    setFormData(prev => ({ ...prev, image_url: '' }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     try {
+      let imageUrl = formData.image_url;
+
+      // Upload new image if file is selected
+      if (imageFile) {
+        setUploading(true);
+        imageUrl = await uploadImage(imageFile);
+        setUploading(false);
+      }
+
       if (editingId) {
-        await updateHeroContent(editingId, formData);
+        await updateHeroContent(editingId, { ...formData, image_url: imageUrl });
       } else {
         await createHeroContent({
           ...formData,
+          image_url: imageUrl,
           created_by: userId,
           is_active: false,
         });
@@ -70,6 +109,7 @@ export default function HeroManagement() {
       await loadHeroContent();
     } catch (error) {
       alert('Error saving hero content');
+      setUploading(false);
     }
   };
 
@@ -91,6 +131,12 @@ export default function HeroManagement() {
       cta_link: content.cta_link,
       image_url: content.image_url || '',
     });
+    
+    // Set existing image as preview
+    if (content.image_url) {
+      setImagePreview(content.image_url);
+    }
+    
     setEditingId(content.id);
     setShowForm(true);
   };
@@ -115,36 +161,38 @@ export default function HeroManagement() {
       cta_link: '/donate',
       image_url: '',
     });
+    setImageFile(null);
+    setImagePreview('');
     setEditingId(null);
     setShowForm(false);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 animate-pulse"></div>
-          <p className="text-gray-600">Loading hero content...</p>
+          <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
+          <p className="text-[var(--text-muted)]">Loading hero content...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+    <div className="min-h-screen overflow-hidden">
+      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+        <div className="editorial-section py-6">
           <div className="flex items-center justify-between">
             <div>
-              <Link href="/admin" className="text-violet-600 hover:text-violet-700 text-sm font-medium mb-2 inline-block">
+              <Link href="/admin" className="mb-2 inline-block text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
                 ← Back to Dashboard
               </Link>
-              <h1 className="text-3xl font-bold text-gray-900">Hero Section Management</h1>
-              <p className="text-gray-600 mt-1">Manage homepage hero content and images</p>
+              <h1 className="font-heading text-4xl font-bold text-[var(--navy)]">Hero Section Management</h1>
+              <p className="mt-1 text-[var(--text-muted)]">Manage homepage hero content and images</p>
             </div>
             <button
               onClick={() => setShowForm(!showForm)}
-              className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition shadow-lg"
+              className="rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
             >
               {showForm ? 'Cancel' : '+ Create New Hero'}
             </button>
@@ -152,17 +200,16 @@ export default function HeroManagement() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Form */}
+      <div className="editorial-section py-12">
         {showForm && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <div className="mb-8 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+            <h2 className="mb-6 font-heading text-3xl font-bold text-[var(--navy)]">
               {editingId ? 'Edit Hero Content' : 'Create New Hero Content'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="title" className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label htmlFor="title" className="mb-2 block text-sm font-semibold text-[var(--navy)]">
                     Title *
                   </label>
                   <input
@@ -172,13 +219,13 @@ export default function HeroManagement() {
                     value={formData.title}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
                     placeholder="Empowering Women"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="subtitle" className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label htmlFor="subtitle" className="mb-2 block text-sm font-semibold text-[var(--navy)]">
                     Subtitle *
                   </label>
                   <input
@@ -188,14 +235,14 @@ export default function HeroManagement() {
                     value={formData.subtitle}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
                     placeholder="Enriching Communities"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="description" className="block text-sm font-semibold text-gray-900 mb-2">
+                <label htmlFor="description" className="mb-2 block text-sm font-semibold text-[var(--navy)]">
                   Description
                 </label>
                 <textarea
@@ -204,14 +251,14 @@ export default function HeroManagement() {
                   value={formData.description}
                   onChange={handleChange}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none resize-none"
+                  className="w-full resize-none rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
                   placeholder="Brief description of your mission..."
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="cta_text" className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label htmlFor="cta_text" className="mb-2 block text-sm font-semibold text-[var(--navy)]">
                     Button Text
                   </label>
                   <input
@@ -220,13 +267,13 @@ export default function HeroManagement() {
                     name="cta_text"
                     value={formData.cta_text}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
                     placeholder="Support Our Mission"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="cta_link" className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label htmlFor="cta_link" className="mb-2 block text-sm font-semibold text-[var(--navy)]">
                     Button Link
                   </label>
                   <input
@@ -235,38 +282,61 @@ export default function HeroManagement() {
                     name="cta_link"
                     value={formData.cta_link}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
                     placeholder="/donate"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="image_url" className="block text-sm font-semibold text-gray-900 mb-2">
-                  Hero Image URL
+                <label className="mb-2 block text-sm font-semibold text-[var(--navy)]">
+                  Hero Image
                 </label>
-                <input
-                  type="url"
-                  id="image_url"
-                  name="image_url"
-                  value={formData.image_url}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none"
-                  placeholder="https://example.com/hero-image.jpg"
-                />
+                
+                {imagePreview ? (
+                  <div className="space-y-3">
+                    <div className="relative h-64 w-full overflow-hidden rounded-xl bg-[color:rgb(30_58_95_/_0.08)]">
+                      <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={handleRemoveImage}
+                        className="absolute right-2 top-2 rounded-full bg-red-600 p-2 text-white transition hover:bg-red-700"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <p className="text-xs text-[var(--text-muted)]">Click the X to remove and upload a new image</p>
+                  </div>
+                ) : (
+                  <div className="rounded-xl border-2 border-dashed border-[var(--border-soft)] p-8 text-center transition hover:border-[var(--blue)]">
+                    <input
+                      type="file"
+                      id="image_url"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                    />
+                    <label htmlFor="image_url" className="cursor-pointer">
+                      <div className="text-4xl mb-2">📷</div>
+                      <p className="mb-1 text-sm font-medium text-[var(--navy)]">Click to upload image</p>
+                      <p className="text-xs text-[var(--text-muted)]">PNG, JPG, WebP or GIF (max 5MB)</p>
+                    </label>
+                  </div>
+                )}
               </div>
 
-              <div className="flex items-center gap-4 pt-6 border-t border-gray-200">
+              <div className="flex items-center gap-4 border-t border-[var(--border-soft)] pt-6">
                 <button
                   type="submit"
-                  className="flex-1 px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition"
+                  disabled={uploading}
+                  className="flex-1 rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)] disabled:opacity-50"
                 >
-                  {editingId ? 'Update Hero Content' : 'Create Hero Content'}
+                  {uploading ? 'Uploading Image...' : editingId ? 'Update Hero Content' : 'Create Hero Content'}
                 </button>
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition"
+                  className="rounded-full bg-[color:rgb(30_58_95_/_0.1)] px-6 py-3 text-sm font-semibold text-[var(--navy)] transition hover:bg-[color:rgb(30_58_95_/_0.16)]"
                 >
                   Cancel
                 </button>
@@ -275,60 +345,59 @@ export default function HeroManagement() {
           </div>
         )}
 
-        {/* Hero Content List */}
         <div className="space-y-6">
           {heroContents.length > 0 ? (
             heroContents.map((content) => (
-              <div key={content.id} className={`bg-white rounded-lg shadow-sm border-2 overflow-hidden ${
-                content.is_active ? 'border-green-500' : 'border-gray-100'
+              <div key={content.id} className={`overflow-hidden rounded-2xl border-2 bg-[var(--surface)] ${
+                content.is_active ? 'border-[var(--teal)]' : 'border-[var(--border-soft)]'
               }`}>
                 <div className="p-6">
                   {content.is_active && (
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-4">
-                      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.16)] px-3 py-1 text-sm font-semibold text-[var(--teal)]">
+                      <span className="h-2 w-2 animate-pulse rounded-full bg-[var(--teal)]"></span>
                       Currently Active
                     </div>
                   )}
                   
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{content.title}</h2>
-                      <p className="text-xl text-violet-600 mb-3">{content.subtitle}</p>
+                      <h2 className="mb-2 font-heading text-3xl font-bold text-[var(--navy)]">{content.title}</h2>
+                      <p className="mb-3 text-xl text-[var(--blue)]">{content.subtitle}</p>
                       {content.description && (
-                        <p className="text-gray-600 mb-4">{content.description}</p>
+                        <p className="mb-4 text-[var(--text-muted)]">{content.description}</p>
                       )}
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <div className="flex items-center gap-4 text-sm text-[var(--text-muted)]">
                         <span>🔗 Button: "{content.cta_text}"</span>
                         <span>→ {content.cta_link}</span>
                       </div>
                     </div>
 
                     {content.image_url && (
-                      <div className="h-48 bg-gray-100 rounded-lg overflow-hidden">
+                      <div className="h-48 overflow-hidden rounded-xl bg-[color:rgb(30_58_95_/_0.08)]">
                         <img src={content.image_url} alt={content.title} className="w-full h-full object-cover" />
                       </div>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 mt-6 pt-6 border-t border-gray-100">
+                  <div className="mt-6 flex items-center gap-2 border-t border-[var(--border-soft)] pt-6">
                     {!content.is_active && (
                       <button
                         onClick={() => handleSetActive(content.id)}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm font-medium"
+                        className="rounded-full bg-[var(--teal)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
                       >
                         Set as Active
                       </button>
                     )}
                     <button
                       onClick={() => handleEdit(content)}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium"
+                      className="rounded-full bg-[var(--blue)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--navy)]"
                     >
                       Edit
                     </button>
                     {!content.is_active && (
                       <button
                         onClick={() => handleDelete(content.id)}
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm font-medium"
+                        className="rounded-full bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
                       >
                         Delete
                       </button>
@@ -338,13 +407,13 @@ export default function HeroManagement() {
               </div>
             ))
           ) : (
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-12 text-center">
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-12 text-center">
               <div className="text-6xl mb-4">🖼️</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">No hero content yet</h3>
-              <p className="text-gray-600 mb-6">Create your first hero section to customize your homepage!</p>
+              <h3 className="font-heading text-3xl font-bold text-[var(--navy)]">No hero content yet</h3>
+              <p className="mb-6 mt-2 text-[var(--text-muted)]">Create your first hero section to customize your homepage.</p>
               <button
                 onClick={() => setShowForm(true)}
-                className="inline-block px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition"
+                className="inline-block rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
               >
                 Create Hero Content
               </button>

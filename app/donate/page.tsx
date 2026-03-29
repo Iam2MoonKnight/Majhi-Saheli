@@ -3,34 +3,31 @@ import { DonateContent } from '@/components/DonateContent';
 
 export default function Donate() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Hero Section */}
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full mx-auto">
-            <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-            <span className="text-xs font-semibold text-teal-900 tracking-wide">DONATE</span>
+    <div className="min-h-screen overflow-hidden">
+      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+        <div className="editorial-section py-16 text-center space-y-6">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(232_131_74_/_0.14)] px-4 py-2">
+            <div className="h-2 w-2 rounded-full bg-[var(--accent)]"></div>
+            <span className="section-eyebrow text-[var(--navy)]">Donate</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Make a difference</h1>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Make a difference</h1>
+          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
             Your generous donation helps us empower rural women through education, health, and skills development.
           </p>
         </div>
       </section>
 
-      {/* Donation Section */}
-      <section className="bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
-          <Suspense fallback={<div className="bg-white rounded-lg p-6 border border-slate-200 h-96 animate-pulse" />}>
+      <section className="py-16">
+        <div className="editorial-section space-y-8">
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6" />}>
             <DonateContent />
           </Suspense>
         </div>
       </section>
 
-      {/* How We Use Donations */}
-      <section className="bg-white border-t border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">How we use your donation</h2>
+      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] py-16">
+        <div className="editorial-section space-y-8">
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">How we use your donation</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {
@@ -66,10 +63,10 @@ export default function Donate() {
                   desc: 'Community awareness and volunteer support programs',
                 },
               ].map((item, idx) => (
-                <div key={idx} className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200">
+                <div key={idx} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 text-center">
                   <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-slate-600 text-sm">{item.desc}</p>
+                  <h3 className="mb-2 text-lg font-bold text-[var(--navy)]">{item.title}</h3>
+                  <p className="text-sm text-[var(--text-muted)]">{item.desc}</p>
                 </div>
               ))
             }
@@ -77,25 +74,24 @@ export default function Donate() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-slate-50 border-t border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">Frequently asked questions</h2>
+      <section className="py-16">
+        <div className="editorial-section space-y-8">
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Frequently asked questions</h2>
 
           <div className="space-y-6">
             {
               [
                 {
                   q: 'Is my donation tax-deductible?',
-                  a: 'Yes! Saheli is registered under 80-G of the Income Tax Act, 1961. You can claim tax benefits on your donations.',
+                  a: 'Yes. Saheli is registered under 80-G of the Income Tax Act, 1961 and donations are eligible for tax benefits.',
                 },
                 {
                   q: 'Can I make a recurring donation?',
-                  a: 'Yes! We offer flexible monthly, quarterly, and annual donation options through our form.',
+                  a: 'Yes. We support recurring contributions through monthly, quarterly, and annual options.',
                 },
                 {
                   q: 'How is my donation used?',
-                  a: 'Each donation goes directly to our programs. We maintain complete transparency and share detailed impact reports annually.',
+                  a: 'Donations go directly into programs. We maintain transparent reporting and publish impact updates.',
                 },
                 {
                   q: 'Can I donate in other currencies?',
@@ -106,9 +102,9 @@ export default function Donate() {
                   a: 'Saheli is a registered NGO with proper governance and audit procedures. Your donation is secure and transparent.',
                 },
               ].map((faq, idx) => (
-                <div key={idx} className="border-l-4 border-teal-500 bg-white rounded-lg p-6">
-                  <h3 className="font-bold text-lg text-slate-900 mb-2">{faq.q}</h3>
-                  <p className="text-slate-600">{faq.a}</p>
+                <div key={idx} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                  <h3 className="mb-2 text-lg font-bold text-[var(--navy)]">{faq.q}</h3>
+                  <p className="text-[var(--text-muted)]">{faq.a}</p>
                 </div>
               ))
             }
@@ -116,18 +112,17 @@ export default function Donate() {
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="bg-white border-t border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Stay updated on our impact</h2>
-          <p className="text-lg text-slate-600">Subscribe to receive monthly updates about our programs and beneficiary stories.</p>
+      <section className="bg-gradient-to-r from-[var(--navy)] to-[var(--teal)] py-16 text-white">
+        <div className="editorial-section max-w-4xl text-center space-y-6">
+          <h2 className="font-heading text-3xl font-bold md:text-5xl">Stay updated on our impact</h2>
+          <p className="text-lg text-white/85">Subscribe to receive monthly updates about programs and beneficiary stories.</p>
           <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-2 rounded-lg border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="flex-1 rounded-lg px-4 py-2 text-[var(--text)] focus:outline-none"
             />
-            <button className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90">
+            <button className="inline-flex items-center justify-center rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]">
               Subscribe
             </button>
           </div>

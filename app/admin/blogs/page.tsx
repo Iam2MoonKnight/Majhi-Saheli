@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession } from '@/lib/supabase';
 import { getUserProfile, getBlogs, deleteBlog, updateBlog } from '@/lib/supabase-functions';
 import Link from 'next/link';
 
@@ -17,7 +17,7 @@ export default function BlogsManagement() {
   }, [router]);
 
   const loadBlogs = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
+    const session = await getSafeSession();
     
     if (!session?.user) {
       router.push('/login');
@@ -70,30 +70,29 @@ export default function BlogsManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 animate-pulse"></div>
-          <p className="text-gray-600">Loading blogs...</p>
+          <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
+          <p className="text-[var(--text-muted)]">Loading blogs...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+    <div className="min-h-screen overflow-hidden">
+      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+        <div className="editorial-section py-6">
           <div className="flex items-center justify-between">
             <div>
-              <Link href="/admin" className="text-violet-600 hover:text-violet-700 text-sm font-medium mb-2 inline-block">
+              <Link href="/admin" className="mb-2 inline-block text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
                 ← Back to Dashboard
               </Link>
-              <h1 className="text-3xl font-bold text-gray-900">Blog Management</h1>
+              <h1 className="font-heading text-4xl font-bold text-[var(--navy)]">Blog Management</h1>
             </div>
             <Link
               href="/admin/blogs/new"
-              className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition shadow-lg"
+              className="rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
             >
               + Create New Blog
             </Link>
@@ -101,31 +100,30 @@ export default function BlogsManagement() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6 border border-gray-100">
+      <div className="editorial-section py-12">
+        <div className="mb-6 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-4">
           <div className="flex items-center gap-4">
-            <span className="text-sm font-medium text-gray-700">Filter:</span>
+            <span className="text-sm font-medium text-[var(--text-muted)]">Filter:</span>
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                filter === 'all' ? 'bg-violet-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                filter === 'all' ? 'bg-[var(--navy)] text-white' : 'bg-[color:rgb(30_58_95_/_0.08)] text-[var(--text-muted)] hover:bg-[color:rgb(30_58_95_/_0.14)]'
               }`}
             >
               All ({blogs.length})
             </button>
             <button
               onClick={() => setFilter('published')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                filter === 'published' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                filter === 'published' ? 'bg-[var(--teal)] text-white' : 'bg-[color:rgb(30_58_95_/_0.08)] text-[var(--text-muted)] hover:bg-[color:rgb(30_58_95_/_0.14)]'
               }`}
             >
               Published ({blogs.filter(b => b.status === 'published').length})
             </button>
             <button
               onClick={() => setFilter('draft')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                filter === 'draft' ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                filter === 'draft' ? 'bg-[var(--accent)] text-white' : 'bg-[color:rgb(30_58_95_/_0.08)] text-[var(--text-muted)] hover:bg-[color:rgb(30_58_95_/_0.14)]'
               }`}
             >
               Drafts ({blogs.filter(b => b.status === 'draft').length})
@@ -133,23 +131,22 @@ export default function BlogsManagement() {
           </div>
         </div>
 
-        {/* Blogs List */}
         {filteredBlogs.length > 0 ? (
           <div className="grid grid-cols-1 gap-6">
             {filteredBlogs.map((blog) => (
-              <div key={blog.id} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
+              <div key={blog.id} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 transition hover:-translate-y-1 hover:shadow-md">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <h2 className="text-xl font-bold text-gray-900">{blog.title}</h2>
+                      <h2 className="font-heading text-2xl font-bold text-[var(--navy)]">{blog.title}</h2>
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        blog.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                        blog.status === 'published' ? 'bg-[color:rgb(42_123_111_/_0.16)] text-[var(--teal)]' : 'bg-[color:rgb(217_119_77_/_0.14)] text-[var(--accent)]'
                       }`}>
                         {blog.status}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4 line-clamp-2">{blog.excerpt}</p>
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                    <p className="mb-4 line-clamp-2 text-[var(--text-muted)]">{blog.excerpt}</p>
+                    <div className="flex items-center gap-4 text-sm text-[var(--text-muted)]">
                       <span>📅 {new Date(blog.created_at).toLocaleDateString()}</span>
                       {blog.published_at && (
                         <span>🌐 Published: {new Date(blog.published_at).toLocaleDateString()}</span>
@@ -160,23 +157,23 @@ export default function BlogsManagement() {
                   <div className="flex items-center gap-2 ml-4">
                     <Link
                       href={`/admin/blogs/edit/${blog.id}`}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium"
+                      className="rounded-full bg-[var(--blue)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--navy)]"
                     >
                       Edit
                     </Link>
                     <button
                       onClick={() => handleToggleStatus(blog)}
-                      className={`px-4 py-2 rounded-lg transition text-sm font-medium ${
+                      className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                         blog.status === 'published'
-                          ? 'bg-yellow-600 text-white hover:bg-yellow-700'
-                          : 'bg-green-600 text-white hover:bg-green-700'
+                          ? 'bg-[var(--accent)] text-white hover:bg-[var(--accent-warm)]'
+                          : 'bg-[var(--teal)] text-white hover:opacity-90'
                       }`}
                     >
                       {blog.status === 'published' ? 'Unpublish' : 'Publish'}
                     </button>
                     <button
                       onClick={() => handleDelete(blog.id)}
-                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm font-medium"
+                      className="rounded-full bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
                     >
                       Delete
                     </button>
@@ -186,15 +183,15 @@ export default function BlogsManagement() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-12 text-center">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-12 text-center">
             <div className="text-6xl mb-4">📝</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">No blogs found</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="font-heading text-3xl font-bold text-[var(--navy)]">No blogs found</h3>
+            <p className="mb-6 mt-2 text-[var(--text-muted)]">
               {filter === 'all' ? 'Create your first blog post to get started!' : `No ${filter} blogs yet.`}
             </p>
             <Link
               href="/admin/blogs/new"
-              className="inline-block px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition"
+              className="inline-block rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
             >
               Create New Blog
             </Link>

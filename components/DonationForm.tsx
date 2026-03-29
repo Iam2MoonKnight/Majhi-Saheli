@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { submitDonation } from '@/lib/supabase-functions';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession } from '@/lib/supabase';
 
 interface DonationFormProps {
   onSuccess?: () => void;
@@ -35,8 +35,8 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
     setError(null);
 
     try {
-      const { data } = await supabase.auth.getSession();
-      const userId = data?.session?.user?.id || null;
+      const session = await getSafeSession();
+      const userId = session?.user?.id || null;
 
       await submitDonation({
         user_id: userId,
@@ -70,23 +70,23 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Make a Donation</h2>
+    <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 shadow-sm">
+      <h2 className="font-heading mb-6 text-3xl font-bold text-[var(--navy)]">Make a Donation</h2>
 
       {campaignLabel && (
-        <div className="mb-6 rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-800">
+        <div className="mb-6 rounded-lg border border-[color:rgb(30_58_95_/_0.28)] bg-[color:rgb(30_58_95_/_0.09)] px-4 py-3 text-sm text-[var(--blue)]">
           Supporting campaign: <span className="font-semibold">{campaignLabel}</span>
         </div>
       )}
 
       {success && (
-        <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+        <div className="mb-6 rounded border border-emerald-300 bg-emerald-50 p-4 text-emerald-700">
           ✓ Thank you for your donation! Your support helps us empower rural women.
         </div>
       )}
 
       {error && (
-        <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="mb-6 rounded border border-red-300 bg-red-50 p-4 text-red-700">
           ✕ Error: {error}
         </div>
       )}
@@ -95,7 +95,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-2">
+            <label htmlFor="name" className="mb-2 block text-sm font-medium text-[var(--navy)]">
               Full Name *
             </label>
             <input
@@ -105,14 +105,14 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
               placeholder="Your name"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
+            <label htmlFor="email" className="mb-2 block text-sm font-medium text-[var(--navy)]">
               Email Address *
             </label>
             <input
@@ -122,7 +122,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
               placeholder="your@email.com"
             />
           </div>
@@ -131,7 +131,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Amount */}
           <div>
-            <label htmlFor="amount" className="block text-sm font-medium text-gray-900 mb-2">
+            <label htmlFor="amount" className="mb-2 block text-sm font-medium text-[var(--navy)]">
               Amount *
             </label>
             <input
@@ -143,14 +143,14 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
               required
               min="1"
               step="0.01"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
               placeholder="500"
             />
           </div>
 
           {/* Currency */}
           <div>
-            <label htmlFor="currency" className="block text-sm font-medium text-gray-900 mb-2">
+            <label htmlFor="currency" className="mb-2 block text-sm font-medium text-[var(--navy)]">
               Currency
             </label>
             <select
@@ -158,7 +158,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
               name="currency"
               value={formData.currency}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             >
               <option value="INR">INR</option>
               <option value="USD">USD</option>
@@ -169,7 +169,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
 
         {/* Frequency */}
         <div>
-          <label htmlFor="frequency" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="frequency" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Donation Type
           </label>
           <div className="flex gap-6">
@@ -182,7 +182,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
                 onChange={handleChange}
                 className="mr-2"
               />
-              <span className="text-gray-700">One-time</span>
+              <span className="text-[var(--text)]">One-time</span>
             </label>
             <label className="flex items-center">
               <input
@@ -193,14 +193,14 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
                 onChange={handleChange}
                 className="mr-2"
               />
-              <span className="text-gray-700">Monthly Recurring</span>
+              <span className="text-[var(--text)]">Monthly Recurring</span>
             </label>
           </div>
         </div>
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="message" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Message (Optional)
           </label>
           <textarea
@@ -209,7 +209,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
             value={formData.message}
             onChange={handleChange}
             rows={4}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none resize-none"
+            className="w-full resize-none rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             placeholder="Share why you're supporting Saheli (optional)"
           />
         </div>
@@ -218,12 +218,12 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         <button
           type="submit"
           disabled={loading}
-          className="w-full inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex w-full items-center justify-center rounded-lg bg-[var(--accent)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? 'Processing...' : `Donate ${formData.currency} ${formData.amount || '0'}`}
         </button>
 
-        <p className="text-xs text-gray-600 text-center">
+        <p className="text-center text-xs text-[var(--text-muted)]">
           💡 <strong>Note:</strong> This form stores donation records. Payment gateway integration (Razorpay, Stripe) can be added later.
         </p>
       </form>

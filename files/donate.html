@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate – Mazi Saheli Charitable Trust</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp;</span>
+    <span>DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp; DONATE NOW &nbsp;✦&nbsp;</span>
+  </div>
+</div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2"/><path d="M12 24c2-4 4-8 8-8s6 4 8 8" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="14" r="3" fill="var(--accent)"/></svg></div>
+      <div class="logo-text"><span class="logo-main">Mazi Saheli</span><span class="logo-sub">Charitable Trust</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="donate.html" class="nav-link nav-donate active">Donate</a></li>
+    </ul>
+    <a href="tel:+910000000000" class="nav-phone">+91 0000000000</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="donate.html">Donate</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero donate-hero">
+  <div class="ph-bg-shapes"><div class="shape shape-1"></div><div class="shape shape-2"></div></div>
+  <div class="container">
+    <div class="ph-content">
+      <div class="section-eyebrow reveal">Make An Impact</div>
+      <h1 class="reveal delay-1">Your Gift Changes <em>Real Lives</em> in Maharashtra</h1>
+      <p class="reveal delay-2">Every rupee directly funds health camps, education, livelihood training, and skill building for marginalised women and adolescents across 6 districts.</p>
+      <div class="hero-trust-badges reveal delay-3">
+        <span>✓ 80G Approved</span>
+        <span>✓ CSR Approved</span>
+        <span>✓ NITI Aayog Registered</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATION FORM + IMPACT -->
+<section class="donation-main">
+  <div class="container">
+    <div class="donation-grid">
+
+      <!-- FORM -->
+      <div class="donation-form-wrap reveal">
+        <h2>Make Your Donation</h2>
+        <p>Choose the amount that works for you to give directly.</p>
+
+        <div class="freq-toggle">
+          <button class="freq-btn active" data-freq="one">One Time</button>
+          <button class="freq-btn" data-freq="monthly">Monthly</button>
+        </div>
+
+        <div class="amount-grid">
+          <button class="amount-btn" data-amount="500">₹500</button>
+          <button class="amount-btn active" data-amount="1000">₹1,000</button>
+          <button class="amount-btn" data-amount="2500">₹2,500</button>
+          <button class="amount-btn" data-amount="5000">₹5,000</button>
+          <button class="amount-btn" data-amount="10000">₹10,000</button>
+          <button class="amount-btn" data-amount="25000">₹25,000</button>
+        </div>
+        <div class="custom-amount">
+          <label>Or enter a custom amount (₹)</label>
+          <input type="number" id="customAmt" placeholder="Enter amount" min="100" />
+        </div>
+
+        <div class="payment-methods">
+          <div class="pm-label">Payment Methods</div>
+          <div class="pm-icons">
+            <span class="pm-icon">UPI</span>
+            <span class="pm-icon">Card</span>
+            <span class="pm-icon">NetBanking</span>
+            <span class="pm-icon">Wire</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="First name" /></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Last name" /></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="you@example.com" /></div>
+        <div class="form-group"><label>PAN (for 80G receipt)</label><input type="text" placeholder="ABCDE1234F (optional)" /></div>
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="dedicateToggle" /> Dedicate this donation
+        </label>
+        <div class="dedicate-wrap" id="dedicateWrap" style="display:none">
+          <input type="text" placeholder="In honour of..." />
+        </div>
+
+        <button class="btn btn-primary full donate-submit-btn" id="donateBtn">
+          <span id="donateBtnText">Generate ₹1,000 Now →</span>
+        </button>
+        <p class="secure-note">🔒 Secure payment powered by Razorpay</p>
+      </div>
+
+      <!-- IMPACT SIDE -->
+      <div class="donation-impact reveal delay-1">
+        <h3>See What Your Donation Does</h3>
+        <p>Every donation goes directly to Balasangopan — not like Lab, lab, but exactly what you most closely believe.</p>
+        <div class="impact-highlight">
+          <div class="ih-amount">₹1,000 <span>one-time</span></div>
+          <p>Your ₹1,000 contribution enables:</p>
+          <ul class="impact-list">
+            <li>🏥 <strong>Health Lamps</strong> – Nutritional supplement for one month for a child</li>
+            <li>🎒 <strong>Education</strong> – Stationery and learning supplies for one student</li>
+            <li>🌿 <strong>Livelihood</strong> – One counselling session for a woman entrepreneur</li>
+            <li>🌍 <strong>Environment</strong> – 10 saplings planted in rural community forests</li>
+          </ul>
+        </div>
+        <div class="impact-logos">
+          <div class="il-row"><span>Health &amp; Hygiene</span><div class="il-bar"><div class="il-fill" style="width:35%"></div></div><span>35%</span></div>
+          <div class="il-row"><span>Education &amp; Skill</span><div class="il-bar"><div class="il-fill" style="width:25%"></div></div><span>25%</span></div>
+          <div class="il-row"><span>Livelihood</span><div class="il-bar"><div class="il-fill" style="width:20%"></div></div><span>20%</span></div>
+          <div class="il-row"><span>Nutrition &amp; Community</span><div class="il-bar"><div class="il-fill" style="width:20%"></div></div><span>20%</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT LEVELS -->
+<section class="impact-levels">
+  <div class="container">
+    <div class="section-eyebrow center">The Decision</div>
+    <h2 class="section-title center">Choose Your <span class="highlight">Impact Level</span></h2>
+    <p class="section-sub center">Every giving level creates a specific, meaningful change in the lives of communities across Maharashtra — real and permanent impact.</p>
+    <div class="level-grid">
+      <div class="level-card seed reveal">
+        <div class="lc-range">₹500–₹2,500</div>
+        <div class="lc-tier">SEED GIVING</div>
+        <h3>Sow the Seeds of Change</h3>
+        <p>Fund a health camp session, sponsor stationery for 5 students, or support one woman's participation in a savings programme.</p>
+        <ul class="lc-points">
+          <li>✓ 1 child's nutrition for a month</li>
+          <li>✓ Access to library materials</li>
+          <li>✓ 1 session in a women's circle</li>
+        </ul>
+        <a href="#donationForm" class="btn btn-outline">Donate ₹500+</a>
+      </div>
+      <div class="level-card change reveal delay-1 featured">
+        <div class="lc-featured-tag">Most Popular</div>
+        <div class="lc-range">₹2,500–₹25,000</div>
+        <div class="lc-tier">CHANGEMAKER</div>
+        <h3>Empower a Woman, Transform a Family</h3>
+        <p>Fund vocational training, a complete health screening programme, or entrepreneurship support for one rural woman.</p>
+        <ul class="lc-points">
+          <li>✓ Full vocational training programme</li>
+          <li>✓ 1 complete health screening event</li>
+          <li>✓ 3-month women's group facilitation</li>
+        </ul>
+        <a href="#donationForm" class="btn btn-primary">Donate ₹2,500+</a>
+      </div>
+      <div class="level-card sponsor reveal delay-2">
+        <div class="lc-range">₹50,000+</div>
+        <div class="lc-tier">LEAD GIVER</div>
+        <h3>Sponsor a Complete Programme</h3>
+        <p>Fund an entire programme, independent research on a specific issue, or a health camp including medication and follow-up care.</p>
+        <ul class="lc-points">
+          <li>✓ 1 full district health camp</li>
+          <li>✓ Annual scholarship for 3 students</li>
+          <li>✓ Complete community kitchen garden</li>
+        </ul>
+        <a href="#donationForm" class="btn btn-outline">Donate ₹50,000+</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="section-eyebrow center">The Process</div>
+    <h2 class="section-title center">How Your Donation <span class="highlight">Reaches the Field</span></h2>
+    <div class="hiw-steps">
+      <div class="hiw-step reveal">
+        <div class="hiw-num">1</div>
+        <h4>Donate Online</h4>
+        <p>Choose your amount and complete your donation securely through Razorpay payment gateway.</p>
+      </div>
+      <div class="hiw-arrow">→</div>
+      <div class="hiw-step reveal delay-1">
+        <div class="hiw-num active">2</div>
+        <h4>Funds Are Allocated</h4>
+        <p>Within 48 hours, funds are allocated to specific programmes — health, education, livelihood, or nutrition.</p>
+      </div>
+      <div class="hiw-arrow">→</div>
+      <div class="hiw-step reveal delay-2">
+        <div class="hiw-num">3</div>
+        <h4>Ground Teams Deploy</h4>
+        <p>Our network of local field workers and programme coordinators implements the funded programmes.</p>
+      </div>
+      <div class="hiw-arrow">→</div>
+      <div class="hiw-step reveal delay-3">
+        <div class="hiw-num">4</div>
+        <h4>You See the Impact</h4>
+        <p>You receive detailed impact reports, photos, testimonials, and stories from the communities you've supported.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MONEY AT WORK -->
+<section class="money-at-work">
+  <div class="container">
+    <h2 class="section-title center">Your Money <span class="highlight">At Work</span></h2>
+    <div class="maw-grid">
+      <div class="maw-card reveal">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500&q=80" alt="Health Centres" />
+        <div class="maw-label">Free Health Centres</div>
+      </div>
+      <div class="maw-card reveal delay-1">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=500&q=80" alt="Training" />
+        <div class="maw-label">Skill Training Sessions</div>
+      </div>
+      <div class="maw-card reveal delay-2">
+        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500&q=80" alt="Garden" />
+        <div class="maw-label">Community Gardens</div>
+      </div>
+      <div class="maw-card reveal delay-3">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&q=80" alt="Savings" />
+        <div class="maw-label">Savings Programmes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET BREAKDOWN -->
+<section class="budget-section">
+  <div class="container">
+    <div class="budget-grid">
+      <div class="budget-text reveal">
+        <div class="section-eyebrow">For Every Rupee</div>
+        <h2>Where Every <span class="highlight">Rupee Goes</span></h2>
+        <p>We maintain complete financial transparency. Every rupee is tracked, allocated, and reported back to our donors through quarterly reports and annual audits.</p>
+        <div class="budget-bars">
+          <div class="bb-row"><span>Health &amp; Hygiene Programmes</span><div class="bb-track"><div class="bb-fill" style="--w:35%"></div></div><strong>35%</strong></div>
+          <div class="bb-row"><span>Education &amp; Skill Building</span><div class="bb-track"><div class="bb-fill" style="--w:25%"></div></div><strong>25%</strong></div>
+          <div class="bb-row"><span>Livelihood &amp; Women Empowerment</span><div class="bb-track"><div class="bb-fill" style="--w:20%"></div></div><strong>20%</strong></div>
+          <div class="bb-row"><span>Nutrition &amp; Community Development</span><div class="bb-track"><div class="bb-fill" style="--w:20%"></div></div><strong>20%</strong></div>
+        </div>
+      </div>
+      <div class="budget-stats reveal delay-1">
+        <div class="bs-item"><span class="bs-num" data-target="21000">0</span><span>Lives Touched</span></div>
+        <div class="bs-item"><span class="bs-num">100%</span><span>Funds to Field</span></div>
+        <div class="bs-item"><span class="bs-num" data-target="224">0</span><span>Camps Organized</span></div>
+        <div class="bs-item"><span class="bs-num">9+</span><span>Years of Impact</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-eyebrow center">Why People Give</div>
+    <h2 class="section-title center">Why People <span class="highlight">Give</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <p>"I wanted to support work that truly reaches rural women. MSCT's field reports show exactly where every rupee went. I felt genuinely connected to the impact."</p>
+        <div class="tc-author"><strong>Sujata Naik</strong><span>Donor, Pune</span></div>
+      </div>
+      <div class="testi-card reveal delay-1">
+        <p>"Our company partnered with MSCT for a ₹5 Lakh CSR contribution. The on-ground transparency and sincerity made every board member proud of this partnership."</p>
+        <div class="tc-author"><strong>Neha Doshi</strong><span>CSR Head, Mumbai</span></div>
+      </div>
+      <div class="testi-card reveal delay-2">
+        <p>"I sent a ₹500 donation not sure how far it would go. MSCT sent me a photo of the exact health camp it funded. That image changed how I think about charity."</p>
+        <div class="tc-author"><strong>Anjali Kulkarni</strong><span>Individual Donor</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER WAYS -->
+<section class="other-ways">
+  <div class="container">
+    <h2 class="section-title center">Other Ways to <span class="highlight">Support MSCT</span></h2>
+    <p class="section-sub center">Financial contributions are not the only way to make a difference. Here are other impactful ways to contribute:</p>
+    <div class="ow-grid">
+      <div class="ow-card reveal">
+        <div class="ow-icon">🏢</div>
+        <h3>Corporate CSR Partnership</h3>
+        <p>Partner with MSCT for structured CSR programmes that align with your company's ESG goals and meet SEBI reporting requirements.</p>
+        <a href="contact.html" class="fc-link">Explore Partnership →</a>
+      </div>
+      <div class="ow-card reveal delay-1">
+        <div class="ow-icon">🎉</div>
+        <h3>Fundraise for MSCT</h3>
+        <p>Organise a fundraiser and build community around the cause — birthdays, marathons, workplace giving, or social media campaigns all work.</p>
+        <a href="contact.html" class="fc-link">Start Fundraising →</a>
+      </div>
+      <div class="ow-card reveal delay-2">
+        <div class="ow-icon">🙌</div>
+        <h3>Volunteer Your Skills</h3>
+        <p>Contribute your professional skills — healthcare, design, legal, technology, education — directly to our programmes and field teams.</p>
+        <a href="contact.html" class="fc-link">Become a Volunteer →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="every-rupee-cta">
+  <div class="container">
+    <div class="section-eyebrow center">Final Note</div>
+    <h2>Every Rupee is a <em>Step Forward</em></h2>
+    <p>We are thousands of donors, volunteers, and partners working together — towards a rural India where every family has access to health, education, and livelihood.</p>
+    <div class="ready-btns">
+      <a href="#donationForm" class="btn btn-primary">Donate Now</a>
+      <a href="contact.html" class="btn btn-outline-light">Become a Partner</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2"/><path d="M12 24c2-4 4-8 8-8s6 4 8 8" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="14" r="3" fill="var(--accent)"/></svg></div><div class="logo-text"><span class="logo-main">Mazi Saheli</span><span class="logo-sub">Charitable Trust</span></div></a>
+        <p>A grassroots NGO transforming lives across 6 districts of Maharashtra.</p>
+        <div class="social-links"><a href="#" class="social">f</a><a href="#" class="social">in</a><a href="#" class="social">𝕏</a><a href="#" class="social">▶</a></div>
+      </div>
+      <div class="footer-nav"><h4>Navigate</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="donate.html">Donate</a></div>
+      <div class="footer-nav"><h4>Focus Areas</h4><a href="#">Health &amp; Hygiene</a><a href="#">Nutrition</a><a href="#">Financial Literacy</a><a href="#">Skill Building</a><a href="#">Women Empowerment</a></div>
+      <div class="footer-nav"><h4>Contact</h4><a href="#">Thane, Maharashtra – 400001</a><a href="tel:+910000000000">+91 90745 42210</a><a href="mailto:info@mazisaheli.org">info@mazisaheli.org</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 Mazi Saheli Charitable Trust. All rights reserved.</p><p>80G Registered &nbsp;|&nbsp; FCRA Approved &nbsp;|&nbsp; Niti Aayog Registered</p></div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

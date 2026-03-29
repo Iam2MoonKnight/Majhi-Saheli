@@ -36,11 +36,11 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+    <div className="mx-auto max-w-2xl rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 shadow-sm">
+      <h2 className="font-heading mb-6 text-3xl font-bold text-[var(--navy)]">Get in Touch</h2>
 
       {success && (
-        <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+        <div className="mb-6 rounded-lg border border-emerald-300 bg-emerald-50 p-4 text-emerald-700">
           ✓ Thank you for your message! We'll get back to you soon.
         </div>
       )}
@@ -49,7 +49,7 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-2">
+            <label htmlFor="name" className="mb-2 block text-sm font-medium text-[var(--navy)]">
               Full Name *
             </label>
             <input
@@ -59,14 +59,14 @@ export default function ContactForm() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+              className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
               placeholder="Your name"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
+            <label htmlFor="email" className="mb-2 block text-sm font-medium text-[var(--navy)]">
               Email Address *
             </label>
             <input
@@ -76,7 +76,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+              className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
               placeholder="your@email.com"
             />
           </div>
@@ -84,7 +84,7 @@ export default function ContactForm() {
 
         {/* Phone */}
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="phone" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Phone Number (Optional)
           </label>
           <input
@@ -93,14 +93,14 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+            className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             placeholder="+91 XXXX-XXXX-XX"
           />
         </div>
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-2">
+          <label htmlFor="message" className="mb-2 block text-sm font-medium text-[var(--navy)]">
             Message *
           </label>
           <textarea
@@ -110,7 +110,7 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             rows={5}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none resize-none"
+            className="w-full resize-none rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-[var(--text)] outline-none focus:border-[var(--accent)]"
             placeholder="Your message here..."
           />
         </div>
@@ -119,7 +119,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full rounded-lg bg-[var(--accent)] px-6 py-3 font-bold text-white transition hover:bg-[var(--accent-warm)] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? 'Sending...' : 'Send Message'}
         </button>

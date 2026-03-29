@@ -1,5 +1,6 @@
 import ProgramCard from '@/components/ProgramCard';
 import { getPrograms } from '@/lib/supabase-functions';
+import Link from 'next/link';
 
 export default async function Programs() {
   let programs = [];
@@ -81,28 +82,26 @@ export default async function Programs() {
   const displayPrograms = programs.length > 0 ? programs : dummyPrograms;
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Hero Section */}
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 rounded-full mx-auto">
-            <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-            <span className="text-xs font-semibold text-teal-900 tracking-wide">OUR PROGRAMS</span>
+    <div className="min-h-screen overflow-hidden">
+      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)] py-16">
+        <div className="editorial-section space-y-6 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.12)] px-4 py-2">
+            <div className="h-2 w-2 rounded-full bg-[var(--teal)]"></div>
+            <span className="section-eyebrow text-[var(--navy)]">Our Programs</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Our programs</h1>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            Comprehensive initiatives supporting every aspect of rural women's empowerment.
+          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Programs that convert intent into impact</h1>
+          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
+            Integrated interventions spanning education, healthcare, livelihoods, and community leadership.
           </p>
         </div>
       </section>
 
-      {/* Program Cards */}
-      <section className="bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-12">
+      <section className="py-16">
+        <div className="editorial-section space-y-12">
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Education programs</h2>
-              <p className="text-slate-600 mt-2">Building knowledge and confidence through quality education.</p>
+              <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">Education programs</h2>
+              <p className="mt-2 text-[var(--text-muted)]">Building knowledge, confidence, and pathways to long-term opportunity.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
@@ -113,10 +112,10 @@ export default async function Programs() {
             </div>
           </div>
 
-          <div className="border-t border-slate-200 pt-12 space-y-6">
+          <div className="border-t border-[var(--border-soft)] pt-12 space-y-6">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Health programs</h2>
-              <p className="text-slate-600 mt-2">Ensuring health, wellness, and medical care for rural women.</p>
+              <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">Health programs</h2>
+              <p className="mt-2 text-[var(--text-muted)]">Preventive care, maternal health, and access to essential services.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
@@ -127,10 +126,10 @@ export default async function Programs() {
             </div>
           </div>
 
-          <div className="border-t border-slate-200 pt-12 space-y-6">
+          <div className="border-t border-[var(--border-soft)] pt-12 space-y-6">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Skill development</h2>
-              <p className="text-slate-600 mt-2">Vocational training for economic independence.</p>
+              <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">Skill development</h2>
+              <p className="mt-2 text-[var(--text-muted)]">Vocational and digital capability-building for financial resilience.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
@@ -141,10 +140,10 @@ export default async function Programs() {
             </div>
           </div>
 
-          <div className="border-t border-slate-200 pt-12 space-y-6">
+          <div className="border-t border-[var(--border-soft)] pt-12 space-y-6">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Other initiatives</h2>
-              <p className="text-slate-600 mt-2">Additional empowerment programs and community services.</p>
+              <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">Other initiatives</h2>
+              <p className="mt-2 text-[var(--text-muted)]">Leadership, collectives, and community-first support models.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayPrograms
@@ -157,10 +156,9 @@ export default async function Programs() {
         </div>
       </section>
 
-      {/* Impact Stats */}
-      <section className="bg-white border-t border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center">Program impact</h2>
+      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] py-16">
+        <div className="editorial-section space-y-8">
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Program impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
               { label: 'Girls Educated', value: '250+' },
@@ -168,28 +166,27 @@ export default async function Programs() {
               { label: 'Health Services', value: '1000+' },
               { label: 'Communities Served', value: '50+' },
             ].map((stat, idx) => (
-              <div key={idx} className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200">
-                <div className="text-3xl font-bold text-teal-700 mb-2">{stat.value}</div>
-                <div className="text-slate-700 font-medium text-sm">{stat.label}</div>
+              <div key={idx} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 text-center">
+                <div className="font-heading mb-2 text-4xl font-bold text-[var(--navy)]">{stat.value}</div>
+                <div className="text-sm font-medium text-[var(--text-muted)]">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-slate-50 border-t border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Support our programs</h2>
-          <p className="text-lg text-slate-600">
+      <section className="py-16">
+        <div className="editorial-section text-center space-y-6">
+          <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Support our programs</h2>
+          <p className="text-lg text-[var(--text-muted)]">
             Your donation enables us to continue and expand these life-changing programs.
           </p>
-          <a
+          <Link
             href="/donate"
-            className="inline-flex items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
           >
             Donate now
-          </a>
+          </Link>
         </div>
       </section>
     </div>

@@ -5,75 +5,71 @@ export default async function BlogPage() {
   const blogs = await getBlogs(false); // Only published blogs
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-violet-600 to-purple-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full mb-6">
-              <span className="text-sm font-semibold tracking-wide">OUR BLOG</span>
-            </div>
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">Stories of Change</h1>
-            <p className="text-xl text-violet-100 max-w-2xl mx-auto">
-              Read about the inspiring journeys, impactful programs, and transformative work happening in rural communities
-            </p>
+    <div className="min-h-screen overflow-hidden">
+      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)] py-16">
+        <div className="editorial-section text-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(212_168_67_/_0.16)] px-4 py-2 mb-6">
+            <span className="section-eyebrow text-[var(--navy)]">Our Blog</span>
           </div>
+          <h1 className="font-heading mb-6 text-5xl font-bold text-[var(--navy)] lg:text-6xl">Stories of change</h1>
+          <p className="mx-auto max-w-2xl text-xl text-[var(--text-muted)]">
+            Read the journeys, field updates, and lessons from communities building change from the ground up.
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Blog Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {blogs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => (
-              <Link
-                key={blog.id}
-                href={`/blog/${blog.slug}`}
-                className="group bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-              >
-                {blog.featured_image ? (
-                  <div className="h-48 overflow-hidden bg-gray-200">
-                    <img
-                      src={blog.featured_image}
-                      alt={blog.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                ) : (
-                  <div className="h-48 bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center">
-                    <span className="text-6xl">📝</span>
-                  </div>
-                )}
-                
-                <div className="p-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-violet-600 transition-colors line-clamp-2">
-                    {blog.title}
-                  </h2>
-                  {blog.excerpt && (
-                    <p className="text-gray-600 mb-4 line-clamp-3">{blog.excerpt}</p>
+      <section className="py-16">
+        <div className="editorial-section">
+          {blogs.length > 0 ? (
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {blogs.map((blog) => (
+                <Link
+                  key={blog.id}
+                  href={`/blog/${blog.slug}`}
+                  className="group overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  {blog.featured_image ? (
+                    <div className="h-52 overflow-hidden bg-[color:rgb(30_58_95_/_0.1)]">
+                      <img
+                        src={blog.featured_image}
+                        alt={blog.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-52 items-center justify-center bg-gradient-to-br from-[color:rgb(30_58_95_/_0.13)] to-[color:rgb(232_131_74_/_0.2)]">
+                      <span className="text-6xl">📝</span>
+                    </div>
                   )}
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <span>{new Date(blog.published_at || blog.created_at).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}</span>
-                    <span className="text-violet-600 font-medium group-hover:translate-x-1 transition-transform">
-                      Read more →
-                    </span>
+
+                  <div className="p-6">
+                    <h2 className="mb-3 line-clamp-2 font-heading text-2xl font-bold text-[var(--navy)] transition-colors group-hover:text-[var(--accent)]">
+                      {blog.title}
+                    </h2>
+                    {blog.excerpt && <p className="mb-4 line-clamp-3 text-[var(--text-muted)]">{blog.excerpt}</p>}
+                    <div className="flex items-center justify-between text-sm text-[var(--text-muted)]">
+                      <span>
+                        {new Date(blog.published_at || blog.created_at).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}
+                      </span>
+                      <span className="font-medium text-[var(--accent)] transition-transform group-hover:translate-x-1">Read more →</span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20">
-            <div className="text-6xl mb-6">📝</div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">No blog posts yet</h3>
-            <p className="text-gray-600">Check back soon for inspiring stories and updates!</p>
-          </div>
-        )}
-      </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="py-20 text-center">
+              <div className="mb-6 text-6xl">📝</div>
+              <h3 className="mb-4 font-heading text-3xl font-bold text-[var(--navy)]">No blog posts yet</h3>
+              <p className="text-[var(--text-muted)]">Check back soon for stories and updates.</p>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

@@ -4,16 +4,17 @@ import { getCampaignBySlug } from '@/lib/supabase-functions';
 import { getCampaignById, mapSupabaseCampaign } from '@/lib/campaigns';
 
 const statusStyles: Record<string, string> = {
-  ongoing: 'bg-teal-100 text-teal-800 border-teal-200',
-  completed: 'bg-slate-200 text-slate-700 border-slate-300',
-  upcoming: 'bg-amber-100 text-amber-800 border-amber-200',
+  ongoing: 'bg-brand-100 text-brand-800 border-brand-200',
+  completed: 'bg-accent-100 text-accent-800 border-accent-200',
+  upcoming: 'bg-slate-100 text-slate-800 border-slate-200',
 };
 
-export default async function CampaignDetailPage({ params }: { params: { id: string } }) {
-  let campaign = getCampaignById(params.id);
+export default async function CampaignDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  let campaign = getCampaignById(id);
 
   try {
-    const supabaseCampaign = await getCampaignBySlug(params.id);
+    const supabaseCampaign = await getCampaignBySlug(id);
     if (supabaseCampaign) {
       campaign = mapSupabaseCampaign(supabaseCampaign);
     }
@@ -28,10 +29,10 @@ export default async function CampaignDetailPage({ params }: { params: { id: str
   const progress = campaign.goalAmount > 0 ? (campaign.raisedAmount / campaign.goalAmount) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-6">
-          <Link href="/campaigns" className="text-sm font-medium text-teal-700 hover:text-teal-800">
+    <div className="min-h-screen overflow-hidden">
+      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+        <div className="editorial-section space-y-6 py-16">
+          <Link href="/campaigns" className="text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
             ← Back to campaigns
           </Link>
           <div className="space-y-4">
@@ -42,56 +43,56 @@ export default async function CampaignDetailPage({ params }: { params: { id: str
             >
               {campaign.status}
             </span>
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-900">{campaign.title}</h1>
-            <p className="text-lg text-slate-600">{campaign.location}</p>
+            <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">{campaign.title}</h1>
+            <p className="text-lg text-[var(--text-muted)]">{campaign.location}</p>
           </div>
         </div>
       </section>
 
-      <section className="bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 py-16 space-y-10">
+      <section className="py-16">
+        <div className="editorial-section space-y-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-2xl border border-slate-200 p-8 space-y-4">
-                <h2 className="text-2xl font-bold text-slate-900">About this campaign</h2>
-                <p className="text-slate-600 leading-relaxed">{campaign.description}</p>
+              <div className="space-y-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+                <h2 className="font-heading text-2xl font-bold text-[var(--navy)]">About this campaign</h2>
+                <p className="leading-relaxed text-[var(--text-muted)]">{campaign.description}</p>
               </div>
 
-              <div className="bg-white rounded-2xl border border-slate-200 p-8 space-y-4">
-                <h3 className="text-xl font-semibold text-slate-900">Campaign progress</h3>
+              <div className="space-y-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+                <h3 className="font-heading text-xl font-semibold text-[var(--navy)]">Campaign progress</h3>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="font-semibold text-slate-900">
+                  <span className="font-semibold text-[var(--navy)]">
                     ₹{campaign.raisedAmount.toLocaleString()}
                   </span>
-                  <span className="text-slate-600">of ₹{campaign.goalAmount.toLocaleString()}</span>
+                  <span className="text-[var(--text-muted)]">of ₹{campaign.goalAmount.toLocaleString()}</span>
                 </div>
-                <div className="w-full bg-slate-200 rounded-full h-3">
+                <div className="h-3 w-full rounded-full bg-[color:rgb(30_58_95_/_0.12)]">
                   <div
-                    className="bg-gradient-to-r from-teal-500 to-emerald-500 h-3 rounded-full"
+                    className="h-3 rounded-full bg-gradient-to-r from-[var(--blue)] to-[var(--accent)]"
                     style={{ width: `${Math.min(progress, 100)}%` }}
                   ></div>
                 </div>
-                <div className="text-xs text-slate-500">{Math.round(progress)}% funded</div>
+                <div className="text-xs text-[var(--text-muted)]">{Math.round(progress)}% funded</div>
               </div>
             </div>
 
             <div className="space-y-6">
-              <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
-                <h3 className="text-lg font-semibold text-slate-900">Support this campaign</h3>
-                <p className="text-sm text-slate-600">
+              <div className="space-y-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <h3 className="font-heading text-lg font-semibold text-[var(--navy)]">Support this campaign</h3>
+                <p className="text-sm text-[var(--text-muted)]">
                   Your contribution helps us meet this campaign goal and deliver real change on the ground.
                 </p>
                 <Link
                   href={`/donate?campaign=${campaign.id}`}
-                  className="inline-flex w-full items-center justify-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
                 >
                   Donate to this campaign
                 </Link>
               </div>
 
-              <div className="bg-white rounded-2xl border border-slate-200 p-6">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Category</p>
-                <p className="mt-2 text-sm font-medium text-slate-900 capitalize">{campaign.category}</p>
+              <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Category</p>
+                <p className="mt-2 text-sm font-medium capitalize text-[var(--navy)]">{campaign.category}</p>
               </div>
             </div>
           </div>

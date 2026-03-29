@@ -8,24 +8,24 @@ interface ProgramCardProps {
 
 const categoryConfig: Record<string, { color: string; bgColor: string; borderColor: string }> = {
   education: {
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200',
+    color: 'text-[var(--blue)]',
+    bgColor: 'bg-[color:rgb(30_58_95_/_0.10)]',
+    borderColor: 'border-[color:rgb(30_58_95_/_0.32)]',
   },
   health: {
-    color: 'text-emerald-600',
-    bgColor: 'bg-emerald-50',
-    borderColor: 'border-emerald-200',
+    color: 'text-[var(--accent)]',
+    bgColor: 'bg-[color:rgb(232_131_74_/_0.12)]',
+    borderColor: 'border-[color:rgb(232_131_74_/_0.35)]',
   },
   training: {
-    color: 'text-amber-600',
-    bgColor: 'bg-amber-50',
-    borderColor: 'border-amber-200',
+    color: 'text-[var(--gold)]',
+    bgColor: 'bg-[color:rgb(212_168_67_/_0.12)]',
+    borderColor: 'border-[color:rgb(212_168_67_/_0.36)]',
   },
   other: {
-    color: 'text-violet-600',
-    bgColor: 'bg-violet-50',
-    borderColor: 'border-violet-200',
+    color: 'text-[var(--teal)]',
+    bgColor: 'bg-[color:rgb(42_123_111_/_0.12)]',
+    borderColor: 'border-[color:rgb(42_123_111_/_0.32)]',
   },
 };
 
@@ -33,18 +33,18 @@ export default function ProgramCard({ program }: ProgramCardProps) {
   const config = categoryConfig[program.category] || categoryConfig.other;
 
   return (
-    <div className="group bg-white rounded-xl border border-neutral-200 hover:border-neutral-300 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className={`group overflow-hidden rounded-2xl border bg-[var(--surface)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${config.borderColor}`}>
       {/* Category indicator bar */}
-      <div className={`h-1.5 ${config.bgColor}`}></div>
+      <div className={`h-1.5 ${config.bgColor}`} />
       
       {/* Content */}
-      <div className="p-6 space-y-4">
+      <div className="space-y-4 p-6">
         {/* Category badge */}
         <div className="flex items-center justify-between">
-          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${config.bgColor} ${config.color} uppercase tracking-wide`}>
+          <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${config.bgColor} ${config.color}`}>
             {program.category}
           </span>
-          <div className={`w-10 h-10 rounded-full ${config.bgColor} flex items-center justify-center`}>
+          <div className={`flex h-10 w-10 items-center justify-center rounded-full ${config.bgColor}`}>
             <svg className={`w-5 h-5 ${config.color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -52,17 +52,17 @@ export default function ProgramCard({ program }: ProgramCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-neutral-900 leading-tight line-clamp-2 min-h-[3.5rem]">
+        <h3 className="font-heading min-h-[3.5rem] line-clamp-2 text-xl font-bold leading-tight text-[var(--navy)]">
           {program.title}
         </h3>
 
         {/* Description */}
-        <p className="text-neutral-600 text-sm leading-relaxed line-clamp-3">
+        <p className="line-clamp-3 text-sm leading-relaxed text-[var(--text-muted)]">
           {program.description}
         </p>
 
         {/* CTA */}
-        <div className="pt-4 border-t border-neutral-100">
+        <div className="border-t border-[var(--border-soft)] pt-4">
           <button className={`group/btn inline-flex items-center text-sm font-semibold ${config.color} hover:gap-2 transition-all`}>
             Learn More
             <svg className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

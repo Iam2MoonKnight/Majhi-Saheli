@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession } from '@/lib/supabase';
 import {
   createUserProfile,
   getAllDonations,
@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const session = await getSafeSession();
       
       if (!session?.user) {
         router.push('/login');
@@ -78,10 +78,10 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full mx-auto mb-4 animate-pulse"></div>
-          <p className="text-gray-600">Loading your dashboard...</p>
+          <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
+          <p className="text-[var(--text-muted)]">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -92,16 +92,17 @@ export default function Dashboard() {
   }
 
   const isAdmin = userProfile?.role === 'admin';
+  const totalDonorAmount = donations.reduce((sum, donation) => sum + donation.amount, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen overflow-hidden">
+      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+        <div className="editorial-section py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
-              <p className="text-gray-600 mt-2">
+              <p className="section-eyebrow text-[var(--navy)]">Account</p>
+              <h1 className="mt-2 font-heading text-4xl font-bold text-[var(--navy)] md:text-5xl">Dashboard</h1>
+              <p className="mt-2 text-[var(--text-muted)]">
                 Welcome back, {userProfile?.full_name || user.email}!
               </p>
             </div>
@@ -109,12 +110,12 @@ export default function Dashboard() {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition shadow-lg"
+                  className="rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--blue)]"
                 >
                   Admin Panel
                 </Link>
               )}
-              <div className="bg-gradient-to-br from-rose-500 to-pink-600 px-6 py-2 rounded-full text-white font-semibold">
+              <div className="rounded-full bg-gradient-to-r from-[var(--navy)] to-[var(--blue)] px-5 py-2 text-sm font-semibold text-white">
                 {isAdmin ? '👑 Admin' : '💚 Donor'}
               </div>
             </div>
@@ -122,78 +123,74 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Admin View */}
+      <div className="editorial-section py-12">
         {isAdmin && (
           <div className="space-y-8">
-            {/* Stats */}
             {stats && (
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="bg-white rounded-lg shadow p-6">
-                  <p className="text-gray-600 text-sm font-medium">Total Donations</p>
-                  <p className="text-4xl font-bold text-rose-600 mt-2">{stats.totalDonations}</p>
+                <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Donations</p>
+                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--navy)]">{stats.totalDonations}</p>
                 </div>
-                <div className="bg-white rounded-lg shadow p-6">
-                  <p className="text-gray-600 text-sm font-medium">Total Amount</p>
-                  <p className="text-4xl font-bold text-rose-600 mt-2">₹{stats.totalAmount.toLocaleString()}</p>
+                <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Amount</p>
+                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--accent)]">₹{stats.totalAmount.toLocaleString()}</p>
                 </div>
-                <div className="bg-white rounded-lg shadow p-6">
-                  <p className="text-gray-600 text-sm font-medium">One-time Donations</p>
-                  <p className="text-4xl font-bold text-blue-600 mt-2">{stats.oneTimeCount}</p>
+                <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">One-time Donations</p>
+                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--blue)]">{stats.oneTimeCount}</p>
                 </div>
-                <div className="bg-white rounded-lg shadow p-6">
-                  <p className="text-gray-600 text-sm font-medium">Recurring Donations</p>
-                  <p className="text-4xl font-bold text-green-600 mt-2">{stats.recurringCount}</p>
+                <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Recurring Donations</p>
+                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--teal)]">{stats.recurringCount}</p>
                 </div>
               </div>
             )}
 
-            {/* All Donations */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900">All Donations</h2>
+            <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
+              <div className="border-b border-[var(--border-soft)] px-6 py-4">
+                <h2 className="font-heading text-3xl font-bold text-[var(--navy)]">All Donations</h2>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="border-b border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)]">
                     <tr>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Email</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Amount</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Type</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Email</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Amount</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Type</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {donations.length > 0 ? (
                       donations.map((donation) => (
-                        <tr key={donation.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                          <td className="px-6 py-4 text-sm text-gray-900">{donation.name}</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">{donation.email}</td>
-                          <td className="px-6 py-4 text-sm font-semibold text-gray-900">
+                        <tr key={donation.id} className="border-b border-[var(--border-soft)] transition hover:bg-[color:rgb(30_58_95_/_0.04)]">
+                          <td className="px-6 py-4 text-sm text-[var(--navy)]">{donation.name}</td>
+                          <td className="px-6 py-4 text-sm text-[var(--text-muted)]">{donation.email}</td>
+                          <td className="px-6 py-4 text-sm font-semibold text-[var(--navy)]">
                             {donation.currency} {donation.amount.toLocaleString()}
                           </td>
                           <td className="px-6 py-4 text-sm">
                             <span
                               className={`px-3 py-1 rounded-full text-xs font-semibold ${
                                 donation.frequency === 'one_time'
-                                  ? 'bg-blue-100 text-blue-700'
-                                  : 'bg-green-100 text-green-700'
+                                  ? 'bg-[color:rgb(74_118_168_/_0.15)] text-[var(--blue)]'
+                                  : 'bg-[color:rgb(42_123_111_/_0.18)] text-[var(--teal)]'
                               }`}
                             >
                               {donation.frequency === 'one_time' ? 'One-time' : 'Recurring'}
                             </span>
                           </td>
-                          <td className="px-6 py-4 text-sm text-gray-600">
+                          <td className="px-6 py-4 text-sm text-[var(--text-muted)]">
                             {new Date(donation.created_at).toLocaleDateString()}
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={5} className="px-6 py-8 text-center text-gray-600">
+                        <td colSpan={5} className="px-6 py-8 text-center text-[var(--text-muted)]">
                           No donations yet
                         </td>
                       </tr>
@@ -205,25 +202,23 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Donor View */}
         {!isAdmin && (
           <div className="space-y-8">
-            {/* My Donations */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900">My Donations</h2>
+            <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
+              <div className="border-b border-[var(--border-soft)] px-6 py-4">
+                <h2 className="font-heading text-3xl font-bold text-[var(--navy)]">My Donations</h2>
               </div>
 
               {donations.length > 0 ? (
                 <div className="space-y-4 p-6">
                   {donations.map((donation) => (
-                    <div key={donation.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
+                    <div key={donation.id} className="rounded-2xl border border-[var(--border-soft)] bg-white p-6 transition hover:-translate-y-1 hover:shadow-md">
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <p className="text-xl font-bold text-gray-900">
+                          <p className="font-heading text-3xl font-bold text-[var(--navy)]">
                             {donation.currency} {donation.amount.toLocaleString()}
                           </p>
-                          <p className="text-sm text-gray-600">
+                          <p className="text-sm text-[var(--text-muted)]">
                             {new Date(donation.created_at).toLocaleDateString()} •{' '}
                             {donation.frequency === 'one_time' ? 'One-time' : 'Monthly Recurring'}
                           </p>
@@ -231,8 +226,8 @@ export default function Dashboard() {
                         <span
                           className={`px-4 py-2 rounded-full text-sm font-semibold ${
                             donation.frequency === 'one_time'
-                              ? 'bg-blue-100 text-blue-700'
-                              : 'bg-green-100 text-green-700'
+                              ? 'bg-[color:rgb(74_118_168_/_0.15)] text-[var(--blue)]'
+                              : 'bg-[color:rgb(42_123_111_/_0.18)] text-[var(--teal)]'
                           }`}
                         >
                           {donation.frequency === 'one_time' ? 'One-time' : 'Recurring'}
@@ -240,7 +235,7 @@ export default function Dashboard() {
                       </div>
 
                       {donation.message && (
-                        <div className="bg-gray-50 rounded p-4 text-gray-700 italic">
+                        <div className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 italic text-[var(--text-muted)]">
                           "{donation.message}"
                         </div>
                       )}
@@ -249,10 +244,10 @@ export default function Dashboard() {
                 </div>
               ) : (
                 <div className="p-12 text-center">
-                  <p className="text-gray-600 mb-6">You haven't made any donations yet.</p>
+                  <p className="mb-6 text-[var(--text-muted)]">You haven't made any donations yet.</p>
                   <Link
                     href="/donate"
-                    className="inline-block px-6 py-2 bg-rose-600 text-white font-bold rounded-lg hover:bg-rose-700 transition"
+                    className="inline-block rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
                   >
                     Make a Donation
                   </Link>
@@ -260,22 +255,21 @@ export default function Dashboard() {
               )}
             </div>
 
-            {/* Impact Summary */}
-            <div className="bg-gradient-to-r from-rose-50 to-pink-50 rounded-lg p-8 border-2 border-rose-200">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Your Impact</h3>
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] p-8">
+              <h3 className="font-heading text-3xl font-bold text-[var(--navy)]">Your Impact</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <p className="text-gray-600 text-sm">Total Contributed</p>
-                  <p className="text-3xl font-bold text-rose-600 mt-2">
-                    ₹{donations.reduce((sum, d) => sum + d.amount, 0).toLocaleString()}
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Contributed</p>
+                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--accent)]">
+                    ₹{totalDonorAmount.toLocaleString()}
                   </p>
                 </div>
                 <div>
-                  <p className="text-gray-600 text-sm">Number of Donations</p>
-                  <p className="text-3xl font-bold text-rose-600 mt-2">{donations.length}</p>
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Number of Donations</p>
+                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--blue)]">{donations.length}</p>
                 </div>
               </div>
-              <p className="text-gray-700 mt-6">Thank you for your generous support in empowering rural women!</p>
+              <p className="mt-6 text-[var(--text-muted)]">Thank you for your generous support in empowering rural women.</p>
             </div>
           </div>
         )}

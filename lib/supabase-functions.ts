@@ -1,9 +1,63 @@
-import { supabase } from './supabase';
+import { supabase, getSafeSession } from './supabase';
 import { Donation, User } from './types';
 
 // Helper to check if Supabase is properly configured
 const isSupabaseConfigured = () => {
   return process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+};
+
+const LOG_THROTTLE_MS = 60000;
+const lastLogTimes = new Map<string, number>();
+
+const getErrorDetails = (error: unknown) => {
+  if (error instanceof Error) {
+    return `${error.name} ${error.message}`;
+  }
+
+  if (typeof error === 'object' && error !== null) {
+    const maybeMessage = 'message' in error ? String((error as { message?: unknown }).message ?? '') : '';
+    const maybeDetails = 'details' in error ? String((error as { details?: unknown }).details ?? '') : '';
+    return `${maybeMessage} ${maybeDetails}`;
+  }
+
+  return String(error ?? '');
+};
+
+const isTimeoutError = (error: unknown) => {
+  const details = getErrorDetails(error);
+  return details.includes('ConnectTimeoutError') || details.includes('UND_ERR_CONNECT_TIMEOUT');
+};
+
+const isNetworkFetchError = (error: unknown) => {
+  const details = getErrorDetails(error);
+  return (
+    details.includes('ENOTFOUND') ||
+    details.includes('getaddrinfo') ||
+    details.includes('fetch failed') ||
+    details.includes('Failed to fetch')
+  );
+};
+
+const logReadError = (key: string, message: string, error: unknown) => {
+  const now = Date.now();
+  const last = lastLogTimes.get(key) ?? 0;
+  if (now - last < LOG_THROTTLE_MS) {
+    return;
+  }
+
+  lastLogTimes.set(key, now);
+
+  if (isTimeoutError(error)) {
+    console.warn(`${message} Supabase connection timed out. Using fallback data.`);
+    return;
+  }
+
+  if (isNetworkFetchError(error)) {
+    console.warn(`${message} Supabase host is unreachable. Using fallback data.`);
+    return;
+  }
+
+  console.error(message, error);
 };
 
 // Authentication functions
@@ -12,10 +66,15 @@ export const signUp = async (email: string, password: string, name: string) => {
     throw new Error('Supabase is not configured');
   }
 
+  // Get the app URL from environment or use default
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const emailRedirectTo = `${appUrl}/auth/callback`;
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
+      emailRedirectTo,
       data: {
         name,
       },
@@ -52,9 +111,7 @@ export const getCurrentUser = async () => {
 };
 
 export const getSession = async () => {
-  const { data, error } = await supabase.auth.getSession();
-  if (error) throw error;
-  return data.session;
+  return getSafeSession();
 };
 
 // Donation functions
@@ -366,7 +423,7 @@ export const getCampaigns = async (includeInactive = false) => {
     if (error) throw error;
     return data || [];
   } catch (err) {
-    console.error('Error fetching campaigns:', err);
+    logReadError('campaigns', 'Error fetching campaigns:', err);
     return [];
   }
 };
@@ -453,7 +510,7 @@ export const getActiveHeroContent = async () => {
     if (error && error.code !== 'PGRST116') throw error;
     return data || null;
   } catch (err) {
-    console.error('Error fetching active hero content:', err);
+    logReadError('hero-active', 'Error fetching active hero content:', err);
     return null;
   }
 };
