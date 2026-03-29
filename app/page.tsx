@@ -1,236 +1,123 @@
-import HeroSection from '@/components/HeroSection';
-import ProgramCard from '@/components/ProgramCard';
-import StatCard from '@/components/StatCard';
-import TestimonialCard from '@/components/TestimonialCard';
 import Link from 'next/link';
-import { getCampaigns, getPrograms } from '@/lib/supabase-functions';
-import { fallbackCampaigns, getFeaturedCampaign, mapSupabaseCampaigns } from '@/lib/campaigns';
+import HeroSection from '@/components/HeroSection';
 
-export default async function Home() {
-  let programs = [];
-  let campaigns = fallbackCampaigns;
-
-  try {
-    programs = await getPrograms();
-  } catch (error) {
-    console.error('Error fetching programs:', error);
-  }
-
-  try {
-    const supabaseCampaigns = await getCampaigns(true);
-    if (supabaseCampaigns.length > 0) {
-      campaigns = mapSupabaseCampaigns(supabaseCampaigns);
-    }
-  } catch (error) {
-    console.error('Error fetching campaigns:', error);
-  }
-
-  // Dummy programs data if fetch fails
-  const dummyPrograms = [
+export default function Home() {
+  const focusAreas = [
     {
-      id: '1',
-      title: 'Girl Child Education',
-      category: 'education' as const,
-      description: 'Providing quality education to girls in rural areas, focusing on literacy and numeracy.',
-      created_at: new Date().toISOString(),
+      icon: '🏥',
+      title: 'Health',
+      text: '224 medical camps covering 53 communities, reaching 4,776 women across 6 districts.',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
     },
     {
-      id: '2',
-      title: 'Women Health Camps',
-      category: 'health' as const,
-      description: 'Regular health check-ups, maternal health awareness, and nutrition programs for women.',
-      created_at: new Date().toISOString(),
+      icon: '💼',
+      title: 'Livelihood',
+      text: '121 sessions reaching 3,206 participants through savings, entrepreneurship, and finance literacy.',
+      image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=80',
     },
     {
-      id: '3',
-      title: 'Vocational Training',
-      category: 'training' as const,
-      description: 'Skill development programs including tailoring, handicrafts, and digital literacy.',
-      created_at: new Date().toISOString(),
+      icon: '📚',
+      title: 'Education',
+      text: 'Learning centers, computer labs, libraries, and skill-building programs across 29 locations.',
+      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80',
     },
     {
-      id: '4',
-      title: 'Community Leadership',
-      category: 'other' as const,
-      description: 'Empowering women to take leadership roles in their communities.',
-      created_at: new Date().toISOString(),
+      icon: '🥗',
+      title: 'Nutrition',
+      text: 'Kitchen garden initiatives in 21 villages supporting child and maternal nutrition outcomes.',
+      image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&q=80',
+    },
+    {
+      icon: '👩',
+      title: 'Women Empowerment',
+      text: 'Leadership, rights awareness, and alternative livelihood pathways for rural women.',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
+    },
+    {
+      icon: '🏘️',
+      title: 'Community Development',
+      text: 'Community-led systems strengthening for long-term rural resilience and local ownership.',
+      image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80',
     },
   ];
 
-  const displayPrograms = programs.length > 0 ? programs : dummyPrograms;
-  const featuredCampaign = getFeaturedCampaign(campaigns);
-  const progress = featuredCampaign.goalAmount > 0 ? (featuredCampaign.raisedAmount / featuredCampaign.goalAmount) * 100 : 0;
+  const partners = [
+    'Bramhon',
+    'Project Roots',
+    'Adveno Foundation',
+    'Wokhard Hospital',
+    'Billion Rising',
+    'FVNSC Pune',
+    'Jan Sevak',
+    'Pragatio Welfare Foundation',
+    'Embibe India',
+    'Rotary',
+    'Genovate India',
+    'IAT',
+  ];
 
   return (
     <div className="overflow-hidden">
       <HeroSection />
 
-      {/* Featured Campaign */}
-      <section className="bg-transparent">
-        <div className="editorial-section space-y-8 py-16">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(30_58_95_/_0.12)] px-4 py-2">
-                <div className="h-2 w-2 rounded-full bg-[var(--blue)]"></div>
-                <span className="section-eyebrow text-[var(--navy)]">Latest Campaign</span>
-              </div>
-              <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Featured campaign</h2>
-              <p className="max-w-2xl text-[var(--text-muted)]">
-                Direct, time-bound initiatives that bring immediate support to women and communities.
-              </p>
-            </div>
-            <Link
-              href="/campaigns"
-              className="inline-flex items-center justify-center rounded-full border border-[var(--navy)] bg-[var(--surface)] px-5 py-2.5 text-sm font-medium text-[var(--navy)] transition hover:bg-[var(--navy)] hover:text-white"
-            >
-              View all campaigns
-            </Link>
+      <section className="py-16">
+        <div className="editorial-section grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+          <div className="space-y-6">
+            <p className="section-eyebrow">Who We Are</p>
+            <h2 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-5xl">
+              Empowering communities across <span className="text-[var(--accent)]">6 districts</span>
+            </h2>
+            <p className="text-[var(--text-muted)]">
+              MSCT works with diverse communities across Thane, Palghar, Ratnagiri, Raigad, Satara, and Osmanabad through healthcare,
+              financial literacy, education, and women-led development initiatives.
+            </p>
+            <ul className="space-y-3 text-sm text-[var(--text-muted)]">
+              <li>• Health &amp; Hygiene — 224 camps, 11,962 participants</li>
+              <li>• Financial Literacy — 121 sessions, 3,206 participants</li>
+              <li>• Skill Building &amp; Education — computer labs, libraries, learning centers</li>
+              <li>• Self-initiated projects — water harvesting, kitchen gardens, eco-tourism</li>
+            </ul>
           </div>
-
-          <div className="grid grid-cols-1 gap-8 rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 lg:grid-cols-3">
-            <div className="lg:col-span-2 space-y-4">
-              <h3 className="font-heading text-2xl font-bold text-[var(--navy)]">{featuredCampaign.title}</h3>
-              <p className="leading-relaxed text-[var(--text-muted)]">{featuredCampaign.description}</p>
-              <p className="text-sm font-medium text-[var(--text-muted)]">{featuredCampaign.location}</p>
-            </div>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-semibold text-[var(--navy)]">
-                    ₹{featuredCampaign.raisedAmount.toLocaleString()}
-                  </span>
-                  <span className="text-[var(--text-muted)]">
-                    of ₹{featuredCampaign.goalAmount.toLocaleString()}
-                  </span>
-                </div>
-                <div className="h-3 w-full rounded-full bg-[color:rgb(30_58_95_/_0.12)]">
-                  <div
-                    className="h-3 rounded-full bg-gradient-to-r from-[var(--blue)] to-[var(--accent)]"
-                    style={{ width: `${Math.min(progress, 100)}%` }}
-                  ></div>
-                </div>
-                <div className="text-xs text-[var(--text-muted)]">{Math.round(progress)}% funded</div>
-              </div>
-              <Link
-                href={`/campaigns/${featuredCampaign.id}`}
-                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
-              >
-                Support this campaign
-              </Link>
-            </div>
+          <div className="overflow-hidden rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)]">
+            <img
+              src="https://images.unsplash.com/photo-1578357078586-491adf1aa5ba?w=560&q=80"
+              alt="Community gathering"
+              className="h-[420px] w-full object-cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* Programs Section */}
-      <section className="bg-[color:rgb(255_255_255_/_0.5)]">
-        <div className="editorial-section space-y-8 py-16">
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.12)] px-4 py-2">
-              <div className="h-2 w-2 rounded-full bg-[var(--teal)]"></div>
-              <span className="section-eyebrow text-[var(--navy)]">Our Programs</span>
-            </div>
-            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Making impact together</h2>
-            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">
-              Comprehensive initiatives supporting rural women's growth and sustainable community development.
-            </p>
+      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] py-16">
+        <div className="editorial-section space-y-8">
+          <div className="text-center">
+            <p className="section-eyebrow">Our Reach</p>
+            <h2 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-5xl">Serving communities across Maharashtra</h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {displayPrograms.map((program) => (
-              <ProgramCard key={program.id} program={program} />
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+            {['Thane', 'Palghar', 'Raigad', 'Ratnagiri', 'Satara', 'Osmanabad'].map((district) => (
+              <div key={district} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] px-4 py-5 text-center text-sm font-semibold text-[var(--navy)]">
+                {district}
+              </div>
             ))}
           </div>
-
-          <div className="flex items-center justify-center">
-            <Link
-              href="/programs"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
-            >
-              Explore all programs
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Impact Section */}
-      <section className="bg-[color:rgb(30_58_95_/_0.06)]">
-        <div className="editorial-section space-y-8 py-16">
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(232_131_74_/_0.12)] px-4 py-2">
-              <div className="h-2 w-2 rounded-full bg-[var(--accent)]"></div>
-              <span className="section-eyebrow text-[var(--navy)]">Our Impact</span>
-            </div>
-            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Creating lasting change</h2>
-            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">
-              Transforming lives in rural communities through education, health, and empowerment.
-            </p>
+      <section className="py-16">
+        <div className="editorial-section space-y-8">
+          <div className="text-center">
+            <p className="section-eyebrow">Areas of Interest</p>
+            <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Our focus areas</h2>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatCard icon="👩" number="2,500+" label="Lives Impacted" description="Direct beneficiaries" />
-            <StatCard icon="🏘️" number="50+" label="Villages Reached" description="Across Maharashtra" />
-            <StatCard icon="💊" number="100+" label="Health Camps" description="Medical services" />
-            <StatCard icon="🎓" number="15+" label="Active Programs" description="Ongoing initiatives" />
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="bg-transparent">
-        <div className="editorial-section space-y-8 py-16">
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(212_168_67_/_0.16)] px-4 py-2">
-              <div className="h-2 w-2 rounded-full bg-[var(--gold)]"></div>
-              <span className="section-eyebrow text-[var(--navy)]">Success Stories</span>
-            </div>
-            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Voices of change</h2>
-            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">
-              Real stories from women whose lives have been transformed.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <TestimonialCard
-              name="Meera Patil"
-              role="Education Program Graduate"
-              content="Saheli gave me the confidence to educate my children. They taught me how important education is for our family's future and breaking generational poverty."
-            />
-            <TestimonialCard
-              name="Priya Sharma"
-              role="Vocational Training Participant"
-              content="I learned tailoring through Saheli and now I earn a sustainable living from home. It has provided economic independence for my family."
-            />
-            <TestimonialCard
-              name="Anjali Deshmukh"
-              role="Health Program Beneficiary"
-              content="Thanks to the health camps, I received proper medical guidance. I'm now a health volunteer helping other women in my village."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Partners Section */}
-      <section className="bg-[color:rgb(42_123_111_/_0.06)]">
-        <div className="editorial-section space-y-8 py-16">
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(30_58_95_/_0.12)] px-4 py-2">
-              <div className="h-2 w-2 rounded-full bg-[var(--blue)]"></div>
-              <span className="section-eyebrow text-[var(--navy)]">Partnerships</span>
-            </div>
-            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Trusted partners</h2>
-            <p className="mx-auto max-w-2xl text-[var(--text-muted)]">Collaborating for sustainable social impact.</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="flex h-32 items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 transition-all hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="text-center">
-                  <div className="font-heading text-3xl font-bold text-[color:rgb(26_26_46_/_0.38)]">Partner</div>
-                  <p className="mt-1 text-xs text-[color:rgb(26_26_46_/_0.45)]">Logo</p>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {focusAreas.map((item) => (
+              <div key={item.title} className="overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
+                <img src={item.image} alt={item.title} className="h-44 w-full object-cover" />
+                <div className="space-y-3 p-6">
+                  <p className="text-2xl">{item.icon}</p>
+                  <h3 className="font-heading text-2xl font-bold text-[var(--navy)]">{item.title}</h3>
+                  <p className="text-sm text-[var(--text-muted)]">{item.text}</p>
                 </div>
               </div>
             ))}
@@ -238,7 +125,62 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] py-16">
+        <div className="editorial-section">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {[
+              ['3,212', 'Health Camp Participants'],
+              ['6,086', 'Financial Literacy Participants'],
+              ['3,126', 'Nutrition Programme Participants'],
+              ['223', 'Expert Sessions Hosted'],
+            ].map(([num, label]) => (
+              <div key={label} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 text-center">
+                <div className="font-heading text-4xl font-bold text-[var(--navy)]">{num}</div>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="editorial-section space-y-8">
+          <div className="text-center">
+            <p className="section-eyebrow">Partnerships</p>
+            <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Our strategic partners</h2>
+          </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {partners.map((partner) => (
+              <div key={partner} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] px-4 py-4 text-center text-sm font-semibold text-[var(--navy)]">
+                {partner}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[color:rgb(42_123_111_/_0.08)] py-16">
+        <div className="editorial-section space-y-8 py-16">
+          <div className="text-center">
+            <p className="section-eyebrow">Future Plans</p>
+            <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Our roadmap ahead</h2>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {[
+              ['01', 'Expand across geographies & demographics', 'Scaling proven programmes to new communities and target groups.'],
+              ['02', 'Saheli Circle initiative', 'Creating a network of trained women leaders and local support systems.'],
+              ['03', 'MSCT Multi-Specialty Hospital venture', 'Building a permanent affordable health services complex.'],
+            ].map(([num, title, text]) => (
+              <div key={title} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <p className="font-mono-eyebrow text-xs text-[var(--accent)]">{num}</p>
+                <h3 className="mt-2 font-heading text-2xl font-semibold text-[var(--navy)]">{title}</h3>
+                <p className="mt-3 text-sm text-[var(--text-muted)]">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="relative overflow-hidden bg-gradient-to-br from-[var(--navy)] via-[var(--blue)] to-[var(--teal)]">
         <div
           className="absolute inset-0 opacity-10"
@@ -248,25 +190,44 @@ export default async function Home() {
           }}
         ></div>
 
-        <div className="relative z-10 mx-auto max-w-4xl space-y-6 px-4 py-16 text-center">
-          <h2 className="font-heading text-4xl font-bold text-white md:text-5xl">Be part of the change</h2>
-          <p className="mx-auto max-w-2xl text-lg text-white/85">
-            Every contribution helps transform the lives of rural women. Join us in creating lasting impact in
-            communities across rural India.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/donate"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(232,131,74,0.35)] transition hover:bg-[var(--accent-warm)]"
-            >
-              Support our mission
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-white px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[var(--navy)]"
-            >
-              Get in touch
-            </Link>
+        <div className="relative z-10 editorial-section py-16">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div className="space-y-5">
+              <h2 className="font-heading text-4xl font-bold text-white md:text-5xl">Help us reach every community</h2>
+              <p className="max-w-3xl text-lg text-white/85">
+                Your contribution directly funds health camps, education programmes, skill training, and financial literacy that transform lives across rural India.
+              </p>
+              <ul className="space-y-2 text-sm text-white/85">
+                <li>✓ Tax exemption under Section 80G</li>
+                <li>✓ 100% funds go to field programmes</li>
+                <li>✓ FCRA registered – international donations accepted</li>
+                <li>✓ Transparent impact reporting to all donors</li>
+              </ul>
+            </div>
+
+            <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-sm">
+              <h3 className="font-heading text-3xl font-bold text-white">Make a donation</h3>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {['₹500', '₹1,000', '₹2,500', '₹5,000', '₹10,000', '₹25,000'].map((amt, idx) => (
+                  <button
+                    key={amt}
+                    className={`rounded-full px-3 py-2 text-xs font-semibold transition ${
+                      idx === 0 ? 'bg-[var(--accent)] text-white' : 'bg-white/15 text-white hover:bg-white/25'
+                    }`}
+                  >
+                    {amt}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-4 text-xs text-white/75">Or enter a custom amount</p>
+              <Link
+                href="/donate"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(232,131,74,0.35)] transition hover:bg-[var(--accent-warm)]"
+              >
+                Donate now →
+              </Link>
+              <p className="mt-3 text-xs text-white/70">Secure payment powered by Razorpay</p>
+            </div>
           </div>
         </div>
       </section>

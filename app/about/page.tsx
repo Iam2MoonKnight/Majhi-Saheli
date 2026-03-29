@@ -17,36 +17,41 @@ export default function About() {
       </section>
 
       <section className="py-16">
-        <div className="editorial-section grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div className="rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 lg:col-span-2">
-            <p className="section-eyebrow">Our Story</p>
-            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">From local action to regional impact</h2>
-            <div className="mt-6 space-y-5 text-[var(--text-muted)]">
-              <p>
-                Mazi Saheli began with a clear purpose: rural women deserve equal access to opportunity, dignity, and decision-making.
-                What started with small education and health interventions has grown into an integrated empowerment movement.
-              </p>
-              <p>
-                Today, we partner with local leaders, schools, healthcare workers, and volunteers to deliver practical, measurable impact.
-                Every initiative is designed to help women become confident earners, informed caregivers, and community leaders.
-              </p>
-              <p>
-                Our long-term approach focuses on sustainability, local ownership, and transparent implementation so progress lasts across generations.
-              </p>
-            </div>
+        <div className="editorial-section grid grid-cols-1 gap-10 lg:grid-cols-2">
+          <div className="overflow-hidden rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)]">
+            <img
+              src="https://images.unsplash.com/photo-1617854818583-09e7f077a156?w=600&q=80"
+              alt="MSCT team"
+              className="h-[500px] w-full object-cover"
+            />
           </div>
 
-          <div className="rounded-3xl border border-[var(--border-soft)] bg-gradient-to-b from-[var(--navy)] to-[var(--blue)] p-8 text-white">
-            <p className="font-mono-eyebrow text-xs uppercase text-[var(--accent)]">Coverage</p>
-            <h3 className="mt-3 font-heading text-2xl font-semibold">Where we work</h3>
-            <ul className="mt-5 space-y-2 text-sm text-white/85">
-              <li>Thane</li>
-              <li>Palghar</li>
-              <li>Raigad</li>
-              <li>Ratnagiri</li>
-              <li>Satara</li>
-              <li>Osmanabad</li>
-            </ul>
+          <div className="rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)] p-8">
+            <p className="section-eyebrow">MSCT — Mazi Saheli Charitable Trust</p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">Who we are</h2>
+            <div className="mt-6 space-y-5 text-[var(--text-muted)]">
+              <p>
+                Mazi Saheli Charitable Trust is a grassroots organisation serving high-risk and bridge populations across Thane,
+                Palghar, Ratnagiri, Raigad, Satara, and Osmanabad.
+              </p>
+              <p>
+                We believe every person deserves access to opportunities and resources for a fulfilling life. Our mission is to empower
+                rural communities through essential services in education, healthcare, livelihood, and social development.
+              </p>
+            </div>
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              {[
+                ['21,962', 'Lives Touched'],
+                ['14+', 'Collaborative Partners'],
+                ['6', 'Districts'],
+                ['224', 'Expert Sessions'],
+              ].map(([num, label]) => (
+                <div key={label} className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 text-center">
+                  <p className="font-heading text-3xl font-bold text-[var(--navy)]">{num}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -71,21 +76,113 @@ export default function About() {
       </section>
 
       <section className="py-16">
+        <div className="editorial-section space-y-8">
+          <div className="text-center">
+            <p className="section-eyebrow">Five Areas of Focus</p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">What we work on</h2>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
+            {[
+              ['🏥', 'Health'],
+              ['💼', 'Livelihood'],
+              ['📚', 'Education'],
+              ['👩', 'Women Empowerment'],
+              ['🏘️', 'Community Development'],
+            ].map(([icon, label]) => (
+              <div key={label} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-5 text-center">
+                <p className="text-3xl">{icon}</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--navy)]">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] py-16">
+        <div className="editorial-section grid grid-cols-1 gap-10 lg:grid-cols-2">
+          <div className="space-y-4">
+            <p className="section-eyebrow">Operating Across Districts</p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">Rooted in the community</h2>
+            <p className="text-[var(--text-muted)]">
+              Our ground-level presence is led by local coordinators who understand language, context, and trust-building in every district.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center">
+                <p className="font-heading text-3xl font-bold text-[var(--navy)]">6</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Districts</p>
+              </div>
+              <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center">
+                <p className="font-heading text-3xl font-bold text-[var(--navy)]">1+</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Rural Networks</p>
+              </div>
+            </div>
+          </div>
+          <div className="overflow-hidden rounded-3xl border border-[var(--border-soft)] bg-[var(--surface)]">
+            <img
+              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=560&q=80"
+              alt="Field operations"
+              className="h-[380px] w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
         <div className="editorial-section space-y-10">
           <div className="text-center">
-            <p className="section-eyebrow">Core Values</p>
-            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">How we lead our work</h2>
+            <p className="section-eyebrow">Our Story So Far</p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Milestones</h2>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {[
-              { title: 'Compassion', desc: 'Human dignity and empathy at every touchpoint.' },
-              { title: 'Equity', desc: 'Equal opportunities regardless of geography or income.' },
-              { title: 'Agency', desc: 'Women leading decisions for their own future.' },
-              { title: 'Sustainability', desc: 'Solutions designed to outlast short-term funding.' },
-            ].map((value) => (
-              <div key={value.title} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
-                <h3 className="font-heading text-xl font-bold text-[var(--navy)]">{value.title}</h3>
-                <p className="mt-2 text-sm text-[var(--text-muted)]">{value.desc}</p>
+              ['2015', 'MSCT established as a formal trust for grassroots rural development.'],
+              ['2017', 'Strategic collaborations with NGOs, hospitals, and public institutions.'],
+              ['2019', 'Expanded field chapters across districts with deep community engagement.'],
+              ['2020', 'Set up digital learning labs and skill-building facilities.'],
+              ['2024', '21,000+ lives touched across villages through integrated programs.'],
+            ].map(([year, text]) => (
+              <div key={year} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <p className="font-mono-eyebrow text-xs text-[var(--accent)]">{year}</p>
+                <p className="mt-2 text-[var(--text-muted)]">{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {[
+              ['224', 'Medical Camps'],
+              ['21000+', 'Lives Touched'],
+              ['152', 'Villages Reached'],
+              ['223', 'Expert Sessions'],
+            ].map(([num, label]) => (
+              <div key={label} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-5 text-center">
+                <p className="font-heading text-3xl font-bold text-[var(--navy)]">{num}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">{label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+            <p className="section-eyebrow">Partnerships</p>
+            <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+              {['Bramhon', 'Project Roots', 'Adveno Foundation', 'Wokhard Hospital', 'Billion Rising', 'FVNSC Pune', 'Jan Sevak', 'Pragatio Welfare'].map((partner) => (
+                <div key={partner} className="rounded-lg border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.04)] px-3 py-2 text-center text-xs font-semibold text-[var(--navy)]">
+                  {partner}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {[
+              ['01', 'Expand Across Geographies', 'Scale proven programmes to new communities and demographics.'],
+              ['02', 'Saheli Circle Initiative', 'Train women leaders as support and advocacy anchors.'],
+              ['03', 'Multi-Specialty Hospital Venture', 'Build affordable, quality health services for rural communities.'],
+            ].map(([num, title, text]) => (
+              <div key={title} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <p className="font-mono-eyebrow text-xs text-[var(--accent)]">{num}</p>
+                <h3 className="mt-2 font-heading text-2xl font-semibold text-[var(--navy)]">{title}</h3>
+                <p className="mt-2 text-sm text-[var(--text-muted)]">{text}</p>
               </div>
             ))}
           </div>

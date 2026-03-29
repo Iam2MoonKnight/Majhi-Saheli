@@ -30,8 +30,13 @@ export default async function HeroSection() {
             </div>
 
             <h1 className="font-heading text-5xl font-bold leading-[1.02] text-[var(--navy)] md:text-6xl xl:text-7xl">
-              {heroContent.title}
-              <span className="mt-3 block text-4xl md:text-5xl xl:text-6xl text-outline">{heroContent.subtitle}</span>
+              Building A
+              <br />
+              <em className="italic">Resilient</em> &amp;
+              <br />
+              Self Sufficient
+              <br />
+              <span className="mt-1 block text-outline">Rural India</span>
             </h1>
 
             <p className="max-w-xl text-lg leading-relaxed text-[var(--text-muted)] md:text-xl">
@@ -49,21 +54,21 @@ export default async function HeroSection() {
                 href="/programs"
                 className="inline-flex items-center justify-center rounded-full border border-[var(--navy)] bg-[var(--surface)] px-7 py-3.5 text-sm font-semibold text-[var(--navy)] transition hover:bg-[var(--navy)] hover:text-white"
               >
-                Explore Programs
+                Learn More
               </Link>
             </div>
 
             <div className="grid grid-cols-3 gap-4 border-t border-[var(--border-soft)] pt-7">
               <div>
-                <p className="font-heading text-3xl font-bold text-[var(--accent)]">2,500+</p>
+                <p className="font-heading text-3xl font-bold text-[var(--accent)]">3,212+</p>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Lives impacted</p>
               </div>
               <div>
-                <p className="font-heading text-3xl font-bold text-[var(--accent)]">50+</p>
+                <p className="font-heading text-3xl font-bold text-[var(--accent)]">6</p>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Villages</p>
               </div>
               <div>
-                <p className="font-heading text-3xl font-bold text-[var(--accent)]">15+</p>
+                <p className="font-heading text-3xl font-bold text-[var(--accent)]">224</p>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Programs</p>
               </div>
             </div>
@@ -78,13 +83,18 @@ export default async function HeroSection() {
               {heroContent.image_url ? (
                 <img src={heroContent.image_url} alt={heroContent.title} className="h-full w-full object-cover" />
               ) : (
-                <div className="h-full w-full bg-gradient-to-br from-[color:rgb(30_58_95_/_0.2)] via-[color:rgb(42_123_111_/_0.2)] to-[color:rgb(232_131_74_/_0.2)]" />
+                <img
+                  src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80"
+                  alt="Community program"
+                  className="h-full w-full object-cover"
+                />
               )}
 
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[color:rgb(13_27_42_/_0.86)] via-[color:rgb(13_27_42_/_0.58)] to-transparent p-7 text-white">
-                <p className="font-mono-eyebrow text-[11px] uppercase text-[var(--accent)]">Featured Story</p>
-                <h3 className="mt-2 font-heading text-2xl font-semibold text-white">From Beneficiary to Community Leader</h3>
-                <p className="mt-1 text-sm text-white/85">How Sunita transformed her village through education</p>
+                <div className="inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-2">
+                  <span className="font-heading text-2xl font-bold">6</span>
+                  <span className="ml-2 text-xs font-semibold uppercase tracking-wide">Districts Served</span>
+                </div>
               </div>
             </div>
           </div>

@@ -49,12 +49,9 @@ export default function Navbar() {
   };
 
   const navItems = [
+    { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/programs', label: 'Programs' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/campaigns', label: 'Campaigns' },
-    { href: '/saheli-circle', label: 'Community' },
-    { href: '/impact', label: 'Impact' },
+    { href: '/gallery', label: 'Gallery' },
     { href: '/contact', label: 'Contact' },
   ];
 
