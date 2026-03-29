@@ -2,12 +2,16 @@
 
 import DonationForm from '@/components/DonationForm';
 import { useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { fallbackCampaigns } from '@/lib/campaigns';
 
 export function DonateContent() {
-  const searchParams = useSearchParams();
-  const campaignId = searchParams.get('campaign');
+  const campaignId = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    return new URLSearchParams(window.location.search).get('campaign');
+  }, []);
 
   const campaignLabel = useMemo(() => {
     if (!campaignId) return null;

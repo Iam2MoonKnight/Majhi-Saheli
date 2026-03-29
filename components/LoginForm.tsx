@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { getUserProfile, signIn } from '@/lib/supabase-functions';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function LoginForm() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -17,8 +16,9 @@ export default function LoginForm() {
   });
 
   useEffect(() => {
-    const message = searchParams.get('message');
-    const email = searchParams.get('email');
+    const params = new URLSearchParams(window.location.search);
+    const message = params.get('message');
+    const email = params.get('email');
     
     if (message === 'check_email') {
       setSuccessMessage(
@@ -32,7 +32,7 @@ export default function LoginForm() {
     } else if (message?.startsWith('error_')) {
       setError(`Error: ${message.replace('error_', '').replace(/_/g, ' ')}`);
     }
-  }, [searchParams]);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

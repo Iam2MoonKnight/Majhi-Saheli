@@ -1,19 +1,18 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
 export default function AuthCallback() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     const handleEmailConfirmation = async () => {
       try {
-        // Get the code from URL parameters
-        const code = searchParams.get('code');
-        const next = searchParams.get('next') || '/login';
+        const query = new URLSearchParams(window.location.search);
+        const code = query.get('code');
+        const next = query.get('next') || '/login';
 
         if (!code) {
           router.push('/login?message=error_no_code');
@@ -42,7 +41,7 @@ export default function AuthCallback() {
     };
 
     handleEmailConfirmation();
-  }, [searchParams, router]);
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 to-pink-50 flex items-center justify-center">
