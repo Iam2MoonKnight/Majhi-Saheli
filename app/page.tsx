@@ -111,16 +111,20 @@ export default function Home() {
             <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Our focus areas</h2>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {focusAreas.map((item) => (
-              <div key={item.title} className="overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
-                <img src={item.image} alt={item.title} className="h-44 w-full object-cover" />
-                <div className="space-y-3 p-6">
-                  <p className="text-2xl">{item.icon}</p>
-                  <h3 className="font-heading text-2xl font-bold text-[var(--navy)]">{item.title}</h3>
-                  <p className="text-sm text-[var(--text-muted)]">{item.text}</p>
-                </div>
-              </div>
-            ))}
+            {focusAreas.map((item) => {
+              // Convert title to URL slug
+              const slug = item.title.toLowerCase().replace(/\s+/g, '-');
+              return (
+                <Link key={item.title} href={`/focus-areas/${slug}`} className="overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+                  <img src={item.image} alt={item.title} className="h-44 w-full object-cover" />
+                  <div className="space-y-3 p-6">
+                    <p className="text-2xl">{item.icon}</p>
+                    <h3 className="font-heading text-2xl font-bold text-[var(--navy)]">{item.title}</h3>
+                    <p className="text-sm text-[var(--text-muted)]">{item.text}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
