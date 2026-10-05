@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { submitContactMessage } from '@/lib/supabase-functions';
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,9 +22,16 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      await submitContactMessage({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        message: formData.message,
+      });
+
       setSuccess(true);
       setFormData({
         name: '',
@@ -30,9 +39,16 @@ export default function ContactForm() {
         phone: '',
         message: '',
       });
-      setTimeout(() => setSuccess(false), 3000);
+      setTimeout(() => setSuccess(false), 5000);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Could not send your message right now. Please email us at info@mazisaheli.org.'
+      );
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -41,7 +57,13 @@ export default function ContactForm() {
 
       {success && (
         <div className="mb-6 rounded-lg border border-emerald-300 bg-emerald-50 p-4 text-emerald-700">
-          ✓ Thank you for your message! We'll get back to you soon.
+          ✓ Thank you for your message! We&rsquo;ll get back to you soon.
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-6 rounded-lg border border-red-300 bg-red-50 p-4 text-red-700">
+          ✕ {error}
         </div>
       )}
 

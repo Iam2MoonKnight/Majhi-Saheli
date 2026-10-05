@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getSafeSession } from '@/lib/supabase';
-import { getUserProfile, getDonationStats, getBlogs, getCampaigns } from '@/lib/supabase-functions';
+import { formatCurrencyTotals, getUserProfile, getDonationStats, getBlogs, getCampaigns } from '@/lib/supabase-functions';
 import Link from 'next/link';
 
 export default function AdminDashboard() {
@@ -95,7 +95,9 @@ export default function AdminDashboard() {
               </div>
             </div>
             <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Amount</p>
-            <p className="font-heading text-3xl font-bold text-[var(--accent)]">₹{stats?.totalAmount?.toLocaleString() || 0}</p>
+            <p className="font-heading text-3xl font-bold text-[var(--accent)]">
+              {formatCurrencyTotals(stats?.totalsByCurrency)}
+            </p>
           </div>
 
           <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
@@ -205,28 +207,32 @@ export default function AdminDashboard() {
             <div className="p-6">
               {activeCampaigns.length > 0 ? (
                 <div className="space-y-4">
-                  {activeCampaigns.map((campaign) => (
-                    <div key={campaign.id} className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
-                      <h3 className="mb-2 font-semibold text-[var(--navy)]">{campaign.title}</h3>
-                      <div className="mb-3">
-                        <div className="flex items-center justify-between text-sm mb-1">
-                          <span className="text-[var(--text-muted)]">Progress</span>
-                          <span className="font-semibold text-[var(--navy)]">
-                            ₹{campaign.raised_amount?.toLocaleString() || 0} / ₹{campaign.goal_amount?.toLocaleString()}
-                          </span>
+                  {activeCampaigns.map((campaign) => {
+                    const raised = Number(campaign.raised_amount) || 0;
+                    const goal = Number(campaign.goal_amount) || 0;
+                    const progress = goal > 0 ? (raised / goal) * 100 : 0;
+
+                    return (
+                      <div key={campaign.id} className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
+                        <h3 className="mb-2 font-semibold text-[var(--navy)]">{campaign.title}</h3>
+                        <div className="mb-3">
+                          <div className="flex items-center justify-between text-sm mb-1">
+                            <span className="text-[var(--text-muted)]">Progress</span>
+                            <span className="font-semibold text-[var(--navy)]">
+                              ₹{raised.toLocaleString()} / ₹{goal.toLocaleString()}
+                            </span>
+                          </div>
+                          <div className="h-2 w-full rounded-full bg-[color:rgb(30_58_95_/_0.14)]">
+                            <div
+                              className="h-2 rounded-full bg-gradient-to-r from-[var(--navy)] to-[var(--blue)] transition-all"
+                              style={{ width: `${Math.min(progress, 100)}%` }}
+                            ></div>
+                          </div>
                         </div>
-                        <div className="h-2 w-full rounded-full bg-[color:rgb(30_58_95_/_0.14)]">
-                          <div
-                            className="h-2 rounded-full bg-gradient-to-r from-[var(--navy)] to-[var(--blue)] transition-all"
-                            style={{ width: `${Math.min((campaign.raised_amount / campaign.goal_amount) * 100, 100)}%` }}
-                          ></div>
-                        </div>
+                        <p className="text-xs text-[var(--text-muted)]">{Math.round(progress)}% funded</p>
                       </div>
-                      <p className="text-xs text-[var(--text-muted)]">
-                        {Math.round((campaign.raised_amount / campaign.goal_amount) * 100)}% funded
-                      </p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <p className="py-8 text-center text-[var(--text-muted)]">No active campaigns. Create one to start fundraising.</p>

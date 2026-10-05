@@ -130,6 +130,38 @@ export const submitDonation = async (donation: Omit<Donation, 'id' | 'created_at
   return data;
 };
 
+export const submitContactMessage = async (contact: {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+}) => {
+  if (!isSupabaseConfigured()) {
+    throw new Error('Supabase is not configured');
+  }
+
+  const { data, error } = await supabase.from('contact_messages').insert([contact]).select().single();
+
+  if (error) throw error;
+  return data;
+};
+
+export const subscribeNewsletter = async (email: string) => {
+  if (!isSupabaseConfigured()) {
+    throw new Error('Supabase is not configured');
+  }
+
+  const { data, error } = await supabase.from('newsletter_subscribers').insert([{ email }]).select().single();
+
+  if (error) {
+    // Duplicate email (unique violation) is not an error for the visitor.
+    if (error.code === '23505') return null;
+    throw error;
+  }
+
+  return data;
+};
+
 export const getUserDonations = async (userId: string) => {
   if (!isSupabaseConfigured()) {
     return [];
@@ -169,14 +201,16 @@ export const getAllDonations = async () => {
   }
 };
 
+const createEmptyDonationStats = () => ({
+  totalDonations: 0,
+  totalsByCurrency: {} as Record<string, number>,
+  recurringCount: 0,
+  oneTimeCount: 0,
+});
+
 export const getDonationStats = async () => {
   if (!isSupabaseConfigured()) {
-    return {
-      totalDonations: 0,
-      totalAmount: 0,
-      recurringCount: 0,
-      oneTimeCount: 0,
-    };
+    return createEmptyDonationStats();
   }
 
   try {
@@ -186,23 +220,34 @@ export const getDonationStats = async () => {
 
     if (error) throw error;
 
-    const stats = {
+    // Amounts are only meaningful within a currency, so total them per currency.
+    const totalsByCurrency: Record<string, number> = {};
+    (data || []).forEach((d) => {
+      const currency = d.currency || 'INR';
+      totalsByCurrency[currency] = (totalsByCurrency[currency] || 0) + (d.amount || 0);
+    });
+
+    return {
       totalDonations: data?.length || 0,
-      totalAmount: data?.reduce((sum, d) => sum + (d.amount || 0), 0) || 0,
+      totalsByCurrency,
       recurringCount: data?.filter(d => d.frequency === 'recurring').length || 0,
       oneTimeCount: data?.filter(d => d.frequency === 'one_time').length || 0,
     };
-
-    return stats;
   } catch (err) {
     console.error('Error fetching donation stats:', err);
-    return {
-      totalDonations: 0,
-      totalAmount: 0,
-      recurringCount: 0,
-      oneTimeCount: 0,
-    };
+    return createEmptyDonationStats();
   }
+};
+
+const CURRENCY_SYMBOLS: Record<string, string> = { INR: '₹', USD: '$', EUR: '€' };
+
+// Renders per-currency totals, e.g. "₹12,000 · $500"; never sums across currencies.
+export const formatCurrencyTotals = (totals?: Record<string, number> | null) => {
+  const entries = Object.entries(totals || {}).filter(([, value]) => value > 0);
+  if (entries.length === 0) return '₹0';
+  return entries
+    .map(([currency, value]) => `${CURRENCY_SYMBOLS[currency] || `${currency} `}${value.toLocaleString()}`)
+    .join(' · ');
 };
 
 // Program functions

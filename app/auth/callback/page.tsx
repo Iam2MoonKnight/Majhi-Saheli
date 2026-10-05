@@ -12,7 +12,9 @@ export default function AuthCallback() {
       try {
         const query = new URLSearchParams(window.location.search);
         const code = query.get('code');
-        const next = query.get('next') || '/login';
+        const nextParam = query.get('next');
+        // Only allow same-site relative paths to avoid open-redirect abuse.
+        const next = nextParam && nextParam.startsWith('/') && !nextParam.startsWith('//') ? nextParam : '/login';
 
         if (!code) {
           router.push('/login?message=error_no_code');
@@ -30,7 +32,10 @@ export default function AuthCallback() {
 
         if (data?.user) {
           // User email is now confirmed
-          router.push(`${next}?message=email_confirmed&user=${data.user.id}`);
+          const url = new URL(next, window.location.origin);
+          url.searchParams.set('message', 'email_confirmed');
+          url.searchParams.set('user', data.user.id);
+          router.push(url.pathname + url.search);
         } else {
           router.push('/login?message=error_no_user');
         }

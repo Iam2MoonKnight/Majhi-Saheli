@@ -1,4 +1,5 @@
 import ContactForm from '@/components/ContactForm';
+import NewsletterForm from '@/components/NewsletterForm';
 
 export default function Contact() {
   const districtOffices = [
@@ -50,7 +51,7 @@ export default function Contact() {
           </div>
           <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Get in touch</h1>
           <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
-            Have questions or want to collaborate? We'd love to hear from you!
+            Have questions or want to collaborate? We&rsquo;d love to hear from you!
           </p>
         </div>
       </section>
@@ -59,7 +60,7 @@ export default function Contact() {
         <div className="editorial-section">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div>
-              <h2 className="font-heading text-2xl font-bold text-[var(--navy)] mb-8">We'd love to hear from you</h2>
+              <h2 className="font-heading text-2xl font-bold text-[var(--navy)] mb-8">We&rsquo;d love to hear from you</h2>
 
               <div className="space-y-8">
                 <div>
@@ -196,16 +197,7 @@ export default function Contact() {
         <div className="editorial-section max-w-4xl text-center">
           <h2 className="font-heading text-4xl font-bold mb-6">Stay connected</h2>
           <p className="mb-8 text-lg text-white/85">Subscribe to receive updates about our programs, impact, and stories from the field.</p>
-          <div className="flex gap-2 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 rounded px-4 py-2 text-[var(--text)] focus:outline-none"
-            />
-            <button className="rounded bg-[var(--accent)] px-6 py-2 font-bold text-white transition hover:bg-[var(--accent-warm)]">
-              Subscribe
-            </button>
-          </div>
+          <NewsletterForm />
         </div>
       </section>
 

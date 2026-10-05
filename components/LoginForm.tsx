@@ -126,7 +126,7 @@ export default function LoginForm() {
       </form>
 
       <div className="mt-6 text-center text-[var(--text-muted)]">
-        Don't have an account?{' '}
+        Don&rsquo;t have an account?{' '}
         <Link href="/signup" className="font-bold text-[var(--accent)] hover:underline">
           Sign up
         </Link>

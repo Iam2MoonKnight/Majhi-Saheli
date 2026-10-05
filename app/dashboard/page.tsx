@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getSafeSession } from '@/lib/supabase';
 import {
   createUserProfile,
+  formatCurrencyTotals,
   getAllDonations,
   getDonationStats,
   getUserDonations,
@@ -92,7 +93,11 @@ export default function Dashboard() {
   }
 
   const isAdmin = userProfile?.role === 'admin';
-  const totalDonorAmount = donations.reduce((sum, donation) => sum + donation.amount, 0);
+  const donationTotals = donations.reduce<Record<string, number>>((acc, donation) => {
+    const currency = donation.currency || 'INR';
+    acc[currency] = (acc[currency] || 0) + donation.amount;
+    return acc;
+  }, {});
 
   return (
     <div className="min-h-screen overflow-hidden">
@@ -134,7 +139,9 @@ export default function Dashboard() {
                 </div>
                 <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
                   <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Amount</p>
-                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--accent)]">₹{stats.totalAmount.toLocaleString()}</p>
+                  <p className="mt-2 font-heading text-4xl font-bold text-[var(--accent)]">
+                    {formatCurrencyTotals(stats.totalsByCurrency)}
+                  </p>
                 </div>
                 <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
                   <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">One-time Donations</p>
@@ -236,7 +243,7 @@ export default function Dashboard() {
 
                       {donation.message && (
                         <div className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 italic text-[var(--text-muted)]">
-                          "{donation.message}"
+                          &ldquo;{donation.message}&rdquo;
                         </div>
                       )}
                     </div>
@@ -244,7 +251,7 @@ export default function Dashboard() {
                 </div>
               ) : (
                 <div className="p-12 text-center">
-                  <p className="mb-6 text-[var(--text-muted)]">You haven't made any donations yet.</p>
+                  <p className="mb-6 text-[var(--text-muted)]">You haven&rsquo;t made any donations yet.</p>
                   <Link
                     href="/donate"
                     className="inline-block rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
@@ -261,7 +268,7 @@ export default function Dashboard() {
                 <div>
                   <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Total Contributed</p>
                   <p className="mt-2 font-heading text-4xl font-bold text-[var(--accent)]">
-                    ₹{totalDonorAmount.toLocaleString()}
+                    {formatCurrencyTotals(donationTotals)}
                   </p>
                 </div>
                 <div>

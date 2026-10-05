@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { supabase, getSafeSession } from '@/lib/supabase';
 import { getUserProfile, updateCampaign } from '@/lib/supabase-functions';
 import { uploadImage, validateImageFile } from '@/lib/upload-image';
 import Link from 'next/link';
 
-export default function EditCampaign({ params }: { params: { id: string } }) {
+export default function EditCampaign() {
   const router = useRouter();
+  const params = useParams<{ id: string }>();
+  const id = params?.id ?? '';
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(true);
@@ -28,8 +30,14 @@ export default function EditCampaign({ params }: { params: { id: string } }) {
   });
 
   useEffect(() => {
+    if (!id) {
+      setError('Invalid campaign id');
+      setFetchLoading(false);
+      return;
+    }
     loadCampaign();
-  }, [params.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const loadCampaign = async () => {
     const session = await getSafeSession();
@@ -50,7 +58,7 @@ export default function EditCampaign({ params }: { params: { id: string } }) {
     const { data: campaign, error } = await supabase
       .from('campaigns')
       .select('*')
-      .eq('id', params.id)
+      .eq('id', id)
       .single();
 
     if (error || !campaign) {
@@ -140,7 +148,7 @@ export default function EditCampaign({ params }: { params: { id: string } }) {
         updates.end_date = new Date(formData.end_date).toISOString();
       }
 
-      await updateCampaign(params.id, updates);
+      await updateCampaign(id, updates);
       router.push('/admin/campaigns');
     } catch (err: any) {
       setError(err.message || 'Failed to update campaign');

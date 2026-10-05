@@ -1,6 +1,20 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 
+const filters = [
+  { label: 'All', key: 'all' },
+  { label: 'Health Camps', key: 'health' },
+  { label: 'Education', key: 'education' },
+  { label: 'Livelihood', key: 'livelihood' },
+  { label: 'Women Empowerment', key: 'women' },
+  { label: 'Community', key: 'community' },
+];
+
 export default function GalleryPage() {
+  const [activeFilter, setActiveFilter] = useState('all');
+
   const galleryItems = [
     { category: 'health', title: 'Health Camp', place: 'Thane District, 2024', image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80' },
     { category: 'education', title: 'Digital Learning', place: 'Palghar District', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80' },
@@ -15,6 +29,9 @@ export default function GalleryPage() {
     { category: 'health', title: 'Wellness Session', place: 'Thane District', image: 'https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=600&q=80' },
     { category: 'education', title: 'Skill Workshop', place: 'Osmanabad', image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80' },
   ];
+
+  const visibleItems =
+    activeFilter === 'all' ? galleryItems : galleryItems.filter((item) => item.category === activeFilter);
 
   return (
     <div className="min-h-screen overflow-hidden">
@@ -31,15 +48,25 @@ export default function GalleryPage() {
       <section className="py-16">
         <div className="editorial-section space-y-10">
           <div className="flex flex-wrap justify-center gap-2">
-            {['All', 'Health Camps', 'Education', 'Livelihood', 'Women Empowerment', 'Community'].map((pill) => (
-              <button key={pill} className="rounded-full border border-[var(--border-soft)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-[var(--navy)]">
-                {pill}
+            {filters.map((filter) => (
+              <button
+                key={filter.key}
+                type="button"
+                onClick={() => setActiveFilter(filter.key)}
+                aria-pressed={activeFilter === filter.key}
+                className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition ${
+                  activeFilter === filter.key
+                    ? 'border-[var(--accent)] bg-[var(--accent)] text-white'
+                    : 'border-[var(--border-soft)] bg-[var(--surface)] text-[var(--navy)] hover:border-[var(--accent)]'
+                }`}
+              >
+                {filter.label}
               </button>
             ))}
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {galleryItems.map((item, idx) => (
+            {visibleItems.map((item, idx) => (
               <div
                 key={`${item.title}-${item.place}`}
                 className={`group overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] ${

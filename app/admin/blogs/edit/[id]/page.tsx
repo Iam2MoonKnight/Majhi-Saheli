@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { supabase, getSafeSession } from '@/lib/supabase';
 import { getUserProfile, updateBlog } from '@/lib/supabase-functions';
 import { uploadImage, validateImageFile } from '@/lib/upload-image';
 import Link from 'next/link';
 
-export default function EditBlog({ params }: { params: { id: string } }) {
+export default function EditBlog() {
   const router = useRouter();
+  const params = useParams<{ id: string }>();
+  const id = params?.id ?? '';
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(true);
@@ -25,8 +27,14 @@ export default function EditBlog({ params }: { params: { id: string } }) {
   });
 
   useEffect(() => {
+    if (!id) {
+      setError('Invalid blog id');
+      setFetchLoading(false);
+      return;
+    }
     loadBlog();
-  }, [params.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const loadBlog = async () => {
     const session = await getSafeSession();
@@ -47,7 +55,7 @@ export default function EditBlog({ params }: { params: { id: string } }) {
     const { data: blog, error } = await supabase
       .from('blogs')
       .select('*')
-      .eq('id', params.id)
+      .eq('id', id)
       .single();
 
     if (error || !blog) {
@@ -128,7 +136,7 @@ export default function EditBlog({ params }: { params: { id: string } }) {
         updates.published_at = new Date().toISOString();
       }
 
-      await updateBlog(params.id, updates);
+      await updateBlog(id, updates);
       router.push('/admin/blogs');
     } catch (err: any) {
       setError(err.message || 'Failed to update blog');
