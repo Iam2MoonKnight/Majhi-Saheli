@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getCampaigns } from '@/lib/supabase-functions';
 import { fallbackCampaigns, mapSupabaseCampaigns } from '@/lib/campaigns';
+import PageHero from '@/components/PageHero';
 
 const statusStyles: Record<string, string> = {
   ongoing: 'bg-brand-100 text-brand-800 border-brand-200',
@@ -22,18 +23,12 @@ export default async function CampaignsPage() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
-        <div className="editorial-section space-y-6 py-16">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(30_58_95_/_0.12)] px-4 py-2">
-            <div className="h-2 w-2 rounded-full bg-[var(--blue)]"></div>
-            <span className="section-eyebrow text-[var(--navy)]">Campaigns</span>
-          </div>
-          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Support our campaigns</h1>
-          <p className="max-w-2xl text-lg text-[var(--text-muted)]">
-            Targeted fundraising efforts to meet urgent needs in education, health, and training for rural women.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Home', href: '/' }, { label: 'Campaigns' }]}
+        eyebrow="Campaigns"
+        title="Support our campaigns"
+        subtitle="Targeted fundraising efforts to meet urgent needs in education, health, and training for rural women."
+      />
 
       <section className="py-16">
         <div className="editorial-section space-y-8">
@@ -100,7 +95,7 @@ export default async function CampaignsPage() {
         </div>
       </section>
 
-      <section className="border-t border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)]">
+      <section className="border-t border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section space-y-6 py-16 text-center">
           <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Want to create your own campaign?</h2>
           <p className="text-lg text-[var(--text-muted)]">

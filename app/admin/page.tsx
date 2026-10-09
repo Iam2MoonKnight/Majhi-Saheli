@@ -47,7 +47,7 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--off-white)]">
         <div className="text-center">
           <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
           <p className="text-[var(--text-muted)]">Loading admin dashboard...</p>
@@ -58,7 +58,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+      <div className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section py-8">
           <div className="flex items-center justify-between">
             <div>
@@ -90,7 +90,7 @@ export default function AdminDashboard() {
 
           <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(42_123_111_/_0.16)]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(47_90_134_/_0.16)]">
                 <span className="text-2xl">₹</span>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function AdminDashboard() {
 
           <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(74_118_168_/_0.15)]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(47_90_134_/_0.15)]">
                 <span className="text-2xl">📝</span>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function AdminDashboard() {
 
           <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(217_119_77_/_0.15)]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:rgb(232_93_117_/_0.15)]">
                 <span className="text-2xl">🎯</span>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function AdminDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/admin/blogs/new"
-              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[var(--off-white)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">✍️</div>
               <h3 className="mb-1 font-semibold text-[var(--navy)]">Create Blog Post</h3>
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
 
             <Link
               href="/admin/campaigns/new"
-              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(217_119_77_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(232_93_117_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">🎯</div>
               <h3 className="mb-1 font-semibold text-[var(--navy)]">New Campaign</h3>
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
 
             <Link
               href="/admin/hero"
-              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(74_118_168_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(47_90_134_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">🖼️</div>
               <h3 className="mb-1 font-semibold text-[var(--navy)]">Update Hero</h3>
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
 
             <Link
               href="/dashboard"
-              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(42_123_111_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group rounded-xl border border-[var(--border-soft)] bg-[color:rgb(47_90_134_/_0.12)] p-6 transition-all hover:-translate-y-1 hover:shadow-md"
             >
               <div className="text-3xl mb-3">📊</div>
               <h3 className="mb-1 font-semibold text-[var(--navy)]">View Reports</h3>
@@ -176,12 +176,12 @@ export default function AdminDashboard() {
               {recentBlogs.length > 0 ? (
                 <div className="space-y-4">
                   {recentBlogs.map((blog) => (
-                    <div key={blog.id} className="flex items-start gap-4 rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
+                    <div key={blog.id} className="flex items-start gap-4 rounded-xl border border-[var(--border-soft)] bg-[var(--off-white)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
                       <div className="flex-1">
                         <h3 className="mb-1 font-semibold text-[var(--navy)]">{blog.title}</h3>
                         <p className="mb-2 line-clamp-1 text-sm text-[var(--text-muted)]">{blog.excerpt}</p>
                         <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
-                          <span className={`rounded-full px-2 py-1 ${blog.status === 'published' ? 'bg-[color:rgb(42_123_111_/_0.16)] text-[var(--teal)]' : 'bg-[color:rgb(217_119_77_/_0.14)] text-[var(--accent)]'}`}>
+                          <span className={`rounded-full px-2 py-1 ${blog.status === 'published' ? 'bg-[color:rgb(47_90_134_/_0.16)] text-[var(--teal)]' : 'bg-[color:rgb(232_93_117_/_0.14)] text-[var(--accent)]'}`}>
                             {blog.status}
                           </span>
                           <span>{new Date(blog.created_at).toLocaleDateString()}</span>
@@ -213,7 +213,7 @@ export default function AdminDashboard() {
                     const progress = goal > 0 ? (raised / goal) * 100 : 0;
 
                     return (
-                      <div key={campaign.id} className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
+                      <div key={campaign.id} className="rounded-xl border border-[var(--border-soft)] bg-[var(--off-white)] p-4 transition hover:bg-[color:rgb(30_58_95_/_0.08)]">
                         <h3 className="mb-2 font-semibold text-[var(--navy)]">{campaign.title}</h3>
                         <div className="mb-3">
                           <div className="flex items-center justify-between text-sm mb-1">

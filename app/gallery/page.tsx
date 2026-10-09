@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import PageHero from '@/components/PageHero';
 
 const filters = [
   { label: 'All', key: 'all' },
@@ -16,18 +17,18 @@ export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState('all');
 
   const galleryItems = [
-    { category: 'health', title: 'Health Camp', place: 'Thane District, 2024', image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80' },
-    { category: 'education', title: 'Digital Learning', place: 'Palghar District', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80' },
-    { category: 'women', title: "Women's Circle", place: 'Satara District', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80' },
-    { category: 'community', title: 'Community Gathering', place: 'Osmanabad', image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=900&q=80' },
-    { category: 'livelihood', title: 'Livelihood Training', place: 'Raigad District', image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80' },
-    { category: 'health', title: 'Medical Screening', place: 'Ratnagiri District', image: 'https://images.unsplash.com/photo-1578357078586-491adf1aa5ba?w=600&q=80' },
-    { category: 'education', title: 'Library Programme', place: 'Thane District', image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80' },
-    { category: 'community', title: 'Field Team Meeting', place: 'Palghar', image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80' },
-    { category: 'women', title: 'Mazi Saheli Mahilavarga', place: 'Raigad District, 2023', image: 'https://images.unsplash.com/photo-1617854818583-09e7f077a156?w=900&q=80' },
-    { category: 'livelihood', title: 'Kitchen Garden', place: 'Satara District', image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80' },
-    { category: 'health', title: 'Wellness Session', place: 'Thane District', image: 'https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=600&q=80' },
-    { category: 'education', title: 'Skill Workshop', place: 'Osmanabad', image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80' },
+    { category: 'health', title: 'Health Camp', place: 'Thane District, 2024', image: '/field-images/health/health-camp.jpg' },
+    { category: 'education', title: 'Digital Learning', place: 'Palghar District', image: '/field-images/education/digital-learning.jpg' },
+    { category: 'women', title: "Women's Circle", place: 'Satara District', image: '/field-images/women/women-leadership.jpg' },
+    { category: 'community', title: 'Community Gathering', place: 'Osmanabad', image: '/field-images/community/community-gathering.jpeg' },
+    { category: 'livelihood', title: 'Livelihood Training', place: 'Raigad District', image: '/field-images/livelihood/skills-training.png' },
+    { category: 'health', title: 'Medical Screening', place: 'Ratnagiri District', image: '/field-images/health/community-screening.png' },
+    { category: 'education', title: 'Library Programme', place: 'Thane District', image: '/field-images/education/education-session.jpg' },
+    { category: 'community', title: 'Field Team Meeting', place: 'Palghar', image: '/field-images/community/village-meeting.jpeg' },
+    { category: 'women', title: 'Mazi Saheli Mahilavarga', place: 'Raigad District, 2023', image: '/field-images/women/womens-circle.jpg' },
+    { category: 'livelihood', title: 'Kitchen Garden', place: 'Satara District', image: '/field-images/livelihood/livelihood-project.jpg' },
+    { category: 'health', title: 'Wellness Session', place: 'Thane District', image: '/field-images/health/health-outreach.png' },
+    { category: 'education', title: 'Skill Workshop', place: 'Osmanabad', image: '/field-images/education/learning-space.jpg' },
   ];
 
   const visibleItems =
@@ -35,15 +36,12 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)] py-16">
-        <div className="editorial-section text-center space-y-6">
-          <p className="section-eyebrow">From the Field</p>
-          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Stories told through images</h1>
-          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
-            A visual journey through our work, where every photograph reflects resilience, dignity, and community action.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Home', href: '/' }, { label: 'Gallery' }]}
+        eyebrow="From the Field"
+        title="Stories told through images"
+        subtitle="A visual journey through our work, where every photograph reflects resilience, dignity, and community action."
+      />
 
       <section className="py-16">
         <div className="editorial-section space-y-10">
@@ -90,7 +88,7 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] py-16">
+      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
           <div className="text-center">
             <p className="section-eyebrow">Field Stories</p>
@@ -98,9 +96,9 @@ export default function GalleryPage() {
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
-              ['Health Camp – Thane 2024', 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80'],
-              ['Women Empowerment Stories', 'https://images.unsplash.com/photo-1617854818583-09e7f077a156?w=600&q=80'],
-              ['Annual Impact Report 2023', 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80'],
+              ['Health Camp – Thane 2024', '/field-images/health/health-camp.jpg'],
+              ['Women Empowerment Stories', '/field-images/women/women-leadership.jpg'],
+              ['Annual Impact Report 2023', '/field-images/community/community-farmers.jpg'],
             ].map(([title, image]) => (
               <div key={title} className="group relative overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
                 <img src={image} alt={title} className="h-56 w-full object-cover" />

@@ -30,7 +30,7 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+      <section className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section space-y-6 py-16">
           <Link href="/campaigns" className="text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
             ← Back to campaigns

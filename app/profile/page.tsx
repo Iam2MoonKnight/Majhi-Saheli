@@ -51,7 +51,7 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--off-white)]">
         <div className="text-center">
           <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
           <p className="text-[var(--text-muted)]">Loading your profile...</p>
@@ -62,7 +62,7 @@ export default function ProfilePage() {
 
   if (!profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--off-white)]">
         <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 text-center">
           <h1 className="font-heading text-3xl font-bold text-[var(--navy)]">Profile Unavailable</h1>
           <p className="mt-2 text-[var(--text-muted)]">Please try again or contact support.</p>
@@ -87,11 +87,11 @@ export default function ProfilePage() {
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-6">
+            <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--off-white)] p-6">
               <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Role</p>
               <p className="mt-2 text-lg font-semibold capitalize text-[var(--navy)]">{profile.role}</p>
             </div>
-            <div className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-6">
+            <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--off-white)] p-6">
               <p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Member Since</p>
               <p className="mt-2 text-lg font-semibold text-[var(--navy)]">
                 {new Date(profile.created_at).toLocaleDateString()}

@@ -79,7 +79,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--off-white)]">
         <div className="text-center">
           <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
           <p className="text-[var(--text-muted)]">Loading your dashboard...</p>
@@ -101,7 +101,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+      <div className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section py-8">
           <div className="flex items-center justify-between">
             <div>
@@ -161,7 +161,7 @@ export default function Dashboard() {
 
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="border-b border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)]">
+                  <thead className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Name</th>
                       <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">Email</th>
@@ -173,7 +173,7 @@ export default function Dashboard() {
                   <tbody>
                     {donations.length > 0 ? (
                       donations.map((donation) => (
-                        <tr key={donation.id} className="border-b border-[var(--border-soft)] transition hover:bg-[color:rgb(30_58_95_/_0.04)]">
+                        <tr key={donation.id} className="border-b border-[var(--border-soft)] transition hover:bg-[var(--off-white)]">
                           <td className="px-6 py-4 text-sm text-[var(--navy)]">{donation.name}</td>
                           <td className="px-6 py-4 text-sm text-[var(--text-muted)]">{donation.email}</td>
                           <td className="px-6 py-4 text-sm font-semibold text-[var(--navy)]">
@@ -183,8 +183,8 @@ export default function Dashboard() {
                             <span
                               className={`px-3 py-1 rounded-full text-xs font-semibold ${
                                 donation.frequency === 'one_time'
-                                  ? 'bg-[color:rgb(74_118_168_/_0.15)] text-[var(--blue)]'
-                                  : 'bg-[color:rgb(42_123_111_/_0.18)] text-[var(--teal)]'
+                                  ? 'bg-[color:rgb(47_90_134_/_0.15)] text-[var(--blue)]'
+                                  : 'bg-[color:rgb(47_90_134_/_0.18)] text-[var(--teal)]'
                               }`}
                             >
                               {donation.frequency === 'one_time' ? 'One-time' : 'Recurring'}
@@ -233,8 +233,8 @@ export default function Dashboard() {
                         <span
                           className={`px-4 py-2 rounded-full text-sm font-semibold ${
                             donation.frequency === 'one_time'
-                              ? 'bg-[color:rgb(74_118_168_/_0.15)] text-[var(--blue)]'
-                              : 'bg-[color:rgb(42_123_111_/_0.18)] text-[var(--teal)]'
+                              ? 'bg-[color:rgb(47_90_134_/_0.15)] text-[var(--blue)]'
+                              : 'bg-[color:rgb(47_90_134_/_0.18)] text-[var(--teal)]'
                           }`}
                         >
                           {donation.frequency === 'one_time' ? 'One-time' : 'Recurring'}
@@ -242,7 +242,7 @@ export default function Dashboard() {
                       </div>
 
                       {donation.message && (
-                        <div className="rounded-xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] p-4 italic text-[var(--text-muted)]">
+                        <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--off-white)] p-4 italic text-[var(--text-muted)]">
                           &ldquo;{donation.message}&rdquo;
                         </div>
                       )}
@@ -262,7 +262,7 @@ export default function Dashboard() {
               )}
             </div>
 
-            <div className="rounded-2xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] p-8">
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--off-white)] p-8">
               <h3 className="font-heading text-3xl font-bold text-[var(--navy)]">Your Impact</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div>

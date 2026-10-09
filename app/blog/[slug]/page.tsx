@@ -19,7 +19,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+      <section className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section max-w-4xl py-12">
           <Link href="/blog" className="mb-6 inline-block text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
             ← Back to Blog

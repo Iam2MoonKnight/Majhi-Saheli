@@ -70,7 +70,7 @@ export default function BlogsManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--off-white)]">
         <div className="text-center">
           <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
           <p className="text-[var(--text-muted)]">Loading blogs...</p>
@@ -81,7 +81,7 @@ export default function BlogsManagement() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+      <div className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -140,7 +140,7 @@ export default function BlogsManagement() {
                     <div className="flex items-center gap-3 mb-3">
                       <h2 className="font-heading text-2xl font-bold text-[var(--navy)]">{blog.title}</h2>
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        blog.status === 'published' ? 'bg-[color:rgb(42_123_111_/_0.16)] text-[var(--teal)]' : 'bg-[color:rgb(217_119_77_/_0.14)] text-[var(--accent)]'
+                        blog.status === 'published' ? 'bg-[color:rgb(47_90_134_/_0.16)] text-[var(--teal)]' : 'bg-[color:rgb(232_93_117_/_0.14)] text-[var(--accent)]'
                       }`}>
                         {blog.status}
                       </span>

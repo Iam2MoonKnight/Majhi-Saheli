@@ -10,7 +10,7 @@ export default function StatCard({ icon, number, label, description }: StatCardP
 
   const renderIcon = () => {
     return (
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[color:rgb(232_131_74_/_0.12)] text-xl font-semibold text-[var(--accent)]">
+      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[color:rgb(232_93_117_/_0.12)] text-xl font-semibold text-[var(--accent)]">
         {labelInitial}
       </div>
     );

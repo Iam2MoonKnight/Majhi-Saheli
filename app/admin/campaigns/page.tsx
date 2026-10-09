@@ -58,7 +58,7 @@ export default function CampaignsManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--off-white)]">
         <div className="text-center">
           <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
           <p className="text-[var(--text-muted)]">Loading campaigns...</p>
@@ -69,7 +69,7 @@ export default function CampaignsManagement() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+      <div className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -104,9 +104,9 @@ export default function CampaignsManagement() {
                     <div className="flex items-start justify-between mb-3">
                       <h2 className="flex-1 font-heading text-2xl font-bold text-[var(--navy)]">{campaign.title}</h2>
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ml-2 ${
-                        campaign.status === 'active' ? 'bg-[color:rgb(42_123_111_/_0.16)] text-[var(--teal)]' :
-                        campaign.status === 'completed' ? 'bg-[color:rgb(74_118_168_/_0.15)] text-[var(--blue)]' :
-                        'bg-[color:rgb(217_119_77_/_0.14)] text-[var(--accent)]'
+                        campaign.status === 'active' ? 'bg-[color:rgb(47_90_134_/_0.16)] text-[var(--teal)]' :
+                        campaign.status === 'completed' ? 'bg-[color:rgb(47_90_134_/_0.15)] text-[var(--blue)]' :
+                        'bg-[color:rgb(232_93_117_/_0.14)] text-[var(--accent)]'
                       }`}>
                         {campaign.status}
                       </span>

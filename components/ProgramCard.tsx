@@ -14,8 +14,8 @@ const categoryConfig: Record<string, { color: string; bgColor: string; borderCol
   },
   health: {
     color: 'text-[var(--accent)]',
-    bgColor: 'bg-[color:rgb(232_131_74_/_0.12)]',
-    borderColor: 'border-[color:rgb(232_131_74_/_0.35)]',
+    bgColor: 'bg-[color:rgb(232_93_117_/_0.12)]',
+    borderColor: 'border-[color:rgb(232_93_117_/_0.35)]',
   },
   training: {
     color: 'text-[var(--gold)]',
@@ -24,8 +24,8 @@ const categoryConfig: Record<string, { color: string; bgColor: string; borderCol
   },
   other: {
     color: 'text-[var(--teal)]',
-    bgColor: 'bg-[color:rgb(42_123_111_/_0.12)]',
-    borderColor: 'border-[color:rgb(42_123_111_/_0.32)]',
+    bgColor: 'bg-[color:rgb(47_90_134_/_0.12)]',
+    borderColor: 'border-[color:rgb(47_90_134_/_0.32)]',
   },
 };
 

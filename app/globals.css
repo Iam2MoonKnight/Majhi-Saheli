@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
+/* ===========================================================================
+   MSCT — Mazi Saheli Charitable Trust
+   Design system: navy · coral · white · off-white editorial
+   ---------------------------------------------------------------------------
+   Legacy variable names (--accent, --blue, --teal, --navy-mid, --accent-warm)
+   are intentionally preserved so existing utilities across the app recolor to
+   the new palette without touching every file.
+   =========================================================================== */
 :root {
-  --navy: #0d1b2a;
-  --navy-mid: #152236;
-  --blue: #1e3a5f;
-  --accent: #e8834a;
-  --accent-warm: #f0a070;
-  --teal: #2a7b6f;
-  --gold: #d4a843;
-  --off-white: #f8f6f2;
-  --surface: #fffdf9;
-  --text: #1a1a2e;
-  --text-muted: #5a6478;
-  --border-soft: #e5e0d8;
-  --ticker-h: 36px;
+  --navy: #1b3a5c; /* primary navy — headers, footers, primary surfaces */
+  --navy-dark: #14293f; /* footer bg, hover states */
+  --navy-mid: #14293f; /* legacy alias of navy-dark */
+  --blue: #2f5a86; /* mid steel blue — secondary accents, gradients */
+  --teal: #3f6f9e; /* legacy alias of blue — keeps gradients on-palette */
+
+  --accent: #e85d75; /* coral — CTAs, highlights */
+  --accent-warm: #d14a62; /* coral hover */
+
+  --gold: #e3a63c; /* ratings / warm micro-accent only */
+  --sky: #d6e4f0; /* subtle card fills */
+  --off-white: #f8f9fb; /* alternating section background */
+  --surface: #ffffff;
+  --text: #1a1a1a; /* body text */
+  --text-muted: #5a6b7d; /* secondary text */
+  --border-soft: #e5e9f0; /* borders, dividers */
+  --ticker-h: 40px;
+}
+
+/* Tailwind v4 theme aliases → enables bg-navy, text-coral, bg-offwhite, etc. */
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-dark: var(--navy-dark);
+  --color-steel: var(--blue);
+  --color-coral: var(--accent);
+  --color-coral-dark: var(--accent-warm);
+  --color-sky: var(--sky);
+  --color-offwhite: var(--off-white);
+  --color-surface: var(--surface);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-line: var(--border-soft);
+  --color-gold: var(--gold);
 }
 
 @keyframes ticker {
   0% {
     transform: translateX(0);
   }
-
   100% {
     transform: translateX(-50%);
   }
@@ -31,7 +58,6 @@
   100% {
     transform: translateY(0px);
   }
-
   50% {
     transform: translateY(-12px);
   }
@@ -42,10 +68,21 @@
     opacity: 0;
     transform: translateY(24px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.7);
   }
 }
 
@@ -57,11 +94,8 @@
   }
 
   body {
-    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background:
-      radial-gradient(circle at 90% 10%, rgba(232, 131, 74, 0.14), transparent 36%),
-      radial-gradient(circle at 0% 42%, rgba(42, 123, 111, 0.12), transparent 32%),
-      var(--off-white);
+    font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--surface);
     color: var(--text);
     min-height: 100vh;
   }
@@ -72,46 +106,77 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-heading), Georgia, serif;
+    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
     color: var(--navy);
+    font-weight: 800;
+    letter-spacing: -0.022em;
+    line-height: 1.1;
   }
 
   p {
     color: var(--text-muted);
   }
+
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
+/* ---------------------------------------------------------------------------
+   Legacy utility names (kept so untouched pages stay consistent)
+   --------------------------------------------------------------------------- */
 @layer utilities {
   .font-heading {
-    font-family: var(--font-heading), Georgia, serif;
+    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
   }
 
   .font-mono-eyebrow {
-    font-family: var(--font-mono), monospace;
-    letter-spacing: 0.14em;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    letter-spacing: 0.16em;
   }
 
   .section-eyebrow {
-    font-family: var(--font-mono), monospace;
+    font-family: var(--font-mono), ui-monospace, monospace;
     font-size: 0.72rem;
-    letter-spacing: 0.16em;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--accent);
   }
 
   .editorial-section {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 80rem;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .editorial-section {
+      padding-inline: 3rem;
+    }
   }
 
   .ticker-track {
-    animation: ticker 26s linear infinite;
-  }
-
-  .text-outline {
-    -webkit-text-stroke: 1.5px var(--accent);
-    color: transparent;
+    animation: ticker 30s linear infinite;
   }
 
   .float-soft {
@@ -120,5 +185,220 @@
 
   .reveal-up {
     animation: revealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .pulse-dot {
+    animation: pulseDot 1.6s ease-in-out infinite;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reusable component classes. Kept in the components layer so plain Tailwind
+   utilities (utilities layer) always win — avoids specificity collisions.
+   --------------------------------------------------------------------------- */
+@layer components {
+  /* --- layout ------------------------------------------------------------ */
+  .section {
+    padding-block: 4.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 6rem;
+    }
+  }
+
+  .section-alt {
+    background: var(--off-white);
+  }
+
+  .container-x {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    .container-x {
+      padding-inline: 3rem;
+    }
+  }
+
+  /* --- eyebrow ----------------------------------------------------------- */
+  .eyebrow {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* --- buttons ----------------------------------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.8rem 1.6rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  .btn-coral {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(232, 93, 117, 0.28);
+  }
+
+  .btn-coral:hover:not(:disabled) {
+    background: var(--accent-warm);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(232, 93, 117, 0.34);
+  }
+
+  .btn-navy {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .btn-navy:hover:not(:disabled) {
+    background: var(--navy-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: #fff;
+    border: 1.5px solid var(--border-soft);
+    color: var(--navy);
+  }
+
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .btn-outline-light {
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    color: #fff;
+  }
+
+  .btn-outline-light:hover:not(:disabled) {
+    background: #fff;
+    border-color: #fff;
+    color: var(--navy);
+  }
+
+  .btn-sm {
+    padding: 0.6rem 1.1rem;
+    font-size: 0.8125rem;
+  }
+
+  /* --- cards ------------------------------------------------------------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 1rem;
+  }
+
+  .card-hover {
+    transition:
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s ease,
+      border-color 0.28s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 44px rgba(20, 41, 63, 0.13);
+    border-color: #f0c6ce;
+  }
+
+  /* --- text links -------------------------------------------------------- */
+  .link-coral {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    transition: gap 0.2s ease, color 0.2s ease;
+  }
+
+  .link-coral:hover {
+    gap: 0.7rem;
+    color: var(--accent-warm);
+  }
+
+  /* --- big stat numbers -------------------------------------------------- */
+  .stat-value {
+    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  /* --- icon badge on focus-area cards ------------------------------------ */
+  .icon-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.9rem;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(232, 93, 117, 0.35);
+  }
+
+  /* --- form controls ----------------------------------------------------- */
+  .field-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .field {
+    width: 100%;
+    border-radius: 0.625rem;
+    border: 1px solid var(--border-soft);
+    background: #fff;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .field::placeholder {
+    color: #9aa8b6;
+  }
+
+  .field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232, 93, 117, 0.16);
   }
 }

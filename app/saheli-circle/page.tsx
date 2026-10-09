@@ -1,3 +1,5 @@
+import PageHero from '@/components/PageHero';
+
 export default function SaheliCircle() {
   const values = [
     {
@@ -120,18 +122,12 @@ export default function SaheliCircle() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
-        <div className="editorial-section space-y-6 py-16 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.12)] px-4 py-2">
-            <div className="h-2 w-2 rounded-full bg-[var(--teal)]"></div>
-            <span className="section-eyebrow text-[var(--navy)]">Community</span>
-          </div>
-          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Saheli Circle</h1>
-          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
-            A community initiative creating peer support, mutual learning, and collective empowerment for rural women.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Home', href: '/' }, { label: 'Saheli Circle' }]}
+        eyebrow="Community"
+        title="Saheli Circle"
+        subtitle="A community initiative creating peer support, mutual learning, and collective empowerment for rural women."
+      />
 
       <section className="py-16">
         <div className="editorial-section space-y-8">
@@ -165,7 +161,7 @@ export default function SaheliCircle() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] py-16">
+      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Upcoming activities</h2>
 
@@ -221,7 +217,7 @@ export default function SaheliCircle() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] py-16">
+      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Circle stories</h2>
 
@@ -231,7 +227,7 @@ export default function SaheliCircle() {
                 <h3 className="font-heading text-2xl font-semibold text-[var(--navy)]">{circle.title}</h3>
                 <p className="mb-4 mt-2 text-sm text-[var(--text-muted)]">📍 {circle.location}</p>
                 <p className="mb-6 leading-relaxed text-[var(--text-muted)]">{circle.story}</p>
-                <div className="inline-flex rounded-full bg-[color:rgb(217_119_77_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
+                <div className="inline-flex rounded-full bg-[color:rgb(232_93_117_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
                   {circle.impact}
                 </div>
               </div>
@@ -260,7 +256,7 @@ export default function SaheliCircle() {
             ))}
           </div>
 
-          <div className="rounded-2xl border border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.07)] p-8 text-center">
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--off-white)] p-8 text-center">
             <h3 className="font-heading text-4xl font-bold text-[var(--navy)]">Ready to join?</h3>
             <p className="mx-auto mb-6 mt-4 max-w-2xl text-[var(--text-muted)]">
               Reach out to us today to find a circle near you or form a new one in your community.

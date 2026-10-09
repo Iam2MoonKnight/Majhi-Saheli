@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display, Space_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const bodyFont = DM_Sans({
+const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const headingFont = Playfair_Display({
+const headingFont = Plus_Jakarta_Sans({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
-  weight: ["600", "700", "900"],
+  weight: ["500", "600", "700", "800"],
 });
 
 const monoFont = Space_Mono({
@@ -26,9 +26,13 @@ const monoFont = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mazi Saheli Charitable Trust",
-  description: "Empowering rural women through education, health, and sustainable community leadership",
-  keywords: "NGO, women empowerment, education, health, rural women, skills development",
+  title: {
+    default: "Mazi Saheli Charitable Trust",
+    template: "%s | Mazi Saheli Charitable Trust",
+  },
+  description:
+    "Empowering rural women and communities across Maharashtra through education, health, livelihood and sustainable community leadership.",
+  keywords: "NGO, women empowerment, education, health, rural women, skills development, Maharashtra",
   robots: "index, follow",
 };
 

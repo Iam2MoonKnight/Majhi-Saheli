@@ -1,4 +1,5 @@
 import StatCard from '@/components/StatCard';
+import PageHero from '@/components/PageHero';
 
 export default function Impact() {
   const impactPrograms = [
@@ -78,18 +79,12 @@ export default function Impact() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
-        <div className="editorial-section space-y-6 py-16 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.12)] px-4 py-2">
-            <div className="h-2 w-2 rounded-full bg-[var(--teal)]"></div>
-            <span className="section-eyebrow text-[var(--navy)]">Our Impact</span>
-          </div>
-          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Measured progress, human stories</h1>
-          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
-            We track outcomes rigorously and stay centered on real change in education, health, livelihoods, and women-led community action.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Home', href: '/' }, { label: 'Impact' }]}
+        eyebrow="Our Impact"
+        title="Measured progress, human stories"
+        subtitle="We track outcomes rigorously and stay centered on real change in education, health, livelihoods, and women-led community action."
+      />
 
       <section className="py-16">
         <div className="editorial-section space-y-8">
@@ -104,7 +99,7 @@ export default function Impact() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] py-16">
+      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Program-wise impact</h2>
 
@@ -139,7 +134,7 @@ export default function Impact() {
               <div key={story.name} className="space-y-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
                 <h3 className="font-heading text-2xl font-semibold text-[var(--navy)]">{story.name}</h3>
                 <p className="leading-relaxed text-[var(--text-muted)]">{story.story}</p>
-                <div className="inline-flex rounded-full bg-[color:rgb(217_119_77_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
+                <div className="inline-flex rounded-full bg-[color:rgb(232_93_117_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
                   {story.impact}
                 </div>
               </div>
@@ -148,7 +143,7 @@ export default function Impact() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.05)] py-16">
+      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Growth over years</h2>
 

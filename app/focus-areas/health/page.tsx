@@ -48,7 +48,7 @@ export default function HealthPage() {
             </div>
             <div className="rounded-2xl overflow-hidden border border-[var(--border-soft)]">
               <img
-                src="https://images.unsplash.com/photo-1576091160550-112ba8d25d1d?w=600&q=80"
+                src="/field-images/health/health-camp.jpg"
                 alt="Health camp"
                 className="w-full h-96 object-cover"
               />
@@ -58,7 +58,7 @@ export default function HealthPage() {
       </section>
 
       {/* Activities */}
-      <section className="py-16 bg-[color:rgb(30_58_95_/_0.05)] border-y border-[var(--border-soft)]">
+      <section className="py-16 bg-[var(--off-white)] border-y border-[var(--border-soft)]">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-[var(--navy)] text-center">Key Activities</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -110,7 +110,7 @@ export default function HealthPage() {
       </section>
 
       {/* Navigation to other areas */}
-      <section className="py-16 bg-[color:rgb(30_58_95_/_0.05)] border-t border-[var(--border-soft)]">
+      <section className="py-16 bg-[var(--off-white)] border-t border-[var(--border-soft)]">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-2xl font-bold text-[var(--navy)] text-center">Explore Other Focus Areas</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

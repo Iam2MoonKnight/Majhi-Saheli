@@ -1,5 +1,13 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * MSCT design tokens.
+ *
+ * NOTE: This project runs Tailwind CSS v4, where the source of truth for the
+ * theme lives in `app/globals.css` (the `@theme inline` block). The aliases
+ * below mirror those tokens for editor/IntelliSense support and any tooling
+ * that still reads the JS config. Keep the two in sync.
+ */
 const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,42 +16,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#F0F9FB',
-          100: '#E1F3F7',
-          200: '#B3E5FC',
-          300: '#81D4FA',
-          400: '#4FC3F7',
-          500: '#1B8A8A',
-          600: '#00838F',
-          700: '#006064',
-          800: '#004D4D',
-          900: '#003838',
+        navy: {
+          DEFAULT: '#1b3a5c',
+          dark: '#14293f',
         },
-        accent: {
-          50: '#FEF5F5',
-          100: '#FCEBEB',
-          200: '#F8D7D7',
-          300: '#F3C3C3',
-          400: '#E88C8C',
-          500: '#D64045',
-          600: '#C73C41',
-          700: '#B83236',
-          800: '#A0282B',
-          900: '#881E20',
+        coral: {
+          DEFAULT: '#e85d75',
+          dark: '#d14a62',
         },
-        gold: {
-          50: '#FFFBF0',
-          100: '#FFF7E1',
-          200: '#FFEFCC',
-          300: '#FFE5B4',
-          400: '#FFD700',
-          500: '#F2C94C',
-          600: '#E6B800',
-          700: '#D4A000',
-          800: '#B88900',
-          900: '#997200',
-        },
+        steel: '#2f5a86',
+        sky: '#d6e4f0',
+        offwhite: '#f8f9fb',
+        line: '#e5e9f0',
+        ink: '#1a1a1a',
+        muted: '#5a6b7d',
+        gold: '#e3a63c',
+      },
+      borderRadius: {
+        xl2: '1rem',
+      },
+      maxWidth: {
+        shell: '80rem',
       },
     },
   },

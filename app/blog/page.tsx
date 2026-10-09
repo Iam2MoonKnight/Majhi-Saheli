@@ -1,22 +1,18 @@
 import { getBlogs } from '@/lib/supabase-functions';
 import Link from 'next/link';
+import PageHero from '@/components/PageHero';
 
 export default async function BlogPage() {
   const blogs = await getBlogs(false); // Only published blogs
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)] py-16">
-        <div className="editorial-section text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(212_168_67_/_0.16)] px-4 py-2 mb-6">
-            <span className="section-eyebrow text-[var(--navy)]">Our Blog</span>
-          </div>
-          <h1 className="font-heading mb-6 text-5xl font-bold text-[var(--navy)] lg:text-6xl">Stories of change</h1>
-          <p className="mx-auto max-w-2xl text-xl text-[var(--text-muted)]">
-            Read the journeys, field updates, and lessons from communities building change from the ground up.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Home', href: '/' }, { label: 'Blog' }]}
+        eyebrow="Our Blog"
+        title="Stories of change"
+        subtitle="Read the journeys, field updates, and lessons from communities building change from the ground up."
+      />
 
       <section className="py-16">
         <div className="editorial-section">
@@ -37,7 +33,7 @@ export default async function BlogPage() {
                       />
                     </div>
                   ) : (
-                    <div className="flex h-52 items-center justify-center bg-gradient-to-br from-[color:rgb(30_58_95_/_0.13)] to-[color:rgb(232_131_74_/_0.2)]">
+                    <div className="flex h-52 items-center justify-center bg-gradient-to-br from-[color:rgb(30_58_95_/_0.13)] to-[color:rgb(232_93_117_/_0.2)]">
                       <span className="text-6xl">📝</span>
                     </div>
                   )}

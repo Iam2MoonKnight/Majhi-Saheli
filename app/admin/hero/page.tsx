@@ -169,7 +169,7 @@ export default function HeroManagement() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[color:rgb(30_58_95_/_0.05)]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--off-white)]">
         <div className="text-center">
           <div className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-[var(--navy)] to-[var(--blue)]"></div>
           <p className="text-[var(--text-muted)]">Loading hero content...</p>
@@ -180,7 +180,7 @@ export default function HeroManagement() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <div className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)]">
+      <div className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
         <div className="editorial-section py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -219,7 +219,7 @@ export default function HeroManagement() {
                     value={formData.title}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(47_90_134_/_0.2)]"
                     placeholder="Empowering Women"
                   />
                 </div>
@@ -235,7 +235,7 @@ export default function HeroManagement() {
                     value={formData.subtitle}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(47_90_134_/_0.2)]"
                     placeholder="Enriching Communities"
                   />
                 </div>
@@ -251,7 +251,7 @@ export default function HeroManagement() {
                   value={formData.description}
                   onChange={handleChange}
                   rows={3}
-                  className="w-full resize-none rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
+                  className="w-full resize-none rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(47_90_134_/_0.2)]"
                   placeholder="Brief description of your mission..."
                 />
               </div>
@@ -267,7 +267,7 @@ export default function HeroManagement() {
                     name="cta_text"
                     value={formData.cta_text}
                     onChange={handleChange}
-                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(47_90_134_/_0.2)]"
                     placeholder="Support Our Mission"
                   />
                 </div>
@@ -282,7 +282,7 @@ export default function HeroManagement() {
                     name="cta_link"
                     value={formData.cta_link}
                     onChange={handleChange}
-                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(74_118_168_/_0.2)]"
+                    className="w-full rounded-xl border border-[var(--border-soft)] px-4 py-3 outline-none transition focus:border-[var(--blue)] focus:ring-2 focus:ring-[color:rgb(47_90_134_/_0.2)]"
                     placeholder="/donate"
                   />
                 </div>
@@ -353,7 +353,7 @@ export default function HeroManagement() {
               }`}>
                 <div className="p-6">
                   {content.is_active && (
-                    <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.16)] px-3 py-1 text-sm font-semibold text-[var(--teal)]">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[color:rgb(47_90_134_/_0.16)] px-3 py-1 text-sm font-semibold text-[var(--teal)]">
                       <span className="h-2 w-2 animate-pulse rounded-full bg-[var(--teal)]"></span>
                       Currently Active
                     </div>

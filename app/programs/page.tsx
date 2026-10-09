@@ -1,6 +1,7 @@
 import ProgramCard from '@/components/ProgramCard';
 import { getPrograms } from '@/lib/supabase-functions';
 import Link from 'next/link';
+import PageHero from '@/components/PageHero';
 
 export default async function Programs() {
   let programs = [];
@@ -83,18 +84,12 @@ export default async function Programs() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[color:rgb(255_255_255_/_0.58)] py-16">
-        <div className="editorial-section space-y-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[color:rgb(42_123_111_/_0.12)] px-4 py-2">
-            <div className="h-2 w-2 rounded-full bg-[var(--teal)]"></div>
-            <span className="section-eyebrow text-[var(--navy)]">Our Programs</span>
-          </div>
-          <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">Programs that convert intent into impact</h1>
-          <p className="mx-auto max-w-3xl text-lg text-[var(--text-muted)]">
-            Integrated interventions spanning education, healthcare, livelihoods, and community leadership.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Home', href: '/' }, { label: 'Programs' }]}
+        eyebrow="Our Programs"
+        title="Programs that convert intent into impact"
+        subtitle="Integrated interventions spanning education, healthcare, livelihoods, and community leadership."
+      />
 
       <section className="py-16">
         <div className="editorial-section space-y-12">
@@ -156,7 +151,7 @@ export default async function Programs() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[color:rgb(30_58_95_/_0.06)] py-16">
+      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Program impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
