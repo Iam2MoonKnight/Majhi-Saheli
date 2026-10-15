@@ -1,0 +1,60 @@
+export const OPERATING_DISTRICTS = [
+  'Thane',
+  'Palghar',
+  'Mumbai',
+  'Pune',
+  'Raigad',
+  'Ratnagiri',
+  'Solapur',
+  'Dharashiv',
+];
+
+export const PARTNER_GROUPS = [
+  {
+    title: 'CSR Partners',
+    partners: [
+      { name: 'Ideal Cures', slug: 'ideal-cures' },
+      { name: 'Mosambee', slug: 'mosambee' },
+      { name: 'Benow', slug: 'benow' },
+      { name: 'Alsina', slug: 'alsina' },
+    ],
+  },
+  {
+    title: 'Collaboration Partners',
+    partners: [
+      { name: 'Renovate India', slug: 'renovate-india' },
+      { name: 'Brahma Kumaris', slug: 'brahma-kumaris' },
+      { name: 'Baala', slug: 'baala' },
+      { name: 'Nana Palkar Smruti Samiti', slug: 'nana-palkar-smruti-samiti' },
+      { name: 'Goonj', slug: 'goonj' },
+      { name: 'Enable India', slug: 'enable-india' },
+      { name: 'Srujna', slug: 'srujna' },
+      { name: 'Rise Against Hunger India', slug: 'rise-against-hunger-india' },
+      { name: 'Pagaria Welfare Foundation', slug: 'pagaria-welfare-foundation' },
+      { name: 'Friends of Farmer', slug: 'friends-of-farmer' },
+      { name: 'Anahat for Change', slug: 'anahat-for-change' },
+      { name: 'Shirt for Sightless', slug: 'shirt-for-sightless' },
+      { name: 'Sheetal Lodha Foundation', slug: 'sheetal-lodha-foundation' },
+      { name: 'We The Change', slug: 'we-the-change' },
+      { name: 'Child Help Foundation', slug: 'child-help-foundation' },
+      { name: 'DigiSwashthya', slug: 'digi-swashthya' },
+      { name: 'Ira Ayurveda', slug: 'ira-ayurveda' },
+      { name: 'Shreelaxmi Foundation', slug: 'shreelaxmi-foundation' },
+      { name: 'DigiUpSkill', slug: 'digiupskill' },
+      { name: 'ConnectFor', slug: 'connectfor' },
+      { name: 'Centre for eGovernance', slug: 'centre-for-egovernance' },
+    ],
+  },
+  {
+    title: 'Associated Partners',
+    partners: [
+      { name: 'Tara', slug: 'tara' },
+      { name: 'Arpan Educational Charitable Foundation', slug: 'arpan-educational-charitable-foundation' },
+      { name: 'Stambh', slug: 'stambh' },
+      { name: 'JCI Dapoli', slug: 'jci-dapoli' },
+      { name: 'Paryaya', slug: 'paryaya' },
+      { name: 'Meraj Foundation', slug: 'meraj-foundation' },
+      { name: 'Yuva Sahas Foundation', slug: 'yuva-sahas-foundation' },
+    ],
+  },
+];

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
 import NewsletterForm from '@/components/NewsletterForm';
@@ -7,63 +6,15 @@ import PageHero from '@/components/PageHero';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import FAQAccordion from '@/components/FAQAccordion';
 import Icon, { type IconName } from '@/components/icons';
+import { OPERATING_DISTRICTS } from '@/lib/organization';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
   description:
-    'Get in touch with Mazi Saheli Charitable Trust — registered office in Thane, Maharashtra, with district presence across Thane, Palghar, Ratnagiri, Raigad, Satara and Osmanabad.',
+    'Get in touch with Mazi Saheli Charitable Trust — headquartered in Maharashtra, with programmes across eight districts.',
 };
 
-const districtOffices = [
-  {
-    name: 'Thane District Office',
-    district: 'Thane',
-    image: '/field-images/health/health-camp.jpg',
-    address: 'Thane, Maharashtra — 400001',
-    focus: 'Health, Well-Being, Financial Literacy',
-    phone: '+91 90745 42211',
-  },
-  {
-    name: 'Palghar District Office',
-    district: 'Palghar',
-    image: '/field-images/nutrition/nutrition-session.jpg',
-    address: 'Palghar, Maharashtra — 40149',
-    focus: 'Nutrition, Women Empowerment, Health',
-    phone: '+91 90745 42212',
-  },
-  {
-    name: 'Ratnagiri District Office',
-    district: 'Ratnagiri',
-    image: '/field-images/community/community-gathering.jpeg',
-    address: 'Ratnagiri, Maharashtra — 41562',
-    focus: 'Skill Building, Water Harvesting, Health',
-    phone: '+91 90745 42213',
-  },
-  {
-    name: 'Raigad District Office',
-    district: 'Raigad',
-    image: '/field-images/education/education-session.jpg',
-    address: 'Raigad, Maharashtra',
-    focus: 'Education, Financial Literacy, Community',
-    phone: '+91 90745 42214',
-  },
-  {
-    name: 'Satara District Office',
-    district: 'Satara',
-    image: '/field-images/livelihood/skills-training.png',
-    address: 'Satara, Maharashtra',
-    focus: 'Skill Building, Nutrition, Health Camps',
-    phone: '+91 90745 42215',
-  },
-  {
-    name: 'Osmanabad District Office',
-    district: 'Osmanabad',
-    image: '/field-images/women/womens-circle.jpg',
-    address: 'Osmanabad, Maharashtra — 41390',
-    focus: 'Women Empowerment, Education, Health',
-    phone: '+91 90745 42216',
-  },
-];
+const districtOffices = OPERATING_DISTRICTS;
 
 const FAQS = [
   {
@@ -88,19 +39,20 @@ const FAQS = [
   },
 ];
 
-const MAP_DOTS: { name: string; left: string; top: string }[] = [
-  { name: 'Palghar', left: '15%', top: '20%' },
-  { name: 'Thane', left: '24%', top: '34%' },
-  { name: 'Raigad', left: '30%', top: '46%' },
-  { name: 'Ratnagiri', left: '20%', top: '60%' },
-  { name: 'Satara', left: '41%', top: '64%' },
-  { name: 'Osmanabad', left: '64%', top: '52%' },
-];
-
 const CONTACT_DETAILS: { icon: IconName; label: string; lines: string[] }[] = [
-  { icon: 'map-pin', label: 'Registered Office', lines: ['Mazi Saheli Charitable Trust', 'Thane, Maharashtra — 400001'] },
-  { icon: 'phone', label: 'Phone', lines: ['+91 90745 42210', 'Mon–Sat, 9 AM to 6 PM IST'] },
-  { icon: 'mail', label: 'Email', lines: ['info@mazisaheli.org', 'partnerships@mazisaheli.org'] },
+  {
+    icon: 'map-pin',
+    label: 'Head Office',
+    lines: ['B/307 Girija Bhavan CHS, Narmada Nagar, Cabin Road, Bhayander East, Thane – 401105'],
+  },
+  {
+    icon: 'map-pin',
+    label: 'Field Office',
+    lines: ['At Post Savarpada Village, Taluka Jawhar, District Palghar – 401603'],
+  },
+  { icon: 'phone', label: 'Phone', lines: ['+91 79776 69173'] },
+  { icon: 'mail', label: 'Email', lines: ['connect@msct.org.in'] },
+  { icon: 'home', label: 'Website', lines: ['www.msct.org.in'] },
 ];
 
 export default function Contact() {
@@ -161,6 +113,20 @@ export default function Contact() {
 
           <div className="lg:col-span-2">
             <ContactForm />
+            <div className="mt-8">
+              <h2 className="font-heading text-xl font-bold text-[var(--navy)]">Get Involved</h2>
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {[
+                  { href: '/donate', label: 'Donate' },
+                  { href: '/contact?purpose=volunteer', label: 'Volunteer' },
+                  { href: '/contact?purpose=csr', label: 'CSR Partnership' },
+                ].map((item) => (
+                  <Link key={item.href} href={item.href} className="card card-hover p-4 text-center text-sm font-bold text-[var(--navy)]">
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -177,33 +143,17 @@ export default function Contact() {
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {districtOffices.map((office) => (
-              <div key={office.name} className="card card-hover overflow-hidden">
-                <div className="relative h-44 w-full">
-                  <Image
-                    src={office.image}
-                    alt={office.district}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                  <span className="absolute left-4 top-4 rounded-full bg-[#e85d75] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
-                    {office.district}
-                  </span>
+              <div key={office} className="card card-hover overflow-hidden">
+                <div
+                  role="img"
+                  aria-label={`Placeholder: ${office} district field photo to be provided`}
+                  className="flex h-44 items-center justify-center bg-gray-200 p-6 text-center text-sm text-[var(--text-muted)]"
+                >
+                  Placeholder: {office} district field photo
                 </div>
                 <div className="p-6">
-                  <h3 className="font-heading text-lg font-bold text-[var(--navy)]">{office.name}</h3>
-                  <p className="mt-2 flex items-start gap-2 text-sm">
-                    <Icon name="map-pin" size={15} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                    {office.address}
-                  </p>
-                  <p className="mt-1.5 text-sm text-[var(--text-muted)]">{office.focus}</p>
-                  <a
-                    href={`tel:${office.phone.replace(/[^+\d]/g, '')}`}
-                    className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[#e85d75]"
-                  >
-                    <Icon name="phone" size={14} className="text-[#e85d75]" />
-                    {office.phone}
-                  </a>
+                  <h3 className="font-heading text-lg font-bold text-[var(--navy)]">{office}</h3>
+                  <p className="mt-2 text-sm text-[var(--text-muted)]">Operating district listed in the 2025-26 annual report.</p>
                 </div>
               </div>
             ))}
@@ -232,21 +182,16 @@ export default function Contact() {
               }}
             />
 
-            {MAP_DOTS.map((dot) => (
-              <div key={dot.name} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: dot.left, top: dot.top }}>
-                <span className="relative flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e85d75] text-white shadow-[0_8px_18px_rgba(232,93,117,0.4)]">
-                    <Icon name="map-pin" size={15} />
-                  </span>
-                  <span className="whitespace-nowrap rounded-full bg-white px-3 py-1 text-[11px] font-bold text-[var(--navy)] shadow">
-                    {dot.name}
-                  </span>
-                </span>
-              </div>
-            ))}
+            <div
+              role="img"
+              aria-label="Placeholder: Maharashtra district map to be provided"
+              className="absolute inset-8 flex items-center justify-center rounded-2xl bg-gray-200 p-6 text-center text-sm text-[var(--text-muted)]"
+            >
+              Placeholder: Maharashtra district map to be provided
+            </div>
 
             <p className="absolute bottom-5 left-0 right-0 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--text-muted)]">
-              MSCT Network — 6 Districts
+              MSCT Network — 8 Districts
             </p>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HealthPage() {
   return (
@@ -29,27 +30,29 @@ export default function HealthPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>224 Medical Camps</strong> covering 53 communities</span>
+                    <span><strong>80+ health camps</strong> conducted in 2025-26</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>4,776 Women</strong> reached across 6 districts</span>
+                    <span><strong>1,821+ women</strong> screened for breast cancer in 2025-26</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Free medical consultations</strong> and preventive care</span>
+                    <span><strong>2,500+ general health beneficiaries</strong> in 2025-26</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Health awareness sessions</strong> on hygiene and nutrition</span>
+                    <span><strong>800+ eye screenings</strong> and <strong>70+ cataract surgeries</strong> in 2025-26</span>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-[var(--border-soft)]">
-              <img
+              <Image
                 src="/field-images/health/health-camp.jpg"
                 alt="Health camp"
+                width={1200}
+                height={900}
                 className="w-full h-96 object-cover"
               />
             </div>
@@ -101,10 +104,33 @@ export default function HealthPage() {
       <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Detailed Content</h2>
-          <div className="prose prose-sm max-w-none">
-            <p className="text-[var(--text-muted)]">
-              Detailed health program content from the Content folder will be displayed here.
-            </p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ['80+', 'Health camps conducted'],
+              ['1,821+', 'Women screened for breast cancer'],
+              ['2,500+', 'General health beneficiaries'],
+              ['10,000+', 'Reusable pads distributed'],
+              ['800+ / 70+', 'Eye screenings / cataract surgeries'],
+              ['13,000+', 'Menstrupedia comics distributed'],
+            ].map(([value, label]) => (
+              <div key={label} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+                <p className="font-heading text-2xl font-bold text-[var(--navy)]">{value}</p>
+                <p className="mt-2 text-sm text-[var(--text-muted)]">{label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+            Health work includes eye camps, breast cancer screening, menstrual health and hygiene, and general health
+            check-ups.
+          </p>
+          <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
+            <Image
+              src="/field-images/health/health-camp.jpg"
+              alt="Community members gathered at a village health camp"
+              width={1600}
+              height={900}
+              className="min-h-48 w-full object-cover"
+            />
           </div>
         </div>
       </section>

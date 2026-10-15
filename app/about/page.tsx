@@ -8,6 +8,7 @@ import DistrictCard from '@/components/DistrictCard';
 import PartnerPill from '@/components/PartnerPill';
 import RoadmapCard from '@/components/RoadmapCard';
 import Icon, { type IconName } from '@/components/icons';
+import { OPERATING_DISTRICTS, PARTNER_GROUPS } from '@/lib/organization';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -24,8 +25,6 @@ export const metadata: Metadata = {
     'Maharashtra',
   ],
 };
-
-const DISTRICTS = ['Thane', 'Palghar', 'Raigad', 'Ratnagiri', 'Satara', 'Osmanabad'];
 
 const FOCUS_AREAS: { icon: IconName; label: string; href: string }[] = [
   { icon: 'heart-pulse', label: 'Health', href: '/focus-areas/health' },
@@ -66,17 +65,6 @@ const FIELD_GALLERY = [
   { src: '/field-images/nutrition/nutrition-outreach.jpg', alt: 'Nutrition programme' },
   { src: '/field-images/community/community-gathering.jpeg', alt: 'Community gathering' },
   { src: '/field-images/livelihood/skills-training.png', alt: 'Livelihood training' },
-];
-
-const partners = [
-  'Bramhon',
-  'Project Roots',
-  'Adveno Foundation',
-  'Wokhard Hospital',
-  'Billion Rising',
-  'FVNSC Pune',
-  'Jan Sevak',
-  'Pragatio Welfare',
 ];
 
 const ROADMAP: { index: string; title: string; text: string; icon: IconName }[] = [
@@ -257,11 +245,19 @@ const selfReliantVision = [
 ];
 
 const milestones: [string, string][] = [
-  ['2015', 'MSCT established as a formal trust for grassroots rural development.'],
-  ['2017', 'Strategic collaborations with NGOs, hospitals, and public institutions.'],
-  ['2019', 'Expanded field chapters across districts with deep community engagement.'],
-  ['2020', 'Set up digital learning labs and skill-building facilities.'],
-  ['2024', '21,000+ lives touched across villages through integrated programs.'],
+  ['24.08.2023', 'Mazi Saheli Charitable Trust was registered under Registration No. E-0013446(THN).'],
+  ['2024-25', 'The annual report records 21,962 lives reached.'],
+  ['2025-26', 'The annual report records 32,000+ lives impacted across communities.'],
+];
+
+const BOARD_MEMBERS = [
+  { name: 'Mr. Avinash Chauhan — Founder', image: '/images/board/avinash-chauhan.jpg' },
+  { name: 'Mr. Sunil Desai', image: '/images/board/sunil-desai.jpg' },
+  { name: 'Ms. Ruchita Zodge', image: '/images/board/ruchita-zodge.jpg' },
+  { name: 'Ms. Jyoti Anantharaman', image: '/images/board/jyoti-anantharaman.jpg' },
+  { name: 'Mr. Neeraj Gupta', image: '/images/board/neeraj-gupta.jpg' },
+  { name: 'Ms. Trusha Nilesh Chittal', image: '/images/board/trusha-nilesh-chittal.jpg' },
+  { name: 'Dr. Damayanti Gupte', image: '/images/board/damayanti-gupte.jpg' },
 ];
 
 export default function About() {
@@ -317,11 +313,11 @@ export default function About() {
           <div className="space-y-6">
             <SectionEyebrow>Who We Are</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Empowering communities across <span className="text-[#e85d75]">6 districts</span>
+              Empowering communities across <span className="text-[#e85d75]">8 districts</span>
             </h2>
             <p className="leading-relaxed">
               Mazi Saheli Charitable Trust is a grassroots organisation serving high-risk and bridge populations across
-              Thane, Palghar, Ratnagiri, Raigad, Satara, and Osmanabad.
+              Thane, Palghar, Mumbai, Pune, Raigad, Ratnagiri, Solapur, and Dharashiv.
             </p>
             <p className="leading-relaxed">
               We believe every person deserves access to opportunities and resources for a fulfilling life. Our mission is
@@ -331,10 +327,10 @@ export default function About() {
 
             <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-4">
               {[
-                ['21,962', 'Lives Touched'],
-                ['14+', 'Partners'],
-                ['6', 'Districts'],
-                ['224', 'Expert Sessions'],
+                ['32,000+', 'Lives Impacted (2025-26)'],
+                ['22', 'Partners'],
+                ['8', 'Districts'],
+                ['80+', 'Health Camps (2025-26)'],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-xl bg-[var(--off-white)] p-4">
                   <p className="stat-value text-2xl text-[var(--navy)]">{value}</p>
@@ -344,6 +340,73 @@ export default function About() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- FOUNDING STORY */}
+      <section className="section section-alt">
+        <div className="container-x grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="space-y-5">
+            <SectionEyebrow>Our Founding Story</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+              Bridging urban and rural development gaps
+            </h2>
+            <p className="leading-relaxed">
+              Mazi Saheli Charitable Trust was registered on 24.08.2023 under Registration No. E-0013446(THN).
+              Headquartered in Mumbai, MSCT was founded to bridge urban-rural development gaps across Maharashtra.
+            </p>
+          </div>
+          <div className="card flex flex-col justify-center p-8">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#e85d75]">Registration</p>
+            <p className="mt-3 font-heading text-2xl font-bold text-[var(--navy)]">E-0013446(THN)</p>
+            <p className="mt-2 text-sm text-[var(--text-muted)]">24.08.2023 | Headquartered in Mumbai</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- FOUNDER'S MESSAGE */}
+      <section className="section">
+        <div className="container-x grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.7fr_1.3fr]">
+          <div className="flex justify-center">
+            <Image
+              src="/images/board/avinash-chauhan.jpg"
+              alt="Mr. Avinash Chauhan, Founder of Mazi Saheli Charitable Trust"
+              width={340}
+              height={340}
+              className="h-64 w-64 rounded-full object-cover"
+            />
+          </div>
+          <div className="space-y-5">
+            <SectionEyebrow>Founder&apos;s Message</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Let&apos;s build a better tomorrow, together</h2>
+            <blockquote className="space-y-4 leading-relaxed text-[var(--text-muted)]">
+              <p>
+                At MSCT, we believe that real change begins with empowerment, not charity. Our mission is to walk
+                alongside communities-equipping them with knowledge, resources, and opportunities so they can shape
+                their own future with dignity and confidence.
+              </p>
+              <p>Development is not given, it is grown.</p>
+              <p>
+                Whether it&apos;s better health, quality education, sustainable livelihoods, or care for our environment -
+                our effort are rooted in listening, learning, and working together.
+              </p>
+              <p>
+                We believe in partnership, not dependency. By building trust and encouraging participation, we create
+                solutions that are local, lasting, and led by the people themselves.
+              </p>
+              <p>
+                This year, with the support of our partners, volunteers, and well-wishers, we crossed a significant
+                milestone-impacting 32,000+ lives across communities.
+              </p>
+              <p>
+                Thank you for being a part. Together, let&apos;s continue to build a more inclusive, sustainable, and
+                compassionate tomorrow.
+              </p>
+            </blockquote>
+            <p className="font-heading text-lg font-bold text-[var(--navy)]">
+              Mr. Avinash Chauhan <span className="block text-sm font-medium text-[var(--text-muted)]">Founder, Mazi Saheli Charitable Trust</span>
+            </p>
           </div>
         </div>
       </section>
@@ -365,20 +428,10 @@ export default function About() {
               </span>
               <h3 className="mt-6 font-heading text-2xl font-bold text-white">Our Vision</h3>
               <p className="mt-4 text-sm leading-relaxed text-white/75">
-                We believe lasting poverty alleviation happens from the inside out. We are working toward a rural landscape
-                where:
+                Rural communities flourishing with resilience, dignity, and opportunity-where every individual,
+                especially women, children, and marginalized groups, have equitable access to quality education,
+                healthcare, sustainable livelihoods, and a healthy environment to lead a fulfilling and empowered life.
               </p>
-              <ul className="mt-6 space-y-4">
-                {[
-                  'Everyday families earn steady incomes, master essential modern skills, and feel secure against unexpected life emergencies.',
-                  'Villages thrive through genuine community-led development, where trusted local leaders and institutions work together for the good of everyone.',
-                ].map((item, idx) => (
-                  <li key={idx} className="flex gap-4">
-                    <span className="font-heading text-2xl font-extrabold text-[#e85d75]">0{idx + 1}</span>
-                    <span className="text-sm leading-relaxed text-white/75">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <div className="rounded-2xl bg-[var(--navy)] p-8 text-white md:p-10">
@@ -387,15 +440,11 @@ export default function About() {
               </span>
               <h3 className="mt-6 font-heading text-2xl font-bold text-white">Our Mission</h3>
               <p className="mt-4 text-sm leading-relaxed text-white/75">
-                To help build empowered, resilient and self-reliant rural communities — so families don&rsquo;t have to wait
-                on outside help to live with dignity and security.
+                To empower rural communities by providing access to quality education, holistic healthcare, and resources
+                that promote women&apos;s empowerment and economic independence. We design need-based programs, build local
+                capacity, and collaborate with partners to create sustainable solutions that uplift lives and strengthen
+                communities.
               </p>
-              <div className="mt-6 rounded-xl bg-white/[0.06] p-5">
-                <p className="font-heading text-base font-bold text-white">
-                  Walking with communities. Building capability. Enabling self-reliance.
-                </p>
-                <p className="mt-2 text-sm text-white/70">Creating a better tomorrow, together.</p>
-              </div>
             </div>
           </div>
         </div>
@@ -447,7 +496,7 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {DISTRICTS.map((district) => (
+            {OPERATING_DISTRICTS.map((district) => (
               <DistrictCard key={district} name={district} />
             ))}
           </div>
@@ -680,6 +729,64 @@ export default function About() {
         </div>
       </section>
 
+      {/* ------------------------------------------------------------- BOARD MEMBERS */}
+      <section className="section section-alt">
+        <div className="container-x space-y-10">
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow className="mb-4">Governance</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Board Members</h2>
+          </div>
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+            {BOARD_MEMBERS.map((member) => (
+              <article key={member.name} className="card flex flex-col items-center p-6 text-center">
+                <Image
+                  src={member.image}
+                  alt={`Portrait of ${member.name.replace(' — Founder', '')}`}
+                  width={96}
+                  height={96}
+                  className="h-24 w-24 rounded-full object-cover"
+                />
+                <h3 className="mt-4 font-heading text-base font-bold text-[var(--navy)]">{member.name}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- REGISTRATION & GOVERNANCE */}
+      <section className="section">
+        <div className="container-x space-y-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow className="mb-4">Registration &amp; Governance</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+              Organisation details
+            </h2>
+          </div>
+          <dl className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {[
+              ['Registration No.', 'E-0013446(THN)'],
+              ['Date of Registration', '24.08.2023'],
+              [
+                'Head Office',
+                'B/307 Girija Bhavan CHS, Narmada Nagar, Cabin Road, Bhayander East, Thane – 401105',
+              ],
+              ['Field Office', 'At Post Savarpada Village, Taluka Jawhar, District Palghar – 401603'],
+              ['Target Group', 'Tribal communities, women, children, rural communities, orphans'],
+              ['Registrations', '80G and FCRA registered'],
+            ].map(([label, value]) => (
+              <div key={label} className="card p-6">
+                <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#e85d75]">{label}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-[var(--navy)]">{value}</dd>
+              </div>
+            ))}
+            <div className="card p-6 md:col-span-2">
+              <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#e85d75]">Operating Districts</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-[var(--navy)]">{OPERATING_DISTRICTS.join(', ')}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
       {/* ------------------------------------------------------------- COMMUNITY-LED */}
       <section className="section section-alt">
         <div className="container-x space-y-10">
@@ -837,11 +944,23 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {partners.map((partner) => (
-              <PartnerPill key={partner} name={partner} />
+          <div className="space-y-8">
+            {PARTNER_GROUPS.map((group) => (
+              <div key={group.title}>
+                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                  {group.title}
+                </h3>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                  {group.partners.map((partner) => (
+                    <PartnerPill key={partner.slug} name={partner.name} slug={partner.slug} />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
+          <p className="text-center text-sm">
+            The 2025-26 annual report records 22 partners, including four dedicated CSR partners.
+          </p>
         </div>
       </section>
 

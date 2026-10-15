@@ -1,80 +1,73 @@
+import Link from 'next/link';
 import StatCard from '@/components/StatCard';
 import PageHero from '@/components/PageHero';
+import { OPERATING_DISTRICTS } from '@/lib/organization';
 
 export default function Impact() {
   const impactPrograms = [
     {
       icon: '📚',
-      title: 'Education Program',
+      title: 'Health Achievements (2025-26)',
       points: [
-        { label: 'Girls Enrolled in School', value: '250+' },
-        { label: 'Adult Literacy Programs', value: '150+ women' },
-        { label: 'School Retention Rate', value: '95%' },
+        { label: 'Health Camps Conducted', value: '80+' },
+        { label: 'General Health Beneficiaries', value: '2,500+' },
+        { label: 'Eye Screenings & Cataract Surgeries', value: '800+ & 70+' },
+        { label: 'Women Screened for Breast Cancer', value: '1,821+' },
+        { label: 'Reusable Pads Distributed', value: '10,000+' },
+        { label: 'Menstrupedia Comics Distributed', value: '13,000+' },
       ],
       summary:
-        'Through our education initiatives, we provide scholarships, learning materials, and mentoring to keep girls and women in school.',
-    },
-    {
-      icon: '💊',
-      title: 'Health Program',
-      points: [
-        { label: 'Health Camps Conducted', value: '50+ camps' },
-        { label: 'Women Benefited', value: '1000+' },
-        { label: 'Awareness Sessions', value: '100+' },
-      ],
-      summary:
-        'Our health work expands access to preventive care, maternal support, and practical awareness in villages with limited facilities.',
+        'The 2025-26 report records health camps, screenings, surgeries, reusable pads and Menstrupedia comics.',
     },
     {
       icon: '🎓',
-      title: 'Vocational Training',
+      title: 'Education & Livelihood Achievements (2025-26)',
       points: [
-        { label: 'Women Trained', value: '200+ women' },
-        { label: 'Skill Categories', value: '8+ skills' },
-        { label: 'Employment Rate', value: '75%' },
+        { label: 'Trained in Financial Literacy', value: '3,000+' },
+        { label: 'Women Trained in Employability Skills', value: '300+' },
       ],
       summary:
-        'Women gain practical livelihood skills including tailoring, crafts, digital literacy, and agriculture-based micro-enterprise training.',
+        'The 2025-26 report records financial-literacy training and employability-skills training for women.',
+    },
+    {
+      icon: '🥗',
+      title: 'Nutrition & Food Support (2025-26)',
+      points: [
+        { label: 'Food Packets & Nutrition Support Distributed', value: '2,800+' },
+      ],
+      summary: 'The annual report records food packets and nutrition support distribution.',
     },
     {
       icon: '🤝',
-      title: 'Community Empowerment',
+      title: 'Financial Literacy (2024-25)',
       points: [
-        { label: 'Communities Organized', value: '50+ villages' },
-        { label: 'Women Leaders Trained', value: '100+ leaders' },
-        { label: 'Community Initiatives', value: '25+ projects' },
+        { label: 'Women Reached', value: '4,333' },
       ],
-      summary:
-        'We support women to take visible leadership roles and launch local projects that improve daily life for families and neighborhoods.',
+      summary: 'The 2024-25 annual report records women reached through the financial-literacy programme.',
     },
   ];
 
   const stories = [
     {
-      name: 'Radhika',
-      story:
-        'Radhika dropped out at age 10. Through our literacy circles, she learned to read and now supports younger girls in her village.',
-      impact: 'From student to community educator',
+      name: 'Gyaan ka Sagar',
+      story: 'Libraries and books were provided across Barhanpur and two neighbouring villages in Palghar.',
+      impact: '88 students catered to',
     },
     {
-      name: 'Lakshmi',
-      story:
-        'After tailoring training, Lakshmi started a home-based enterprise and now funds her children’s school expenses independently.',
-      impact: 'Economic independence achieved',
+      name: 'Swaasthya Mela',
+      story: 'Free medicines and health check-ups were provided during health campaigns across eight villages.',
+      impact: '762 medicine recipients; 12 cataract operations',
     },
     {
-      name: 'Jyoti',
-      story:
-        'Jyoti became a local health volunteer and now leads awareness sessions while helping coordinate village health camps.',
-      impact: 'Community health champion',
+      name: 'Dapoli Learning Centre',
+      story: 'The learning centre in Dapoli was maintained to serve children in the community.',
+      impact: '30 children served daily',
     },
   ];
 
   const growth = [
-    { year: '2020', beneficiaries: '100+', villages: '5', programs: '3' },
-    { year: '2021', beneficiaries: '200+', villages: '15', programs: '5' },
-    { year: '2022', beneficiaries: '350+', villages: '35', programs: '7' },
-    { year: '2024', beneficiaries: '500+', villages: '50', programs: '8' },
+    { year: '2024-25', beneficiaries: '21,962' },
+    { year: '2025-26', beneficiaries: '32,000+' },
   ];
 
   return (
@@ -88,20 +81,24 @@ export default function Impact() {
 
       <section className="py-16">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Key metrics</h2>
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">
+            Verified 2025-26 metrics
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <StatCard icon="👩" number="500+" label="Women Trained" description="Direct beneficiaries of our programs" />
-            <StatCard icon="👧" number="250+" label="Girls Educated" description="Enrolled in school/education" />
-            <StatCard icon="🏘️" number="50+" label="Villages" description="Communities reached annually" />
-            <StatCard icon="💊" number="1000+" label="Health Services" description="Medical check-ups conducted" />
+            <StatCard icon="👥" number="32,000+" label="Lives Impacted" description="Across communities in 2025-26" />
+            <StatCard icon="💊" number="80+" label="Health Camps" description="Conducted in 2025-26" />
+            <StatCard icon="🩺" number="1,821+" label="Women Screened" description="For breast cancer in 2025-26" />
+            <StatCard icon="📍" number="8" label="Districts" description="Operating districts listed for 2025-26" />
           </div>
         </div>
       </section>
 
       <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Program-wise impact</h2>
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">
+            Programme achievements
+          </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {impactPrograms.map((program) => (
@@ -127,7 +124,9 @@ export default function Impact() {
 
       <section className="py-16">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Success stories</h2>
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">
+            Reported Field Outcomes
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {stories.map((story) => (
@@ -145,26 +144,80 @@ export default function Impact() {
 
       <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Growth over years</h2>
+          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">
+            Year-wise Impact Progression
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {growth.map((year) => (
               <div key={year.year} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 text-center">
                 <div className="font-heading text-4xl font-bold text-[var(--navy)]">{year.year}</div>
-                <div className="mt-4 space-y-3 text-sm">
-                  <p className="text-[var(--text-muted)]">
-                    <span className="font-bold text-[var(--blue)]">{year.beneficiaries}</span> Beneficiaries
-                  </p>
-                  <p className="text-[var(--text-muted)]">
-                    <span className="font-bold text-[var(--blue)]">{year.villages}</span> Villages
-                  </p>
-                  <p className="text-[var(--text-muted)]">
-                    <span className="font-bold text-[var(--blue)]">{year.programs}</span> Programs
-                  </p>
-                </div>
+                <p className="mt-4 text-[var(--text-muted)]">
+                  <span className="font-bold text-[var(--blue)]">{year.beneficiaries}</span>{' '}
+                  {year.year === '2024-25' ? 'lives reached' : 'lives impacted'}
+                </p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-2">
+          <div className="space-y-6">
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Geographic Reach</h2>
+            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+              The 2025-26 operating districts are {OPERATING_DISTRICTS.join(', ')}.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {OPERATING_DISTRICTS.map((district) => (
+                <div key={district} className="card p-4 text-center text-sm font-semibold text-[var(--navy)]">
+                  {district}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div
+            role="img"
+            aria-label="Placeholder: Maharashtra map to be provided"
+            className="flex min-h-64 items-center justify-center rounded-2xl bg-gray-200 p-6 text-center text-sm text-[var(--text-muted)]"
+          >
+            Placeholder: Maharashtra map to be provided
+          </div>
+        </div>
+      </section>
+
+      <section id="annual-reports" className="section section-alt">
+        <div className="container-x space-y-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Annual Reports</h2>
+            <p className="mt-3 text-sm text-[var(--text-muted)]">Download the annual reports.</p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {[
+              { label: '2023-24 Annual Report (Aug 2023 – Mar 2024)', file: 'msct-annual-report-2023-24.pdf' },
+              { label: '2024-25 Annual Report', file: 'msct-annual-report-2024-25.pdf' },
+              { label: '2025-26 Annual Report', file: 'msct-annual-report-2025-26.pdf' },
+            ].map((report) => (
+              <Link
+                key={report.file}
+                href={`/reports/${report.file}`}
+                className="card card-hover flex items-center justify-between gap-4 p-6 font-semibold text-[var(--navy)]"
+              >
+                <span>{report.label}</span>
+                <span className="shrink-0 text-[#e85d75]">PDF</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-x max-w-3xl text-center">
+          <h2 className="font-heading text-2xl font-extrabold text-[var(--navy)]">Methodology</h2>
+          <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">
+            Metrics are aggregated from verified field reports, camps, and partner-collaborated initiatives.
+          </p>
         </div>
       </section>
 

@@ -74,7 +74,7 @@ export default function ContactForm() {
       setError(
         err instanceof Error
           ? err.message
-          : 'Could not send your message right now. Please email us at info@mazisaheli.org.'
+          : 'Could not send your message right now. Please email us at connect@msct.org.in.'
       );
     } finally {
       setLoading(false);
@@ -163,7 +163,7 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               className="field"
-              placeholder="+91 98765 43210"
+              placeholder="+91 79776 69173"
             />
           </div>
         </div>

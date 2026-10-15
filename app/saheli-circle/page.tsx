@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 
 export default function SaheliCircle() {
@@ -136,7 +137,7 @@ export default function SaheliCircle() {
           <div className="space-y-6 text-[var(--text-muted)]">
             <p className="text-lg leading-relaxed">
               Saheli Circle is our community initiative that creates spaces for rural women to come together, support
-              each other, and learn collectively. It's more than a program—it's a movement of women supporting women.
+              each other, and learn collectively. It&apos;s more than a program—it&apos;s a movement of women supporting women.
             </p>
 
             <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
@@ -265,6 +266,86 @@ export default function SaheliCircle() {
               Contact Us Now
             </button>
           </div>
+        </div>
+      </section>
+
+      <section className="section section-alt">
+        <div className="container-x space-y-10">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow mb-4">2025-26 Annual Report</p>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+              The Saheli Circle: What, Why, How
+            </h2>
+            <p className="mt-5 text-left leading-relaxed text-[var(--text-muted)]">
+              A circle represents the earth, the cycle of life, and above all equality, equanimity, and unity. It is a
+              space without hierarchy, where women hold hands to move forward together toward progress and a better world
+              for generations to come. At MSCT, Saheli means recognizing that women are the epicentre of family,
+              household, and society-yet often unaware of their own strength. The Saheli Circle exists to change that:
+              women supporting women, breaking the cycle of helplessness through closeness, comfort, and shared power.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div className="card p-7">
+              <h3 className="font-heading text-xl font-bold text-[var(--navy)]">Why</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+                <li>Local problems demand local solutions</li>
+                <li>Harnessing women&apos;s collective energy to drive egalitarian change</li>
+                <li>Philosophy: start small, build confidence, grow big</li>
+              </ul>
+            </div>
+            <div className="card p-7">
+              <h3 className="font-heading text-xl font-bold text-[var(--navy)]">How</h3>
+              <ol className="mt-4 list-inside list-decimal space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+                <li>Identify local problems → prioritize</li>
+                <li>Own them as &quot;ours&quot;</li>
+                <li>Resolve using local resources</li>
+                <li>Seek external support (training funding) only where truly needed</li>
+              </ol>
+            </div>
+            <div className="card p-7">
+              <h3 className="font-heading text-xl font-bold text-[var(--navy)]">What This Achieves</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+                <li>Independence through self-sufficiency</li>
+                <li>Boosted self-confidence</li>
+                <li>Preservation of natural resources and indigenous heritage</li>
+                <li>Awareness of both rights and duties</li>
+                <li>Prevention of rural migration and ecological preservation</li>
+                <li>Long-term sustainability</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-center font-heading text-lg font-bold text-[var(--navy)]">
+            For the locals, of the locals, by the locals — powered by women.
+          </p>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {[
+              {
+                src: '/field-images/women/womens-circle.jpg',
+                alt: 'Women gather for a community-led programme',
+              },
+              {
+                src: '/field-images/women/women-leadership.jpg',
+                alt: 'Women take part in a community awareness activity',
+              },
+            ].map((photo) => (
+              <div key={photo.src} className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={1200}
+                  height={800}
+                  className="min-h-48 w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+
+          <blockquote className="rounded-2xl bg-[var(--navy)] p-8 text-center font-heading text-xl font-bold text-white md:p-10">
+            &ldquo;Alone we cannot do much, but through partnerships we have achieved all this.&rdquo;
+          </blockquote>
         </div>
       </section>
     </div>

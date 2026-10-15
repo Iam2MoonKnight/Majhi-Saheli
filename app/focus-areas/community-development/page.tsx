@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CommunityDevelopmentPage() {
   return (
@@ -47,9 +48,11 @@ export default function CommunityDevelopmentPage() {
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-[var(--border-soft)]">
-              <img
+              <Image
                 src="/field-images/community/community-gathering.jpeg"
                 alt="Community development"
+                width={1200}
+                height={900}
                 className="w-full h-96 object-cover"
               />
             </div>
@@ -101,10 +104,20 @@ export default function CommunityDevelopmentPage() {
       <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Detailed Content</h2>
-          <div className="prose prose-sm max-w-none">
-            <p className="text-[var(--text-muted)]">
-              Detailed community development program content from the Content folder will be displayed here.
-            </p>
+          <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+            <li>Rooftop water harvesting and kitchen gardens were implemented for 11 households in 2024-25.</li>
+            <li>575 household surveys were carried out for Swachh Maharashtra Abhiyan 2.0 in 2024-25.</li>
+            <li>10 wheelchairs were distributed to residents of old age homes in 2024-25.</li>
+            <li>&quot;Rise for Diversity, Inclusion and Dignity&quot; workshops included 300 participants in 2024-25.</li>
+          </ul>
+          <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
+            <Image
+              src="/field-images/community/community-gathering.jpeg"
+              alt="Residents gather for a community development initiative"
+              width={1600}
+              height={900}
+              className="min-h-48 w-full object-cover"
+            />
           </div>
         </div>
       </section>

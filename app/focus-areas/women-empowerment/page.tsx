@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function WomenEmpowermentPage() {
   return (
@@ -47,9 +48,11 @@ export default function WomenEmpowermentPage() {
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-[var(--border-soft)]">
-              <img
+              <Image
                 src="/field-images/women/women-leadership.jpg"
                 alt="Women empowerment"
+                width={1200}
+                height={900}
                 className="w-full h-96 object-cover"
               />
             </div>
@@ -101,10 +104,20 @@ export default function WomenEmpowermentPage() {
       <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Detailed Content</h2>
-          <div className="prose prose-sm max-w-none">
-            <p className="text-[var(--text-muted)]">
-              Detailed women empowerment program content from the Content folder will be displayed here.
-            </p>
+          <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+            <li>Saheli Circle supports women-led local action and collective learning.</li>
+            <li>Financial literacy reached 4,333 women in 2024-25; 3,000+ people were trained in 2025-26.</li>
+            <li>300+ women were trained in employability skills in 2025-26.</li>
+            <li>Activities include SHG group sales training and menstrual health and hygiene awareness.</li>
+          </ul>
+          <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
+            <Image
+              src="/field-images/women/womens-circle.jpg"
+              alt="Women gathered for a community-led programme"
+              width={1600}
+              height={900}
+              className="min-h-48 w-full object-cover"
+            />
           </div>
         </div>
       </section>

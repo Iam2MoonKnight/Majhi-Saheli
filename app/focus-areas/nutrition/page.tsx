@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function NutritionPage() {
   return (
@@ -29,11 +30,11 @@ export default function NutritionPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Kitchen Gardens</strong> in 21 villages</span>
+                    <span><strong>2,800+ food packets</strong> and nutrition support distributed in 2025-26</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>3,126 Participants</strong> in nutrition programs</span>
+                    <span><strong>Kitchen gardens and rooftop water harvesting</strong> for 11 households in 2024-25</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
@@ -47,9 +48,11 @@ export default function NutritionPage() {
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-[var(--border-soft)]">
-              <img
+              <Image
                 src="/field-images/nutrition/nutrition-outreach.jpg"
                 alt="Nutrition program"
+                width={1200}
+                height={900}
                 className="w-full h-96 object-cover"
               />
             </div>
@@ -101,10 +104,20 @@ export default function NutritionPage() {
       <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Detailed Content</h2>
-          <div className="prose prose-sm max-w-none">
-            <p className="text-[var(--text-muted)]">
-              Detailed nutrition program content from the Content folder will be displayed here.
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+            <p className="font-heading text-3xl font-bold text-[var(--navy)]">2,800+</p>
+            <p className="mt-2 text-sm text-[var(--text-muted)]">
+              Food packets and nutrition support distributed in 2025-26.
             </p>
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
+            <Image
+              src="/field-images/nutrition/nutrition-support.jpg"
+              alt="Women hold nutrition support packets distributed through a community programme"
+              width={1600}
+              height={900}
+              className="min-h-48 w-full object-cover"
+            />
           </div>
         </div>
       </section>

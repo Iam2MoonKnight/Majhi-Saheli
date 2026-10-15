@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import Icon, { type IconName } from './icons';
+import { OPERATING_DISTRICTS } from '@/lib/organization';
 
 const NAVIGATE = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
   { href: '/programs', label: 'Programs' },
   { href: '/impact', label: 'Our Impact' },
+  { href: '/projects', label: 'Projects & Field Stories' },
+  { href: '/news', label: 'News & Events' },
   { href: '/blog', label: 'Blog' },
 ];
 
@@ -102,19 +105,35 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <Icon name="map-pin" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <span>Thane, Maharashtra — 400001, India</span>
+                <span>
+                  B/307 Girija Bhavan CHS, Narmada Nagar, Cabin Road, Bhayander East, Thane – 401105
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Icon name="map-pin" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
+                <span>At Post Savarpada Village, Taluka Jawhar, District Palghar – 401603</span>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="mail" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <a href="mailto:info@mazisaheli.org" className="transition-colors hover:text-[#e85d75]">
-                  info@mazisaheli.org
+                <a href="mailto:connect@msct.org.in" className="transition-colors hover:text-[#e85d75]">
+                  connect@msct.org.in
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="phone" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <a href="tel:+919074542210" className="transition-colors hover:text-[#e85d75]">
-                  +91 90745 42210
+                <a href="tel:+917977669173" className="transition-colors hover:text-[#e85d75]">
+                  +91 79776 69173
                 </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Icon name="home" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
+                <a href="https://www.msct.org.in" className="transition-colors hover:text-[#e85d75]">
+                  www.msct.org.in
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Icon name="map-pin" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
+                <span>Operating districts: {OPERATING_DISTRICTS.join(', ')}</span>
               </li>
             </ul>
 
@@ -134,9 +153,9 @@ export default function Footer() {
               <a href="#" className="transition-colors hover:text-[#e85d75]">
                 Terms of Service
               </a>
-              <a href="#" className="transition-colors hover:text-[#e85d75]">
+              <Link href="/impact#annual-reports" className="transition-colors hover:text-[#e85d75]">
                 Annual Report
-              </a>
+              </Link>
             </div>
           </div>
         </div>

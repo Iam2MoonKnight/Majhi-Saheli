@@ -96,11 +96,11 @@ export default function Navbar() {
             })}
 
             <Link
-              href="tel:+919074542210"
+              href="tel:+917977669173"
               className="ml-2 inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[var(--navy-dark)]"
             >
               <Icon name="phone" size={14} />
-              +91 90745 42210
+              +91 79776 69173
             </Link>
 
             {mounted &&
@@ -199,9 +199,9 @@ export default function Navbar() {
                   </Link>
                 ))}
 
-              <Link href="tel:+919074542210" className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[var(--navy)] hover:bg-[var(--off-white)]">
+              <Link href="tel:+917977669173" className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[var(--navy)] hover:bg-[var(--off-white)]">
                 <Icon name="phone" size={15} />
-                +91 90745 42210
+                +91 79776 69173
               </Link>
 
               <Link href="/donate" className="btn btn-coral mt-2 w-full">

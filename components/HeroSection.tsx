@@ -61,9 +61,9 @@ export default async function HeroSection() {
 
           <div className="grid max-w-lg grid-cols-3 gap-6 border-t border-white/15 pt-7">
             {[
-              ['3,212+', 'Lives impacted'],
-              ['6', 'Villages'],
-              ['224', 'Programs'],
+              ['32,000+', 'Lives impacted (2025-26)'],
+              ['8', 'Operating districts'],
+              ['80+', 'Health camps (2025-26)'],
             ].map(([value, label]) => (
               <div key={label}>
                 <p className="stat-value text-3xl text-white md:text-4xl">{value}</p>
@@ -79,7 +79,7 @@ export default async function HeroSection() {
             <img src={heroImage} alt={heroContent.title} className="h-full w-full object-cover" />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#14293f] via-[#14293f]/55 to-transparent p-6">
               <div className="inline-flex items-center gap-2.5 rounded-full bg-[#e85d75] px-4 py-2.5 shadow-[0_10px_24px_rgba(232,93,117,0.4)]">
-                <span className="font-heading text-2xl font-extrabold leading-none text-white">6</span>
+                <span className="font-heading text-2xl font-extrabold leading-none text-white">8</span>
                 <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-white">Districts Served</span>
               </div>
             </div>

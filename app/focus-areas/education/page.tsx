@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function EducationPage() {
   return (
@@ -29,11 +30,11 @@ export default function EducationPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Learning Centers</strong> in 29 locations</span>
+                    <span><strong>Dapoli Learning Centre</strong> served 30 children daily in 2024-25</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Computer Labs & Libraries</strong> in rural areas</span>
+                    <span><strong>Gyaan ka Sagar libraries</strong> catered to 88 students in 2023-24</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
@@ -47,9 +48,11 @@ export default function EducationPage() {
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-[var(--border-soft)]">
-              <img
+              <Image
                 src="/field-images/education/digital-learning.jpg"
                 alt="Education program"
+                width={1200}
+                height={900}
                 className="w-full h-96 object-cover"
               />
             </div>
@@ -101,10 +104,20 @@ export default function EducationPage() {
       <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Detailed Content</h2>
-          <div className="prose prose-sm max-w-none">
-            <p className="text-[var(--text-muted)]">
-              Detailed education program content from the Content folder will be displayed here.
-            </p>
+          <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+            <li>Digital classrooms, computer labs and rural school infrastructure repair.</li>
+            <li>Baala painting, and toys and game box distribution to Anganwadi centres.</li>
+            <li>The Dapoli learning centre served 30 children daily in 2024-25.</li>
+            <li>Gyaan ka Sagar libraries in Barhanpur and two neighbouring Palghar villages catered to 88 students in 2023-24.</li>
+          </ul>
+          <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
+            <Image
+              src="/field-images/education/digital-learning.jpg"
+              alt="Students learning in a rural computer classroom"
+              width={1600}
+              height={900}
+              className="min-h-48 w-full object-cover"
+            />
           </div>
         </div>
       </section>

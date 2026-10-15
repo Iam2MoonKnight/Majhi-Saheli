@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function LivelihoodPage() {
   return (
@@ -29,27 +30,29 @@ export default function LivelihoodPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>121 Training Sessions</strong> on financial skills</span>
+                    <span><strong>3,000+ people</strong> trained in financial literacy in 2025-26</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>3,206 Participants</strong> trained across communities</span>
+                    <span><strong>300+ women</strong> trained in employability skills in 2025-26</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Savings Groups</strong> with over 2,000 active members</span>
+                    <span><strong>4,333 women</strong> reached through financial literacy in 2024-25</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Microentrepreneur Support</strong> for sustainable businesses</span>
+                    <span><strong>Farmer support</strong> with IoT-based real-time farm insights in 2025-26</span>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-[var(--border-soft)]">
-              <img
+              <Image
                 src="/field-images/livelihood/farmer-workshop.jpg"
                 alt="Livelihood training"
+                width={1200}
+                height={900}
                 className="w-full h-96 object-cover"
               />
             </div>
@@ -101,10 +104,33 @@ export default function LivelihoodPage() {
       <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Detailed Content</h2>
-          <div className="prose prose-sm max-w-none">
-            <p className="text-[var(--text-muted)]">
-              Detailed livelihood program content from the Content folder will be displayed here.
-            </p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+              <p className="font-heading text-2xl font-bold text-[var(--navy)]">3,000+</p>
+              <p className="mt-2 text-sm text-[var(--text-muted)]">Trained in financial literacy (2025-26)</p>
+            </div>
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+              <p className="font-heading text-2xl font-bold text-[var(--navy)]">300+</p>
+              <p className="mt-2 text-sm text-[var(--text-muted)]">Women trained in employability skills (2025-26)</p>
+            </div>
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
+              <p className="font-heading text-2xl font-bold text-[var(--navy)]">4,333</p>
+              <p className="mt-2 text-sm text-[var(--text-muted)]">Women reached in financial literacy (2024-25)</p>
+            </div>
+          </div>
+          <ul className="list-inside list-disc space-y-2 text-sm leading-relaxed text-[var(--text-muted)]">
+            <li>Farmer IoT support, soil health, water conservation and sustainable farming.</li>
+            <li>Community-based eco-tourism and SHG group sales training.</li>
+            <li>PwD livelihood programme.</li>
+          </ul>
+          <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
+            <Image
+              src="/field-images/livelihood/farmer-workshop.jpg"
+              alt="Community members gathered at a solar-powered rural farming project"
+              width={1600}
+              height={900}
+              className="min-h-48 w-full object-cover"
+            />
           </div>
         </div>
       </section>

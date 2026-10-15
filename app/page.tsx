@@ -8,68 +8,52 @@ import PartnerPill from '@/components/PartnerPill';
 import RoadmapCard from '@/components/RoadmapCard';
 import StatBlock from '@/components/StatBlock';
 import Icon, { type IconName } from '@/components/icons';
+import { OPERATING_DISTRICTS, PARTNER_GROUPS } from '@/lib/organization';
 
 const FOCUS_AREAS: { icon: IconName; title: string; text: string; image: string }[] = [
   {
     icon: 'heart-pulse',
     title: 'Health',
-    text: '224 medical camps covering 53 communities, reaching 4,776 women across 6 districts.',
+    text: '80+ health camps, breast cancer screening, eye care and menstrual health support.',
     image: '/field-images/health/health-camp.jpg',
   },
   {
     icon: 'briefcase',
     title: 'Livelihood',
-    text: '121 sessions reaching 3,206 participants through savings, entrepreneurship, and finance literacy.',
+    text: 'Financial literacy, employability skills, farmer support and sustainable rural tourism.',
     image: '/field-images/livelihood/farmer-workshop.jpg',
   },
   {
     icon: 'graduation-cap',
     title: 'Education',
-    text: 'Learning centers, computer labs, libraries, and skill-building programs across 29 locations.',
+    text: 'Digital classrooms, school infrastructure support, libraries and learning centres.',
     image: '/field-images/education/digital-learning.jpg',
   },
   {
     icon: 'apple',
     title: 'Nutrition',
-    text: 'Kitchen garden initiatives in 21 villages supporting child and maternal nutrition outcomes.',
+    text: '2,800+ food packets and nutrition support distributed in 2025-26.',
     image: '/field-images/nutrition/nutrition-session.jpg',
   },
   {
     icon: 'users',
     title: 'Women Empowerment',
-    text: 'Leadership, rights awareness, and alternative livelihood pathways for rural women.',
+    text: 'Financial literacy, employability skills, menstrual health and hygiene awareness.',
     image: '/field-images/women/women-leadership.jpg',
   },
   {
     icon: 'home',
     title: 'Community Development',
-    text: 'Community-led systems strengthening for long-term rural resilience and local ownership.',
+    text: 'Water conservation, kitchen gardens, inclusion workshops and community support.',
     image: '/field-images/community/community-gathering.jpeg',
   },
 ];
 
-const DISTRICTS = ['Thane', 'Palghar', 'Raigad', 'Ratnagiri', 'Satara', 'Osmanabad'];
-
 const WHO_ROWS: { icon: IconName; label: string }[] = [
-  { icon: 'heart-pulse', label: 'Health & Hygiene — 224 camps, 11,962 participants' },
-  { icon: 'briefcase', label: 'Financial Literacy — 121 sessions, 3,206 participants' },
-  { icon: 'graduation-cap', label: 'Skill Building & Education — computer labs, libraries, learning centers' },
-  { icon: 'sparkles', label: 'Self-initiated projects — water harvesting, kitchen gardens, eco-tourism' },
-];
-
-const PARTNERS = [
-  'Bramhon',
-  'Project Roots',
-  'Adveno Foundation',
-  'Wokhard Hospital',
-  'Billion Rising',
-  'FVNSC Pune',
-  'Jan Sevak',
-  'Pragatio Welfare Foundation',
-  'Embibe India',
-  'Rotary',
-  'Genovate India',
-  'IAT',
+  { icon: 'heart-pulse', label: 'Health — 80+ camps, screenings, surgeries and menstrual health support' },
+  { icon: 'briefcase', label: 'Livelihood — financial literacy, employability and farmer support' },
+  { icon: 'graduation-cap', label: 'Education — digital classrooms, libraries and learning centres' },
+  { icon: 'sparkles', label: 'Community support — water conservation, nutrition and sustainable tourism' },
 ];
 
 const ROADMAP: { index: string; title: string; text: string; icon: IconName }[] = [
@@ -105,6 +89,28 @@ const SELF_INITIATED = ['Rainwater Harvesting & Kitchen Gardens', 'Eco-Tourism']
 
 const DONATION_AMOUNTS = ['₹500', '₹1,000', '₹2,500', '₹5,000', '₹10,000', '₹25,000'];
 
+const EXPLORE_MORE: { icon: IconName; title: string; description: string; href: string }[] = [
+  {
+    icon: 'users',
+    title: 'Projects & Field Stories',
+    description:
+      'Real stories from the field — health camps, eye surgeries, learning centres, farmer support, and community-led change across rural Maharashtra.',
+    href: '/projects',
+  },
+  {
+    icon: 'calendar',
+    title: 'News & Events',
+    description: 'Milestones, awards, media recognition, and upcoming activities from the MSCT family.',
+    href: '/news',
+  },
+  {
+    icon: 'star',
+    title: 'Our Impact',
+    description: 'Year-wise impact, verified metrics, and downloadable annual reports.',
+    href: '/impact#annual-reports',
+  },
+];
+
 export default function Home() {
   return (
     <div className="overflow-hidden">
@@ -126,11 +132,11 @@ export default function Home() {
           <div className="space-y-6">
             <SectionEyebrow>Who We Are</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Empowering communities across <span className="text-[#e85d75]">6 districts</span>
+              Empowering communities across <span className="text-[#e85d75]">8 districts</span>
             </h2>
             <p className="leading-relaxed">
-              MSCT works with diverse communities across Thane, Palghar, Ratnagiri, Raigad, Satara, and Osmanabad through
-              healthcare, financial literacy, education, and women-led development initiatives.
+              MSCT works across Thane, Palghar, Mumbai, Pune, Raigad, Ratnagiri, Solapur and Dharashiv through healthcare,
+              financial literacy, education and community-led development initiatives.
             </p>
 
             <ul className="space-y-3 pt-1">
@@ -167,7 +173,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {DISTRICTS.map((district) => (
+            {OPERATING_DISTRICTS.map((district) => (
               <DistrictCard key={district} name={district} />
             ))}
           </div>
@@ -255,10 +261,10 @@ export default function Home() {
 
           <div className="grid grid-cols-2 gap-6 border-t border-white/12 pt-10 lg:grid-cols-4">
             {[
-              ['3,212', 'Health Camp Participants'],
-              ['6,086', 'Financial Literacy Participants'],
-              ['3,126', 'Nutrition Programme Participants'],
-              ['223', 'Expert Sessions Hosted'],
+              ['80+', 'Health Camps Conducted'],
+              ['3,000+', 'Financial Literacy Training'],
+              ['2,800+', 'Food Packets Distributed'],
+              ['300+', 'Women Trained in Employability Skills'],
             ].map(([value, label]) => (
               <StatBlock key={label} value={value} label={label} variant="navy" />
             ))}
@@ -276,9 +282,18 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {PARTNERS.map((partner) => (
-              <PartnerPill key={partner} name={partner} />
+          <div className="space-y-8">
+            {PARTNER_GROUPS.map((group) => (
+              <div key={group.title}>
+                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                  {group.title}
+                </h3>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                  {group.partners.map((partner) => (
+                    <PartnerPill key={partner.slug} name={partner.name} slug={partner.slug} />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
@@ -300,6 +315,32 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {ROADMAP.map((item) => (
               <RoadmapCard key={item.title} index={item.index} title={item.title} text={item.text} icon={item.icon} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------- EXPLORE MORE */}
+      <section className="section section-alt">
+        <div className="container-x space-y-10">
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionEyebrow className="mb-4">Explore More</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Explore More</h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {EXPLORE_MORE.map((item) => (
+              <article key={item.href} className="card card-hover flex flex-col p-7">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[color:rgb(232_93_117_/_0.1)] text-[#e85d75]">
+                  <Icon name={item.icon} size={22} />
+                </span>
+                <h3 className="mt-5 font-heading text-xl font-bold text-[var(--navy)]">{item.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--text-muted)]">{item.description}</p>
+                <Link href={item.href} className="link-coral mt-5">
+                  Learn More
+                  <Icon name="arrow-right" size={14} />
+                </Link>
+              </article>
             ))}
           </div>
         </div>
