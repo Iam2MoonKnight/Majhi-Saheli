@@ -133,7 +133,17 @@ export default function EditCampaign() {
         setUploading(false);
       }
 
-      const updates: any = {
+      const updates: {
+        title: string;
+        slug: string;
+        description: string;
+        goal_amount: number;
+        raised_amount: number;
+        currency: string;
+        featured_image: string | null;
+        status: 'active' | 'paused' | 'completed';
+        end_date?: string;
+      } = {
         title: formData.title,
         slug: formData.slug,
         description: formData.description,
@@ -150,8 +160,9 @@ export default function EditCampaign() {
 
       await updateCampaign(id, updates);
       router.push('/admin/campaigns');
-    } catch (err: any) {
-      setError(err.message || 'Failed to update campaign');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to update campaign';
+      setError(message);
       setUploading(false);
     } finally {
       setLoading(false);

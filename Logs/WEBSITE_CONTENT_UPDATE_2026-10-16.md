@@ -167,3 +167,48 @@ No JSX structure, class names, spacing, colors, borders, image layout, or visual
 ### Build confirmation
 
 `npm run build` was re-run after the partner logo update and the project still passes successfully in production mode. The build completed without errors and generated the expected pages including `/projects` and `/news`.
+
+## Follow-Up: Full Site Audit — 2026-10-19
+
+Completed the full-site audit without changing the design system, Supabase/auth behavior, or admin routes. The separate [audit report](./SITE_AUDIT_2026-10-19.md) documents the route, responsive, metadata, image, accessibility, content, and build checks, along with unresolved work requiring approved source material or a publishing decision.
+
+Audit follow-up changes:
+
+- Reconciled the public partner groups to the annual report's visible 33-logo roster (4 CSR, 22 collaboration, 7 associated) and mapped all 33 logos.
+- Added descriptive route metadata and Open Graph tags, labels for the newsletter and donation-dedication fields, and keyboard-visible focus on the newsletter email field.
+- Removed nonfunctional `#` destinations from controls without verified URLs; these controls are no longer exposed as links.
+- Verified 36 public routes, four representative pages at 375/768/1280/1440 px, partner logo rendering, form labels, keyboard focus, and the production build.
+
+Pending source/owner input: 31 project detail fields remain marked `[TODO]`; four project photos and the Contact/Impact maps or district imagery are unavailable; the three annual-report download targets are missing from `public/reports/`; social/legal URLs are unverified; Saheli Circle examples need confirmation; and the report's written partner count conflicts with its visible logo groups. Twenty-eight public images exceed 500 KB, and the existing coral-on-white contrast is 3.36:1. These were documented rather than guessed, redesigned, or optimized.
+
+## Final Closeout — 2026-10-19
+
+This final section supersedes the pending TODO/report/link status above. It records the completed closeout after direct review of the current diffs and source PDFs. No redesign was made, no project or partner facts were inferred, and the user-supplied source PDFs were not modified.
+
+### Completed closeout work
+
+- Compressed and installed the annual reports under `public/reports/`:
+  - `msct-annual-report-2023-24.pdf` — 2,304,192 bytes (27 pages)
+  - `msct-annual-report-2024-25.pdf` — 3,884,336 bytes (14 pages)
+  - `msct-annual-report-2025-26.pdf` — 4,624,624 bytes (17 pages)
+  - Combined size is 10,813,152 bytes, down from 62,486,782 bytes (about 82.7% smaller). All three public URLs returned HTTP 200.
+- Cleared the 31 literal `[TODO: ...]` values in `app/projects/project-data.ts` instead of inventing facts. Also hid the unsupported generic `Rural schools` location. The project detail page omits empty values; a crawl of the 14 project pages found no visible TODO markers.
+- Restored visible but disabled social placeholders in Footer and Contact, and disabled Privacy Policy/Terms placeholders. No unverified social or legal URL was added. This supersedes the earlier statement that these controls were not links: the current safe anchors have `href="#"`, `aria-disabled`, and inert keyboard/pointer behavior.
+- Fixed Navbar's two hook lint errors with hydration-safe external-store state and pathname-derived menu closure; auth subscription/logout logic was not changed.
+- Replaced the seven initial public-page/component image/unused-variable lint warnings. Image elements now use `next/image` with unoptimized loading where dynamic source hosts must remain compatible; current layouts and source URLs are preserved.
+- Rechecked the donation dedication control without submitting the form: the checkbox toggles on, `#dedication` becomes visible, and the label reads “Name to dedicate this donation to”.
+- Per the user's later direction, the partner section now displays only the 31 real image files in `images/MSCT Partners Logo/` (excluding macOS metadata files). The unprovided `Ideal Cures`, `ConnectFor`, `Centre for eGovernance`, `Arpan`, `Paryaya`, and `Shirt for Sightless` entries are excluded; the supplied `Paginma`, `Atharva Educational Charitable Foundation`, CEGP, and `Sight for the Sightless` logos are displayed. The user may provide additional logo files later. The 31 displayed public files were byte-verified against their supplied source files; browser checks decoded all 31 on Home and About. Four supplied logos with no verified group placement are under a neutral “Additional Logos” heading.
+
+### Restricted-scope diff review
+
+At the user's request, the pre-existing diffs in seven `app/admin/` files and `lib/supabase-functions.ts` were inspected directly rather than relying on the earlier changelog summary. The admin changes comprise type narrowing/safer error typing, effect-loading adjustments with lint suppressions, a zero-goal campaign-progress guard, and JSX quote escaping. `lib/supabase-functions.ts` changes function argument types from `any` to `Record<string, unknown>`. No Supabase client configuration, authentication, RLS, SQL, or query logic change was found. These files were not edited during this closeout; their existing diffs remain in the worktree.
+
+### Validation and remaining input
+
+- `npm run build` passed and generated the expected routes. During static generation, existing Supabase DNS failures were logged for blogs, hero content, and campaigns; the existing fallback behavior allowed the build to complete.
+- `npx tsc --noEmit` passed.
+- Full `npm run lint` reports 11 errors and 27 warnings, with no findings in the changed public components/pages/data files (remaining findings are in admin/dashboard/scripts and existing utility/config files).
+- The 36-route production crawl returned HTTP 200 and metadata for all routes; project pages exposed no TODO text. Home, Projects, About, and Contact had no horizontal overflow at 375/768/1280/1440 px. After the final image changes, Home/About/Gallery/Donate were rechecked; the 31 supplied partner logos and all 16 Gallery images decoded successfully.
+- `git diff --check` passed; Git emitted only its LF-to-CRLF normalization notices.
+- The partner section is an intentionally partial display of the logo files supplied so far; it is not presented as a complete official roster or count. The supplied `Paginma` asset is used, and `Paryaya` is excluded because no corresponding logo was supplied. No new project/contact images were attached, so those existing placeholders remain.
+- The user's original `git add -A` instruction covers the current worktree, including the pre-existing admin/Supabase diffs and user-supplied source files described above. Those restricted source files were not edited during this closeout.

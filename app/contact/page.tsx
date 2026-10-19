@@ -7,12 +7,12 @@ import SectionEyebrow from '@/components/SectionEyebrow';
 import FAQAccordion from '@/components/FAQAccordion';
 import Icon, { type IconName } from '@/components/icons';
 import { OPERATING_DISTRICTS } from '@/lib/organization';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description:
-    'Get in touch with Mazi Saheli Charitable Trust — headquartered in Maharashtra, with programmes across eight districts.',
-};
+export const metadata: Metadata = createPageMetadata(
+  'Contact Us',
+  'Get in touch with Mazi Saheli Charitable Trust — headquartered in Maharashtra, with programmes across eight districts.',
+);
 
 const districtOffices = OPERATING_DISTRICTS;
 
@@ -97,16 +97,22 @@ export default function Contact() {
             <div className="mt-8 border-t border-white/12 pt-6">
               <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/50">Follow Us</p>
               <div className="mt-3 flex flex-wrap gap-2.5">
-                {(['facebook', 'twitter', 'instagram', 'linkedin'] as IconName[]).map((social) => (
-                  <a
-                    key={social}
-                    href="#"
-                    aria-label={social}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#e85d75] hover:bg-[#e85d75] hover:text-white"
-                  >
-                    <Icon name={social} size={16} />
-                  </a>
-                ))}
+                {(['facebook', 'twitter', 'instagram', 'linkedin'] as IconName[]).map((social) => {
+                  // TODO: Replace the placeholder with a verified profile URL when supplied.
+                  return (
+                    <a
+                      key={social}
+                      href="#"
+                      aria-label={social}
+                      aria-disabled="true"
+                      tabIndex={-1}
+                      title="Coming soon"
+                      className="pointer-events-none flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 opacity-60"
+                    >
+                      <Icon name={social} size={16} />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

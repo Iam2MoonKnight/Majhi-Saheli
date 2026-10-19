@@ -4,11 +4,12 @@ import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import Icon from '@/components/icons';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'News & Events',
-  description: 'Recent milestones, awards and media features from Mazi Saheli Charitable Trust.',
-};
+export const metadata: Metadata = createPageMetadata(
+  'News & Events',
+  'Recent milestones, awards and media features from Mazi Saheli Charitable Trust.',
+);
 
 const MILESTONES = [
   {

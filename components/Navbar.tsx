@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 import { supabase, getSafeSession } from '@/lib/supabase';
 import DonationTicker from './DonationTicker';
 import Icon from './icons';
@@ -15,16 +15,23 @@ const NAV_ITEMS = [
   { href: '/contact', label: 'Contact' },
 ];
 
+const subscribeToHydration = () => () => {};
+const getClientHydrationSnapshot = () => true;
+const getServerHydrationSnapshot = () => false;
+
 export default function Navbar() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  const [openMenuPath, setOpenMenuPath] = useState<string | null>(null);
+  const isOpen = openMenuPath === pathname;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    subscribeToHydration,
+    getClientHydrationSnapshot,
+    getServerHydrationSnapshot,
+  );
 
   useEffect(() => {
-    setMounted(true);
-
     const checkAuth = async () => {
       const session = await getSafeSession();
       if (session?.user) {
@@ -49,10 +56,6 @@ export default function Navbar() {
       authListener?.subscription?.unsubscribe();
     };
   }, []);
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -149,7 +152,7 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-soft)] text-[var(--navy)] transition-colors hover:bg-[var(--off-white)] lg:hidden"
-            onClick={() => setIsOpen((v) => !v)}
+            onClick={() => setOpenMenuPath(isOpen ? null : pathname)}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
           >

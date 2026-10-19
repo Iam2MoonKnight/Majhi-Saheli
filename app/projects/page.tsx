@@ -1,15 +1,15 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import Icon from '@/components/icons';
 import { PROJECTS } from './project-data';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Projects & Field Stories',
-  description: 'Explore MSCT projects and field stories from communities across Maharashtra.',
-};
+export const metadata = createPageMetadata(
+  'Projects & Field Stories',
+  'Explore MSCT projects and field stories from communities across Maharashtra.',
+);
 
 export default function ProjectsPage() {
   return (

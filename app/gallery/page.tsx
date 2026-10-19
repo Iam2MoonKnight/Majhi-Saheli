@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 
@@ -71,9 +72,12 @@ export default function GalleryPage() {
                   idx % 5 === 0 ? 'md:row-span-2' : ''
                 }`}
               >
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
+                  width={1200}
+                  height={800}
+                  unoptimized
                   className={`w-full object-cover transition duration-300 group-hover:scale-105 ${
                     idx % 5 === 0 ? 'h-[360px]' : idx % 3 === 0 ? 'h-72' : 'h-64'
                   }`}
@@ -101,7 +105,7 @@ export default function GalleryPage() {
               ['Annual Impact Report 2023', '/field-images/community/community-farmers.jpg'],
             ].map(([title, image]) => (
               <div key={title} className="group relative overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)]">
-                <img src={image} alt={title} className="h-56 w-full object-cover" />
+                <Image src={image} alt={title} width={1200} height={600} unoptimized className="h-56 w-full object-cover" />
                 <div className="absolute inset-0 flex items-center justify-center bg-[color:rgb(13_27_42_/_0.35)]">
                   <div className="rounded-full border border-white/70 bg-white/15 px-4 py-2 text-sm font-semibold text-white">▶ Play</div>
                 </div>

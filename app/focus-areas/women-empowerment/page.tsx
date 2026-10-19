@@ -1,5 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Women Empowerment',
+  'Explore Mazi Saheli Charitable Trust programmes supporting women and community leadership.',
+);
 
 export default function WomenEmpowermentPage() {
   return (

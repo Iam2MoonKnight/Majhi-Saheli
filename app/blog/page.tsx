@@ -1,6 +1,13 @@
 import { getBlogs } from '@/lib/supabase-functions';
+import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Blog',
+  'Read published stories, field updates, and lessons from Mazi Saheli Charitable Trust.',
+);
 
 export default async function BlogPage() {
   const blogs = await getBlogs(false); // Only published blogs
@@ -25,10 +32,13 @@ export default async function BlogPage() {
                   className="group overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
                   {blog.featured_image ? (
-                    <div className="h-52 overflow-hidden bg-[color:rgb(30_58_95_/_0.1)]">
-                      <img
+                    <div className="relative h-52 overflow-hidden bg-[color:rgb(30_58_95_/_0.1)]">
+                      <Image
                         src={blog.featured_image}
                         alt={blog.title}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        unoptimized
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>

@@ -21,12 +21,12 @@ const FOCUS_AREAS = [
   { href: '/focus-areas/community-development', label: 'Community Development' },
 ];
 
-const SOCIALS: { href: string; label: string; icon: IconName }[] = [
-  { href: '#', label: 'Facebook', icon: 'facebook' },
-  { href: '#', label: 'LinkedIn', icon: 'linkedin' },
-  { href: '#', label: 'X (Twitter)', icon: 'twitter' },
-  { href: '#', label: 'Instagram', icon: 'instagram' },
-  { href: '#', label: 'YouTube', icon: 'youtube' },
+const SOCIALS: { label: string; icon: IconName }[] = [
+  { label: 'Facebook', icon: 'facebook' },
+  { label: 'LinkedIn', icon: 'linkedin' },
+  { label: 'X (Twitter)', icon: 'twitter' },
+  { label: 'Instagram', icon: 'instagram' },
+  { label: 'YouTube', icon: 'youtube' },
 ];
 
 export default function Footer() {
@@ -56,16 +56,22 @@ export default function Footer() {
             </p>
 
             <div className="flex flex-wrap gap-2.5 pt-1">
-              {SOCIALS.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#e85d75] hover:bg-[#e85d75] hover:text-white"
-                >
-                  <Icon name={social.icon} size={16} />
-                </a>
-              ))}
+              {SOCIALS.map((social) => {
+                // TODO: Replace the placeholder with a verified profile URL when supplied.
+                return (
+                  <a
+                    key={social.label}
+                    href="#"
+                    aria-label={social.label}
+                    aria-disabled="true"
+                    tabIndex={-1}
+                    title="Coming soon"
+                    className="pointer-events-none flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 opacity-60"
+                  >
+                    <Icon name={social.icon} size={16} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -147,10 +153,10 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 text-xs text-white/50 md:flex-row">
             <p>&copy; {currentYear} Mazi Saheli Charitable Trust. All rights reserved.</p>
             <div className="flex flex-wrap items-center gap-6">
-              <a href="#" className="transition-colors hover:text-[#e85d75]">
+              <a href="#" aria-disabled="true" tabIndex={-1} title="Link coming soon" className="pointer-events-none opacity-60">
                 Privacy Policy
               </a>
-              <a href="#" className="transition-colors hover:text-[#e85d75]">
+              <a href="#" aria-disabled="true" tabIndex={-1} title="Link coming soon" className="pointer-events-none opacity-60">
                 Terms of Service
               </a>
               <Link href="/impact#annual-reports" className="transition-colors hover:text-[#e85d75]">

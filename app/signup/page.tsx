@@ -1,5 +1,11 @@
 import SignupForm from '@/components/SignupForm';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Sign Up',
+  'Create a Mazi Saheli community account.',
+);
 
 export default function Signup() {
   return (

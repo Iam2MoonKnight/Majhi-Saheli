@@ -1,5 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Livelihood Development',
+  'Explore Mazi Saheli Charitable Trust livelihood development programmes.',
+);
 
 export default function LivelihoodPage() {
   return (

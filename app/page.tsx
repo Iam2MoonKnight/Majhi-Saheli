@@ -9,6 +9,12 @@ import RoadmapCard from '@/components/RoadmapCard';
 import StatBlock from '@/components/StatBlock';
 import Icon, { type IconName } from '@/components/icons';
 import { OPERATING_DISTRICTS, PARTNER_GROUPS } from '@/lib/organization';
+import { createPageMetadata, SITE_NAME } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  SITE_NAME,
+  'Empowering rural women and communities across Maharashtra through education, health, livelihood and sustainable community leadership.',
+);
 
 const FOCUS_AREAS: { icon: IconName; title: string; text: string; image: string }[] = [
   {
@@ -290,7 +296,7 @@ export default function Home() {
                 </h3>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
                   {group.partners.map((partner) => (
-                    <PartnerPill key={partner.slug} name={partner.name} slug={partner.slug} />
+                    <PartnerPill key={partner.slug} name={partner.name} logoSrc={partner.logoSrc} />
                   ))}
                 </div>
               </div>

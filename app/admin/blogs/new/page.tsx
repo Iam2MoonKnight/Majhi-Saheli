@@ -109,7 +109,16 @@ export default function NewBlog() {
         setUploading(false);
       }
 
-      const blogData: any = {
+      const blogData: {
+        title: string;
+        slug: string;
+        excerpt: string;
+        content: string;
+        featured_image: string;
+        status: 'draft' | 'published';
+        author_id: string | null;
+        published_at?: string;
+      } = {
         ...formData,
         featured_image: imageUrl,
         author_id: userId,
@@ -122,8 +131,9 @@ export default function NewBlog() {
 
       await createBlog(blogData);
       router.push('/admin/blogs');
-    } catch (err: any) {
-      setError(err.message || 'Failed to create blog');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to create blog';
+      setError(message);
       setUploading(false);
     } finally {
       setLoading(false);

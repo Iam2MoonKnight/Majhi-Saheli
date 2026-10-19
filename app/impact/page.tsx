@@ -2,6 +2,12 @@ import Link from 'next/link';
 import StatCard from '@/components/StatCard';
 import PageHero from '@/components/PageHero';
 import { OPERATING_DISTRICTS } from '@/lib/organization';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Our Impact',
+  'Review Mazi Saheli Charitable Trust programme outcomes, operating districts, and annual reports.',
+);
 
 export default function Impact() {
   const impactPrograms = [

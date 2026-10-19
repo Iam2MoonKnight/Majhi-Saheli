@@ -2,6 +2,12 @@ import ProgramCard from '@/components/ProgramCard';
 import { getPrograms } from '@/lib/supabase-functions';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Programs',
+  'Explore Mazi Saheli Charitable Trust programmes in health, education, livelihoods, nutrition, and community development.',
+);
 
 export default async function Programs() {
   let programs = [];

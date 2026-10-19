@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -7,11 +8,22 @@ import { getUserProfile, getAllHeroContent, createHeroContent, updateHeroContent
 import { uploadImage, validateImageFile } from '@/lib/upload-image';
 import Link from 'next/link';
 
+type HeroContentRecord = {
+  id: string;
+  title: string;
+  subtitle: string;
+  description?: string | null;
+  cta_text: string;
+  cta_link: string;
+  image_url?: string | null;
+  is_active: boolean;
+};
+
 export default function HeroManagement() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
-  const [heroContents, setHeroContents] = useState<any[]>([]);
+  const [heroContents, setHeroContents] = useState<HeroContentRecord[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
@@ -25,10 +37,6 @@ export default function HeroManagement() {
     cta_link: '/donate',
     image_url: '',
   });
-
-  useEffect(() => {
-    loadHeroContent();
-  }, [router]);
 
   const loadHeroContent = async () => {
     const session = await getSafeSession();
@@ -50,6 +58,12 @@ export default function HeroManagement() {
     setHeroContents(contents);
     setLoading(false);
   };
+
+  // The admin guard fetch is intentionally triggered via effect because it depends on router/session state.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => {
+    loadHeroContent();
+  }, [router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -122,7 +136,7 @@ export default function HeroManagement() {
     }
   };
 
-  const handleEdit = (content: any) => {
+  const handleEdit = (content: HeroContentRecord) => {
     setFormData({
       title: content.title,
       subtitle: content.subtitle,
@@ -367,7 +381,7 @@ export default function HeroManagement() {
                         <p className="mb-4 text-[var(--text-muted)]">{content.description}</p>
                       )}
                       <div className="flex items-center gap-4 text-sm text-[var(--text-muted)]">
-                        <span>🔗 Button: "{content.cta_text}"</span>
+                        <span>🔗 Button: &quot;{content.cta_text}&quot;</span>
                         <span>→ {content.cta_link}</span>
                       </div>
                     </div>

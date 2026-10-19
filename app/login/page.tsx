@@ -1,5 +1,11 @@
 import LoginForm from '@/components/LoginForm';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Log In',
+  'Log in to your Mazi Saheli community account.',
+);
 
 export default function Login() {
   return (

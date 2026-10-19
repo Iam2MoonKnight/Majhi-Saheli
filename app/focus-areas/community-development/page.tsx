@@ -1,5 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Community Development',
+  'Explore Mazi Saheli Charitable Trust community development programmes.',
+);
 
 export default function CommunityDevelopmentPage() {
   return (

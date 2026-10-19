@@ -2,6 +2,16 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCampaignBySlug } from '@/lib/supabase-functions';
 import { getCampaignById, mapSupabaseCampaign } from '@/lib/campaigns';
+import { createPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const campaign = getCampaignById(id);
+  return createPageMetadata(
+    campaign ? `Campaign: ${campaign.title}` : 'Fundraising Campaign',
+    campaign?.description ?? 'Learn more about a Mazi Saheli Charitable Trust fundraising campaign.',
+  );
+}
 
 const statusStyles: Record<string, string> = {
   ongoing: 'bg-brand-100 text-brand-800 border-brand-200',

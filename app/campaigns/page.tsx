@@ -2,6 +2,12 @@ import Link from 'next/link';
 import { getCampaigns } from '@/lib/supabase-functions';
 import { fallbackCampaigns, mapSupabaseCampaigns } from '@/lib/campaigns';
 import PageHero from '@/components/PageHero';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Campaigns',
+  'Explore fundraising campaigns from Mazi Saheli Charitable Trust.',
+);
 
 const statusStyles: Record<string, string> = {
   ongoing: 'bg-brand-100 text-brand-800 border-brand-200',

@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -6,15 +7,21 @@ import { getSafeSession } from '@/lib/supabase';
 import { getUserProfile, getBlogs, deleteBlog, updateBlog } from '@/lib/supabase-functions';
 import Link from 'next/link';
 
+type BlogRecord = {
+  id: string;
+  title: string;
+  excerpt?: string | null;
+  slug: string;
+  status: 'draft' | 'published';
+  created_at: string;
+  published_at?: string | null;
+};
+
 export default function BlogsManagement() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState<BlogRecord[]>([]);
   const [filter, setFilter] = useState<'all' | 'published' | 'draft'>('all');
-
-  useEffect(() => {
-    loadBlogs();
-  }, [router]);
 
   const loadBlogs = async () => {
     const session = await getSafeSession();
@@ -47,11 +54,11 @@ export default function BlogsManagement() {
     }
   };
 
-  const handleToggleStatus = async (blog: any) => {
+  const handleToggleStatus = async (blog: BlogRecord) => {
     try {
       const newStatus = blog.status === 'published' ? 'draft' : 'published';
-      const updates: any = { status: newStatus };
-      
+      const updates: Partial<BlogRecord> & { published_at?: string } = { status: newStatus };
+
       if (newStatus === 'published' && !blog.published_at) {
         updates.published_at = new Date().toISOString();
       }
@@ -62,6 +69,12 @@ export default function BlogsManagement() {
       alert('Error updating blog status');
     }
   };
+
+  // The admin guard fetch is intentionally triggered via effect because it depends on router/session state.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => {
+    loadBlogs();
+  }, [router]);
 
   const filteredBlogs = blogs.filter(blog => {
     if (filter === 'all') return true;

@@ -9,11 +9,13 @@ import PartnerPill from '@/components/PartnerPill';
 import RoadmapCard from '@/components/RoadmapCard';
 import Icon, { type IconName } from '@/components/icons';
 import { OPERATING_DISTRICTS, PARTNER_GROUPS } from '@/lib/organization';
+import { createPageMetadata } from '@/lib/seo';
+
+const aboutDescription =
+  'Mazi Saheli Charitable Trust (MSCT) builds empowered, resilient, self-reliant rural communities across Maharashtra through community-led development in health, education, livelihood, and environmental sustainability.';
 
 export const metadata: Metadata = {
-  title: 'About Us',
-  description:
-    'Mazi Saheli Charitable Trust (MSCT) builds empowered, resilient, self-reliant rural communities across Maharashtra through community-led development in health, education, livelihood, and environmental sustainability.',
+  ...createPageMetadata('About Us', aboutDescription),
   keywords: [
     'Mazi Saheli Charitable Trust',
     'MSCT',
@@ -952,7 +954,7 @@ export default function About() {
                 </h3>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
                   {group.partners.map((partner) => (
-                    <PartnerPill key={partner.slug} name={partner.name} slug={partner.slug} />
+                    <PartnerPill key={partner.slug} name={partner.name} logoSrc={partner.logoSrc} />
                   ))}
                 </div>
               </div>

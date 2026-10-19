@@ -1,5 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Nutrition & Food Security',
+  'Explore Mazi Saheli Charitable Trust nutrition and food security programmes.',
+);
 
 export default function NutritionPage() {
   return (

@@ -1,6 +1,16 @@
 import { getBlogBySlug, getBlogs } from '@/lib/supabase-functions';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { createPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  return createPageMetadata(
+    `Blog: ${slug.replaceAll('-', ' ')}`,
+    'Read this story from Mazi Saheli Charitable Trust.',
+  );
+}
 
 export async function generateStaticParams() {
   const blogs = await getBlogs(false);
@@ -45,9 +55,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       {blog.featured_image && (
         <div className="editorial-section max-w-4xl py-8">
           <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)] shadow-lg">
-            <img
+            <Image
               src={blog.featured_image}
               alt={blog.title}
+              width={1200}
+              height={675}
+              unoptimized
               className="w-full h-auto"
             />
           </div>

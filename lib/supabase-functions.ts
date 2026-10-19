@@ -407,7 +407,7 @@ export const getBlogBySlug = async (slug: string) => {
   }
 };
 
-export const createBlog = async (blog: any) => {
+export const createBlog = async (blog: Record<string, unknown>) => {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured');
   }
@@ -422,7 +422,7 @@ export const createBlog = async (blog: any) => {
   return data;
 };
 
-export const updateBlog = async (id: string, updates: any) => {
+export const updateBlog = async (id: string, updates: Record<string, unknown>) => {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured');
   }
@@ -493,7 +493,7 @@ export const getCampaignBySlug = async (slug: string) => {
   }
 };
 
-export const createCampaign = async (campaign: any) => {
+export const createCampaign = async (campaign: Record<string, unknown>) => {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured');
   }
@@ -508,7 +508,7 @@ export const createCampaign = async (campaign: any) => {
   return data;
 };
 
-export const updateCampaign = async (id: string, updates: any) => {
+export const updateCampaign = async (id: string, updates: Record<string, unknown>) => {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured');
   }
@@ -579,7 +579,7 @@ export const getAllHeroContent = async () => {
   }
 };
 
-export const createHeroContent = async (content: any) => {
+export const createHeroContent = async (content: Record<string, unknown>) => {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured');
   }
@@ -594,7 +594,7 @@ export const createHeroContent = async (content: any) => {
   return data;
 };
 
-export const updateHeroContent = async (id: string, updates: any) => {
+export const updateHeroContent = async (id: string, updates: Record<string, unknown>) => {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured');
   }

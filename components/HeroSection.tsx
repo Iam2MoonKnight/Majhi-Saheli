@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { getActiveHeroContent } from '@/lib/supabase-functions';
 import Icon from './icons';
@@ -75,8 +76,15 @@ export default async function HeroSection() {
 
         <div className="relative">
           <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/15 shadow-[0_28px_60px_rgba(10,22,36,0.5)] lg:h-[500px]">
-            {/* DB-driven URL → plain img (arbitrary hosts would break the optimizer) */}
-            <img src={heroImage} alt={heroContent.title} className="h-full w-full object-cover" />
+            {/* Database image URLs can use hosts outside the image optimizer allowlist. */}
+            <Image
+              src={heroImage}
+              alt={heroContent.title}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              unoptimized
+              className="h-full w-full object-cover"
+            />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#14293f] via-[#14293f]/55 to-transparent p-6">
               <div className="inline-flex items-center gap-2.5 rounded-full bg-[#e85d75] px-4 py-2.5 shadow-[0_10px_24px_rgba(232,93,117,0.4)]">
                 <span className="font-heading text-2xl font-extrabold leading-none text-white">8</span>

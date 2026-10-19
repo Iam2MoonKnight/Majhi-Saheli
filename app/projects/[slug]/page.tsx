@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import PageHero from '@/components/PageHero';
 import Icon from '@/components/icons';
 import { PROJECTS } from '../project-data';
+import { createPageMetadata } from '@/lib/seo';
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -18,10 +19,9 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const { slug } = await params;
   const project = PROJECTS.find((item) => item.slug === slug);
 
-  return {
-    title: project ? `${project.title} | Projects & Field Stories` : 'Project not found',
-    description: project?.summary,
-  };
+  return project
+    ? createPageMetadata(`${project.title} | Projects & Field Stories`, project.summary)
+    : createPageMetadata('Project not found', 'This project story is unavailable.');
 }
 
 export default async function ProjectStoryPage({ params }: ProjectPageProps) {
@@ -38,7 +38,7 @@ export default async function ProjectStoryPage({ params }: ProjectPageProps) {
     ['Intervention', project.intervention],
     ['Partners', project.partners],
     ['Results', project.results],
-  ];
+  ].filter(([, value]) => value !== '');
 
   return (
     <div className="overflow-hidden">

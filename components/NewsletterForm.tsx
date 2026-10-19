@@ -29,13 +29,18 @@ export default function NewsletterForm() {
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-3">
       <div className="flex gap-2">
+        <label htmlFor="newsletter-email" className="sr-only">
+          Email address
+        </label>
         <input
           type="email"
+          id="newsletter-email"
+          name="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="flex-1 rounded px-4 py-2 text-[var(--text)] focus:outline-none"
+          className="flex-1 rounded px-4 py-2 text-[var(--text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--navy)]"
         />
         <button
           type="submit"

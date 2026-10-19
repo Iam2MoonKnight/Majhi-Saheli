@@ -1,5 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Education & Skill Building',
+  'Explore Mazi Saheli Charitable Trust education and skill-building programmes.',
+);
 
 export default function EducationPage() {
   return (

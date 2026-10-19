@@ -109,7 +109,18 @@ export default function NewCampaign() {
         setUploading(false);
       }
 
-      const campaignData: any = {
+      const campaignData: {
+        title: string;
+        slug: string;
+        description: string;
+        goal_amount: number;
+        currency: string;
+        featured_image: string | null;
+        status: 'active' | 'paused';
+        created_by: string | null;
+        raised_amount: number;
+        end_date?: string;
+      } = {
         title: formData.title,
         slug: formData.slug || generateSlug(formData.title),
         description: formData.description,
@@ -127,8 +138,9 @@ export default function NewCampaign() {
 
       await createCampaign(campaignData);
       router.push('/admin/campaigns');
-    } catch (err: any) {
-      setError(err.message || 'Failed to create campaign');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to create campaign';
+      setError(message);
       setUploading(false);
     } finally {
       setLoading(false);

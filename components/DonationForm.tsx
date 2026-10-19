@@ -278,13 +278,19 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
             In honour or memory of someone special.
           </p>
           {dedicate && (
-            <input
-              type="text"
-              value={dedication}
-              onChange={(e) => setDedication(e.target.value)}
-              className="field mt-3"
-              placeholder="In honour / memory of…"
-            />
+            <>
+              <label htmlFor="dedication" className="sr-only">
+                Name to dedicate this donation to
+              </label>
+              <input
+                id="dedication"
+                type="text"
+                value={dedication}
+                onChange={(e) => setDedication(e.target.value)}
+                className="field mt-3"
+                placeholder="In honour / memory of…"
+              />
+            </>
           )}
         </div>
 

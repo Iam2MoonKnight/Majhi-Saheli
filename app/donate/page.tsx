@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -7,12 +6,12 @@ import NewsletterForm from '@/components/NewsletterForm';
 import PageHero from '@/components/PageHero';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import Icon, { type IconName } from '@/components/icons';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Donate',
-  description:
-    'Your generous donation helps Mazi Saheli Charitable Trust empower rural women in Maharashtra through education, health, and skills development. 80G certified and FCRA registered.',
-};
+export const metadata = createPageMetadata(
+  'Donate',
+  'Your generous donation helps Mazi Saheli Charitable Trust empower rural women in Maharashtra through education, health, and skills development. 80G certified and FCRA registered.',
+);
 
 const IMPACT_LEVELS: { icon: IconName; title: string; desc: string }[] = [
   { icon: 'sparkles', title: 'Seed Giving (₹500–₹2,500)', desc: 'Fund stationery, nutrition support, and women circle sessions.' },

@@ -1,34 +1,26 @@
 'use client';
 
+import Image from 'next/image';
+
 interface PartnerPillProps {
   name: string;
-  slug?: string;
+  logoSrc?: string;
 }
 
-export default function PartnerPill({ name, slug }: PartnerPillProps) {
-  const hasLogo = Boolean(slug);
-
+export default function PartnerPill({ name, logoSrc }: PartnerPillProps) {
   return (
-    <div className="flex h-16 items-center justify-center rounded-full border border-[var(--border-soft)] bg-white px-3 text-center text-sm font-semibold text-[var(--navy)] transition-colors duration-200 hover:border-[#e85d75] hover:text-[#e85d75]">
-      {hasLogo ? (
-        <>
-          <img
-            src={`/images/partners/${slug}.png`}
-            alt={`${name} logo`}
-            className="max-h-10 w-auto max-w-[90%] object-contain"
-            onError={(event) => {
-              const target = event.currentTarget as HTMLImageElement;
-              target.style.display = 'none';
-              const fallback = target.nextElementSibling as HTMLElement | null;
-              if (fallback) {
-                fallback.style.display = 'inline-flex';
-              }
-            }}
-          />
-          <span className="hidden items-center justify-center">{name}</span>
-        </>
+    <div className="flex min-h-28 items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-white p-5 text-center text-sm font-semibold text-[var(--navy)] transition-colors duration-200 hover:border-[#e85d75]">
+      {logoSrc ? (
+        <Image
+          src={logoSrc}
+          alt={`${name} logo`}
+          width={200}
+          height={100}
+          unoptimized
+          className="max-h-14 w-auto max-w-full object-contain"
+        />
       ) : (
-        <span className="inline-flex items-center justify-center">{name}</span>
+        <span>{name}</span>
       )}
     </div>
   );

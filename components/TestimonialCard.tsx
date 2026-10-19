@@ -5,7 +5,7 @@ interface TestimonialCardProps {
   image?: string;
 }
 
-export default function TestimonialCard({ name, role, content, image }: TestimonialCardProps) {
+export default function TestimonialCard({ name, role, content }: TestimonialCardProps) {
   return (
     <div className="space-y-6 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       {/* Quote decoration */}

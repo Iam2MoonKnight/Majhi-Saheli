@@ -127,7 +127,15 @@ export default function EditBlog() {
         setUploading(false);
       }
 
-      const updates: any = { 
+      const updates: {
+        title: string;
+        slug: string;
+        excerpt: string;
+        content: string;
+        featured_image: string;
+        status: 'draft' | 'published';
+        published_at?: string;
+      } = {
         ...formData,
         featured_image: imageUrl,
       };
@@ -138,8 +146,9 @@ export default function EditBlog() {
 
       await updateBlog(id, updates);
       router.push('/admin/blogs');
-    } catch (err: any) {
-      setError(err.message || 'Failed to update blog');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to update blog';
+      setError(message);
       setUploading(false);
     } finally {
       setLoading(false);

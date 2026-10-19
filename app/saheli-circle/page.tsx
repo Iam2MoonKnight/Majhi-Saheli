@@ -1,5 +1,11 @@
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata(
+  'Saheli Circle',
+  'Learn about Saheli Circle, Mazi Saheli Charitable Trust’s community-led women’s peer support and learning initiative.',
+);
 
 export default function SaheliCircle() {
   const values = [
@@ -206,9 +212,9 @@ export default function SaheliCircle() {
                   {resource.items.map((item, i) => (
                     <li key={i} className="mt-2 flex items-center gap-2 text-sm text-[var(--text-muted)]">
                       <span className="text-[var(--accent)]">→</span>
-                      <a href="#" className="transition hover:text-[var(--blue)]">
+                      <span>
                         {item}
-                      </a>
+                      </span>
                     </li>
                   ))}
                 </ul>
