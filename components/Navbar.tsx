@@ -70,9 +70,9 @@ export default function Navbar() {
       <DonationTicker />
 
       <div className="border-b border-[var(--border-soft)] bg-white/95 backdrop-blur-md">
-        <div className="container-x flex h-[72px] items-center gap-4">
+        <div className="container-x flex h-[88px] items-center gap-4">
           <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="Mazi Saheli Charitable Trust — home">
-            <Image src="/logo.png" alt="Mazi Saheli Charitable Trust" width={132} height={48} className="h-10 w-auto object-contain" priority />
+            <Image src="/logo.png" alt="Mazi Saheli Charitable Trust" width={1600} height={604} className="h-[60px] w-auto object-contain" priority />
           </Link>
 
           {/* Desktop nav */}

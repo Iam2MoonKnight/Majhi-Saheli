@@ -39,7 +39,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e85d75] font-heading text-lg font-extrabold text-white shadow-[0_10px_24px_rgba(232,93,117,0.35)]">
+              <div className="flex h-[66px] w-[66px] items-center justify-center rounded-xl bg-[#e85d75] font-heading text-lg font-extrabold text-white shadow-[0_10px_24px_rgba(232,93,117,0.35)]">
                 MS
               </div>
               <span className="leading-tight">

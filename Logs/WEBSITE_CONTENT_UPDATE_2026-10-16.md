@@ -212,3 +212,29 @@ At the user's request, the pre-existing diffs in seven `app/admin/` files and `l
 - `git diff --check` passed; Git emitted only its LF-to-CRLF normalization notices.
 - The partner section is an intentionally partial display of the logo files supplied so far; it is not presented as a complete official roster or count. The supplied `Paginma` asset is used, and `Paryaya` is excluded because no corresponding logo was supplied. No new project/contact images were attached, so those existing placeholders remain.
 - The user's original `git add -A` instruction covers the current worktree, including the pre-existing admin/Supabase diffs and user-supplied source files described above. Those restricted source files were not edited during this closeout.
+
+## Logo Size Increase — 2026-10-20
+
+### Changes
+
+- **Navbar desktop logo:** approximately 106×40px → 159×60px (Option B, +50%; intrinsic ratio preserved).
+- **Navbar mobile logo:** approximately 106×40px → 159×60px (same shared image sizing at mobile breakpoints).
+- **Navbar row height:** 72px → 88px.
+- **Footer brand mark:** 44×44px → 66×66px. The footer currently uses an “MS” monogram tile and wordmark rather than `public/logo.png`; its structure and wordmark are unchanged.
+- The existing source image was retained; its native dimensions are 1600×604px. No replacement, recoloring, typography, or layout restructuring was made.
+- **Files touched:** `components/Navbar.tsx`, `components/Footer.tsx`, this changelog.
+
+### Verification
+
+- [x] `npm run build` passed. Existing Supabase DNS lookup failures were logged during static generation; established fallbacks allowed the build to complete.
+- [x] `npx tsc --noEmit` passed.
+- [x] Focused ESLint on Navbar and Footer passed.
+- [x] No horizontal overflow across Home, About, Projects, News, and Contact at 375 / 768 / 1280 / 1440px.
+- [x] At 375px, the logo and 40px mobile menu button fit without overlap; opening and closing the menu worked, and selecting Gallery navigated and closed the menu.
+- [x] At 1280px, desktop nav, phone pill, and Donate button fit; footer remained a four-column grid and its brand row fit within its column.
+- [x] Logo aspect ratio is preserved (1600×604 source; displayed approximately 159×60px) and no visible pixelation was observed.
+- [x] No color, typography, or layout-structure changes.
+
+### Note
+
+If the logo appears pixelated at its larger display size, supply a higher-resolution source (at least 2× the displayed dimensions). The current 1600×604px source looked crisp at the tested sizes; it was not upscaled programmatically.
