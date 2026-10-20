@@ -1,0 +1,596 @@
+# TASK: Comprehensive Visual Refresh — Marquee, Footer, Header, Alternation, Contrast, Polish
+
+## CONTEXT
+
+The Mazi Saheli NGO site (Next.js 16 + TypeScript + Tailwind CSS v4 + Supabase) has an established navy/coral/white design system. The current build is functional but visually feels **flat**, and the user has flagged multiple specific issues plus a general request to improve UI polish.
+
+This is a **targeted visual refresh**, NOT a redesign. Preserve the design system (colors, fonts, existing routes, admin, Supabase, auth).
+
+## CRITICAL RULES
+
+1. **DO NOT touch `/app/admin/*`, Supabase functions, auth, RLS, or any `lib/supabase*.ts` file.**
+2. **DO NOT change design tokens** (`--navy`, `--coral`, `--off-white`, etc.) — only USE them differently.
+3. **DO NOT change copy, content, or routes.**
+4. **DO NOT change font families or weights** (except where explicitly asked for hierarchy fixes).
+5. **DO audit before applying** any multi-section changes — produce the report FIRST.
+6. **DO maintain WCAG AA contrast** — 4.5:1 for body text, 3:1 for large text/UI. Verify with computed styles.
+7. **DO preserve responsive behavior** — verify at 375 / 768 / 1280 / 1440.
+8. **DO run `npx tsc --noEmit` and `npm run build` after each phase.**
+9. **DO append a changelog** to `Logs/WEBSITE_CONTENT_UPDATE_2026-10-16.md`.
+10. **DO commit at the end of each run** with a clear message.
+11. **STOP and ask** if any change would require touching a locked file or break a route.
+
+---
+
+## ⚡ EXECUTION PLAN — TWO RUNS
+
+This task is intentionally split into **two runs** to keep each change batch reviewable and reversible. The user reviews Run 1's output before Run 2 starts.
+
+### Run 1 — Audit + focused fixes
+**Phases: 0, 2, 3, 5, 6, 7**
+- Phase 0: Full audit (writes `Logs/VISUAL_REFRESH_AUDIT_2026-10-20.md`)
+- Phase 2: Footer → white background
+- Phase 3: Header restructure (nav order, phone icon, login)
+- Phase 5: Remove hero blur box
+- Phase 6: Contrast fixes
+- Phase 7: Stay Updated form → white input
+
+**At the end of Run 1:** Stop. Do NOT proceed to Phases 1, 4, 8, 9. Report what was done, run verification for touched phases only, commit, and **wait for the user to say "continue" or "start run 2"**.
+
+### Run 2 — Structural changes + polish
+**Phases: 1, 4, 8, 9, 10, 11**
+- Phase 1: Partner marquee (consolidate + new component)
+- Phase 4: Section background alternation
+- Phase 8: Annual Reports section hierarchy
+- Phase 9: Flatness polish pass
+- Phase 10: Full verification
+- Phase 11: Final changelog + commit
+
+**If the user provides all instructions in one shot and expects a single run:** still respect the Run 1 → checkpoint → Run 2 sequence. Do not skip the checkpoint. The user has explicitly requested this split.
+
+### If you hit a context limit mid-Run
+Respect the priority order within each run:
+- **Run 1 priority:** Phase 0 (must finish — gives the map) → Phase 5 (quick win) → Phase 2 (biggest visual impact) → Phase 3 (nav-critical) → Phase 6 (a11y + user complaint) → Phase 7 (specific complaint)
+- **Run 2 priority:** Phase 1 (specific complaint) → Phase 8 (localized fix) → Phase 4 (large structural) → Phase 9 (polish) → Phase 10-11 (verify + commit)
+
+Document exactly which phases completed and which were deferred at the checkpoint.
+
+---
+
+## PHASE 0: AUDIT (REPORT FIRST, DO NOT ACT)
+
+Produce `Logs/VISUAL_REFRESH_AUDIT_2026-10-20.md` with these sections before any fixes:
+
+### 0.1 Section background color audit
+For every public page, list every section in order with its current bg color (from the `className`).
+
+Table format:
+
+| Page | Section | Current bg | Notes |
+|---|---|---|---|
+| `/` | Hero | navy | — |
+| `/` | Who We Are | white | — |
+| `/` | Our Reach | navy | — |
+| ... | ... | ... | ... |
+
+Specifically flag **anywhere two adjacent sections share the same bg** (e.g., two whites back-to-back).
+
+### 0.2 Contrast audit
+For every text element that sits on a colored background, compute contrast ratio using the actual hex values.
+
+Flag anything under **4.5:1 (body) or 3:1 (large)**. Common suspects:
+- Navy bg + dark text
+- Coral bg + white small text (likely < 4.5:1 — flag whether text should be on navy for CTAs)
+- Off-white bg + gray-muted text
+
+Produce a table:
+
+| Page | Element | FG hex | BG hex | Ratio | WCAG AA? | Fix suggestion |
+|---|---|---|---|---|---|---|
+
+### 0.3 Hero blur box location
+Search `app/page.tsx` and `components/HeroSection.tsx` for:
+- `backdrop-blur`
+- `blur-`
+- `bg-white/` with opacity
+- `filter blur`
+- `glass` or `frosted`
+- Any element with `backdrop-filter`
+
+Report every match with `file:line` and the surrounding JSX. The user wants this removed.
+
+### 0.4 Stay Updated form audit
+Locate the newsletter/email subscription form (likely `/contact` or footer). Report:
+- Current input `className` (bg, border, text colors)
+- Whether it inherits a blue/navy bg from its parent section
+- What the input should look like (white bg, navy border, dark text)
+
+### 0.5 Annual report section text hierarchy
+Locate the "Annual Reports" section (likely on `/impact`). Report:
+- Current H1/H2/H3 hierarchy
+- Font sizes used
+- Weights
+- Line heights
+- Whether section eyebrow exists
+- Whether headings are consistent with the rest of the site
+
+Flag any inconsistency (e.g., H2 in this section is smaller than H2 elsewhere).
+
+### 0.6 Partner section inventory
+Locate all partner rendering (homepage + about + any others). Report:
+- Current structure (categories? groups?)
+- Total partner count
+- Where each partner is defined (likely `lib/organization.ts`)
+- Current display type (grid? pills? grouped?)
+
+### 0.7 Header structure audit
+Report current `components/Navbar.tsx` structure:
+- Nav links and order
+- Phone number rendering (is the actual number shown? What element?)
+- Login link location
+- Donate button location
+- Mobile behavior
+
+### 0.8 Footer audit
+Report current `components/Footer.tsx`:
+- Background color
+- Text colors
+- Logo rendering (does it work on current bg?)
+- Column structure
+- Social icons
+- Any elements that would lose contrast if footer becomes white
+
+### 0.9 Flatness indicators
+Sweep these across all public pages and report each element type that's affected:
+- **Shadows**: Do cards have `shadow-*`? Do they lift on hover (`hover:shadow-lg`)? Do buttons have shadows?
+- **Hover states**: Do all links/buttons have `hover:bg-*` or `hover:text-*`? Do cards have `hover:-translate-y-1` or similar?
+- **Borders**: Are cards border-only with no shadow? Consistent `border-[var(--border-soft)]` or hard gray?
+- **Iconography**: Icons inline with text (no container) vs contained in tinted circles/rounded squares — are they consistent?
+- **Typography scale**: Are heading sizes (H1/H2/H3) consistent across sections? Any page where they're not?
+- **Spacing rhythm**: Any section with cramped or floating vertical spacing?
+- **Image treatment**: Any photos without overlay treatment when text sits on them?
+- **Micro-interactions**: Do buttons animate on hover (`transition-all`)?
+
+Produce a table:
+
+| Category | Status | Example files | Severity |
+|---|---|---|---|
+| Shadows | flat / ok / elevated | `components/ProgramCard.tsx` | P1 |
+| Hover states | ... | ... | ... |
+| Borders | ... | ... | ... |
+| Icons | ... | ... | ... |
+| Typography | ... | ... | ... |
+| Spacing | ... | ... | ... |
+| Images | ... | ... | ... |
+| Transitions | ... | ... | ... |
+
+### 0.10 Run plan confirmation
+At the bottom of the audit, confirm:
+- Which phases you'll complete in Run 1 (0, 2, 3, 5, 6, 7)
+- Which phases are deferred to Run 2 (1, 4, 8, 9, 10, 11)
+- Any Phase 0 findings that would prevent a Phase from being completed safely
+
+**After writing the audit, proceed to Phase 2. Do NOT jump to Phase 1 or Phase 4.**
+
+---
+
+## PHASE 2: FOOTER → WHITE BACKGROUND
+
+*(Run 1)*
+
+### 2.1 Background
+- Change footer `bg-[var(--navy)]` → `bg-white`
+- Add a top border `border-t border-[var(--border-soft)]` to separate it from the section above
+
+### 2.2 Text colors
+Systematically change:
+- Headings in footer columns → `text-[var(--navy)]` (bold)
+- Body text / links → `text-[var(--text-dark)]` with `hover:text-[var(--coral)]`
+- Muted text (copyright, etc.) → `text-[var(--text-muted)]`
+- Column dividers (if any) → `border-[var(--border-soft)]`
+
+### 2.3 Logo
+- The footer logo (currently likely white/navy version) — pick the correct one for white bg. If there's only a white version, STOP and ask the user for a navy/dark logo asset.
+- Verify visually — the logo must be clearly visible on white.
+
+### 2.4 Social icons
+- Change icon color from white to `text-[var(--navy)]` or `text-[var(--text-muted)]`
+- Hover → `text-[var(--coral)]`
+- Any `aria-disabled` placeholders keep their `opacity-60` treatment
+
+### 2.5 Contact info in footer
+- Phone, email, website → `text-[var(--text-dark)]`
+- Icons → `text-[var(--coral)]` or `text-[var(--navy)]`
+
+### 2.6 Verify contrast
+Every text element on white must be ≥4.5:1. `--coral` (#E85D75) **fails on white as small text** — flag it if used for anything other than large text or decorative.
+
+---
+
+## PHASE 3: HEADER RESTRUCTURE
+
+*(Run 1)*
+
+### 3.1 Desktop nav order
+Restructure the navbar to this exact order:
+
+```
+[HOME] [ABOUT] [GALLERY] [CONTACT US]   [DONATE] [📞] [Login]
+```
+
+Where:
+- **HOME** → `/`
+- **ABOUT** → `/about`
+- **GALLERY** → `/gallery`
+- **CONTACT US** → `/contact` (update label from "CONTACT" to "CONTACT US")
+- **DONATE** → coral pill button → `/donate`
+- **📞** → **icon-only link** (see 3.2) → `tel:+917977669173`
+- **Login** → text link → `/login`
+
+### 3.2 Phone icon treatment
+- Replace the current phone number pill with a **circular icon button**
+- Icon: phone handset (existing `components/icons.tsx` or lucide-react)
+- Size: ~40-44px diameter, matching nav height balance
+- Styling: `border border-[var(--border-soft)]`, `text-[var(--navy)]`, `hover:bg-[var(--off-white)]`
+- `aria-label="Call us at +91 79776 69173"`
+- `title="+91 79776 69173"`
+- The number is **not shown as text** — only the icon
+
+### 3.3 Login link
+- Text link after the phone icon
+- `text-[var(--navy)] hover:text-[var(--coral)]`
+- Label: "Login"
+- Size: same as nav links
+
+### 3.4 Mobile behavior
+- Nav links collapse into hamburger menu as before
+- **Keep visible on mobile**: DONATE button + phone icon (compact) — Login may move into mobile menu
+- Recommendation: phone icon stays in the top bar, DONATE stays as a compact pill, Login moves into mobile menu
+
+### 3.5 Remove
+- Any leftover phone number text
+- The old `+91 0000000000` placeholder if still somewhere
+
+### 3.6 Do not touch
+- Logo size
+- Nav link font size unless the extra item forces it (only shrink if it overflows at 1280px)
+
+---
+
+## PHASE 5: REMOVE HERO BLUR BOX
+
+*(Run 1)*
+
+Per Phase 0.3 audit — remove whichever element is identified as the "blurry box" in the hero. Common candidates:
+- A glassmorphism card with `backdrop-blur`
+- A blurred stat card
+- A decorative translucent panel
+
+Remove the element entirely (do not just reduce the blur). **If the box contained meaningful content (stats, headline, copy), STOP and ask the user before removing** — they may want the content relocated rather than deleted.
+
+---
+
+## PHASE 6: CONTRAST FIXES
+
+*(Run 1)*
+
+Apply fixes for every P1 (fails WCAG AA) contrast issue from Phase 0.2 audit. Rules:
+
+- Navy bg + dark text → switch text to white or off-white
+- Coral bg + white small text → switch to navy bg + white (or use coral only for large text/decorative)
+- Off-white bg + `--text-muted` → fine (passes)
+- Any label on image → add dark overlay gradient under the text
+
+Do not change the color tokens themselves — only which tokens are applied to text vs bg.
+
+Verify with computed styles after fix: `color` vs `background-color` of immediate parent.
+
+---
+
+## PHASE 7: STAY UPDATED FORM
+
+*(Run 1)*
+
+Locate the newsletter/email form (Phase 0.4).
+
+- Input `className`: `bg-white border border-[var(--border-soft)] text-[var(--text-dark)] placeholder:text-[var(--text-muted)]`
+- If currently inherits a blue/navy parent bg — the input itself now has explicit white bg
+- Focus state: `focus:ring-2 focus:ring-[var(--coral)] focus:border-[var(--coral)]`
+- Button stays coral; verify its text is white on coral for large text (acceptable at 3:1) — otherwise use navy bg + white
+
+---
+
+## ⛔ END OF RUN 1 — STOP HERE
+
+Before stopping, complete the **Run 1 Verification**:
+
+- [ ] `npx tsc --noEmit` passes
+- [ ] `npm run build` passes
+- [ ] `/`, `/about`, `/contact` render correctly at 375 / 768 / 1280 / 1440
+- [ ] Header order: HOME | ABOUT | GALLERY | CONTACT US | DONATE | 📞 | Login
+- [ ] Phone icon aria-label present with the number
+- [ ] Footer bg is white, logo visible, all text ≥4.5:1 contrast
+- [ ] Hero blur box removed (or user-approved relocation done)
+- [ ] Contrast failures from Phase 0.2 fixed (list them)
+- [ ] Stay Updated input has white bg
+
+**Then append Run 1 to the changelog:**
+
+```markdown
+## Visual Refresh Run 1 — 2026-10-20
+
+**Phases completed:** 0 (audit), 2 (footer), 3 (header), 5 (hero blur removal), 6 (contrast), 7 (form)
+**Phases deferred to Run 2:** 1 (marquee), 4 (section alternation), 8 (annual reports hierarchy), 9 (flatness polish)
+
+### Changes Applied
+[Bullet list of each change with file references]
+
+### Verification
+- Build: ✅
+- TypeScript: ✅
+- Responsive: ✅ at 375 / 768 / 1280 / 1440
+- Contrast failures remaining: [count]
+- Blockers encountered: [list or "none"]
+```
+
+**Then commit:**
+
+```bash
+git add -A
+git commit -m "Visual refresh run 1: white footer, header restructure, hero blur removal, contrast fixes, form styling"
+git log --oneline -1
+```
+
+**Then STOP and report to the user:**
+- What was done
+- What was deferred
+- Any blockers (e.g., missing logo asset, hero box content question)
+- Ask: "Run 2 ready to start — proceed?"
+
+**Do NOT proceed to Phase 1, 4, 8, 9 until the user explicitly says "start run 2" or "continue".**
+
+---
+
+## PHASE 1: CONSOLIDATE PARTNER SECTION + MARQUEE
+
+*(Run 2)*
+
+### 1.1 Consolidate
+- In `lib/organization.ts`, restructure partner data to a **single flat array** (keep `category` metadata on each object, but don't render category headings).
+- Keep all partners. Total count should match the current one.
+
+### 1.2 Render as marquee
+- Create `components/PartnerMarquee.tsx`
+- Section heading: **"Our Associate Partners"** (one title, no categories)
+- Replace current partner grid on homepage + about page
+
+### 1.3 Marquee behavior
+- Horizontal scroll animation, infinite loop
+- Smooth, slow (~40s for full loop — adjust for total logo count)
+- **Pause on hover**
+- **Respect `prefers-reduced-motion`** — static wrapping row instead of animated
+- Logos uniform height (~40px mobile, ~56px desktop), preserved aspect ratio
+- Grayscale default, color on hover (optional polish)
+- Subtle fade at left/right edges (mask-image gradient)
+- No horizontal scrollbar
+- Section bg: follow Phase 4 alternation
+
+### 1.4 Accessibility
+- `aria-label="Our Associate Partners"` on the container
+- Hidden `<ul className="sr-only">` listing partner names for screen readers
+
+### 1.5 Responsive
+- Mobile: still marquee
+- Reduced-motion: static wrapping row
+
+---
+
+## PHASE 4: SECTION BACKGROUND ALTERNATION
+
+*(Run 2)*
+
+### 4.1 Establish the pattern
+Per the user, sections should alternate through a 3-cycle:
+
+```
+white → off-white → navy → white → off-white → navy → ...
+```
+
+**Exception:** Hero sections stay navy. Footer is white (per Phase 2). CTA-strong sections (like "Help Us Reach Every Community") may stay navy for emphasis — flag if a deviation is needed.
+
+### 4.2 Apply to every public page
+Walk every public page and reassign section backgrounds following the pattern. Preserve:
+- Hero = navy
+- Final CTA (if exists) = navy
+- Footer = white
+
+Every in-between section must alternate. No two adjacent sections share a bg.
+
+### 4.3 Verify text contrast per section
+When a section becomes navy, ensure its text switches to white/light. When a section becomes off-white, its text stays dark. Audit each swap visually (Playwright screenshot or computed styles).
+
+### 4.4 Verify dividers
+Between same-bg-adjacent sections (which should no longer exist after fix), no divider needed. If any two whites remain adjacent for a valid reason, add a subtle `border-t border-[var(--border-soft)]` between them.
+
+### 4.5 Report the mapping
+In the changelog, list the old → new bg for each section, so it's reviewable.
+
+---
+
+## PHASE 8: ANNUAL REPORT SECTION TEXT HIERARCHY
+
+*(Run 2)*
+
+Locate the Annual Reports section (Phase 0.5). Fix:
+
+- **Section eyebrow** (if missing): add `SectionEyebrow` above the H2 (e.g., "Annual Reports" or "Transparency")
+- **H2**: `text-3xl md:text-4xl font-bold text-[var(--navy)]` — match other section H2s on the site exactly
+- **Intro paragraph**: `text-base md:text-lg text-[var(--text-muted)]` — max-width ~65ch
+- **Report cards**: each with:
+  - Title: `text-xl font-semibold text-[var(--navy)]`
+  - Year label: `text-sm uppercase tracking-wide text-[var(--coral)]`
+  - Short description: `text-sm text-[var(--text-muted)]`
+  - Download button: coral pill, `text-sm font-medium`
+
+Match the visual hierarchy of an existing well-structured section (like "Our Focus Areas" or "Strategic Partners"). Do not invent a new pattern.
+
+Verify: H2 in this section renders the same computed font-size as H2 in the Focus Areas section.
+
+---
+
+## PHASE 9: FLATNESS POLISH PASS
+
+*(Run 2)*
+
+Using the Phase 0.9 audit, apply surgical polish. **Do not redesign — polish within the existing system.**
+
+### 9.1 Shadows
+- Cards without shadows: add `shadow-sm` + `hover:shadow-lg`
+- Navy sections: light shadows or border-only treatment
+- Buttons: coral CTA gets `shadow-md hover:shadow-lg`
+
+### 9.2 Hover states
+- Nav links: `hover:text-[var(--coral)]`
+- Card: `hover:-translate-y-1 hover:shadow-lg transition-all duration-200`
+- Buttons: `hover:bg-[var(--coral-hover)]`
+- Icon buttons: `hover:bg-[var(--off-white)]`
+
+### 9.3 Border consistency
+- All cards use `border border-[var(--border-soft)]`
+- Card corners standardized to `rounded-xl`
+
+### 9.4 Icon containers
+Where icons sit naked next to text — wrap in:
+- `w-10 h-10 rounded-full bg-[var(--coral)]/10 flex items-center justify-center`
+- Icon inside: `text-[var(--coral)]`
+- Apply across feature cards, contact info, focus area cards
+
+### 9.5 Typography
+- One H1 per page
+- Section headings = H2 (no H3 where H2 should be)
+- Sub-sections = H3
+- Body line-height ≥1.6, heading line-height ≤1.2
+- Eyebrow labels: `text-xs uppercase tracking-[0.18em] font-semibold`
+
+### 9.6 Spacing rhythm
+- Section padding: `py-16 md:py-24`
+- Container: `max-w-7xl mx-auto px-6`
+- Card grid gap: `gap-6 md:gap-8`
+- Between H2 and body: `mt-4`
+- Between heading block and cards: `mt-12 md:mt-16`
+
+### 9.7 Image treatment
+- Text overlay on image: add `bg-gradient-to-t from-black/60 to-transparent` layer
+- Card images: `rounded-t-xl` top corners, consistent aspect ratio in same grid
+
+### 9.8 Micro-interactions
+- Buttons and cards: `transition-all duration-200`
+- Nav links: `transition-colors duration-150`
+
+### 9.9 Do NOT
+- Do not add animations longer than 300ms
+- Do not add gradients beyond existing
+- Do not change fonts
+- Do not add decorative elements not in the reference design
+- Do not touch admin pages
+
+---
+
+## PHASE 10: FINAL VERIFICATION
+
+*(Run 2)*
+
+- [ ] `npx tsc --noEmit` passes
+- [ ] `npm run build` passes
+- [ ] No new console errors on `/`, `/about`, `/contact`, `/impact`, `/projects`, `/news`, `/saheli-circle`, `/gallery`, and 2 focus-area pages
+- [ ] Start production server, crawl 30+ routes, all HTTP 200
+- [ ] Responsive at 375 / 768 / 1280 / 1440 on: `/`, `/about`, `/contact`, `/impact`
+- [ ] No horizontal overflow on any checked page
+- [ ] Partner marquee renders on home + about, pauses on hover, respects `prefers-reduced-motion`
+- [ ] No two adjacent sections share the same bg on any public page
+- [ ] Annual Reports section H2 matches computed size of other page H2s
+- [ ] No contrast failures remaining (spot-check 5 worst offenders from Phase 0.2)
+- [ ] Cards have hover lift + shadow (not flat)
+- [ ] Icons have tinted containers (feature cards, contact info, etc.)
+- [ ] Footer still white + logo visible
+
+---
+
+## PHASE 11: FINAL CHANGELOG + COMMIT
+
+*(Run 2)*
+
+Append to `Logs/WEBSITE_CONTENT_UPDATE_2026-10-16.md`:
+
+```markdown
+## Visual Refresh Run 2 — 2026-10-20
+
+**Phases completed:** 1 (marquee), 4 (section alternation), 8 (annual reports hierarchy), 9 (flatness polish), 10 (verification)
+
+### Changes Applied
+[Bullet list of each change with file references]
+
+### Section Background Map
+[List old → new bg for every changed section]
+
+### Verification
+- Build: ✅
+- TypeScript: ✅
+- Routes 200: N/N
+- Responsive: ✅
+- Contrast: ✅ no remaining AA failures
+- Marquee reduces-motion fallback: ✅
+```
+
+Then commit:
+
+```bash
+git add -A
+git commit -m "Visual refresh run 2: partner marquee, section alternation, annual reports hierarchy, flatness polish"
+git log --oneline -1
+```
+
+---
+
+## FINAL SUMMARY TABLE (both runs)
+
+| Check | Result |
+|---|---|
+| **Run 1** |
+| Phase 0 audit file created | ✅ `Logs/VISUAL_REFRESH_AUDIT_2026-10-20.md` |
+| Footer bg = white, logo visible | ✅ / ❌ |
+| Header order correct | ✅ / ❌ |
+| Phone icon (no number text) | ✅ / ❌ |
+| Hero blur box removed | ✅ / ❌ |
+| Contrast failures fixed (Run 1 batch) | N/N |
+| Stay Updated input white | ✅ / ❌ |
+| Run 1 committed | ✅ (`xxxxxxx`) |
+| **Run 2** |
+| Partner categories consolidated | ✅ N → 1 |
+| Marquee live on home + about | ✅ / ❌ |
+| Section alternation applied | ✅ / ❌ |
+| Annual Reports hierarchy fixed | ✅ / ❌ |
+| Flatness fixes applied | N items |
+| Run 2 committed | ✅ (`xxxxxxx`) |
+| **Overall** |
+| `npm run build` (final) | ✅ / ❌ |
+| `npx tsc --noEmit` (final) | ✅ / ❌ |
+| Routes 200 | N/N |
+| Responsive verified | ✅ / ❌ |
+
+---
+
+## STOP CONDITIONS
+
+Pause and ask the user if:
+
+- **Run 1:** The hero blur box contains meaningful content (stats, headline, copy) — confirm before deleting
+- **Run 1:** The footer logo needs a different asset (only white version exists in repo)
+- **Run 1:** Header becomes too crowded at 1280px with 4 nav links + donate + phone icon + login
+- **Run 2:** Marquee total width is too small to loop smoothly (<3× viewport) — may need to duplicate logos
+- **Run 2:** Section alternation creates a visually jarring sequence on a specific page (e.g., 4 navy sections in a row) — propose page-specific tweak
+- **Any run:** Any contrast fix would require changing a design token
+
+## BEGIN
+
+Start with Phase 0. Produce the audit report. Then proceed through **Run 1 (Phases 2, 3, 5, 6, 7)**. Verify. Changelog. Commit. **Then STOP and wait for the user's "continue" instruction before starting Run 2.**
