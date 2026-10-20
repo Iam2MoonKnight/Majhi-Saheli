@@ -102,11 +102,11 @@ export default function Donate() {
       </section>
 
       {/* ----------------------------------------------------- HOW IT REACHES */}
-      <section className="section">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">The Journey</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+            <SectionEyebrow className="mb-4 text-white">The Journey</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               How your donation reaches the field
             </h2>
           </div>
@@ -126,7 +126,7 @@ export default function Donate() {
       </section>
 
       {/* ----------------------------------------------------- MONEY AT WORK */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">In The Field</SectionEyebrow>
@@ -153,7 +153,7 @@ export default function Donate() {
       </section>
 
       {/* ----------------------------------------------------- ALLOCATION */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <div className="space-y-6">
             <SectionEyebrow>For Every Rupee</SectionEyebrow>
@@ -196,11 +196,11 @@ export default function Donate() {
       </section>
 
       {/* ----------------------------------------------------- WHY PEOPLE GIVE */}
-      <section className="section section-alt">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">In Their Words</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Why people give</h2>
+            <SectionEyebrow className="mb-4 text-white">In Their Words</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">Why people give</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -243,15 +243,15 @@ export default function Donate() {
       </section>
 
       {/* ----------------------------------------------------- NEWSLETTER */}
-      <section className="bg-[var(--navy)] py-16">
+      <section className="section section-alt">
         <div className="container-x max-w-3xl text-center">
-          <SectionEyebrow className="mb-4 text-white">Stay Updated</SectionEyebrow>
-          <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">Stay updated on our impact</h2>
-          <p className="mt-4 text-white/75">
+          <SectionEyebrow className="mb-4">Stay Updated</SectionEyebrow>
+          <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Stay updated on our impact</h2>
+          <p className="mt-4 text-[var(--text-muted)]">
             Subscribe to receive monthly updates about programs and beneficiary stories.
           </p>
           <div className="mt-8">
-            <NewsletterForm />
+            <NewsletterForm variant="light" />
           </div>
           <Link href="/contact" className="link-coral mt-8 justify-center">
             Talk to our team

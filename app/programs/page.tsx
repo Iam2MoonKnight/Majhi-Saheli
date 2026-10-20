@@ -176,15 +176,15 @@ export default async function Programs() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="bg-[var(--navy)] py-16">
         <div className="editorial-section text-center space-y-6">
-          <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-5xl">Support our programs</h2>
-          <p className="text-lg text-[var(--text-muted)]">
+          <h2 className="font-heading text-3xl font-bold text-white md:text-5xl">Support our programs</h2>
+          <p className="text-lg text-white/80">
             Your donation enables us to continue and expand these life-changing programs.
           </p>
           <Link
             href="/donate"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]"
+            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--navy)] shadow-md transition-all duration-200 hover:bg-[var(--off-white)] hover:shadow-lg"
           >
             Donate now
           </Link>

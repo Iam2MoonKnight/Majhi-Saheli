@@ -29,17 +29,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
+      <section className="border-b border-white/10 bg-[var(--navy)]">
         <div className="editorial-section max-w-4xl py-12">
-          <Link href="/blog" className="mb-6 inline-block text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
+          <Link href="/blog" className="mb-6 inline-block text-sm font-medium text-white/80 hover:text-white">
             ← Back to Blog
           </Link>
 
-          <h1 className="mb-6 font-heading text-4xl font-bold leading-tight text-[var(--navy)] lg:text-6xl">
+          <h1 className="mb-6 font-heading text-4xl font-bold leading-tight text-white lg:text-6xl">
             {blog.title}
           </h1>
 
-          <div className="flex items-center gap-4 text-[var(--text-muted)]">
+          <div className="flex items-center gap-4 text-white/75">
             <span>
               📅{' '}
               {new Date(blog.published_at || blog.created_at).toLocaleDateString('en-US', {

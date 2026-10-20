@@ -199,9 +199,9 @@ export default function SaheliCircle() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="bg-[var(--navy)] py-16">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Resources</h2>
+          <h2 className="font-heading text-center text-3xl font-bold text-white md:text-4xl">Resources</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {resources.map((resource) => (
@@ -224,7 +224,7 @@ export default function SaheliCircle() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
+      <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">Circle stories</h2>
 
@@ -243,7 +243,7 @@ export default function SaheliCircle() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-10">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">How to join Saheli Circle</h2>
 
@@ -275,14 +275,14 @@ export default function SaheliCircle() {
         </div>
       </section>
 
-      <section className="section section-alt">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-10">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow mb-4">2025-26 Annual Report</p>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+            <p className="eyebrow mb-4 text-white/80">2025-26 Annual Report</p>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               The Saheli Circle: What, Why, How
             </h2>
-            <p className="mt-5 text-left leading-relaxed text-[var(--text-muted)]">
+            <p className="mt-5 text-left leading-relaxed text-white/80">
               A circle represents the earth, the cycle of life, and above all equality, equanimity, and unity. It is a
               space without hierarchy, where women hold hands to move forward together toward progress and a better world
               for generations to come. At MSCT, Saheli means recognizing that women are the epicentre of family,
@@ -322,7 +322,7 @@ export default function SaheliCircle() {
             </div>
           </div>
 
-          <p className="text-center font-heading text-lg font-bold text-[var(--navy)]">
+          <p className="text-center font-heading text-lg font-bold text-white">
             For the locals, of the locals, by the locals — powered by women.
           </p>
 
@@ -349,7 +349,7 @@ export default function SaheliCircle() {
             ))}
           </div>
 
-          <blockquote className="rounded-2xl bg-[var(--navy)] p-8 text-center font-heading text-xl font-bold text-white md:p-10">
+          <blockquote className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-8 text-center font-heading text-xl font-bold text-[var(--navy)] md:p-10">
             &ldquo;Alone we cannot do much, but through partnerships we have achieved all this.&rdquo;
           </blockquote>
         </div>

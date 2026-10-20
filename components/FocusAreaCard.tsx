@@ -13,7 +13,7 @@ interface FocusAreaCardProps {
 
 export default function FocusAreaCard({ title, description, href, image, icon, priority }: FocusAreaCardProps) {
   return (
-    <Link href={href} className="card card-hover group flex flex-col overflow-hidden">
+    <Link href={href} className="card card-hover group flex flex-col overflow-hidden rounded-xl">
       <div className="relative h-44 w-full overflow-hidden">
         <Image
           src={image}

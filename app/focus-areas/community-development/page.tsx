@@ -97,7 +97,7 @@ export default function CommunityDevelopmentPage() {
                 description: 'Organizing and strengthening community-based organizations',
               },
             ].map((activity, idx) => (
-              <div key={idx} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 hover:shadow-lg transition-shadow">
+              <div key={idx} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <h3 className="font-heading text-xl font-bold text-[var(--navy)] mb-3">{activity.title}</h3>
                 <p className="text-sm text-[var(--text-muted)]">{activity.description}</p>
               </div>
@@ -107,10 +107,10 @@ export default function CommunityDevelopmentPage() {
       </section>
 
       {/* Content Placeholder */}
-      <section className="py-16">
+      <section className="py-16 bg-[var(--navy)]">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Detailed Content</h2>
-          <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+          <h2 className="font-heading text-4xl font-bold text-white">Detailed Content</h2>
+          <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-white/80">
             <li>Rooftop water harvesting and kitchen gardens were implemented for 11 households in 2024-25.</li>
             <li>575 household surveys were carried out for Swachh Maharashtra Abhiyan 2.0 in 2024-25.</li>
             <li>10 wheelchairs were distributed to residents of old age homes in 2024-25.</li>
@@ -129,7 +129,7 @@ export default function CommunityDevelopmentPage() {
       </section>
 
       {/* Navigation to other areas */}
-      <section className="py-16 bg-[var(--off-white)] border-t border-[var(--border-soft)]">
+      <section className="py-16 bg-white border-t border-[var(--border-soft)]">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-2xl font-bold text-[var(--navy)] text-center">Explore Other Focus Areas</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -140,7 +140,7 @@ export default function CommunityDevelopmentPage() {
               { title: 'Nutrition', url: '/focus-areas/nutrition', icon: '🥗' },
               { title: 'Women Empowerment', url: '/focus-areas/women-empowerment', icon: '👩' },
             ].map((area) => (
-              <Link key={area.url} href={area.url} className="rounded-lg border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center hover:shadow-md transition-shadow">
+              <Link key={area.url} href={area.url} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <p className="text-3xl mb-2">{area.icon}</p>
                 <p className="font-semibold text-[var(--navy)] text-sm">{area.title}</p>
               </Link>

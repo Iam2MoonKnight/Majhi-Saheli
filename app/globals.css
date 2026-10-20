@@ -53,6 +53,12 @@
   }
 }
 
+@keyframes partner-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes floatSoft {
   0%,
   100% {
@@ -177,6 +183,57 @@
 
   .ticker-track {
     animation: ticker 30s linear infinite;
+  }
+
+  .partner-marquee-viewport {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  }
+
+  .partner-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: partner-marquee 40s linear infinite;
+  }
+
+  .partner-marquee:hover .partner-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .partner-marquee-group {
+    display: flex;
+    flex: none;
+    width: max-content;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partner-marquee-viewport {
+      overflow: visible;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .partner-marquee-track {
+      display: block;
+      width: 100%;
+      animation: none;
+    }
+
+    .partner-marquee-group {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding-right: 0;
+    }
+
+    .partner-marquee-group[aria-hidden='true']:nth-child(2) {
+      display: none;
+    }
   }
 
   .float-soft {
@@ -321,10 +378,11 @@
   }
 
   .card-hover {
+    box-shadow: 0 1px 2px rgba(20, 41, 63, 0.08);
     transition:
-      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.28s ease,
-      border-color 0.28s ease;
+      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .card-hover:hover {

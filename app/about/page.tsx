@@ -5,10 +5,10 @@ import PageHero from '@/components/PageHero';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import StatBlock from '@/components/StatBlock';
 import DistrictCard from '@/components/DistrictCard';
-import PartnerPill from '@/components/PartnerPill';
+import PartnerMarquee from '@/components/PartnerMarquee';
 import RoadmapCard from '@/components/RoadmapCard';
 import Icon, { type IconName } from '@/components/icons';
-import { OPERATING_DISTRICTS, PARTNER_GROUPS } from '@/lib/organization';
+import { OPERATING_DISTRICTS } from '@/lib/organization';
 import { createPageMetadata } from '@/lib/seo';
 
 const aboutDescription =
@@ -368,7 +368,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- FOUNDER'S MESSAGE */}
-      <section className="section">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.7fr_1.3fr]">
           <div className="flex justify-center">
             <Image
@@ -379,7 +379,7 @@ export default function About() {
               className="h-64 w-64 rounded-full object-cover"
             />
           </div>
-          <div className="space-y-5">
+          <div className="space-y-5 rounded-2xl bg-white p-6 shadow-sm md:p-8">
             <SectionEyebrow>Founder&apos;s Message</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Let&apos;s build a better tomorrow, together</h2>
             <blockquote className="space-y-4 leading-relaxed text-[var(--text-muted)]">
@@ -414,7 +414,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- VISION & MISSION */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-x space-y-10">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">Our Vision &amp; Mission</SectionEyebrow>
@@ -453,7 +453,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- FOCUS AREAS */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container-x space-y-10">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">Area of Interest</SectionEyebrow>
@@ -566,9 +566,9 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- AID → EMPOWERMENT */}
-      <section className="section">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-5">
+          <div className="space-y-5 rounded-2xl bg-white p-7 shadow-sm">
             <SectionEyebrow>Our Direction</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
               From temporary aid to lasting community empowerment
@@ -599,7 +599,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- PATHWAY */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-x space-y-10">
           <div className="max-w-3xl space-y-4">
             <SectionEyebrow>Our Pathway</SectionEyebrow>
@@ -648,7 +648,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- STORY / TIMELINE */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">Our Story So Far</SectionEyebrow>
@@ -674,11 +674,11 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- FROM THE FIELD */}
-      <section className="section section-alt">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-10">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">From the Field</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+            <SectionEyebrow className="mb-4 text-white">From the Field</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Moments from our programmes
             </h2>
           </div>
@@ -701,7 +701,7 @@ export default function About() {
           </div>
 
           <div className="text-center">
-            <Link href="/gallery" className="link-coral justify-center">
+            <Link href="/gallery" className="link-coral justify-center text-white">
               View Full Gallery
               <Icon name="arrow-right" size={14} />
             </Link>
@@ -756,11 +756,11 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- REGISTRATION & GOVERNANCE */}
-      <section className="section">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-8">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Registration &amp; Governance</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+            <SectionEyebrow className="mb-4 text-white">Registration &amp; Governance</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Organisation details
             </h2>
           </div>
@@ -790,7 +790,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- COMMUNITY-LED */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-x space-y-10">
           <div className="max-w-3xl space-y-4">
             <SectionEyebrow>Community-Led Approach</SectionEyebrow>
@@ -871,7 +871,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- SELF-RELIANT VISION */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container-x space-y-10">
           <div className="max-w-3xl space-y-4">
             <SectionEyebrow>The Vision</SectionEyebrow>
@@ -937,29 +937,10 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- PARTNERS */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-x space-y-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Partnerships</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Our Strategic Partners
-            </h2>
-          </div>
+          <PartnerMarquee />
 
-          <div className="space-y-8">
-            {PARTNER_GROUPS.map((group) => (
-              <div key={group.title}>
-                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-[0.14em] text-[var(--text-muted)]">
-                  {group.title}
-                </h3>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                  {group.partners.map((partner) => (
-                    <PartnerPill key={partner.slug} name={partner.name} logoSrc={partner.logoSrc} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
           <p className="text-center text-sm">
             The 2025-26 annual report records 22 partners, including four dedicated CSR partners.
           </p>
@@ -967,7 +948,7 @@ export default function About() {
       </section>
 
       {/* ------------------------------------------------------------- ROADMAP */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">Future Plans</SectionEyebrow>
@@ -985,7 +966,7 @@ export default function About() {
       {/* ------------------------------------------------------------- CTA */}
       <section className="section bg-[var(--navy-dark)]">
         <div className="container-x text-center">
-          <SectionEyebrow className="mb-4">Join The Mission</SectionEyebrow>
+          <SectionEyebrow className="mb-4 text-white/80">Join The Mission</SectionEyebrow>
           <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
             Help us reach <span className="text-[#e85d75]">every community</span>
           </h2>

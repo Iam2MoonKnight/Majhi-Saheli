@@ -9,7 +9,7 @@ interface RoadmapCardProps {
 
 export default function RoadmapCard({ index, title, text, icon = 'target' }: RoadmapCardProps) {
   return (
-    <div className="card card-hover flex flex-col p-8">
+    <div className="card card-hover flex flex-col rounded-xl p-8">
       <div className="flex items-center justify-between">
         <span className="icon-badge">
           <Icon name={icon} size={22} />

@@ -3,11 +3,16 @@
 import { useState } from 'react';
 import { subscribeNewsletter } from '@/lib/supabase-functions';
 
-export default function NewsletterForm() {
+interface NewsletterFormProps {
+  variant?: 'dark' | 'light';
+}
+
+export default function NewsletterForm({ variant = 'dark' }: NewsletterFormProps) {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const statusTextClass = variant === 'dark' ? 'text-white' : 'text-[var(--text-muted)]';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,13 +50,15 @@ export default function NewsletterForm() {
         <button
           type="submit"
           disabled={loading}
-          className="rounded bg-[var(--navy)] px-6 py-2 font-bold text-white transition hover:bg-[var(--navy-dark)] disabled:opacity-50"
+          className="rounded bg-[var(--navy)] px-6 py-2 font-bold text-white shadow-sm transition-all duration-200 hover:bg-[var(--navy-dark)] hover:shadow-md disabled:opacity-50"
         >
           {loading ? 'Subscribing...' : 'Subscribe'}
         </button>
       </div>
-      {message && <p className="text-sm text-white">✓ {message}</p>}
-      {error && <p className="text-sm text-white/90">✕ {error}</p>}
+      {message && <p className={`text-sm ${statusTextClass}`}>✓ {message}</p>}
+      {error && (
+        <p className={`text-sm ${variant === 'dark' ? 'text-white/90' : 'text-red-700'}`}>✕ {error}</p>
+      )}
     </form>
   );
 }

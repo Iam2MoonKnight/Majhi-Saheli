@@ -73,7 +73,7 @@ export default function Contact() {
       <section className="section">
         <div className="container-x grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="rounded-2xl bg-[var(--navy)] p-8 text-white lg:col-span-1">
-            <SectionEyebrow className="mb-4">Reach Us</SectionEyebrow>
+            <SectionEyebrow className="mb-4 text-white/80">Reach Us</SectionEyebrow>
             <h2 className="font-heading text-2xl font-bold text-white">We&rsquo;d love to hear from you</h2>
 
             <ul className="mt-8 space-y-7">
@@ -168,11 +168,11 @@ export default function Contact() {
       </section>
 
       {/* ---------------------------------------------------------- MAP */}
-      <section className="section">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-10">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Geographic Reach</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+            <SectionEyebrow className="mb-4 text-white">Geographic Reach</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Find us across Maharashtra
             </h2>
           </div>
@@ -204,7 +204,7 @@ export default function Contact() {
       </section>
 
       {/* ---------------------------------------------------------- FAQ */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <SectionEyebrow className="mb-4">Frequently Asked</SectionEyebrow>
@@ -225,17 +225,17 @@ export default function Contact() {
       </section>
 
       {/* ---------------------------------------------------------- NEWSLETTER */}
-      <section className="bg-[var(--navy)] py-16">
+      <section className="section section-alt">
         <div className="container-x max-w-3xl text-center">
-          <SectionEyebrow className="mb-4 text-white">Stay Connected</SectionEyebrow>
-          <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
+          <SectionEyebrow className="mb-4">Stay Connected</SectionEyebrow>
+          <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
             Updates from the field
           </h2>
-          <p className="mt-4 text-white/75">
+          <p className="mt-4 text-[var(--text-muted)]">
             Subscribe to receive updates about our programs, impact, and stories from the field.
           </p>
           <div className="mt-8">
-            <NewsletterForm />
+            <NewsletterForm variant="light" />
           </div>
         </div>
       </section>

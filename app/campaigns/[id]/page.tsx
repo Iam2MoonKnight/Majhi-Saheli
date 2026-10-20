@@ -40,9 +40,9 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <section className="border-b border-[var(--border-soft)] bg-[var(--off-white)]">
+      <section className="border-b border-white/10 bg-[var(--navy)]">
         <div className="editorial-section space-y-6 py-16">
-          <Link href="/campaigns" className="text-sm font-medium text-[var(--blue)] hover:text-[var(--navy)]">
+          <Link href="/campaigns" className="text-sm font-medium text-white/80 hover:text-white">
             ← Back to campaigns
           </Link>
           <div className="space-y-4">
@@ -53,8 +53,8 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
             >
               {campaign.status}
             </span>
-            <h1 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-6xl">{campaign.title}</h1>
-            <p className="text-lg text-[var(--text-muted)]">{campaign.location}</p>
+            <h1 className="font-heading text-4xl font-bold text-white md:text-6xl">{campaign.title}</h1>
+            <p className="text-lg text-white/80">{campaign.location}</p>
           </div>
         </div>
       </section>

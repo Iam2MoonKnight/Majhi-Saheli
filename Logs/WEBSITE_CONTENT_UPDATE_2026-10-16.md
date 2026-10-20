@@ -268,3 +268,76 @@ If the logo appears pixelated at its larger display size, supply a higher-resolu
 - Full `npm run lint`: ❌ Existing errors remain in untouched admin/dashboard/scripts files (11 errors and 27 warnings); no findings were reported for the modified public UI files.
 - Contrast failures remaining: 0 known in the audited public marketing surfaces; account/admin/dashboard surfaces remain outside this run’s scope.
 - Blockers: Supabase DNS was unreachable during build; the current fallback behavior worked. Repository-wide lint is blocked by the unrelated pre-existing findings above.
+
+## Visual Refresh Run 2 — 2026-10-20
+
+**Phases completed:** 1 (partner marquee), 4 (section alternation), 8 (annual-report hierarchy), 9 (flatness polish), 10 (verification)
+
+### Changes Applied
+
+- Flattened the 31-entry partner inventory in `lib/organization.ts`, preserving each partner name, logo path, and category metadata; replaced partner pills with the shared `components/PartnerMarquee.tsx` on Home and About.
+- Added a duplicated, 40-second logo track with hover pause, masked edges, eager logo loading, and a static wrapping row for reduced-motion users. The screen-reader list contains one accessible name per partner.
+- Rebalanced public section backgrounds without changing color tokens. Dark sections use light headings and body text; the six focus-area pages now follow the same sequence.
+- Added the Transparency eyebrow and consistent heading/intro/card hierarchy to Annual Reports. Year badges use coral-tinted surfaces with navy text, and the PDF pill stays navy with white text to preserve AA contrast for small text.
+- Added restrained card shadows, 200ms hover transitions, and `rounded-xl` corners to shared and focus-area cards. Existing icon containers were retained.
+- Fixed a hydration mismatch on `/impact`: `StatCard` now renders the complete emoji rather than truncating it to a UTF-16 surrogate.
+- Replaced the unused `components/PartnerPill.tsx`; no admin, authentication, Supabase, RLS, routes, or design-token values were changed.
+
+### Section Background Map
+
+Each entry lists the section’s previous background followed by its new background. Sections not listed already followed the cycle.
+
+| Page | Section | Old → new |
+|---|---|---|
+| `/` | Our Reach | navy → off-white |
+| `/` | Area of Interest | off-white → navy |
+| `/` | How The Work Happens | navy → white |
+| `/` | Our Associate Partners | white → off-white |
+| `/` | Future Plans | off-white → navy |
+| `/` | Explore More | off-white → white |
+| `/about` | Founder’s Message | white → navy |
+| `/about` | Vision & Mission | off-white → white |
+| `/about` | Area of Interest | white → off-white |
+| `/about` | Aid → Empowerment | white → navy |
+| `/about` | Our Pathway | off-white → white |
+| `/about` | Story / Timeline | white → off-white |
+| `/about` | From the Field | off-white → navy |
+| `/about` | Registration & Governance | white → navy |
+| `/about` | Community-Led Approach | off-white → white |
+| `/about` | The Vision | white → off-white |
+| `/about` | Partners | off-white → white |
+| `/about` | Roadmap | white → off-white |
+| `/contact` | Geographic Reach | white → navy |
+| `/contact` | Frequently Asked | off-white → white |
+| `/contact` | Stay Connected | navy → off-white |
+| `/donate` | The Journey | white → navy |
+| `/donate` | Your Money at Work | off-white → white |
+| `/donate` | Allocation | white → off-white |
+| `/donate` | In Their Words | off-white → navy |
+| `/donate` | Stay Updated | navy → off-white |
+| Each `/focus-areas/*` page | Detailed Content | white → navy |
+| Each `/focus-areas/*` page | Explore Other Focus Areas | off-white → white |
+| `/programs` | Support Our Programs (final CTA) | white → navy |
+| `/saheli-circle` | Resources | white → navy |
+| `/saheli-circle` | Circle Stories | off-white → white |
+| `/saheli-circle` | How to Join Saheli Circle | white → off-white |
+| `/saheli-circle` | Annual Report | off-white → navy |
+| `/impact` | Programme Achievements | off-white → navy |
+| `/impact` | Geographic Reach | white → navy |
+| `/impact` | Annual Reports | off-white → white |
+| `/impact` | Methodology | white → off-white |
+| `/impact` | Be Part of This Impact (final CTA) | white → navy |
+| `/blog/[slug]` | Article title | off-white → navy |
+| `/campaigns/[id]` | Campaign title | off-white → navy |
+
+### Verification
+
+- Build: ✅ `npm run build` passed; existing Supabase DNS failures used the site’s fallback data.
+- TypeScript: ✅ `npx tsc --noEmit` passed.
+- Focused ESLint: ✅ Changed public TypeScript/TSX files passed.
+- Routes: ✅ 34 public routes returned HTTP 200; the dynamic campaign detail route also returned HTTP 200. No runtime page errors remained after the `StatCard` fix.
+- Responsive: ✅ `/`, `/about`, `/contact`, and `/impact` tested at 375 / 768 / 1280 / 1440px (16 checks, no horizontal overflow).
+- Section cycle: ✅ 32 public/static routes plus the campaign detail route checked; no adjacent top-level sections shared a background.
+- Marquee: ✅ All 31 logos and all 31 screen-reader names rendered on Home and About; all logos loaded, 40s animation ran, hover paused it, and reduced motion produced a wrapping static row without overflow.
+- Annual reports: ✅ Annual Reports and Focus Areas H2 computed to 36px; all three report downloads returned HTTP 200.
+- Contrast: ✅ Five spot-checked section headings measured 11.63:1 on their rendered backgrounds. Small coral text/white-on-coral controls were avoided in favor of contrast-safe navy text and buttons.

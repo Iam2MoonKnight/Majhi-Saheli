@@ -33,7 +33,7 @@ export default function ProgramCard({ program }: ProgramCardProps) {
   const config = categoryConfig[program.category] || categoryConfig.other;
 
   return (
-    <div className={`group overflow-hidden rounded-2xl border bg-[var(--surface)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${config.borderColor}`}>
+    <div className={`group overflow-hidden rounded-xl border bg-[var(--surface)] shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${config.borderColor}`}>
       {/* Category indicator bar */}
       <div className={`h-1.5 ${config.bgColor}`} />
       

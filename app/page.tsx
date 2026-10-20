@@ -4,11 +4,11 @@ import HeroSection from '@/components/HeroSection';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import FocusAreaCard from '@/components/FocusAreaCard';
 import DistrictCard from '@/components/DistrictCard';
-import PartnerPill from '@/components/PartnerPill';
+import PartnerMarquee from '@/components/PartnerMarquee';
 import RoadmapCard from '@/components/RoadmapCard';
 import StatBlock from '@/components/StatBlock';
 import Icon, { type IconName } from '@/components/icons';
-import { OPERATING_DISTRICTS, PARTNER_GROUPS } from '@/lib/organization';
+import { OPERATING_DISTRICTS } from '@/lib/organization';
 import { createPageMetadata, SITE_NAME } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
@@ -165,14 +165,14 @@ export default function Home() {
       </section>
 
       {/* ---------------------------------------------------------------- OUR REACH */}
-      <section className="section bg-[var(--navy)]">
+      <section className="section section-alt">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4 text-white">Our Reach</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
+            <SectionEyebrow className="mb-4">Our Reach</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
               Serving communities across <span className="text-[#e85d75]">Maharashtra</span>
             </h2>
-            <p className="mt-4 text-white/70">
+            <p className="mt-4 text-[var(--text-muted)]">
               On-ground presence led by local coordinators who understand the language, context, and trust of every
               district we serve.
             </p>
@@ -180,21 +180,21 @@ export default function Home() {
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {OPERATING_DISTRICTS.map((district) => (
-              <DistrictCard key={district} name={district} />
+              <DistrictCard key={district} name={district} variant="light" />
             ))}
           </div>
         </div>
       </section>
 
       {/* ---------------------------------------------------------------- FOCUS AREAS */}
-      <section className="section section-alt">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Area of Interest</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
+            <SectionEyebrow className="mb-4 text-white">Area of Interest</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Our focus areas
             </h2>
-            <p className="mt-4">
+            <p className="mt-4 text-white/80">
               Six connected programmes working together so families can build lives of security, dignity and independence.
             </p>
           </div>
@@ -216,22 +216,22 @@ export default function Home() {
       </section>
 
       {/* ---------------------------------------------------------------- COLLABORATIVE WORK */}
-      <section className="section bg-[var(--navy)]">
+      <section className="section">
         <div className="container-x space-y-14">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4 text-white">How The Work Happens</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
+            <SectionEyebrow className="mb-4">How The Work Happens</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
               Collaborative &amp; <span className="text-[#e85d75]">Self-Initiated</span> Work
             </h2>
           </div>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div className="rounded-2xl border border-white/12 bg-white/[0.04] p-8">
-              <h3 className="font-heading text-xl font-bold text-white">Collaborative Programmes</h3>
+            <div className="card p-8">
+              <h3 className="font-heading text-xl font-bold text-[var(--navy)]">Collaborative Programmes</h3>
               <ul className="mt-6 space-y-3.5">
                 {COLLABORATIVE.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-white/80">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[color:rgb(232_93_117_/_0.2)] text-[#e85d75]">
+                  <li key={item} className="flex items-center gap-3 text-sm text-[var(--text-muted)]">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--off-white)] text-[var(--navy)]">
                       <Icon name="check" size={12} />
                     </span>
                     {item}
@@ -240,12 +240,12 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-white/12 bg-white/[0.04] p-8">
-              <h3 className="font-heading text-xl font-bold text-white">Self-Initiated Programmes</h3>
+            <div className="card p-8">
+              <h3 className="font-heading text-xl font-bold text-[var(--navy)]">Self-Initiated Programmes</h3>
               <ul className="mt-6 space-y-3.5">
                 {SELF_INITIATED.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-white/80">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[color:rgb(232_93_117_/_0.2)] text-[#e85d75]">
+                  <li key={item} className="flex items-center gap-3 text-sm text-[var(--text-muted)]">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--off-white)] text-[var(--navy)]">
                       <Icon name="check" size={12} />
                     </span>
                     {item}
@@ -253,7 +253,7 @@ export default function Home() {
                 ))}
               </ul>
 
-              <div className="relative mt-7 h-44 overflow-hidden rounded-xl border border-white/12">
+              <div className="relative mt-7 h-44 overflow-hidden rounded-xl border border-[var(--border-soft)]">
                 <Image
                   src="/field-images/livelihood/livelihood-project.jpg"
                   alt="Self-initiated rural projects"
@@ -265,14 +265,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 border-t border-white/12 pt-10 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 border-t border-[var(--border-soft)] pt-10 lg:grid-cols-4">
             {[
               ['80+', 'Health Camps Conducted'],
               ['3,000+', 'Financial Literacy Training'],
               ['2,800+', 'Food Packets Distributed'],
               ['300+', 'Women Trained in Employability Skills'],
             ].map(([value, label]) => (
-              <StatBlock key={label} value={value} label={label} variant="navy" />
+              <StatBlock key={label} value={value} label={label} />
             ))}
           </div>
         </div>
@@ -281,27 +281,7 @@ export default function Home() {
       {/* ---------------------------------------------------------------- PARTNERS */}
       <section className="section section-alt">
         <div className="container-x space-y-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Partnerships</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Our Strategic Partners
-            </h2>
-          </div>
-
-          <div className="space-y-8">
-            {PARTNER_GROUPS.map((group) => (
-              <div key={group.title}>
-                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-[0.14em] text-[var(--text-muted)]">
-                  {group.title}
-                </h3>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                  {group.partners.map((partner) => (
-                    <PartnerPill key={partner.slug} name={partner.name} logoSrc={partner.logoSrc} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <PartnerMarquee />
 
           <p className="text-center text-sm">
             Working together with <span className="font-semibold text-[var(--navy)]">14+ organisations</span> across
@@ -311,11 +291,11 @@ export default function Home() {
       </section>
 
       {/* ---------------------------------------------------------------- ROADMAP */}
-      <section className="section">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Future Plans</SectionEyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Our Roadmap Ahead</h2>
+            <SectionEyebrow className="mb-4 text-white">Future Plans</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">Our Roadmap Ahead</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -327,7 +307,7 @@ export default function Home() {
       </section>
 
       {/* ---------------------------------------------------------------- EXPLORE MORE */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-x space-y-10">
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">Explore More</SectionEyebrow>

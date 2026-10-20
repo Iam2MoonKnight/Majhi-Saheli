@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import StatCard from '@/components/StatCard';
 import PageHero from '@/components/PageHero';
+import SectionEyebrow from '@/components/SectionEyebrow';
 import { OPERATING_DISTRICTS } from '@/lib/organization';
 import { createPageMetadata } from '@/lib/seo';
 
@@ -100,9 +101,9 @@ export default function Impact() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
+      <section className="bg-[var(--navy)] py-16">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">
+          <h2 className="font-heading text-center text-3xl font-bold text-white md:text-4xl">
             Programme achievements
           </h2>
 
@@ -168,11 +169,11 @@ export default function Impact() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section bg-[var(--navy)]">
         <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-2">
           <div className="space-y-6">
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Geographic Reach</h2>
-            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+            <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">Geographic Reach</h2>
+            <p className="text-sm leading-relaxed text-white/80">
               The 2025-26 operating districts are {OPERATING_DISTRICTS.join(', ')}.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -193,32 +194,43 @@ export default function Impact() {
         </div>
       </section>
 
-      <section id="annual-reports" className="section section-alt">
+      <section id="annual-reports" className="section">
         <div className="container-x space-y-8">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">Annual Reports</h2>
-            <p className="mt-3 text-sm text-[var(--text-muted)]">Download the annual reports.</p>
+            <SectionEyebrow className="mb-4">Transparency</SectionEyebrow>
+            <h2 className="font-heading text-3xl font-bold text-[var(--navy)] md:text-4xl">Annual Reports</h2>
+            <p className="mx-auto mt-4 max-w-[65ch] text-base text-[var(--text-muted)] md:text-lg">
+              Download the annual reports.
+            </p>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
-              { label: '2023-24 Annual Report (Aug 2023 – Mar 2024)', file: 'msct-annual-report-2023-24.pdf' },
-              { label: '2024-25 Annual Report', file: 'msct-annual-report-2024-25.pdf' },
-              { label: '2025-26 Annual Report', file: 'msct-annual-report-2025-26.pdf' },
+              { year: '2023-24', description: 'Aug 2023 – Mar 2024', file: 'msct-annual-report-2023-24.pdf' },
+              { year: '2024-25', description: '', file: 'msct-annual-report-2024-25.pdf' },
+              { year: '2025-26', description: '', file: 'msct-annual-report-2025-26.pdf' },
             ].map((report) => (
               <Link
                 key={report.file}
                 href={`/reports/${report.file}`}
-                className="card card-hover flex items-center justify-between gap-4 p-6 font-semibold text-[var(--navy)]"
+                className="card card-hover flex flex-col items-start gap-5 rounded-xl p-6 shadow-sm"
               >
-                <span>{report.label}</span>
-                <span className="shrink-0 text-[var(--navy)]">PDF</span>
+                <div>
+                  <p className="inline-flex rounded-full bg-[color:rgb(232_93_117_/_0.12)] px-3 py-1 text-sm font-semibold uppercase tracking-wide text-[var(--navy)]">
+                    {report.year}
+                  </p>
+                  <h3 className="mt-2 font-heading text-xl font-semibold text-[var(--navy)]">Annual Report</h3>
+                  {report.description && <p className="mt-2 text-sm text-[var(--text-muted)]">{report.description}</p>}
+                </div>
+                <span className="inline-flex items-center rounded-full bg-[var(--navy)] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--navy-dark)]">
+                  PDF
+                </span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section-alt">
         <div className="container-x max-w-3xl text-center">
           <h2 className="font-heading text-2xl font-extrabold text-[var(--navy)]">Methodology</h2>
           <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">
@@ -227,15 +239,15 @@ export default function Impact() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="bg-[var(--navy)] py-16">
         <div className="editorial-section text-center space-y-6">
-          <h2 className="font-heading text-4xl font-bold text-[var(--navy)] md:text-5xl">Be part of this impact</h2>
-          <p className="mx-auto max-w-2xl text-lg text-[var(--text-muted)]">
+          <h2 className="font-heading text-4xl font-bold text-white md:text-5xl">Be part of this impact</h2>
+          <p className="mx-auto max-w-2xl text-lg text-white/80">
             Help us reach more women and communities. Every contribution fuels long-term, measurable change.
           </p>
           <a
             href="/donate"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]"
+            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--navy)] transition hover:bg-[var(--off-white)]"
           >
             Donate now
           </a>
