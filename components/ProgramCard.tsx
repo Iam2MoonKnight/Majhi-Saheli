@@ -13,7 +13,7 @@ const categoryConfig: Record<string, { color: string; bgColor: string; borderCol
     borderColor: 'border-[color:rgb(30_58_95_/_0.32)]',
   },
   health: {
-    color: 'text-[var(--accent)]',
+    color: 'text-[var(--navy)]',
     bgColor: 'bg-[color:rgb(232_93_117_/_0.12)]',
     borderColor: 'border-[color:rgb(232_93_117_/_0.35)]',
   },

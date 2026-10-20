@@ -227,7 +227,7 @@ export default function Contact() {
       {/* ---------------------------------------------------------- NEWSLETTER */}
       <section className="bg-[var(--navy)] py-16">
         <div className="container-x max-w-3xl text-center">
-          <SectionEyebrow className="mb-4">Stay Connected</SectionEyebrow>
+          <SectionEyebrow className="mb-4 text-white">Stay Connected</SectionEyebrow>
           <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
             Updates from the field
           </h2>

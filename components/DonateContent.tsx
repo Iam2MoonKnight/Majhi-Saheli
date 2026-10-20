@@ -50,7 +50,7 @@ export function DonateContent() {
                 <Icon name="heart" size={17} />
               </span>
               <div>
-                <p className="font-heading text-base font-extrabold text-[#e85d75]">{item.amount}</p>
+                <p className="font-heading text-base font-extrabold text-[var(--navy)]">{item.amount}</p>
                 <p className="mt-0.5 text-sm leading-relaxed">{item.impact}</p>
               </div>
             </div>

@@ -44,7 +44,7 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs, image, chil
                       {crumb.label}
                     </Link>
                   ) : (
-                    <span className="text-[#e85d75]">{crumb.label}</span>
+                    <span className="text-white">{crumb.label}</span>
                   )}
                   {idx < crumbs.length - 1 && <Icon name="chevron-right" size={13} className="text-white/35" />}
                 </li>
@@ -53,7 +53,7 @@ export default function PageHero({ eyebrow, title, subtitle, crumbs, image, chil
           </nav>
         )}
 
-        {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
+        {eyebrow && <p className="eyebrow mb-4 text-white">{eyebrow}</p>}
 
         <h1 className="max-w-4xl font-heading text-4xl font-extrabold leading-[1.08] text-white md:text-6xl">
           {title}

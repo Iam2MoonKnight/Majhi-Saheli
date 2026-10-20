@@ -139,7 +139,7 @@ export default function Impact() {
               <div key={story.name} className="space-y-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6">
                 <h3 className="font-heading text-2xl font-semibold text-[var(--navy)]">{story.name}</h3>
                 <p className="leading-relaxed text-[var(--text-muted)]">{story.story}</p>
-                <div className="inline-flex rounded-full bg-[color:rgb(232_93_117_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
+                <div className="inline-flex rounded-full bg-[color:rgb(232_93_117_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--navy)]">
                   {story.impact}
                 </div>
               </div>
@@ -211,7 +211,7 @@ export default function Impact() {
                 className="card card-hover flex items-center justify-between gap-4 p-6 font-semibold text-[var(--navy)]"
               >
                 <span>{report.label}</span>
-                <span className="shrink-0 text-[#e85d75]">PDF</span>
+                <span className="shrink-0 text-[var(--navy)]">PDF</span>
               </Link>
             ))}
           </div>
@@ -235,7 +235,7 @@ export default function Impact() {
           </p>
           <a
             href="/donate"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]"
           >
             Donate now
           </a>

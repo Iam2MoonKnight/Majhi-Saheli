@@ -86,7 +86,7 @@ export default function NewsPage() {
                   />
                 )}
                 <div className="p-7">
-                  <p className="font-mono-eyebrow text-xs font-bold text-[#e85d75]">{milestone.year}</p>
+                  <p className="font-mono-eyebrow text-xs font-bold text-[var(--navy)]">{milestone.year}</p>
                   <h3 className="mt-3 font-heading text-xl font-bold text-[var(--navy)]">{milestone.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{milestone.description}</p>
                 </div>

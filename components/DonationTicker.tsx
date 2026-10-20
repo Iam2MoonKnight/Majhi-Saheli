@@ -19,7 +19,7 @@ function Run() {
 /** Navy bar with a scrolling coral "Donate Now" marquee, shown above the navbar. */
 export default function DonationTicker() {
   return (
-    <div className="relative bg-[var(--navy-dark)] text-[#e85d75]">
+    <div className="relative bg-[var(--navy-dark)] text-white">
       <Link
         href="/donate"
         aria-label="Donate now"
@@ -32,7 +32,7 @@ export default function DonationTicker() {
         </div>
 
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center bg-[var(--navy-dark)] pl-6 pr-4">
-          <span className="inline-flex items-center gap-2 rounded-full bg-[#e85d75] px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-[0_6px_18px_rgba(232,93,117,0.4)] transition-transform group-hover:translate-x-0.5">
+          <span className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-[0_6px_18px_rgba(232,93,117,0.4)] transition-transform group-hover:translate-x-0.5">
             <Icon name="heart" size={12} />
             Give
           </span>

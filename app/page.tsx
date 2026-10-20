@@ -168,7 +168,7 @@ export default function Home() {
       <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Our Reach</SectionEyebrow>
+            <SectionEyebrow className="mb-4 text-white">Our Reach</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Serving communities across <span className="text-[#e85d75]">Maharashtra</span>
             </h2>
@@ -219,7 +219,7 @@ export default function Home() {
       <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-14">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">How The Work Happens</SectionEyebrow>
+            <SectionEyebrow className="mb-4 text-white">How The Work Happens</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Collaborative &amp; <span className="text-[#e85d75]">Self-Initiated</span> Work
             </h2>
@@ -356,7 +356,7 @@ export default function Home() {
       <section className="section bg-[var(--navy-dark)]">
         <div className="container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div className="space-y-6">
-            <SectionEyebrow className="mb-1">Support The Mission</SectionEyebrow>
+            <SectionEyebrow className="mb-1 text-white">Support The Mission</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Help us reach <span className="text-[#e85d75]">every community</span>
             </h2>
@@ -395,8 +395,8 @@ export default function Home() {
                   href="/donate"
                   className={`rounded-full border px-3 py-2.5 text-center text-xs font-bold transition-colors ${
                     idx === 0
-                      ? 'border-[#e85d75] bg-[#e85d75] text-white'
-                      : 'border-[var(--border-soft)] text-[var(--navy)] hover:border-[#e85d75] hover:text-[#e85d75]'
+                      ? 'border-[var(--navy)] bg-[var(--navy)] text-white'
+                      : 'border-[var(--border-soft)] text-[var(--navy)] hover:border-[var(--navy)] hover:text-[var(--navy)]'
                   }`}
                 >
                   {amount}

@@ -33,24 +33,24 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--navy-dark)] text-white/70">
+    <footer className="border-t border-[var(--border-soft)] bg-white text-[var(--text-muted)]">
       <div className="container-x py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-[66px] w-[66px] items-center justify-center rounded-xl bg-[#e85d75] font-heading text-lg font-extrabold text-white shadow-[0_10px_24px_rgba(232,93,117,0.35)]">
+              <div className="flex h-[66px] w-[66px] items-center justify-center rounded-xl bg-[var(--navy)] font-heading text-lg font-extrabold text-white shadow-[0_10px_24px_rgba(232,93,117,0.35)]">
                 MS
               </div>
               <span className="leading-tight">
-                <span className="block font-heading text-lg font-extrabold text-white">Mazi Saheli</span>
-                <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">
+                <span className="block font-heading text-lg font-extrabold text-[var(--navy)]">Mazi Saheli</span>
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
                   Charitable Trust
                 </span>
               </span>
             </div>
 
-            <p className="text-sm leading-relaxed text-white/60">
+            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
               Let&rsquo;s build a better tomorrow. Empowering rural women and communities across Maharashtra through
               education, health, livelihood and community-led development.
             </p>
@@ -66,7 +66,7 @@ export default function Footer() {
                     aria-disabled="true"
                     tabIndex={-1}
                     title="Coming soon"
-                    className="pointer-events-none flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 opacity-60"
+                    className="pointer-events-none flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-soft)] text-[var(--text-muted)] opacity-60"
                   >
                     <Icon name={social.icon} size={16} />
                   </a>
@@ -77,12 +77,12 @@ export default function Footer() {
 
           {/* Navigate */}
           <div>
-            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-white">Navigate</h3>
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-[var(--navy)]">Navigate</h3>
             <ul className="space-y-3 text-sm">
               {NAVIGATE.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="inline-flex items-center gap-2 transition-colors hover:text-[#e85d75]">
-                    <span className="h-px w-3 bg-[#e85d75]" />
+                  <Link href={item.href} className="inline-flex items-center gap-2 text-[var(--text)] transition-colors hover:text-[var(--navy)]">
+                    <span className="h-px w-3 bg-[#e85d75]" aria-hidden="true" />
                     {item.label}
                   </Link>
                 </li>
@@ -92,12 +92,12 @@ export default function Footer() {
 
           {/* Focus areas */}
           <div>
-            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-white">Focus Areas</h3>
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-[var(--navy)]">Focus Areas</h3>
             <ul className="space-y-3 text-sm">
               {FOCUS_AREAS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="inline-flex items-center gap-2 transition-colors hover:text-[#e85d75]">
-                    <span className="h-px w-3 bg-[#e85d75]" />
+                  <Link href={item.href} className="inline-flex items-center gap-2 text-[var(--text)] transition-colors hover:text-[var(--navy)]">
+                    <span className="h-px w-3 bg-[#e85d75]" aria-hidden="true" />
                     {item.label}
                   </Link>
                 </li>
@@ -107,39 +107,39 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-white">Contact</h3>
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-[var(--navy)]">Contact</h3>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <Icon name="map-pin" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <span>
+                <span className="text-[var(--text)]">
                   B/307 Girija Bhavan CHS, Narmada Nagar, Cabin Road, Bhayander East, Thane – 401105
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="map-pin" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <span>At Post Savarpada Village, Taluka Jawhar, District Palghar – 401603</span>
+                <span className="text-[var(--text)]">At Post Savarpada Village, Taluka Jawhar, District Palghar – 401603</span>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="mail" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <a href="mailto:connect@msct.org.in" className="transition-colors hover:text-[#e85d75]">
+                <a href="mailto:connect@msct.org.in" className="text-[var(--text)] transition-colors hover:text-[var(--navy)]">
                   connect@msct.org.in
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="phone" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <a href="tel:+917977669173" className="transition-colors hover:text-[#e85d75]">
+                <a href="tel:+917977669173" className="text-[var(--text)] transition-colors hover:text-[var(--navy)]">
                   +91 79776 69173
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="home" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <a href="https://www.msct.org.in" className="transition-colors hover:text-[#e85d75]">
+                <a href="https://www.msct.org.in" className="text-[var(--text)] transition-colors hover:text-[var(--navy)]">
                   www.msct.org.in
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="map-pin" size={17} className="mt-0.5 shrink-0 text-[#e85d75]" />
-                <span>Operating districts: {OPERATING_DISTRICTS.join(', ')}</span>
+                <span className="text-[var(--text)]">Operating districts: {OPERATING_DISTRICTS.join(', ')}</span>
               </li>
             </ul>
 
@@ -149,8 +149,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 text-xs text-white/50 md:flex-row">
+        <div className="mt-14 border-t border-[var(--border-soft)] pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 text-xs text-[var(--text-muted)] md:flex-row">
             <p>&copy; {currentYear} Mazi Saheli Charitable Trust. All rights reserved.</p>
             <div className="flex flex-wrap items-center gap-6">
               <a href="#" aria-disabled="true" tabIndex={-1} title="Link coming soon" className="pointer-events-none opacity-60">
@@ -159,7 +159,7 @@ export default function Footer() {
               <a href="#" aria-disabled="true" tabIndex={-1} title="Link coming soon" className="pointer-events-none opacity-60">
                 Terms of Service
               </a>
-              <Link href="/impact#annual-reports" className="transition-colors hover:text-[#e85d75]">
+              <Link href="/impact#annual-reports" className="transition-colors hover:text-[var(--navy)]">
                 Annual Report
               </Link>
             </div>

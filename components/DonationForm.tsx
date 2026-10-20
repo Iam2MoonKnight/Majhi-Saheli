@@ -146,7 +146,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
                 aria-pressed={active}
                 onClick={() => setFormData((prev) => ({ ...prev, frequency: value }))}
                 className={`rounded-full px-4 py-2.5 text-sm font-bold transition-colors ${
-                  active ? 'bg-[var(--navy)] text-white shadow' : 'text-[var(--navy)] hover:text-[#e85d75]'
+                  active ? 'bg-[var(--navy)] text-white shadow' : 'text-[var(--navy)] hover:text-[var(--navy-dark)]'
                 }`}
               >
                 {label}
@@ -173,7 +173,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
                       : 'border-[var(--border-soft)] hover:border-[#e85d75]'
                   }`}
                 >
-                  <span className={`block font-heading text-base font-extrabold ${active ? 'text-[#e85d75]' : 'text-[var(--navy)]'}`}>
+                  <span className="block font-heading text-base font-extrabold text-[var(--navy)]">
                     {amount.label}
                   </span>
                   <span className="mt-0.5 block text-[11px] leading-tight text-[var(--text-muted)]">{amount.note}</span>

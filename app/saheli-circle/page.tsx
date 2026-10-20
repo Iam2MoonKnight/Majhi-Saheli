@@ -189,7 +189,7 @@ export default function SaheliCircle() {
                       <span className="font-semibold">👥</span> {activity.attendees}
                     </p>
                   </div>
-                  <button className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]">
+                  <button className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[var(--navy)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]">
                     Learn More
                   </button>
                 </div>
@@ -234,7 +234,7 @@ export default function SaheliCircle() {
                 <h3 className="font-heading text-2xl font-semibold text-[var(--navy)]">{circle.title}</h3>
                 <p className="mb-4 mt-2 text-sm text-[var(--text-muted)]">📍 {circle.location}</p>
                 <p className="mb-6 leading-relaxed text-[var(--text-muted)]">{circle.story}</p>
-                <div className="inline-flex rounded-full bg-[color:rgb(232_93_117_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
+                <div className="inline-flex rounded-full bg-[color:rgb(232_93_117_/_0.15)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--navy)]">
                   {circle.impact}
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function SaheliCircle() {
             <p className="mx-auto mb-6 mt-4 max-w-2xl text-[var(--text-muted)]">
               Reach out to us today to find a circle near you or form a new one in your community.
             </p>
-            <button className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]">
+            <button className="inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]">
               Contact Us Now
             </button>
           </div>

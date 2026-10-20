@@ -184,7 +184,7 @@ export default async function Programs() {
           </p>
           <Link
             href="/donate"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]"
           >
             Donate now
           </Link>

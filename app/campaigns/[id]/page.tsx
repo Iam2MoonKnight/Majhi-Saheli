@@ -94,7 +94,7 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
                 </p>
                 <Link
                   href={`/donate?campaign=${campaign.id}`}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[var(--navy)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]"
                 >
                   Donate to this campaign
                 </Link>

@@ -61,7 +61,7 @@ export default async function BlogPage() {
                           day: 'numeric',
                         })}
                       </span>
-                      <span className="font-medium text-[var(--accent)] transition-transform group-hover:translate-x-1">Read more →</span>
+                      <span className="font-medium text-[var(--navy)] transition-transform group-hover:translate-x-1">Read more →</span>
                     </div>
                   </div>
                 </Link>

@@ -210,8 +210,8 @@ export default function ContactForm() {
                   onClick={() => setRole(option)}
                   className={`rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
                     active
-                      ? 'border-[#e85d75] bg-[#e85d75] text-white'
-                      : 'border-[var(--border-soft)] text-[var(--navy)] hover:border-[#e85d75] hover:text-[#e85d75]'
+                      ? 'border-[var(--navy)] bg-[var(--navy)] text-white'
+                      : 'border-[var(--border-soft)] text-[var(--navy)] hover:border-[var(--navy)] hover:text-[var(--navy)]'
                   }`}
                 >
                   {option}

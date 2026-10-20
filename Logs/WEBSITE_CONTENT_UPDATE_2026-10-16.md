@@ -238,3 +238,33 @@ At the user's request, the pre-existing diffs in seven `app/admin/` files and `l
 ### Note
 
 If the logo appears pixelated at its larger display size, supply a higher-resolution source (at least 2× the displayed dimensions). The current 1600×604px source looked crisp at the tested sizes; it was not upscaled programmatically.
+
+## Visual Refresh Run 1 — 2026-10-20
+
+**Phases completed:** 0 (audit), 2 (footer), 3 (header), 5 (hero blur removal), 6 (contrast), 7 (form)
+**Phases deferred to Run 2:** 1 (marquee), 4 (section alternation), 8 (annual reports hierarchy), 9 (flatness polish)
+
+### Changes Applied
+
+- Added the pre-change public-page inventory and contrast audit in `Logs/VISUAL_REFRESH_AUDIT_2026-10-20.md`.
+- Changed the public footer to a white surface with navy headings/monogram, dark copy and links, and retained its existing column structure in `components/Footer.tsx`.
+- Reordered the header actions to navigation, Donate, icon-only phone, and Login/user menu; changed the visible label to “Contact Us” and kept the existing logo sizing and auth handlers in `components/Navbar.tsx`.
+- Removed only the empty translucent blurred square from `components/HeroSection.tsx`; retained the ambient glow.
+- Changed public CTA buttons and text links to navy/navy-dark for normal and hover states; switched small labels on light surfaces to navy and preserved coral for large display emphasis and decoration.
+- Added an explicit white background, border, dark text, muted placeholder, and coral focus treatment to the newsletter field; changed its submit button to navy in `components/NewsletterForm.tsx`.
+- Applied related contrast corrections to public campaign, blog, gallery, impact, program, Saheli Circle, project, and donation controls/content.
+- No design-token values, auth behavior, admin pages, Supabase functions, or RLS policies were changed.
+
+### Verification
+
+- Build: ✅ `npm run build` passed; Supabase DNS lookups failed during static generation, and existing fallbacks allowed the build to complete.
+- TypeScript: ✅ `npx tsc --noEmit` passed.
+- Responsive: ✅ `/`, `/about`, and `/contact` rendered at 375 / 768 / 1280 / 1440px with no horizontal overflow.
+- Mobile menu: ✅ At 375px, the 159×60px logo, Donate, 40px phone control, and 40px menu button fit without overlap; opening the menu displayed its mobile navigation.
+- Desktop header: ✅ Logo and primary navigation fit at 1024 / 1280 / 1440px; phone icon has an accessible label with the number.
+- Footer/input/hero: ✅ Footer and newsletter input compute to white backgrounds; the hero empty blur box is absent.
+- Browser console: ✅ No console errors observed. Supabase fallback and unused-preload warnings were observed.
+- Focused ESLint: ✅ No errors in modified public UI files (the CSS file is ignored by the ESLint configuration).
+- Full `npm run lint`: ❌ Existing errors remain in untouched admin/dashboard/scripts files (11 errors and 27 warnings); no findings were reported for the modified public UI files.
+- Contrast failures remaining: 0 known in the audited public marketing surfaces; account/admin/dashboard surfaces remain outside this run’s scope.
+- Blockers: Supabase DNS was unreachable during build; the current fallback behavior worked. Repository-wide lint is blocked by the unrelated pre-existing findings above.

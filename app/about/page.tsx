@@ -360,7 +360,7 @@ export default function About() {
             </p>
           </div>
           <div className="card flex flex-col justify-center p-8">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#e85d75]">Registration</p>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--navy)]">Registration</p>
             <p className="mt-3 font-heading text-2xl font-bold text-[var(--navy)]">E-0013446(THN)</p>
             <p className="mt-2 text-sm text-[var(--text-muted)]">24.08.2023 | Headquartered in Mumbai</p>
           </div>
@@ -487,7 +487,7 @@ export default function About() {
       <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Operating Across Districts</SectionEyebrow>
+            <SectionEyebrow className="mb-4 text-white">Operating Across Districts</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Rooted in the <span className="text-[#e85d75]">community</span>
             </h2>
@@ -556,7 +556,7 @@ export default function About() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {howWeWork.map(([num, title, text]) => (
               <div key={title} className="card card-hover p-7">
-                <p className="font-mono-eyebrow text-xs font-bold text-[#e85d75]">{num}</p>
+                <p className="font-mono-eyebrow text-xs font-bold text-[var(--navy)]">{num}</p>
                 <h3 className="mt-3 font-heading text-lg font-extrabold tracking-wide text-[var(--navy)]">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed">{text}</p>
               </div>
@@ -625,7 +625,7 @@ export default function About() {
                     {area.icon}
                   </span>
                   <div>
-                    <p className="font-mono-eyebrow text-xs font-bold text-[#e85d75]">0{idx + 1}</p>
+                    <p className="font-mono-eyebrow text-xs font-bold text-[var(--navy)]">0{idx + 1}</p>
                     <h3 className="mt-1.5 font-heading text-xl font-bold text-[var(--navy)]">{area.title}</h3>
                   </div>
                 </div>
@@ -663,7 +663,7 @@ export default function About() {
                 className={`relative mb-6 md:flex ${idx % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}
               >
                 <div className="card ml-10 p-6 md:ml-0 md:w-[calc(50%-2.5rem)]">
-                  <p className="font-mono-eyebrow text-xs font-bold text-[#e85d75]">{year}</p>
+                  <p className="font-mono-eyebrow text-xs font-bold text-[var(--navy)]">{year}</p>
                   <p className="mt-2 text-sm leading-relaxed">{text}</p>
                 </div>
                 <span className="absolute left-2 top-7 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-white bg-[#e85d75] shadow md:left-1/2" />
@@ -777,12 +777,12 @@ export default function About() {
               ['Registrations', '80G and FCRA registered'],
             ].map(([label, value]) => (
               <div key={label} className="card p-6">
-                <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#e85d75]">{label}</dt>
+                <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--navy)]">{label}</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-[var(--navy)]">{value}</dd>
               </div>
             ))}
             <div className="card p-6 md:col-span-2">
-              <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#e85d75]">Operating Districts</dt>
+              <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--navy)]">Operating Districts</dt>
               <dd className="mt-2 text-sm leading-relaxed text-[var(--navy)]">{OPERATING_DISTRICTS.join(', ')}</dd>
             </div>
           </dl>
@@ -917,7 +917,7 @@ export default function About() {
       <section className="section bg-[var(--navy)]">
         <div className="container-x space-y-12">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionEyebrow className="mb-4">Impact</SectionEyebrow>
+            <SectionEyebrow className="mb-4 text-white">Impact</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
               Impact That <span className="text-[#e85d75]">Speaks</span> for Itself
             </h2>

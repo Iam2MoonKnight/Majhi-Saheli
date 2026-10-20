@@ -51,7 +51,7 @@ export default function ProjectsPage() {
                   </div>
                 )}
                 <div className="flex h-full flex-col p-6">
-                  <p className="font-mono-eyebrow text-xs font-bold text-[#e85d75]">{project.year}</p>
+                  <p className="font-mono-eyebrow text-xs font-bold text-[var(--navy)]">{project.year}</p>
                   <h3 className="mt-2 font-heading text-xl font-bold text-[var(--navy)]">{project.title}</h3>
                   <p className="mt-2 flex items-start gap-2 text-xs font-semibold text-[var(--text-muted)]">
                     <Icon name="map-pin" size={14} className="mt-0.5 shrink-0 text-[#e85d75]" />

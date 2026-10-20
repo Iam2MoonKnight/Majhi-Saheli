@@ -99,7 +99,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </p>
           <Link
             href="/donate"
-            className="inline-flex items-center rounded-full bg-[var(--accent)] px-8 py-3 font-semibold text-white transition hover:bg-[var(--accent-warm)]"
+            className="inline-flex items-center rounded-full bg-[var(--navy)] px-8 py-3 font-semibold text-white transition hover:bg-[var(--navy-dark)]"
           >
             Donate Now
             <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

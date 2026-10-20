@@ -12,7 +12,7 @@ export default function StatBlock({ value, label, description, variant = 'card',
     return (
       <div className={`text-center ${className}`}>
         <p className="stat-value text-4xl text-white md:text-5xl">{value}</p>
-        <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#e85d75]">{label}</p>
+        <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white">{label}</p>
         {description && <p className="mt-1 text-xs text-white/60">{description}</p>}
       </div>
     );

@@ -169,7 +169,7 @@ export default function Donate() {
                 <div key={row.label} className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-semibold text-[var(--navy)]">{row.label}</span>
-                    <span className="font-bold text-[#e85d75]">{row.pct}</span>
+                    <span className="font-bold text-[var(--navy)]">{row.pct}</span>
                   </div>
                   <div className="h-2 rounded-full bg-[var(--off-white)]">
                     <div className="h-2 rounded-full bg-[#e85d75]" style={{ width: row.pct }} />
@@ -245,7 +245,7 @@ export default function Donate() {
       {/* ----------------------------------------------------- NEWSLETTER */}
       <section className="bg-[var(--navy)] py-16">
         <div className="container-x max-w-3xl text-center">
-          <SectionEyebrow className="mb-4">Stay Updated</SectionEyebrow>
+          <SectionEyebrow className="mb-4 text-white">Stay Updated</SectionEyebrow>
           <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">Stay updated on our impact</h2>
           <p className="mt-4 text-white/75">
             Subscribe to receive monthly updates about programs and beneficiary stories.

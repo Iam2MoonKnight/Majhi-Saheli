@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/gallery', label: 'Gallery' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/contact', label: 'Contact Us' },
 ];
 
 const subscribeToHydration = () => () => {};
@@ -70,7 +70,7 @@ export default function Navbar() {
       <DonationTicker />
 
       <div className="border-b border-[var(--border-soft)] bg-white/95 backdrop-blur-md">
-        <div className="container-x flex h-[88px] items-center gap-4">
+        <div className="container-x flex h-[88px] items-center gap-2 px-3 sm:px-5 lg:px-12">
           <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="Mazi Saheli Charitable Trust — home">
             <Image src="/logo.png" alt="Mazi Saheli Charitable Trust" width={1600} height={604} className="h-[60px] w-auto object-contain" priority />
           </Link>
@@ -85,7 +85,7 @@ export default function Navbar() {
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
                   className={`relative px-3.5 py-2 text-[13px] font-bold uppercase tracking-[0.1em] transition-colors ${
-                    active ? 'text-[#e85d75]' : 'text-[var(--navy)] hover:text-[#e85d75]'
+                    active ? 'text-[var(--navy)]' : 'text-[var(--navy)] hover:text-[var(--navy-dark)]'
                   }`}
                 >
                   {item.label}
@@ -98,66 +98,81 @@ export default function Navbar() {
               );
             })}
 
-            <Link
-              href="tel:+917977669173"
-              className="ml-2 inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[var(--navy-dark)]"
-            >
-              <Icon name="phone" size={14} />
-              +91 79776 69173
-            </Link>
-
-            {mounted &&
-              (isLoggedIn ? (
-                <div className="group relative ml-1">
-                  <button
-                    type="button"
-                    aria-label="Open user menu"
-                    aria-haspopup="menu"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--navy)] text-sm font-bold text-white transition-colors hover:bg-[var(--navy-dark)]"
-                  >
-                    {userName ? userName.trim().charAt(0).toUpperCase() : 'U'}
-                  </button>
-
-                  <div className="pointer-events-none absolute right-0 mt-2 w-52 translate-y-1 rounded-xl border border-[var(--border-soft)] bg-white py-2 opacity-0 shadow-xl transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                    <div className="border-b border-[var(--border-soft)] px-4 py-3">
-                      <p className="text-[11px] uppercase tracking-wide text-[var(--text-muted)]">Signed in</p>
-                      <p className="truncate text-sm font-semibold text-[var(--navy)]">{userName || 'User'}</p>
-                    </div>
-                    <Link href="/profile" className="block px-4 py-2 text-sm text-[var(--navy)] hover:bg-[var(--off-white)]">
-                      Profile
-                    </Link>
-                    <Link href="/dashboard" className="block px-4 py-2 text-sm text-[var(--navy)] hover:bg-[var(--off-white)]">
-                      Dashboard
-                    </Link>
-                    <button onClick={handleLogout} className="w-full px-4 py-2 text-left text-sm text-[var(--navy)] hover:bg-[var(--off-white)]">
-                      Logout
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  href="/login"
-                  className="ml-1 rounded-full border border-[var(--border-soft)] px-4 py-2 text-sm font-semibold text-[var(--navy)] transition-colors hover:border-[var(--navy)] hover:bg-[var(--navy)] hover:text-white"
-                >
-                  Login
-                </Link>
-              ))}
-
             <Link href="/donate" className="btn btn-coral btn-sm ml-2">
               <Icon name="heart" size={14} />
               Donate
             </Link>
+
+            <Link
+              href="tel:+917977669173"
+              aria-label="Call us at +91 79776 69173"
+              title="+91 79776 69173"
+              className="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-soft)] text-[var(--navy)] transition-colors hover:bg-[var(--off-white)]"
+            >
+              <Icon name="phone" size={16} />
+            </Link>
+
+            {mounted && isLoggedIn && (
+              <div className="group relative ml-1">
+                <button
+                  type="button"
+                  aria-label="Open user menu"
+                  aria-haspopup="menu"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--navy)] text-sm font-bold text-white transition-colors hover:bg-[var(--navy-dark)]"
+                >
+                  {userName ? userName.trim().charAt(0).toUpperCase() : 'U'}
+                </button>
+
+                <div className="pointer-events-none absolute right-0 mt-2 w-52 translate-y-1 rounded-xl border border-[var(--border-soft)] bg-white py-2 opacity-0 shadow-xl transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                  <div className="border-b border-[var(--border-soft)] px-4 py-3">
+                    <p className="text-[11px] uppercase tracking-wide text-[var(--text-muted)]">Signed in</p>
+                    <p className="truncate text-sm font-semibold text-[var(--navy)]">{userName || 'User'}</p>
+                  </div>
+                  <Link href="/profile" className="block px-4 py-2 text-sm text-[var(--navy)] hover:bg-[var(--off-white)]">
+                    Profile
+                  </Link>
+                  <Link href="/dashboard" className="block px-4 py-2 text-sm text-[var(--navy)] hover:bg-[var(--off-white)]">
+                    Dashboard
+                  </Link>
+                  <button onClick={handleLogout} className="w-full px-4 py-2 text-left text-sm text-[var(--navy)] hover:bg-[var(--off-white)]">
+                    Logout
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {mounted && !isLoggedIn && (
+              <Link
+                href="/login"
+                className="ml-1 rounded-full px-3 py-2 text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--navy-dark)]"
+              >
+                Login
+              </Link>
+            )}
           </nav>
 
-          {/* Mobile toggle */}
-          <button
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-soft)] text-[var(--navy)] transition-colors hover:bg-[var(--off-white)] lg:hidden"
-            onClick={() => setOpenMenuPath(isOpen ? null : pathname)}
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isOpen}
-          >
-            <Icon name={isOpen ? 'close' : 'menu'} size={22} />
-          </button>
+          <div className="ml-auto flex shrink-0 items-center gap-1 lg:hidden">
+            <Link href="/donate" className="btn btn-coral btn-sm px-2.5 py-2">
+              <Icon name="heart" size={14} />
+              Donate
+            </Link>
+            <Link
+              href="tel:+917977669173"
+              aria-label="Call us at +91 79776 69173"
+              title="+91 79776 69173"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-soft)] text-[var(--navy)] transition-colors hover:bg-[var(--off-white)]"
+            >
+              <Icon name="phone" size={16} />
+            </Link>
+            <button
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-soft)] text-[var(--navy)] transition-colors hover:bg-[var(--off-white)]"
+              onClick={() => setOpenMenuPath(isOpen ? null : pathname)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+            >
+              <Icon name={isOpen ? 'close' : 'menu'} size={22} />
+            </button>
+          </div>
         </div>
 
         {isOpen && (
@@ -169,7 +184,7 @@ export default function Navbar() {
                   href={item.href}
                   className={`block rounded-lg px-4 py-3 text-sm font-semibold transition-colors ${
                     isActive(item.href)
-                      ? 'bg-[color:rgb(232_93_117_/_0.08)] text-[#e85d75]'
+                      ? 'bg-[color:rgb(232_93_117_/_0.08)] text-[var(--navy)]'
                       : 'text-[var(--navy)] hover:bg-[var(--off-white)]'
                   }`}
                 >
@@ -202,15 +217,6 @@ export default function Navbar() {
                   </Link>
                 ))}
 
-              <Link href="tel:+917977669173" className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[var(--navy)] hover:bg-[var(--off-white)]">
-                <Icon name="phone" size={15} />
-                +91 79776 69173
-              </Link>
-
-              <Link href="/donate" className="btn btn-coral mt-2 w-full">
-                <Icon name="heart" size={15} />
-                Donate
-              </Link>
             </nav>
           </div>
         )}

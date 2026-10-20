@@ -55,7 +55,7 @@ export default function GalleryPage() {
                 aria-pressed={activeFilter === filter.key}
                 className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition ${
                   activeFilter === filter.key
-                    ? 'border-[var(--accent)] bg-[var(--accent)] text-white'
+                    ? 'border-[var(--navy)] bg-[var(--navy)] text-white'
                     : 'border-[var(--border-soft)] bg-[var(--surface)] text-[var(--navy)] hover:border-[var(--accent)]'
                 }`}
               >
@@ -121,7 +121,7 @@ export default function GalleryPage() {
           <h2 className="font-heading text-4xl font-bold">Ready to make a difference?</h2>
           <p className="text-white/85">Every contribution supports programmes you just saw in action across Maharashtra.</p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="/donate" className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-warm)]">
+            <Link href="/donate" className="inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--navy-dark)]">
               Donate now
             </Link>
             <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-white px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[var(--navy)]">

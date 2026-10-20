@@ -40,7 +40,7 @@ export default async function HeroSection() {
         <div className="space-y-7">
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-[#e85d75] pulse-dot" />
-            <span className="eyebrow">Empowering Rural Maharashtra</span>
+            <span className="eyebrow text-white">Empowering Rural Maharashtra</span>
           </span>
 
           <h1 className="font-heading text-[2.4rem] font-extrabold leading-[1.05] text-white sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
@@ -86,14 +86,13 @@ export default async function HeroSection() {
               className="h-full w-full object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#14293f] via-[#14293f]/55 to-transparent p-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full bg-[#e85d75] px-4 py-2.5 shadow-[0_10px_24px_rgba(232,93,117,0.4)]">
+              <div className="inline-flex items-center gap-2.5 rounded-full bg-[var(--navy)] px-4 py-2.5 shadow-[0_10px_24px_rgba(232,93,117,0.4)]">
                 <span className="font-heading text-2xl font-extrabold leading-none text-white">8</span>
                 <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-white">Districts Served</span>
               </div>
             </div>
           </div>
 
-          <div className="float-soft absolute -bottom-6 -left-6 hidden h-24 w-24 rounded-2xl border border-[color:rgb(232_93_117_/_0.45)] bg-[color:rgb(232_93_117_/_0.18)] backdrop-blur-sm lg:block" />
         </div>
       </div>
     </section>
