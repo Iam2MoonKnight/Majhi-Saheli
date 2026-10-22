@@ -126,7 +126,9 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
       }
 
       const { load } = await import('@cashfreepayments/cashfree-js');
-      const mode = process.env.NEXT_PUBLIC_CASHFREE_ENV === 'production' ? 'production' : 'sandbox';
+      const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+      const envConfig = (process.env.NEXT_PUBLIC_CASHFREE_ENV || '').toLowerCase();
+      const mode = envConfig === 'sandbox' || (isLocalhost && !envConfig) ? 'sandbox' : 'production';
       const cashfree = await load({ mode });
 
       if (!cashfree) {

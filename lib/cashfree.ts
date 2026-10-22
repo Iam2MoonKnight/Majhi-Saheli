@@ -7,7 +7,12 @@ const CASHFREE_API_VERSION = '2023-08-01';
 let cashfreeClient: Cashfree | null = null;
 
 const resolveCashfreeEnvironment = () => {
-  const env = (process.env.NEXT_PUBLIC_CASHFREE_ENV || 'sandbox').toLowerCase();
+  const env = (
+    process.env.NEXT_PUBLIC_CASHFREE_ENV ||
+    process.env.NEXT_PRIVATE_CASHFREE_ENV ||
+    process.env.CASHFREE_ENV ||
+    'production'
+  ).toLowerCase();
   return env === 'production' ? CFEnvironment.PRODUCTION : CFEnvironment.SANDBOX;
 };
 
@@ -18,7 +23,7 @@ export const getCashfreeClient = () => {
   const secretKey = process.env.CASHFREE_SECRET_KEY;
 
   if (!appId || !secretKey) {
-    throw new Error('Cashfree credentials are not configured.');
+    throw new Error('Cashfree credentials are not configured. Please check CASHFREE_APP_ID and CASHFREE_SECRET_KEY.');
   }
 
   cashfreeClient = new Cashfree(

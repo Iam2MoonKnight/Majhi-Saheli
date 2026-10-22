@@ -76,11 +76,12 @@ export async function POST(req: NextRequest) {
       name: body.name?.trim(),
     };
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    if (!siteUrl) {
-      console.error('[Cashfree create-order] NEXT_PUBLIC_SITE_URL is not configured.');
-      return NextResponse.json({ error: 'NEXT_PUBLIC_SITE_URL is required.' }, { status: 500 });
-    }
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined) ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ||
+      req.headers.get('origin') ||
+      req.nextUrl.origin;
 
     const supabase = getSupabaseServiceClient() as unknown as SupabaseDonationClient;
 
