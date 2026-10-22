@@ -118,9 +118,10 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
       });
 
       const createOrderPayload = (await createOrderResponse.json()) as CashfreeCreateOrderResponse | { error?: string };
+      const createOrderError = !('paymentSessionId' in createOrderPayload) ? createOrderPayload.error : undefined;
 
       if (!createOrderResponse.ok || !('paymentSessionId' in createOrderPayload)) {
-        throw new Error(createOrderPayload.error || 'Unable to create payment order.');
+        throw new Error(createOrderError || 'Unable to create payment order.');
       }
 
       const { load } = await import('@cashfreepayments/cashfree-js');

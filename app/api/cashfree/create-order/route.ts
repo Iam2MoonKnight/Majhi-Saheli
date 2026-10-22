@@ -16,7 +16,8 @@ const normalizeSiteUrl = (value: string) => value.replace(/\/+$/, '');
 
 const generateOrderId = () => `MSCT-${Date.now()}-${randomBytes(4).toString('hex').toUpperCase()}`;
 
-const isValidAmount = (amount: unknown) => typeof amount === 'number' && Number.isFinite(amount) && amount > 0;
+const isValidAmount = (amount: unknown): amount is number =>
+  typeof amount === 'number' && Number.isFinite(amount) && amount > 0;
 
 const isValidEmail = (email: unknown): email is string => typeof email === 'string' && EMAIL_REGEX.test(email.trim());
 
@@ -24,6 +25,31 @@ const isValidPhone = (phone: unknown): phone is string => typeof phone === 'stri
 
 const isValidDonationId = (donationId: unknown): donationId is string =>
   typeof donationId === 'string' && UUID_REGEX.test(donationId);
+
+type DonationOrderRow = {
+  id: string;
+  amount: number;
+  currency: string;
+  email: string;
+  payment_status: string | null;
+  cashfree_order_id: string | null;
+  cashfree_payment_session_id: string | null;
+};
+
+type DonationSelectQuery = {
+  select(columns: string): DonationSelectQuery;
+  eq(column: string, value: unknown): DonationSelectQuery;
+  single(): Promise<{ data: DonationOrderRow | null; error: { message: string } | null }>;
+};
+
+type DonationUpdateQuery = {
+  update(values: Record<string, unknown>): DonationUpdateQuery;
+  eq(column: string, value: unknown): Promise<{ error: { message: string } | null }>;
+};
+
+type SupabaseDonationClient = {
+  from(table: 'donations'): DonationSelectQuery & DonationUpdateQuery;
+};
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,17 +63,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid request payload.' }, { status: 400 });
     }
 
+    const validatedBody: CashfreeCreateOrderRequestBody = {
+      donationId: body.donationId,
+      amount: body.amount,
+      currency: 'INR',
+      email: body.email.trim(),
+      phone: body.phone.trim(),
+      name: body.name?.trim(),
+    };
+
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
     if (!siteUrl) {
       return NextResponse.json({ error: 'NEXT_PUBLIC_SITE_URL is required.' }, { status: 500 });
     }
 
-    const supabase = getSupabaseServiceClient();
+    const supabase = getSupabaseServiceClient() as unknown as SupabaseDonationClient;
 
     const { data: donation, error: donationError } = await supabase
       .from('donations')
       .select('id, amount, currency, email, payment_status, cashfree_order_id, cashfree_payment_session_id')
-      .eq('id', body.donationId)
+      .eq('id', validatedBody.donationId)
       .single();
 
     if (donationError || !donation) {
@@ -58,12 +93,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Only INR donations are supported for this checkout.' }, { status: 400 });
     }
 
-    if (Math.abs(Number(donation.amount || 0) - body.amount) > 0.01) {
+    if (Math.abs(Number(donation.amount || 0) - validatedBody.amount) > 0.01) {
       return NextResponse.json({ error: 'Donation amount mismatch.' }, { status: 400 });
     }
 
     const donationEmail = typeof donation.email === 'string' ? donation.email.trim().toLowerCase() : '';
-    if (donationEmail && donationEmail !== body.email.trim().toLowerCase()) {
+    if (donationEmail && donationEmail !== validatedBody.email.toLowerCase()) {
       return NextResponse.json({ error: 'Donation email mismatch.' }, { status: 400 });
     }
 
@@ -73,10 +108,10 @@ export async function POST(req: NextRequest) {
 
     if (donation.cashfree_order_id && donation.cashfree_payment_session_id) {
       const existingResponse: CashfreeCreateOrderResponse = {
-        donationId: body.donationId,
+        donationId: validatedBody.donationId,
         cashfreeOrderId: donation.cashfree_order_id,
         paymentSessionId: donation.cashfree_payment_session_id,
-        orderAmount: body.amount,
+        orderAmount: validatedBody.amount,
         orderCurrency: 'INR',
       };
       return NextResponse.json(existingResponse);
@@ -84,31 +119,31 @@ export async function POST(req: NextRequest) {
 
     const cashfreeOrderId = generateOrderId();
     const baseUrl = normalizeSiteUrl(siteUrl);
-    const returnUrl = `${baseUrl}/payment-status?donation_id=${encodeURIComponent(body.donationId)}&order_id=${encodeURIComponent(cashfreeOrderId)}`;
+    const returnUrl = `${baseUrl}/payment-status?donation_id=${encodeURIComponent(validatedBody.donationId)}&order_id=${encodeURIComponent(cashfreeOrderId)}`;
     const notifyUrl = `${baseUrl}/api/cashfree/webhook`;
 
     const cashfreeOrder = await createCashfreeOrder(
       {
         order_id: cashfreeOrderId,
-        order_amount: body.amount,
+        order_amount: validatedBody.amount,
         order_currency: 'INR',
         customer_details: {
-          customer_id: body.donationId,
-          customer_email: body.email.trim(),
-          customer_phone: body.phone.trim(),
-          customer_name: body.name?.trim() || undefined,
+          customer_id: validatedBody.donationId,
+          customer_email: validatedBody.email,
+          customer_phone: validatedBody.phone,
+          customer_name: validatedBody.name || undefined,
         },
         order_meta: {
           return_url: returnUrl,
           notify_url: notifyUrl,
         },
-        order_note: `Donation ${body.donationId}`,
+        order_note: `Donation ${validatedBody.donationId}`,
         order_tags: {
-          donation_id: body.donationId,
+          donation_id: validatedBody.donationId,
           source: 'majhi-saheli-web',
         },
       },
-      body.donationId
+      validatedBody.donationId
     );
 
     if (!cashfreeOrder.order_id || !cashfreeOrder.payment_session_id) {
@@ -126,17 +161,17 @@ export async function POST(req: NextRequest) {
         gateway_response: cashfreeOrder,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', body.donationId);
+      .eq('id', validatedBody.donationId);
 
     if (updateError) {
       return NextResponse.json({ error: 'Failed to persist Cashfree order metadata.' }, { status: 500 });
     }
 
     const responsePayload: CashfreeCreateOrderResponse = {
-      donationId: body.donationId,
+      donationId: validatedBody.donationId,
       cashfreeOrderId: cashfreeOrder.order_id,
       paymentSessionId: cashfreeOrder.payment_session_id,
-      orderAmount: Number(cashfreeOrder.order_amount || body.amount),
+      orderAmount: Number(cashfreeOrder.order_amount || validatedBody.amount),
       orderCurrency: (cashfreeOrder.order_currency as 'INR') || 'INR',
     };
 

@@ -41,10 +41,11 @@ export default function PaymentStatusContent() {
         });
 
         const payload = (await response.json()) as CashfreeVerifyOrderResponse | { error?: string };
+        const payloadError = !('paymentStatus' in payload) ? payload.error : undefined;
 
         if (!response.ok || !('paymentStatus' in payload)) {
           setState('failed');
-          setMessage(payload.error || 'We could not verify your payment right now.');
+          setMessage(payloadError || 'We could not verify your payment right now.');
           return;
         }
 

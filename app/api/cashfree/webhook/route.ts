@@ -16,6 +16,27 @@ type CashfreeWebhookPayload = {
   };
 };
 
+type DonationWebhookRow = {
+  id: string;
+  payment_status: string | null;
+  cashfree_order_id: string | null;
+};
+
+type DonationSelectQuery = {
+  select(columns: string): DonationSelectQuery;
+  eq(column: string, value: unknown): DonationSelectQuery;
+  limit(count: number): Promise<{ data: DonationWebhookRow[] | null }>;
+};
+
+type DonationUpdateQuery = {
+  update(values: Record<string, unknown>): DonationUpdateQuery;
+  eq(column: string, value: unknown): DonationUpdateQuery;
+};
+
+type SupabaseDonationClient = {
+  from(table: 'donations'): DonationSelectQuery & DonationUpdateQuery;
+};
+
 const getHeader = (req: NextRequest, key: string) => req.headers.get(key) || req.headers.get(key.toLowerCase());
 
 export async function POST(req: NextRequest) {
@@ -39,9 +60,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ received: true, ignored: 'No order id in webhook.' });
     }
 
-    const supabase = getSupabaseServiceClient();
+    const supabase = getSupabaseServiceClient() as unknown as SupabaseDonationClient;
 
-    let donationQuery = supabase
+    const donationQuery = supabase
       .from('donations')
       .select('id, payment_status, cashfree_order_id')
       .eq('cashfree_order_id', orderId)
@@ -101,11 +122,13 @@ export async function POST(req: NextRequest) {
       updatePayload.paid_at = new Date().toISOString();
     }
 
-    const { error: updateError } = await supabase
+    const { error: updateError } = (await (supabase
       .from('donations')
       .update(updatePayload)
       .eq('id', donation.id)
-      .eq('payment_status', donation.payment_status ?? 'pending');
+      .eq('payment_status', donation.payment_status ?? 'pending') as unknown as Promise<{
+      error: { message: string } | null;
+    }>));
 
     if (updateError) {
       return NextResponse.json({ error: 'Failed to apply webhook update.' }, { status: 500 });
