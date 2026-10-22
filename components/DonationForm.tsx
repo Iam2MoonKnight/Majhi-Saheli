@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { submitDonation } from '@/lib/supabase-functions';
 import { getSafeSession } from '@/lib/supabase';
 import Icon from './icons';
+import type { CashfreeCreateOrderResponse } from '@/lib/types';
 
 interface DonationFormProps {
   onSuccess?: () => void;
@@ -21,17 +22,18 @@ const AMOUNTS = [
 ];
 
 const PAYMENT_METHODS = ['Card', 'UPI', 'Net Banking', 'Bank Transfer'];
+const PHONE_REGEX = /^\+?[0-9]{10,15}$/;
 
 export default function DonationForm({ onSuccess, campaignLabel, initialMessage }: DonationFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [dedicate, setDedicate] = useState(false);
   const [dedication, setDedication] = useState('');
   const defaultMessage = initialMessage ?? '';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     amount: '',
     currency: 'INR',
     frequency: 'one_time' as 'one_time' | 'recurring',
@@ -52,9 +54,25 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
     e.preventDefault();
     setError(null);
 
+    if (formData.frequency === 'recurring') {
+      // TODO: Add Cashfree subscription flow when monthly donation support is implemented.
+      setError('Monthly donations are coming soon. Please select One-time donation for now.');
+      return;
+    }
+
     const amount = parseFloat(formData.amount);
     if (!formData.amount || Number.isNaN(amount) || amount <= 0) {
       setError('Please choose an amount or enter a custom amount.');
+      return;
+    }
+
+    if (formData.currency !== 'INR') {
+      setError('Online checkout is currently available only for INR donations.');
+      return;
+    }
+
+    if (!PHONE_REGEX.test(formData.phone.trim())) {
+      setError('Please enter a valid phone number.');
       return;
     }
 
@@ -71,7 +89,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         .filter(Boolean)
         .join('\n');
 
-      await submitDonation({
+      const donation = await submitDonation({
         user_id: userId,
         name: formData.name,
         email: formData.email,
@@ -79,24 +97,61 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         currency: formData.currency,
         frequency: formData.frequency,
         message: message || undefined,
+        payment_status: 'pending',
+        payment_gateway: 'cashfree',
+        status: 'pending',
       });
 
-      setSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        amount: '',
-        currency: 'INR',
-        frequency: 'one_time',
-        message: defaultMessage,
+      const createOrderResponse = await fetch('/api/cashfree/create-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          donationId: donation.id,
+          amount,
+          currency: 'INR',
+          email: formData.email,
+          phone: formData.phone,
+          name: formData.name,
+        }),
       });
-      setDedicate(false);
-      setDedication('');
 
-      setTimeout(() => {
-        setSuccess(false);
-        onSuccess?.();
-      }, 4000);
+      const createOrderPayload = (await createOrderResponse.json()) as CashfreeCreateOrderResponse | { error?: string };
+
+      if (!createOrderResponse.ok || !('paymentSessionId' in createOrderPayload)) {
+        throw new Error(createOrderPayload.error || 'Unable to create payment order.');
+      }
+
+      const { load } = await import('@cashfreepayments/cashfree-js');
+      const mode = process.env.NEXT_PUBLIC_CASHFREE_ENV === 'production' ? 'production' : 'sandbox';
+      const cashfree = await load({ mode });
+
+      if (!cashfree) {
+        throw new Error('Unable to load the payment SDK. Please try again.');
+      }
+
+      const checkoutResult = await cashfree.checkout({
+        paymentSessionId: createOrderPayload.paymentSessionId,
+        redirectTarget: '_self',
+      });
+
+      if (checkoutResult?.error) {
+        if ((checkoutResult.error.code || '').toUpperCase() === 'USER_DROPPED') {
+          setError('Checkout was closed. Your donation remains pending; you can retry anytime.');
+          return;
+        }
+
+        throw new Error(checkoutResult.error.message || 'Unable to start checkout.');
+      }
+
+      if (!checkoutResult?.redirect) {
+        window.location.assign(
+          `/payment-status?donation_id=${encodeURIComponent(createOrderPayload.donationId)}&order_id=${encodeURIComponent(createOrderPayload.cashfreeOrderId)}`
+        );
+      }
+
+      onSuccess?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -114,13 +169,6 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
           <span>
             Supporting campaign: <span className="font-bold text-[var(--navy)]">{campaignLabel}</span>
           </span>
-        </div>
-      )}
-
-      {success && (
-        <div className="mt-6 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">
-          <Icon name="check" size={17} className="mt-0.5 shrink-0" />
-          <span>Thank you for your donation! Your support helps us empower rural women.</span>
         </div>
       )}
 
@@ -159,14 +207,14 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         <div>
           <p className="field-label">Select Amount</p>
           <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-            {AMOUNTS.map((amount) => {
-              const active = formData.amount === amount.value;
+            {AMOUNTS.map((amountOption) => {
+              const active = formData.amount === amountOption.value;
               return (
                 <button
-                  key={amount.value}
+                  key={amountOption.value}
                   type="button"
                   aria-pressed={active}
-                  onClick={() => setFormData((prev) => ({ ...prev, amount: amount.value }))}
+                  onClick={() => setFormData((prev) => ({ ...prev, amount: amountOption.value }))}
                   className={`rounded-xl border p-3 text-left transition-colors ${
                     active
                       ? 'border-[#e85d75] bg-[color:rgb(232_93_117_/_0.08)]'
@@ -174,9 +222,9 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
                   }`}
                 >
                   <span className="block font-heading text-base font-extrabold text-[var(--navy)]">
-                    {amount.label}
+                    {amountOption.label}
                   </span>
-                  <span className="mt-0.5 block text-[11px] leading-tight text-[var(--text-muted)]">{amount.note}</span>
+                  <span className="mt-0.5 block text-[11px] leading-tight text-[var(--text-muted)]">{amountOption.note}</span>
                 </button>
               );
             })}
@@ -245,6 +293,22 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
               placeholder="your@email.com"
             />
           </div>
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="field-label">
+            Phone Number *
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            className="field"
+            placeholder="10-digit mobile number"
+          />
         </div>
 
         {/* Payment methods (informational) */}
@@ -316,7 +380,7 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         </button>
 
         <p className="text-center text-xs text-[var(--text-muted)]">
-          This form stores donation records securely. Payment gateway integration (Razorpay, Stripe) can be added later.
+          You&apos;ll be redirected to secure Cashfree checkout to complete this donation.
         </p>
       </form>
     </div>

@@ -115,7 +115,7 @@ export const getSession = async () => {
 };
 
 // Donation functions
-export const submitDonation = async (donation: Omit<Donation, 'id' | 'created_at'>) => {
+export const submitDonation = async (donation: Omit<Donation, 'id' | 'created_at' | 'updated_at'>) => {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured');
   }
@@ -129,6 +129,8 @@ export const submitDonation = async (donation: Omit<Donation, 'id' | 'created_at
   if (error) throw error;
   return data;
 };
+
+export const createDonation = submitDonation;
 
 export const submitContactMessage = async (contact: {
   name: string;
