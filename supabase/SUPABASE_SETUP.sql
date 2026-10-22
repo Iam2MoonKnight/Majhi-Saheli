@@ -16,11 +16,14 @@ CREATE TABLE users (
 CREATE TABLE donations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES users(id) ON DELETE SET NULL,
+  name TEXT,
+  email TEXT,
+  phone TEXT,
   amount DECIMAL(10, 2) NOT NULL,
   currency TEXT DEFAULT 'INR' CHECK (currency IN ('INR', 'USD', 'EUR')),
   frequency TEXT DEFAULT 'one_time' CHECK (frequency IN ('one_time', 'recurring')),
   message TEXT,
-  status TEXT DEFAULT 'completed' CHECK (status IN ('pending', 'completed', 'failed')),
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed')),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -72,7 +75,7 @@ CREATE POLICY "Users can insert their own profile"
 -- RLS Policies for donations table
 CREATE POLICY "Users can read their own donations"
   ON donations FOR SELECT
-  USING (auth.uid() = user_id OR user_id IS NULL);
+  USING (auth.uid() IS NOT NULL AND auth.uid() = user_id);
 
 CREATE POLICY "Admins can read all donations"
   ON donations FOR SELECT

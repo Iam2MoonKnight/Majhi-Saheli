@@ -22,7 +22,6 @@ const AMOUNTS = [
 ];
 
 const PAYMENT_METHODS = ['Card', 'UPI', 'Net Banking', 'Bank Transfer'];
-const PHONE_REGEX = /^\+?[0-9]{10,15}$/;
 
 export default function DonationForm({ onSuccess, campaignLabel, initialMessage }: DonationFormProps) {
   const [loading, setLoading] = useState(false);
@@ -71,8 +70,9 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
       return;
     }
 
-    if (!PHONE_REGEX.test(formData.phone.trim())) {
-      setError('Please enter a valid phone number.');
+    const cleanPhone = formData.phone.replace(/\D/g, '').slice(-10);
+    if (cleanPhone.length !== 10) {
+      setError('Please enter a valid 10-digit mobile number.');
       return;
     }
 
@@ -91,8 +91,9 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
 
       const donation = await submitDonation({
         user_id: userId,
-        name: formData.name,
-        email: formData.email,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: cleanPhone,
         amount,
         currency: formData.currency,
         frequency: formData.frequency,
@@ -111,9 +112,9 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
           donationId: donation.id,
           amount,
           currency: 'INR',
-          email: formData.email,
-          phone: formData.phone,
-          name: formData.name,
+          email: formData.email.trim(),
+          phone: cleanPhone,
+          name: formData.name.trim(),
         }),
       });
 

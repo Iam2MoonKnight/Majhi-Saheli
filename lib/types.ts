@@ -5,6 +5,7 @@ export interface Donation {
   user_id: string | null;
   name: string;
   email: string;
+  phone?: string;
   amount: number;
   currency: string;
   frequency: 'one_time' | 'recurring';

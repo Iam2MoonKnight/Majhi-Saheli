@@ -19,6 +19,7 @@ type DonationVerifyRow = {
   id: string;
   payment_status: PaymentStatus | null;
   cashfree_order_id: string | null;
+  cashfree_payment_session_id?: string | null;
 };
 
 type DonationSelectQuery = {
@@ -30,6 +31,8 @@ type DonationSelectQuery = {
 type DonationUpdateQuery = {
   update(values: Record<string, unknown>): DonationUpdateQuery;
   eq(column: string, value: unknown): DonationUpdateQuery;
+  is(column: string, value: unknown): DonationUpdateQuery;
+  then: Promise<{ error: { message: string } | null }>['then'];
 };
 
 type SupabaseDonationClient = {
@@ -65,11 +68,12 @@ export async function POST(req: NextRequest) {
 
     const { data: donation, error: donationError } = await supabase
       .from('donations')
-      .select('id, payment_status, cashfree_order_id')
+      .select('id, payment_status, cashfree_order_id, cashfree_payment_session_id')
       .eq('id', validatedBody.donationId)
       .single();
 
     if (donationError || !donation) {
+      console.error('[Cashfree verify-order] Donation lookup failed:', donationError?.message);
       return NextResponse.json({ error: 'Donation not found.' }, { status: 404 });
     }
 
@@ -91,7 +95,7 @@ export async function POST(req: NextRequest) {
         payment_status: mappedStatus,
         status: mapLegacyDonationStatus(mappedStatus),
         cashfree_order_id: order.order_id || validatedBody.cashfreeOrderId,
-        cashfree_payment_session_id: order.payment_session_id || null,
+        cashfree_payment_session_id: order.payment_session_id || donation.cashfree_payment_session_id || null,
         gateway_response: order,
         updated_at: new Date().toISOString(),
       };
@@ -100,15 +104,21 @@ export async function POST(req: NextRequest) {
         updatePayload.paid_at = new Date().toISOString();
       }
 
-      const { error: updateError } = (await (supabase
+      let updateQuery = (supabase
         .from('donations')
         .update(updatePayload)
-        .eq('id', validatedBody.donationId)
-        .eq('payment_status', donation.payment_status ?? 'pending') as unknown as Promise<{
-        error: { message: string } | null;
-      }>));
+        .eq('id', validatedBody.donationId)) as any;
+
+      if (donation.payment_status) {
+        updateQuery = updateQuery.eq('payment_status', donation.payment_status);
+      } else {
+        updateQuery = updateQuery.is('payment_status', null);
+      }
+
+      const { error: updateError } = await updateQuery;
 
       if (updateError) {
+        console.error('[Cashfree verify-order] Failed to update donation payment status:', updateError.message);
         return NextResponse.json({ error: 'Failed to update donation payment status.' }, { status: 500 });
       }
 
@@ -122,15 +132,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(buildResponse(validatedBody.donationId, validatedBody.cashfreeOrderId, mappedStatus, message));
     }
 
+    const alreadyFinalizedMessage =
+      donation.payment_status === 'paid'
+        ? 'Payment completed successfully.'
+        : 'Payment status already confirmed.';
+
     return NextResponse.json(
       buildResponse(
         validatedBody.donationId,
         validatedBody.cashfreeOrderId,
         donation.payment_status as PaymentStatus,
-        'Payment was already finalized earlier.'
+        alreadyFinalizedMessage
       )
     );
-  } catch {
-    return NextResponse.json({ error: 'Unable to verify payment status.' }, { status: 500 });
+  } catch (err: unknown) {
+    console.error('[Cashfree verify-order error]:', err);
+    const message = err instanceof Error ? err.message : 'Unable to verify payment status.';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -31,6 +31,8 @@ type DonationSelectQuery = {
 type DonationUpdateQuery = {
   update(values: Record<string, unknown>): DonationUpdateQuery;
   eq(column: string, value: unknown): DonationUpdateQuery;
+  is(column: string, value: unknown): DonationUpdateQuery;
+  then: Promise<{ error: { message: string } | null }>['then'];
 };
 
 type SupabaseDonationClient = {
@@ -45,16 +47,18 @@ export async function POST(req: NextRequest) {
     const timestamp = getHeader(req, 'x-webhook-timestamp');
 
     if (!signature || !timestamp) {
+      console.warn('[Cashfree webhook] Missing webhook signature headers.');
       return NextResponse.json({ error: 'Missing webhook signature headers.' }, { status: 401 });
     }
 
     const rawBody = await req.text();
     const event = verifyCashfreeWebhookSignature(signature, rawBody, timestamp);
 
-    const payload = event.object as CashfreeWebhookPayload;
-    const webhookType = payload.type || event.type;
-    const orderId = payload.data?.order?.order_id;
-    const donationIdFromTag = payload.data?.order?.order_tags?.donation_id;
+    const rawEvent = (event as any);
+    const payload = (rawEvent?.object || rawEvent || {}) as CashfreeWebhookPayload;
+    const webhookType = payload?.type || rawEvent?.type;
+    const orderId = payload?.data?.order?.order_id;
+    const donationIdFromTag = payload?.data?.order?.order_tags?.donation_id;
 
     if (!orderId) {
       return NextResponse.json({ received: true, ignored: 'No order id in webhook.' });
@@ -122,20 +126,27 @@ export async function POST(req: NextRequest) {
       updatePayload.paid_at = new Date().toISOString();
     }
 
-    const { error: updateError } = (await (supabase
+    let updateQuery = (supabase
       .from('donations')
       .update(updatePayload)
-      .eq('id', donation.id)
-      .eq('payment_status', donation.payment_status ?? 'pending') as unknown as Promise<{
-      error: { message: string } | null;
-    }>));
+      .eq('id', donation.id)) as any;
+
+    if (donation.payment_status) {
+      updateQuery = updateQuery.eq('payment_status', donation.payment_status);
+    } else {
+      updateQuery = updateQuery.is('payment_status', null);
+    }
+
+    const { error: updateError } = await updateQuery;
 
     if (updateError) {
+      console.error('[Cashfree webhook] Failed to apply webhook update:', updateError.message);
       return NextResponse.json({ error: 'Failed to apply webhook update.' }, { status: 500 });
     }
 
     return NextResponse.json({ received: true, updated: true });
-  } catch {
+  } catch (err: unknown) {
+    console.error('[Cashfree webhook error]:', err);
     return NextResponse.json({ error: 'Invalid webhook signature or payload.' }, { status: 401 });
   }
 }
