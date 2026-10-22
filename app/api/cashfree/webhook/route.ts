@@ -41,6 +41,15 @@ type SupabaseDonationClient = {
 
 const getHeader = (req: NextRequest, key: string) => req.headers.get(key) || req.headers.get(key.toLowerCase());
 
+// Health check / verification GET handler
+export async function GET() {
+  return NextResponse.json({
+    status: 'ok',
+    endpoint: 'Cashfree Webhook Handler',
+    message: 'Endpoint is active and listening for Cashfree POST webhook events.',
+  });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const signature = getHeader(req, 'x-webhook-signature');
@@ -54,11 +63,22 @@ export async function POST(req: NextRequest) {
     const rawBody = await req.text();
     const event = verifyCashfreeWebhookSignature(signature, rawBody, timestamp);
 
-    const rawEvent = (event as any);
-    const payload = (rawEvent?.object || rawEvent || {}) as CashfreeWebhookPayload;
-    const webhookType = payload?.type || rawEvent?.type;
+    let payload: CashfreeWebhookPayload = {};
+    try {
+      payload = JSON.parse(rawBody);
+    } catch {
+      const rawEvent = event as any;
+      payload = (rawEvent?.object || rawEvent || {}) as CashfreeWebhookPayload;
+    }
+
+    const webhookType = payload?.type || (event as any)?.type;
     const orderId = payload?.data?.order?.order_id;
     const donationIdFromTag = payload?.data?.order?.order_tags?.donation_id;
+
+    // Handle Cashfree test notifications from dashboard
+    if (webhookType === 'TEST_NOTIFICATION' || (webhookType && webhookType.includes('TEST')) || orderId?.startsWith('test_')) {
+      return NextResponse.json({ received: true, test: true, message: 'Test notification verified successfully.' });
+    }
 
     if (!orderId) {
       return NextResponse.json({ received: true, ignored: 'No order id in webhook.' });
@@ -147,6 +167,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true, updated: true });
   } catch (err: unknown) {
     console.error('[Cashfree webhook error]:', err);
-    return NextResponse.json({ error: 'Invalid webhook signature or payload.' }, { status: 401 });
+    const message = err instanceof Error ? err.message : 'Invalid webhook signature or payload.';
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }
