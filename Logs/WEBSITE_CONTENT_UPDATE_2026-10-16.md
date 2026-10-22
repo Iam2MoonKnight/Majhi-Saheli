@@ -341,3 +341,38 @@ Each entry lists the section’s previous background followed by its new backgro
 - Marquee: ✅ All 31 logos and all 31 screen-reader names rendered on Home and About; all logos loaded, 40s animation ran, hover paused it, and reduced motion produced a wrapping static row without overflow.
 - Annual reports: ✅ Annual Reports and Focus Areas H2 computed to 36px; all three report downloads returned HTTP 200.
 - Contrast: ✅ Five spot-checked section headings measured 11.63:1 on their rendered backgrounds. Small coral text/white-on-coral controls were avoided in favor of contrast-safe navy text and buttons.
+
+## Cashfree Integration Update — 2026-10-22
+
+Implemented one-time donation Cashfree Payment Gateway backend and checkout flow with additive Supabase migration support, while preserving existing routes, visual system, and admin/auth areas.
+
+### Added
+
+- `supabase/CASHFREE_INTEGRATION.sql` (additive-only donation columns + order-id index)
+- `lib/cashfree.ts` (server-only Cashfree SDK client)
+- `lib/supabase-admin.ts` (server-only Supabase service-role client)
+- `lib/payment-status.ts` (payment-status mapping helpers)
+- `app/api/cashfree/create-order/route.ts`
+- `app/api/cashfree/verify-order/route.ts`
+- `app/api/cashfree/webhook/route.ts`
+- `app/payment-status/page.tsx`
+- `components/PaymentStatusContent.tsx`
+- `types/cashfree-js.d.ts`
+- `Logs/CASHFREE_SETUP_GUIDE.md`
+
+### Updated
+
+- `components/DonationForm.tsx` now:
+  - blocks Monthly with a clear coming-soon message,
+  - creates donation row first with pending payment state,
+  - creates Cashfree order,
+  - opens Cashfree checkout using `@cashfreepayments/cashfree-js`,
+  - keeps pending state on checkout close/cancel,
+  - redirects to payment-status flow instead of showing final thank-you pre-payment.
+- `lib/types.ts` with optional Cashfree donation fields and Cashfree request/response types.
+- `lib/supabase-functions.ts` donation helper typing and `createDonation` alias.
+
+### Validation notes
+
+- Verification results are documented from this implementation run only where actually executed.
+- Route-count reporting is omitted here until explicitly measured in this run.

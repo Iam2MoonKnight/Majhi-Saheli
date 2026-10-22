@@ -1,3 +1,5 @@
+export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'expired' | 'refunded';
+
 export interface Donation {
   id: string;
   user_id: string | null;
@@ -7,7 +9,44 @@ export interface Donation {
   currency: string;
   frequency: 'one_time' | 'recurring';
   message?: string;
+  status?: 'pending' | 'completed' | 'failed';
+  payment_status?: PaymentStatus;
+  payment_gateway?: string;
+  cashfree_order_id?: string;
+  cashfree_payment_session_id?: string;
+  gateway_response?: unknown;
+  paid_at?: string | null;
   created_at: string;
+  updated_at?: string;
+}
+
+export interface CashfreeCreateOrderRequestBody {
+  donationId: string;
+  amount: number;
+  currency: 'INR';
+  email: string;
+  phone: string;
+  name?: string;
+}
+
+export interface CashfreeCreateOrderResponse {
+  donationId: string;
+  cashfreeOrderId: string;
+  paymentSessionId: string;
+  orderAmount: number;
+  orderCurrency: 'INR';
+}
+
+export interface CashfreeVerifyOrderRequestBody {
+  donationId: string;
+  cashfreeOrderId: string;
+}
+
+export interface CashfreeVerifyOrderResponse {
+  donationId: string;
+  cashfreeOrderId: string;
+  paymentStatus: PaymentStatus;
+  message: string;
 }
 
 export interface User {
