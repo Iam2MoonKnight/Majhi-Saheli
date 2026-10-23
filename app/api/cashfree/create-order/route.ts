@@ -83,6 +83,16 @@ export async function POST(req: NextRequest) {
       req.headers.get('origin') ||
       req.nextUrl.origin;
 
+    // Cashfree production API requires https:// — replace http://localhost with the
+    // configured app URL so local dev still works with production Cashfree keys.
+    const resolvedSiteUrl = (() => {
+      const base = normalizeSiteUrl(siteUrl);
+      if (base.startsWith('http://') && process.env.NEXT_PUBLIC_APP_URL) {
+        return normalizeSiteUrl(process.env.NEXT_PUBLIC_APP_URL);
+      }
+      return base;
+    })();
+
     const supabase = getSupabaseServiceClient() as unknown as SupabaseDonationClient;
 
     const { data: donation, error: donationError } = await supabase
@@ -133,9 +143,8 @@ export async function POST(req: NextRequest) {
     }
 
     const cashfreeOrderId = generateOrderId();
-    const baseUrl = normalizeSiteUrl(siteUrl);
-    const returnUrl = `${baseUrl}/payment-status?donation_id=${encodeURIComponent(validatedBody.donationId)}&order_id=${encodeURIComponent(cashfreeOrderId)}`;
-    const notifyUrl = `${baseUrl}/api/cashfree/webhook`;
+    const returnUrl = `${resolvedSiteUrl}/payment-status?donation_id=${encodeURIComponent(validatedBody.donationId)}&order_id=${encodeURIComponent(cashfreeOrderId)}`;
+    const notifyUrl = `${resolvedSiteUrl}/api/cashfree/webhook`;
 
     const cashfreeOrder = await createCashfreeOrder(
       {

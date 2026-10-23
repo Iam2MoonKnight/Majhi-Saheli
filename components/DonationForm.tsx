@@ -79,8 +79,10 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
     setLoading(true);
 
     try {
+      console.log('[Donate] Step 1: getting session');
       const session = await getSafeSession();
       const userId = session?.user?.id || null;
+      console.log('[Donate] Step 2: userId =', userId);
 
       const message = [
         formData.message || null,
@@ -89,19 +91,34 @@ export default function DonationForm({ onSuccess, campaignLabel, initialMessage 
         .filter(Boolean)
         .join('\n');
 
-      const donation = await submitDonation({
-        user_id: userId,
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        phone: cleanPhone,
-        amount,
-        currency: formData.currency,
-        frequency: formData.frequency,
-        message: message || undefined,
-        payment_status: 'pending',
-        payment_gateway: 'cashfree',
-        status: 'pending',
-      });
+      console.log('[Donate] Step 3: calling submitDonation with amount =', amount, 'currency =', formData.currency);
+      let donation;
+      try {
+        const donationRes = await fetch('/api/donations/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_id: userId,
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            phone: cleanPhone,
+            amount,
+            currency: formData.currency,
+            frequency: formData.frequency,
+            message: message || undefined,
+          }),
+        });
+        if (!donationRes.ok) {
+          const errBody = await donationRes.json();
+          throw new Error(errBody.error || 'Failed to save donation');
+        }
+        donation = await donationRes.json();
+        console.log('[Donate] Step 4: donation created, id =', donation?.id);
+      } catch (donationErr: unknown) {
+        console.error('[Donate] ❌ submitDonation failed:', donationErr);
+        const msg = donationErr instanceof Error ? donationErr.message : JSON.stringify(donationErr);
+        throw new Error(`Failed to save donation: ${msg}`);
+      }
 
       const createOrderResponse = await fetch('/api/cashfree/create-order', {
         method: 'POST',
