@@ -12,14 +12,14 @@ import { OPERATING_DISTRICTS } from '@/lib/organization';
 import { createPageMetadata } from '@/lib/seo';
 
 const aboutDescription =
-  'Mazi Saheli Charitable Trust (MSCT) builds empowered, resilient, self-reliant rural communities across Maharashtra through community-led development in health, education, livelihood, and environmental sustainability.';
+  'Mazi Saheli Charitable Trust (MSCT) builds empowered, resilient, self-reliant communities across Maharashtra through community-led development in health, education, livelihood, and environmental sustainability.';
 
 export const metadata: Metadata = {
   ...createPageMetadata('About Us', aboutDescription),
   keywords: [
     'Mazi Saheli Charitable Trust',
     'MSCT',
-    'rural development NGO',
+    'community development NGO',
     'women empowerment',
     'health camps',
     'financial literacy',
@@ -30,11 +30,10 @@ export const metadata: Metadata = {
 
 const FOCUS_AREAS: { icon: IconName; label: string; href: string }[] = [
   { icon: 'heart-pulse', label: 'Health', href: '/focus-areas/health' },
-  { icon: 'briefcase', label: 'Livelihood', href: '/focus-areas/livelihood' },
+  { icon: 'briefcase', label: 'Community Development through Livelihood', href: '/focus-areas/livelihood' },
   { icon: 'graduation-cap', label: 'Education', href: '/focus-areas/education' },
   { icon: 'apple', label: 'Nutrition', href: '/focus-areas/nutrition' },
   { icon: 'users', label: 'Women Empowerment', href: '/focus-areas/women-empowerment' },
-  { icon: 'home', label: 'Community Development', href: '/focus-areas/community-development' },
 ];
 
 const CORE_VALUES: { icon: IconName; title: string; text: string }[] = [
@@ -85,7 +84,7 @@ const ROADMAP: { index: string; title: string; text: string; icon: IconName }[] 
   {
     index: '03',
     title: 'Multi-Specialty Hospital Venture',
-    text: 'Build affordable, quality health services for rural communities.',
+    text: 'Build affordable, quality health services for communities.',
     icon: 'building',
   },
 ];
@@ -98,7 +97,7 @@ const wholePicture = [
   ],
   [
     '🏥',
-    'Rural Healthcare & Financial Debt',
+    'Community Healthcare & Financial Access',
     'When a parent falls sick without access to basic preventive healthcare, one emergency clinic visit can push the entire family into high-interest debt.',
   ],
   [
@@ -122,7 +121,7 @@ const howWeWork = [
   [
     '02',
     'CONNECT',
-    'Help often exists, but the road to get it is broken. We bridge that gap by linking rural households directly to government welfare schemes, fair banking, local clinics, schools, and honest markets.',
+    'Help often exists, but the road to get it is broken. We bridge that gap by linking households directly to government welfare schemes, fair banking, local clinics, schools, and honest markets.',
   ],
   [
     '03',
@@ -141,7 +140,7 @@ const pathway = [
     icon: '🏥',
     title: 'Health and Well-Being',
     intro:
-      'A healthy home is where everything begins. When a parent falls sick or a child is in pain, work stops, schooling pauses, and family savings vanish overnight. We work to bridge the healthcare divide for vulnerable and underserved rural populations:',
+      'A healthy home is where everything begins. When a parent falls sick or a child is in pain, work stops, schooling pauses, and family savings vanish overnight. We work to bridge the healthcare divide for vulnerable and underserved communities:',
     points: [
       [
         'Care That Reaches the Last Mile',
@@ -161,7 +160,7 @@ const pathway = [
     icon: '📚',
     title: 'Education and Human Development',
     intro:
-      'Education does so much more than teach reading and writing — it helps a child look beyond the boundaries of their village and imagine an entirely different future. To help rural children not just enroll, but stay curious and finish school, MSCT invests directly in the places where they learn:',
+      'Education does so much more than teach reading and writing — it helps a child look beyond the boundaries of their village and imagine an entirely different future. To help children not just enroll, but stay curious and finish school, MSCT invests directly in the places where they learn:',
     points: [
       [
         'Inspiring School Environments',
@@ -185,7 +184,7 @@ const pathway = [
       ],
       [
         'Skills for the Real World',
-        'We offer hands-on vocational and employability training for rural youth and women, helping them turn emerging local opportunities into stable, dignified incomes.',
+        'We offer hands-on vocational and employability training for youth and women, helping them turn emerging local opportunities into stable, dignified incomes.',
       ],
       [
         'Standing With Smallholder Farmers',
@@ -197,7 +196,7 @@ const pathway = [
     icon: '🌿',
     title: 'Environmental Sustainability & Ecological Resilience',
     intro:
-      'In rural communities, life is tied directly to the earth. If the groundwater drops or the soil erodes, families feel it immediately at the dinner table. You cannot lift a community out of poverty while ignoring the land they rely on. MSCT embeds ecological balance into every program:',
+      'In many communities, life is tied directly to the earth. If the groundwater drops or the soil erodes, families feel it immediately at the dinner table. You cannot lift a community out of poverty while ignoring the land they rely on. MSCT embeds ecological balance into every program:',
     points: [
       [
         'Protecting Water and Land',
@@ -238,7 +237,7 @@ const selfReliantVision = [
   ],
   [
     'Last-Mile Access',
-    'Essential government welfare schemes and public services finally bridge the gap, seamlessly reaching the rural families who need them most.',
+    'Essential government welfare schemes and public services finally bridge the gap, seamlessly reaching the families who need them most.',
   ],
   [
     'Protected Ecosystems',
@@ -248,8 +247,8 @@ const selfReliantVision = [
 
 const milestones: [string, string][] = [
   ['24.08.2023', 'Mazi Saheli Charitable Trust was registered under Registration No. E-0013446(THN).'],
-  ['2024-25', 'The annual report records 21,962 lives reached.'],
-  ['2025-26', 'The annual report records 32,000+ lives impacted across communities.'],
+  ['2024-25', '21,962 lives impacted cumulatively as of March 2025.'],
+  ['2025-26', '32,000+ lives impacted cumulatively as of March 2026.'],
 ];
 
 const BOARD_MEMBERS = [
@@ -270,18 +269,18 @@ export default function About() {
         eyebrow="About Mazi Saheli"
         title={
           <>
-            Building a stronger, more <span className="text-[#e85d75]">self-reliant</span> rural India
+            Building a stronger, more <span className="text-[#e85d75]">self-reliant</span> India
           </>
         }
       >
         <div className="max-w-3xl space-y-4 text-white/80">
           <p className="text-white/80">
             At Mazi Saheli Charitable Trust (MSCT), our goal is straightforward: to help build empowered, resilient, and
-            self-reliant rural communities so that families don&rsquo;t have to wait on outside help to live with dignity and
+            self-reliant communities so that families don&rsquo;t have to wait on outside help to live with dignity and
             security.
           </p>
           <p className="text-white/70">
-            We&rsquo;ve come to learn that real sustainable rural development isn&rsquo;t about dropping off supplies and
+            We&rsquo;ve come to learn that real sustainable community development isn&rsquo;t about dropping off supplies and
             walking away. It&rsquo;s when village families have the knowledge, the tools, and the confidence to solve their
             own problems, take advantage of new opportunities, and shape their own futures.
           </p>
@@ -315,24 +314,24 @@ export default function About() {
           <div className="space-y-6">
             <SectionEyebrow>Who We Are</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Empowering communities across <span className="text-[#e85d75]">8 districts</span>
+              Empowering communities <span className="text-[#e85d75]">across Maharashtra</span>
             </h2>
             <p className="leading-relaxed">
               Mazi Saheli Charitable Trust is a grassroots organisation serving high-risk and bridge populations across
-              Thane, Palghar, Mumbai, Pune, Raigad, Ratnagiri, Solapur, and Dharashiv.
+              Thane, Palghar, Mumbai, Pune, Raigad, Ratnagiri, Solapur, Dharashiv, and Hingoli.
             </p>
             <p className="leading-relaxed">
               We believe every person deserves access to opportunities and resources for a fulfilling life. Our mission is
-              to empower rural communities through essential services in education, healthcare, livelihood, and social
+              to empower communities through essential services in education, healthcare, livelihood, and social
               development.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-4">
               {[
-                ['32,000+', 'Lives Impacted (2025-26)'],
-                ['22', 'Partners'],
-                ['8', 'Districts'],
-                ['80+', 'Health Camps (2025-26)'],
+                ['32,000+', 'Lives impacted since 2023'],
+                ['306+', 'Health camps over 3 years'],
+                ['1,821+', 'Breast cancer screenings over 3 years'],
+                ['14,143+', 'Women reached via financial literacy over 3 years'],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-xl bg-[var(--off-white)] p-4">
                   <p className="stat-value text-2xl text-[var(--navy)]">{value}</p>
@@ -352,11 +351,11 @@ export default function About() {
           <div className="space-y-5">
             <SectionEyebrow>Our Founding Story</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Bridging urban and rural development gaps
+              Bridging the access gap
             </h2>
             <p className="leading-relaxed">
               Mazi Saheli Charitable Trust was registered on 24.08.2023 under Registration No. E-0013446(THN).
-              Headquartered in Mumbai, MSCT was founded to bridge urban-rural development gaps across Maharashtra.
+              Headquartered in Mumbai, MSCT was founded to bridge access gaps across Maharashtra.
             </p>
           </div>
           <div className="card flex flex-col justify-center p-8">
@@ -399,7 +398,7 @@ export default function About() {
               </p>
               <p>
                 This year, with the support of our partners, volunteers, and well-wishers, we crossed a significant
-                milestone-impacting 32,000+ lives across communities.
+                milestone-impacting 32,000+ lives cumulatively since 2023 across communities.
               </p>
               <p>
                 Thank you for being a part. Together, let&apos;s continue to build a more inclusive, sustainable, and
@@ -419,7 +418,7 @@ export default function About() {
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">Our Vision &amp; Mission</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              A self-reliant rural India
+              A self-reliant India
             </h2>
           </div>
 
@@ -430,7 +429,7 @@ export default function About() {
               </span>
               <h3 className="mt-6 font-heading text-2xl font-bold text-white">Our Vision</h3>
               <p className="mt-4 text-sm leading-relaxed text-white/75">
-                Rural communities flourishing with resilience, dignity, and opportunity-where every individual,
+                Communities flourishing with resilience, dignity, and opportunity-where every individual,
                 especially women, children, and marginalized groups, have equitable access to quality education,
                 healthcare, sustainable livelihoods, and a healthy environment to lead a fulfilling and empowered life.
               </p>
@@ -442,7 +441,7 @@ export default function About() {
               </span>
               <h3 className="mt-6 font-heading text-2xl font-bold text-white">Our Mission</h3>
               <p className="mt-4 text-sm leading-relaxed text-white/75">
-                To empower rural communities by providing access to quality education, holistic healthcare, and resources
+                To empower communities by providing access to quality education, holistic healthcare, and resources
                 that promote women&apos;s empowerment and economic independence. We design need-based programs, build local
                 capacity, and collaborate with partners to create sustainable solutions that uplift lives and strengthen
                 communities.
@@ -458,7 +457,7 @@ export default function About() {
           <div className="mx-auto max-w-3xl text-center">
             <SectionEyebrow className="mb-4">Area of Interest</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Six focus areas, one connected mission
+              Five focus areas, one connected mission
             </h2>
             <p className="mt-4">
               The four threads of our pathway run through everything we do. On the ground, that work shows up across six
@@ -514,7 +513,7 @@ export default function About() {
               Why we look at the whole picture
             </h2>
             <p>
-              When you spend time on the ground in rural villages, one thing becomes obvious: life&rsquo;s hardships are
+              When you spend time on the ground in villages, one thing becomes obvious: life&rsquo;s hardships are
               deeply tangled together. You cannot fix one problem without touching the others:
             </p>
           </div>
@@ -604,7 +603,7 @@ export default function About() {
           <div className="max-w-3xl space-y-4">
             <SectionEyebrow>Our Pathway</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Our pathway to rural community empowerment
+              Our pathway to community empowerment
             </h2>
             <p>
               Real change rarely fits into a neat template. When you spend time in a village, you quickly realize that you
@@ -773,8 +772,8 @@ export default function About() {
                 'B/307 Girija Bhavan CHS, Narmada Nagar, Cabin Road, Bhayander East, Thane – 401105',
               ],
               ['Field Office', 'At Post Savarpada Village, Taluka Jawhar, District Palghar – 401603'],
-              ['Target Group', 'Tribal communities, women, children, rural communities, orphans'],
-              ['Registrations', '80G and FCRA registered'],
+              ['Target Group', 'Tribal communities, women, children, underserved communities, orphans'],
+              ['Registrations', '80G registered'],
             ].map(([label, value]) => (
               <div key={label} className="card p-6">
                 <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--navy)]">{label}</dt>
@@ -798,8 +797,8 @@ export default function About() {
               Beneficiaries to partners
             </h2>
             <p>
-              At Mazi Saheli Charitable Trust, rural families are not regarded as beneficiaries but rather the creators and
-              rightful owners of their development journey. Real sustainable development in rural areas starts from
+              At Mazi Saheli Charitable Trust, families are not regarded as beneficiaries but rather the creators and
+              rightful owners of their development journey. Real sustainable development in underserved areas starts from
               listening. Our role is to sit down with communities, understand their daily realities, identify the gaps, and
               build practical solutions side-by-side. To do this, we bring everyone to the table: village families, dedicated
               frontline workers, local government institutions, technical experts, and forward-thinking CSR partnerships.
@@ -825,7 +824,7 @@ export default function About() {
                 Strengthening local systems, not building parallel ones
               </h3>
               <p className="mt-4 text-sm leading-relaxed">
-                The foundation of rural life is already there — rooted in Gram Panchayats, village schools, local health
+                The foundation of community life is already there — rooted in Gram Panchayats, village schools, local health
                 providers, self-help collectives, and grassroots leadership. Rather than setting up temporary, parallel
                 structures that collapse the moment funding stops, our goal is institutional strengthening: improving
                 coordination, upgrading local skills, and bridging the gap so families can easily access the public resources
@@ -848,7 +847,7 @@ export default function About() {
                 Cultivating local leadership and grassroots agency
               </h3>
               <p className="mt-4 text-sm leading-relaxed">
-                Real rural community empowerment ultimately depends on the people who stay behind to carry the torch long
+                Real community empowerment ultimately depends on the people who carry the work forward long
                 after we step back. That&rsquo;s why MSCT places deep focus on discovering everyday local champions, mentoring
                 frontline workers, encouraging open community dialogue, and helping local institutions take proud ownership
                 of their own development priorities.
@@ -876,11 +875,11 @@ export default function About() {
           <div className="max-w-3xl space-y-4">
             <SectionEyebrow>The Vision</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              What a self-reliant rural India looks like
+              What a self-reliant India looks like
             </h2>
             <p>
               When we look to the future, we don&rsquo;t just see projects completed — we see villages thriving on their own
-              strength. We are working toward a rural India where:
+              strength. We are working toward an India where:
             </p>
           </div>
 
@@ -904,7 +903,7 @@ export default function About() {
               seek CSR partnerships and collaborative funding that go far beyond sponsoring isolated, short-term projects.
               We warmly welcome institutional partners, donors, and philanthropists who share our belief in community-led
               development, ready to invest deeply in strengthening the local people, grassroots institutions, and public
-              systems that make rural community empowerment a permanent reality.
+              systems that make community empowerment a permanent reality.
             </p>
             <p className="mt-6 font-heading text-lg font-bold text-[var(--navy)]">
               Walking with communities. Building capability. Enabling self-reliance. Creating a better tomorrow.
@@ -925,10 +924,10 @@ export default function About() {
 
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
             {[
-              ['224', 'Medical Camps'],
-              ['21K+', 'Lives Touched'],
-              ['152', 'Villages Reached'],
-              ['223', 'Expert Sessions'],
+              ['32,000+', 'Lives impacted since 2023'],
+              ['306+', 'Health camps over 3 years'],
+              ['2,900+', 'Eye screenings over 3 years'],
+              ['14,143+', 'Women reached via financial literacy over 3 years'],
             ].map(([value, label]) => (
               <StatBlock key={label} value={value} label={label} variant="navy" />
             ))}
@@ -942,7 +941,7 @@ export default function About() {
           <PartnerMarquee />
 
           <p className="text-center text-sm">
-            The 2025-26 annual report records 22 partners, including four dedicated CSR partners.
+            Our partners collaborate across programme areas throughout Maharashtra.
           </p>
         </div>
       </section>

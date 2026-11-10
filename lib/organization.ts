@@ -7,6 +7,7 @@ export const OPERATING_DISTRICTS = [
   'Ratnagiri',
   'Solapur',
   'Dharashiv',
+  'Hingoli',
 ];
 
 export const PARTNERS = [

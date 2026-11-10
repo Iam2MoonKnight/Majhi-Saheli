@@ -14,43 +14,46 @@ export default function Impact() {
   const impactPrograms = [
     {
       icon: '📚',
-      title: 'Health Achievements (2025-26)',
+      title: 'Health & Menstrual Health (3 years)',
       points: [
-        { label: 'Health Camps Conducted', value: '80+' },
-        { label: 'General Health Beneficiaries', value: '2,500+' },
-        { label: 'Eye Screenings & Cataract Surgeries', value: '800+ & 70+' },
-        { label: 'Women Screened for Breast Cancer', value: '1,821+' },
-        { label: 'Reusable Pads Distributed', value: '10,000+' },
-        { label: 'Menstrupedia Comics Distributed', value: '13,000+' },
+        { label: 'Health camps over 3 years', value: '306+' },
+        { label: 'Eye screenings over 3 years', value: '2,900+' },
+        { label: 'Eye surgeries over 3 years', value: '228+' },
+        { label: 'Breast cancer screenings over 3 years', value: '1,821+' },
+        { label: 'Reusable pads distributed since 2023', value: '10,900+' },
+        { label: 'Women reached via menstrual health over 3 years', value: '5,725+' },
+        { label: 'Adolescent girls reached via menstrual comics over 3 years', value: '13,200+' },
       ],
-      summary:
-        'The 2025-26 report records health camps, screenings, surgeries, reusable pads and Menstrupedia comics.',
+      summary: 'Totals are aggregated across the three annual reports, except reusable pads, which are cumulative since 2023.',
     },
     {
       icon: '🎓',
-      title: 'Education & Livelihood Achievements (2025-26)',
+      title: 'Education & Livelihood (3 years)',
       points: [
-        { label: 'Trained in Financial Literacy', value: '3,000+' },
-        { label: 'Women Trained in Employability Skills', value: '300+' },
+        { label: 'Women reached via financial literacy over 3 years', value: '14,143+' },
+        { label: 'Women trained in employability skills over 3 years', value: '300+' },
+        { label: 'Children served at the learning centre since 2023', value: '118' },
       ],
-      summary:
-        'The 2025-26 report records financial-literacy training and employability-skills training for women.',
+      summary: 'Financial-literacy and employability totals cover all three annual reports; learning-centre service is cumulative since 2023.',
     },
     {
       icon: '🥗',
-      title: 'Nutrition & Food Support (2025-26)',
+      title: 'Nutrition & Food Support (3 years)',
       points: [
-        { label: 'Food Packets & Nutrition Support Distributed', value: '2,800+' },
+        { label: 'Nutrition packets distributed over 3 years', value: '2,800+' },
       ],
-      summary: 'The annual report records food packets and nutrition support distribution.',
+      summary: 'Total across the three annual reports.',
     },
     {
       icon: '🤝',
-      title: 'Financial Literacy (2024-25)',
+      title: 'Community Development (3 years)',
       points: [
-        { label: 'Women Reached', value: '4,333' },
+        { label: 'Wheelchairs distributed over 3 years', value: '10' },
+        { label: 'Household surveys completed over 3 years', value: '575' },
+        { label: 'Diversity & Inclusion workshop participants over 3 years', value: '300' },
+        { label: 'Kitchen gardens established since 2023', value: '11' },
       ],
-      summary: 'The 2024-25 annual report records women reached through the financial-literacy programme.',
+      summary: 'Totals are aggregated across the three annual reports, except kitchen gardens, which are cumulative since 2023.',
     },
   ];
 
@@ -58,23 +61,23 @@ export default function Impact() {
     {
       name: 'Gyaan ka Sagar',
       story: 'Libraries and books were provided across Barhanpur and two neighbouring villages in Palghar.',
-      impact: '88 students catered to',
+      impact: 'Libraries supported learning in Palghar communities',
     },
     {
       name: 'Swaasthya Mela',
       story: 'Free medicines and health check-ups were provided during health campaigns across eight villages.',
-      impact: '762 medicine recipients; 12 cataract operations',
+      impact: 'Free medicines, health checks and cataract care provided',
     },
     {
       name: 'Dapoli Learning Centre',
       story: 'The learning centre in Dapoli was maintained to serve children in the community.',
-      impact: '30 children served daily',
+      impact: '118 children served since 2023',
     },
   ];
 
   const growth = [
-    { year: '2024-25', beneficiaries: '21,962' },
-    { year: '2025-26', beneficiaries: '32,000+' },
+    { year: '2024-25', beneficiaries: '21,962', asOf: 'March 2025' },
+    { year: '2025-26', beneficiaries: '32,000+', asOf: 'March 2026' },
   ];
 
   return (
@@ -89,14 +92,14 @@ export default function Impact() {
       <section className="py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">
-            Verified 2025-26 metrics
+            Verified cumulative impact
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <StatCard icon="👥" number="32,000+" label="Lives Impacted" description="Across communities in 2025-26" />
-            <StatCard icon="💊" number="80+" label="Health Camps" description="Conducted in 2025-26" />
-            <StatCard icon="🩺" number="1,821+" label="Women Screened" description="For breast cancer in 2025-26" />
-            <StatCard icon="📍" number="8" label="Districts" description="Operating districts listed for 2025-26" />
+            <StatCard icon="👥" number="32,000+" label="Lives Impacted" description="Cumulative since 2023" />
+            <StatCard icon="💊" number="306+" label="Health Camps" description="Over 3 years" />
+            <StatCard icon="🩺" number="1,821+" label="Breast Cancer Screenings" description="Over 3 years" />
+            <StatCard icon="📊" number="14,143+" label="Women Reached via Financial Literacy" description="Over 3 years" />
           </div>
         </div>
       </section>
@@ -152,8 +155,9 @@ export default function Impact() {
       <section className="border-y border-[var(--border-soft)] bg-[var(--off-white)] py-16">
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-center text-3xl font-bold text-[var(--navy)] md:text-4xl">
-            Year-wise Impact Progression
+            Year-wise Lives Impacted (Cumulative)
           </h2>
+          <p className="text-center text-[var(--text-muted)]">Figures are cumulative since 2023; they are not added together.</p>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {growth.map((year) => (
@@ -161,7 +165,7 @@ export default function Impact() {
                 <div className="font-heading text-4xl font-bold text-[var(--navy)]">{year.year}</div>
                 <p className="mt-4 text-[var(--text-muted)]">
                   <span className="font-bold text-[var(--blue)]">{year.beneficiaries}</span>{' '}
-                  {year.year === '2024-25' ? 'lives reached' : 'lives impacted'}
+                  lives impacted cumulatively as of {year.asOf}
                 </p>
               </div>
             ))}
@@ -174,7 +178,7 @@ export default function Impact() {
           <div className="space-y-6">
             <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">Geographic Reach</h2>
             <p className="text-sm leading-relaxed text-white/80">
-              The 2025-26 operating districts are {OPERATING_DISTRICTS.join(', ')}.
+              Operating communities span {OPERATING_DISTRICTS.join(', ')}.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {OPERATING_DISTRICTS.map((district) => (

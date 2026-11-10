@@ -18,7 +18,7 @@ export default function ProjectsPage() {
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Projects & Field Stories' }]}
         eyebrow="Our Work"
         title="Projects & Field Stories"
-        subtitle="Real work, real communities, real change across rural Maharashtra."
+        subtitle="Real work, real communities, real change across Maharashtra."
       />
 
       <section className="section">

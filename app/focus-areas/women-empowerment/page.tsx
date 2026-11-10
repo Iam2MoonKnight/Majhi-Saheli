@@ -31,7 +31,7 @@ export default function WomenEmpowermentPage() {
               <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Our Impact</h2>
               <div className="space-y-4 text-[var(--text-muted)]">
                 <p>
-                  We work towards comprehensive women empowerment by building leadership capacity, protecting rights, and creating economic pathways for rural women.
+                  We work towards comprehensive women empowerment by building leadership capacity, protecting rights, and creating economic pathways for women.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -112,8 +112,8 @@ export default function WomenEmpowermentPage() {
           <h2 className="font-heading text-4xl font-bold text-white">Detailed Content</h2>
           <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-white/80">
             <li>Saheli Circle supports women-led local action and collective learning.</li>
-            <li>Financial literacy reached 4,333 women in 2024-25; 3,000+ people were trained in 2025-26.</li>
-            <li>300+ women were trained in employability skills in 2025-26.</li>
+            <li>Financial literacy reached 14,143+ women over 3 years.</li>
+            <li>300+ women were trained in employability skills over 3 years.</li>
             <li>Activities include SHG group sales training and menstrual health and hygiene awareness.</li>
           </ul>
           <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
@@ -135,10 +135,9 @@ export default function WomenEmpowermentPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
               { title: 'Health', url: '/focus-areas/health', icon: '🏥' },
-              { title: 'Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
               { title: 'Education', url: '/focus-areas/education', icon: '📚' },
               { title: 'Nutrition', url: '/focus-areas/nutrition', icon: '🥗' },
-              { title: 'Community Development', url: '/focus-areas/community-development', icon: '🏘️' },
+              { title: 'Community Development through Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
             ].map((area) => (
               <Link key={area.url} href={area.url} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <p className="text-3xl mb-2">{area.icon}</p>

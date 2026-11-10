@@ -36,19 +36,19 @@ export default function HealthPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>80+ health camps</strong> conducted in 2025-26</span>
+                    <span><strong>306+ health camps</strong> over 3 years</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>1,821+ women</strong> screened for breast cancer in 2025-26</span>
+                    <span><strong>1,821+ women</strong> screened for breast cancer over 3 years</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>2,500+ general health beneficiaries</strong> in 2025-26</span>
+                    <span><strong>2,900+ eye screenings</strong> over 3 years</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>800+ eye screenings</strong> and <strong>70+ cataract surgeries</strong> in 2025-26</span>
+                    <span><strong>228+ eye surgeries</strong> over 3 years</span>
                   </li>
                 </ul>
               </div>
@@ -74,7 +74,7 @@ export default function HealthPage() {
             {[
               {
                 title: 'Medical Camps',
-                description: 'Free health check-ups, screening, and basic treatment in rural areas',
+                description: 'Free health check-ups, screening, and basic treatment in underserved areas',
               },
               {
                 title: 'Maternal Health',
@@ -112,12 +112,13 @@ export default function HealthPage() {
           <h2 className="font-heading text-4xl font-bold text-white">Detailed Content</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              ['80+', 'Health camps conducted'],
-              ['1,821+', 'Women screened for breast cancer'],
-              ['2,500+', 'General health beneficiaries'],
-              ['10,000+', 'Reusable pads distributed'],
-              ['800+ / 70+', 'Eye screenings / cataract surgeries'],
-              ['13,000+', 'Menstrupedia comics distributed'],
+              ['306+', 'Health camps over 3 years'],
+              ['2,900+', 'Eye screenings over 3 years'],
+              ['228+', 'Eye surgeries over 3 years'],
+              ['1,821+', 'Breast cancer screenings over 3 years'],
+              ['10,900+', 'Reusable pads distributed since 2023'],
+              ['5,725+', 'Women reached via menstrual health over 3 years'],
+              ['13,200+', 'Adolescent girls reached via menstrual comics over 3 years'],
             ].map(([value, label]) => (
               <div key={label} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 shadow-sm">
                 <p className="font-heading text-2xl font-bold text-[var(--navy)]">{value}</p>
@@ -147,11 +148,10 @@ export default function HealthPage() {
           <h2 className="font-heading text-2xl font-bold text-[var(--navy)] text-center">Explore Other Focus Areas</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { title: 'Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
               { title: 'Education', url: '/focus-areas/education', icon: '📚' },
               { title: 'Nutrition', url: '/focus-areas/nutrition', icon: '🥗' },
               { title: 'Women Empowerment', url: '/focus-areas/women-empowerment', icon: '👩' },
-              { title: 'Community Development', url: '/focus-areas/community-development', icon: '🏘️' },
+              { title: 'Community Development through Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
             ].map((area) => (
               <Link key={area.url} href={area.url} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <p className="text-3xl mb-2">{area.icon}</p>

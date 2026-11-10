@@ -20,7 +20,7 @@ export const fallbackCampaigns: CampaignItem[] = [
     id: 'education-kits-2024',
     title: 'Back-to-School Kits for Girls',
     description:
-      'Provide uniforms, books, and learning kits for 600 girls across remote villages to keep them in school.',
+      'Provide uniforms, books, and learning kits to help girls stay in school.',
     goalAmount: 750000,
     raisedAmount: 420000,
     status: 'ongoing',
@@ -44,7 +44,7 @@ export const fallbackCampaigns: CampaignItem[] = [
     id: 'skill-atelier',
     title: 'Skill Atelier for Women Artisans',
     description:
-      'A six-month training program in tailoring, embroidery, and market access for 120 women.',
+      'A training program in tailoring, embroidery, and market access for women.',
     goalAmount: 650000,
     raisedAmount: 0,
     status: 'upcoming',
@@ -56,7 +56,7 @@ export const fallbackCampaigns: CampaignItem[] = [
     id: 'clean-water-villages',
     title: 'Clean Water for Villages',
     description:
-      'Completed installation of filtration units and safe water kiosks serving 3 villages.',
+      'Completed installation of filtration units and safe water kiosks for communities.',
     goalAmount: 300000,
     raisedAmount: 300000,
     status: 'completed',
@@ -86,7 +86,7 @@ export const mapSupabaseCampaign = (campaign: SupabaseCampaign): CampaignItem =>
     raisedAmount: campaign.raised_amount,
     status,
     category: 'education',
-    location: 'Rural Maharashtra',
+    location: 'Maharashtra',
     image: campaign.featured_image ?? null,
   };
 };

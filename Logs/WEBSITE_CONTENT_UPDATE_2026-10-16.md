@@ -376,3 +376,39 @@ Implemented one-time donation Cashfree Payment Gateway backend and checkout flow
 
 - Verification results are documented from this implementation run only where actually executed.
 - Route-count reporting is omitted here until explicitly measured in this run.
+
+## Content Update — 2026-11-10
+
+### Changes
+
+1. Removed rural/urban terminology from 69 occurrences across 19 public source files. The hero uses “India” rather than “Underprivileged India” because the latter reads awkwardly in the existing headline.
+2. Replaced four district-count claims across three files with “across Maharashtra”; the district name lists are preserved.
+3. Added Hingoli to `OPERATING_DISTRICTS`, making the shared district list: Thane, Palghar, Mumbai, Pune, Raigad, Ratnagiri, Solapur, Dharashiv and Hingoli. Homepage, About, Contact and Footer use this list.
+4. Updated lives impacted as cumulative: 32,000+ since 2023; year-wise figures are 21,962 as of March 2025 and 32,000+ as of March 2026. They are not summed.
+5. Replaced other displayed annual metrics with the supplied 3-year totals:
+  - Health camps: **306+** over 3 years
+  - Eye screenings: **2,900+** over 3 years
+  - Eye surgeries: **228+** over 3 years
+  - Women reached via financial literacy: **14,143+** over 3 years
+  - Women reached via menstrual health: **5,725+** over 3 years
+  - Adolescent girls reached via menstrual comics: **13,200+** over 3 years
+  - Reusable pads distributed: **10,900+** since 2023
+  - Breast cancer screenings: **1,821+** over 3 years
+  - Wheelchairs distributed: **10** over 3 years
+  - Nutrition packets distributed: **2,800+** over 3 years
+  - Household surveys completed: **575** over 3 years
+  - Women trained in employability skills: **300+** over 3 years
+  - Children served at the learning centre: **118** since 2023
+  - Diversity & Inclusion workshop participants: **300** over 3 years
+  - Kitchen gardens established: **11** since 2023
+6. Replaced sustainable-tourism wording with “eco tourism” in three occurrences across two files.
+7. Replaced the Community Development focus-area page with a redirect to `/focus-areas/livelihood`, renamed that area “Community Development through Livelihood,” moved its water-harvesting, kitchen-garden, Swachh Maharashtra Abhiyan 2.0, disability-inclusion, community-mobilization and SHG-governance content, and removed the separate focus-area links.
+8. Removed FCRA claims from public content and retained the valid 80G wording. Unsupported impact and partner counts were removed; donation descriptions no longer state unverified beneficiary counts.
+
+### Verification
+
+- Zero rural/urban, numbered-district, FCRA or sustainable-tourism matches in the requested public source folders.
+- `npx tsc --noEmit` passed.
+- `npm run build` passed and generated all 51 routes. Existing Supabase DNS failures were logged; established fallback behavior allowed the build to complete.
+- GET `/focus-areas/community-development` returned **307 Temporary Redirect** with `Location: /focus-areas/livelihood`. Next.js `redirect()` uses 307 here; it does not emit the task’s expected 302.
+- No changes were made to admin pages, Supabase functions, auth, RLS or environment files.

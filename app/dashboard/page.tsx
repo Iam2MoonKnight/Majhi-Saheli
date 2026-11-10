@@ -276,7 +276,7 @@ export default function Dashboard() {
                   <p className="mt-2 font-heading text-4xl font-bold text-[var(--blue)]">{donations.length}</p>
                 </div>
               </div>
-              <p className="mt-6 text-[var(--text-muted)]">Thank you for your generous support in empowering rural women.</p>
+              <p className="mt-6 text-[var(--text-muted)]">Thank you for your generous support in empowering communities.</p>
             </div>
           </div>
         )}

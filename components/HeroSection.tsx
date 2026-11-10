@@ -12,7 +12,7 @@ export default async function HeroSection() {
       title: 'Empowering Women',
       subtitle: 'Enriching Communities',
       description:
-        "Through education, healthcare, and vocational training, we're building a future where every rural woman has the opportunity to thrive and lead.",
+        "Through education, healthcare, and vocational training, we're building a future where every community has the opportunity to thrive and lead.",
       cta_text: 'Donate Now',
       cta_link: '/donate',
       image_url: null,
@@ -40,11 +40,11 @@ export default async function HeroSection() {
         <div className="space-y-7">
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-[#e85d75] pulse-dot" />
-            <span className="eyebrow text-white">Empowering Rural Maharashtra</span>
+            <span className="eyebrow text-white">Empowering Communities Across Maharashtra</span>
           </span>
 
           <h1 className="font-heading text-[2.4rem] font-extrabold leading-[1.05] text-white sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-            Building a Resilient &amp; Self&nbsp;Sufficient <span className="text-[#e85d75]">Rural India</span>
+            Building a Resilient &amp; Self&nbsp;Sufficient <span className="text-[#e85d75]">India</span>
           </h1>
 
           <p className="max-w-xl text-base leading-relaxed text-white/80 md:text-lg">{heroContent.description}</p>
@@ -62,9 +62,9 @@ export default async function HeroSection() {
 
           <div className="grid max-w-lg grid-cols-3 gap-6 border-t border-white/15 pt-7">
             {[
-              ['32,000+', 'Lives impacted (2025-26)'],
-              ['8', 'Operating districts'],
-              ['80+', 'Health camps (2025-26)'],
+              ['32,000+', 'Lives impacted since 2023'],
+              ['306+', 'Health camps over 3 years'],
+              ['2,900+', 'Eye screenings over 3 years'],
             ].map(([value, label]) => (
               <div key={label}>
                 <p className="stat-value text-3xl text-white md:text-4xl">{value}</p>
@@ -87,8 +87,8 @@ export default async function HeroSection() {
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#14293f] via-[#14293f]/55 to-transparent p-6">
               <div className="inline-flex items-center gap-2.5 rounded-full bg-[var(--navy)] px-4 py-2.5 shadow-[0_10px_24px_rgba(232,93,117,0.4)]">
-                <span className="font-heading text-2xl font-extrabold leading-none text-white">8</span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-white">Districts Served</span>
+                <span className="font-heading text-2xl font-extrabold leading-none text-white">Across</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-white">Maharashtra</span>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
   'Donate',
-  'Your generous donation helps Mazi Saheli Charitable Trust empower rural women in Maharashtra through education, health, and skills development. 80G certified and FCRA registered.',
+  'Your generous donation helps Mazi Saheli Charitable Trust empower communities in Maharashtra through education, health, and skills development. 80G certified.',
 );
 
 const IMPACT_LEVELS: { icon: IconName; title: string; desc: string }[] = [
@@ -63,7 +63,7 @@ export default function Donate() {
             Your Gift Changes <span className="text-[#e85d75]">Real Lives</span> in Maharashtra
           </>
         }
-        subtitle="Your generous donation helps us empower rural women through education, health, and skills development."
+        subtitle="Your generous donation helps us empower communities through education, health, and skills development."
       />
 
       {/* ----------------------------------------------------- DONATION CARD */}

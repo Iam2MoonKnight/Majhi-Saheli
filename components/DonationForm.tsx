@@ -13,11 +13,11 @@ interface DonationFormProps {
 }
 
 const AMOUNTS = [
-  { value: '500', label: '₹500', note: 'Eye camp for 10' },
+  { value: '500', label: '₹500', note: 'Support eye care' },
   { value: '1000', label: '₹1,000', note: 'Monthly learning centre' },
   { value: '2500', label: '₹2,500', note: 'Full health camp' },
-  { value: '5000', label: '₹5,000', note: 'Skill training for 5 women' },
-  { value: '10000', label: '₹10,000', note: 'Support 10 women entrepreneurs' },
+  { value: '5000', label: '₹5,000', note: 'Support skills training' },
+  { value: '10000', label: '₹10,000', note: 'Support women-led livelihoods' },
   { value: '25000', label: '₹25,000', note: 'District-level intervention' },
 ];
 

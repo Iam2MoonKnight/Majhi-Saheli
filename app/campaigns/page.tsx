@@ -33,7 +33,7 @@ export default async function CampaignsPage() {
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Campaigns' }]}
         eyebrow="Campaigns"
         title="Support our campaigns"
-        subtitle="Targeted fundraising efforts to meet urgent needs in education, health, and training for rural women."
+        subtitle="Targeted fundraising efforts to meet urgent needs in education, health, and training for underserved communities."
       />
 
       <section className="py-16">

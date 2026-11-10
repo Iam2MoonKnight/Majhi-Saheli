@@ -25,7 +25,7 @@ export default async function Programs() {
       title: 'Girl Child Education',
       category: 'education' as const,
       description:
-        'Providing quality primary and secondary education to girls in remote rural areas. Includes literacy programs, numeracy skills, and STEM education to prepare girls for higher education and employment.',
+        'Providing quality primary and secondary education to girls in underserved areas. Includes literacy programs, numeracy skills, and STEM education to prepare girls for higher education and employment.',
       created_at: new Date().toISOString(),
     },
     {
@@ -41,7 +41,7 @@ export default async function Programs() {
       title: 'Health Camps',
       category: 'health' as const,
       description:
-        'Regular health check-ups, maternal health awareness, immunization programs, and nutrition counseling for women and children in rural communities.',
+        'Regular health check-ups, maternal health awareness, immunization programs, and nutrition counseling for women and children in communities.',
       created_at: new Date().toISOString(),
     },
     {

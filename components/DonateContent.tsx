@@ -7,11 +7,11 @@ import SectionEyebrow from '@/components/SectionEyebrow';
 import Icon from '@/components/icons';
 
 const IMPACT = [
-  { amount: '₹100', impact: 'Provides educational materials for one girl' },
-  { amount: '₹500', impact: 'Supports one woman in vocational training' },
-  { amount: '₹1,000', impact: 'Funds a health camp for 50 women' },
-  { amount: '₹5,000', impact: "Sponsors one girl's education for a year" },
-  { amount: '₹10,000', impact: 'Supports 10 women entrepreneurs' },
+  { amount: '₹100', impact: 'Supports access to educational materials' },
+  { amount: '₹500', impact: 'Supports vocational training' },
+  { amount: '₹1,000', impact: 'Supports community health initiatives' },
+  { amount: '₹5,000', impact: 'Supports access to education' },
+  { amount: '₹10,000', impact: 'Supports women-led livelihoods' },
 ];
 
 export function DonateContent() {

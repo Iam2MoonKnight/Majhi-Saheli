@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Empowering rural women and communities across Maharashtra through education, health, livelihood and sustainable community leadership.",
-  keywords: "NGO, women empowerment, education, health, rural women, skills development, Maharashtra",
+    "Empowering communities across Maharashtra through education, health, livelihood and sustainable community leadership.",
+  keywords: "NGO, women empowerment, education, health, community development, skills development, Maharashtra",
   robots: "index, follow",
   openGraph: {
     title: SITE_NAME,
     description:
-      "Empowering rural women and communities across Maharashtra through education, health, livelihood and sustainable community leadership.",
+      "Empowering communities across Maharashtra through education, health, livelihood and sustainable community leadership.",
     type: "website",
     siteName: SITE_NAME,
     locale: "en_IN",

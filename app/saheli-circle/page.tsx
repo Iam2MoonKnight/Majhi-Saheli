@@ -32,28 +32,28 @@ export default function SaheliCircle() {
       title: 'Women\'s Skill-Sharing Workshop',
       location: 'Village Community Center',
       desc: 'Women from different circles share techniques in traditional crafts, food processing, and agriculture.',
-      attendees: '50+ women',
+      attendees: 'Women participants',
     },
     {
       date: 'March 22, 2024',
       title: 'Health Awareness Session',
       location: 'Outdoor community gathering',
       desc: 'A practical session on reproductive health, nutrition, and preventive care with our field health team.',
-      attendees: '30+ women',
+      attendees: 'Women participants',
     },
     {
       date: 'April 5, 2024',
       title: 'Circle Leaders Training',
       location: 'Main Office',
       desc: 'Facilitation and group leadership training for coordinators to improve circle quality and continuity.',
-      attendees: '20+ coordinators',
+      attendees: 'Circle coordinators',
     },
     {
       date: 'April 20, 2024',
       title: 'Annual Saheli Circle Festival',
       location: 'District Grounds',
       desc: 'A district-wide gathering celebrating women-led initiatives through showcases, performances, and dialogue.',
-      attendees: '500+ women',
+      attendees: 'Community gathering',
     },
   ];
 
@@ -85,7 +85,7 @@ export default function SaheliCircle() {
       title: 'Gram Vikas Circle',
       location: 'Village A',
       story:
-        'Started with 10 women who met weekly to discuss local challenges. Today they run a collective farm project that generates reliable annual income.',
+        'Women met regularly to discuss local challenges and developed a collective farm project that generates reliable income.',
       impact: 'Economic independence',
     },
     {
@@ -99,7 +99,7 @@ export default function SaheliCircle() {
       title: 'Mahila Vichar Circle',
       location: 'Village C',
       story:
-        'Women organized around girls\' education and pushed for local schooling access. Their efforts helped establish a school serving 50+ girls.',
+        'Women organized around girls\' education and pushed for local schooling access, supporting improved educational access.',
       impact: 'Educational access',
     },
   ];
@@ -133,7 +133,7 @@ export default function SaheliCircle() {
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Saheli Circle' }]}
         eyebrow="Community"
         title="Saheli Circle"
-        subtitle="A community initiative creating peer support, mutual learning, and collective empowerment for rural women."
+        subtitle="A community initiative creating peer support, mutual learning, and collective empowerment for women."
       />
 
       <section className="py-16">
@@ -142,7 +142,7 @@ export default function SaheliCircle() {
 
           <div className="space-y-6 text-[var(--text-muted)]">
             <p className="text-lg leading-relaxed">
-              Saheli Circle is our community initiative that creates spaces for rural women to come together, support
+              Saheli Circle is our community initiative that creates spaces for women to come together, support
               each other, and learn collectively. It&apos;s more than a program—it&apos;s a movement of women supporting women.
             </p>
 
@@ -316,7 +316,7 @@ export default function SaheliCircle() {
                 <li>Boosted self-confidence</li>
                 <li>Preservation of natural resources and indigenous heritage</li>
                 <li>Awareness of both rights and duties</li>
-                <li>Prevention of rural migration and ecological preservation</li>
+                <li>Prevention of migration and ecological preservation</li>
                 <li>Long-term sustainability</li>
               </ul>
             </div>

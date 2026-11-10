@@ -13,21 +13,22 @@ import { createPageMetadata, SITE_NAME } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
   SITE_NAME,
-  'Empowering rural women and communities across Maharashtra through education, health, livelihood and sustainable community leadership.',
+  'Empowering communities across Maharashtra through education, health, livelihood and sustainable community leadership.',
 );
 
-const FOCUS_AREAS: { icon: IconName; title: string; text: string; image: string }[] = [
+const FOCUS_AREAS: { icon: IconName; title: string; text: string; image: string; slug?: string }[] = [
   {
     icon: 'heart-pulse',
     title: 'Health',
-    text: '80+ health camps, breast cancer screening, eye care and menstrual health support.',
+    text: '306+ health camps, 1,821+ breast cancer screenings and 2,900+ eye screenings over 3 years.',
     image: '/field-images/health/health-camp.jpg',
   },
   {
     icon: 'briefcase',
-    title: 'Livelihood',
-    text: 'Financial literacy, employability skills, farmer support and sustainable rural tourism.',
+    title: 'Community Development through Livelihood',
+    text: 'Financial literacy, employability skills, farmer support and eco tourism.',
     image: '/field-images/livelihood/farmer-workshop.jpg',
+    slug: 'livelihood',
   },
   {
     icon: 'graduation-cap',
@@ -38,7 +39,7 @@ const FOCUS_AREAS: { icon: IconName; title: string; text: string; image: string 
   {
     icon: 'apple',
     title: 'Nutrition',
-    text: '2,800+ food packets and nutrition support distributed in 2025-26.',
+    text: '2,800+ nutrition packets distributed over 3 years.',
     image: '/field-images/nutrition/nutrition-session.jpg',
   },
   {
@@ -47,19 +48,13 @@ const FOCUS_AREAS: { icon: IconName; title: string; text: string; image: string 
     text: 'Financial literacy, employability skills, menstrual health and hygiene awareness.',
     image: '/field-images/women/women-leadership.jpg',
   },
-  {
-    icon: 'home',
-    title: 'Community Development',
-    text: 'Water conservation, kitchen gardens, inclusion workshops and community support.',
-    image: '/field-images/community/community-gathering.jpeg',
-  },
 ];
 
 const WHO_ROWS: { icon: IconName; label: string }[] = [
-  { icon: 'heart-pulse', label: 'Health — 80+ camps, screenings, surgeries and menstrual health support' },
+  { icon: 'heart-pulse', label: 'Health — 306+ camps, 2,900+ eye screenings and 228+ eye surgeries over 3 years' },
   { icon: 'briefcase', label: 'Livelihood — financial literacy, employability and farmer support' },
   { icon: 'graduation-cap', label: 'Education — digital classrooms, libraries and learning centres' },
-  { icon: 'sparkles', label: 'Community support — water conservation, nutrition and sustainable tourism' },
+  { icon: 'sparkles', label: 'Community support — water conservation, nutrition and eco tourism' },
 ];
 
 const ROADMAP: { index: string; title: string; text: string; icon: IconName }[] = [
@@ -88,7 +83,6 @@ const COLLABORATIVE = [
   'Nutrition',
   'Financial Literacy',
   'Skill Building & Education',
-  'Community Development',
 ];
 
 const SELF_INITIATED = ['Rainwater Harvesting & Kitchen Gardens', 'Eco-Tourism'];
@@ -100,7 +94,7 @@ const EXPLORE_MORE: { icon: IconName; title: string; description: string; href: 
     icon: 'users',
     title: 'Projects & Field Stories',
     description:
-      'Real stories from the field — health camps, eye surgeries, learning centres, farmer support, and community-led change across rural Maharashtra.',
+      'Real stories from the field — health camps, eye surgeries, learning centres, farmer support, and community-led change across Maharashtra.',
     href: '/projects',
   },
   {
@@ -138,10 +132,10 @@ export default function Home() {
           <div className="space-y-6">
             <SectionEyebrow>Who We Are</SectionEyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-[var(--navy)] md:text-4xl">
-              Empowering communities across <span className="text-[#e85d75]">8 districts</span>
+              Empowering communities <span className="text-[#e85d75]">across Maharashtra</span>
             </h2>
             <p className="leading-relaxed">
-              MSCT works across Thane, Palghar, Mumbai, Pune, Raigad, Ratnagiri, Solapur and Dharashiv through healthcare,
+              MSCT works across Thane, Palghar, Mumbai, Pune, Raigad, Ratnagiri, Solapur, Dharashiv and Hingoli through healthcare,
               financial literacy, education and community-led development initiatives.
             </p>
 
@@ -195,7 +189,7 @@ export default function Home() {
               Our focus areas
             </h2>
             <p className="mt-4 text-white/80">
-              Six connected programmes working together so families can build lives of security, dignity and independence.
+              Five focus areas working together so families can build lives of security, dignity and independence.
             </p>
           </div>
 
@@ -207,7 +201,7 @@ export default function Home() {
                 description={item.text}
                 image={item.image}
                 icon={item.icon}
-                href={`/focus-areas/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                href={`/focus-areas/${item.slug ?? item.title.toLowerCase().replace(/\s+/g, '-')}`}
                 priority={idx < 3}
               />
             ))}
@@ -256,7 +250,7 @@ export default function Home() {
               <div className="relative mt-7 h-44 overflow-hidden rounded-xl border border-[var(--border-soft)]">
                 <Image
                   src="/field-images/livelihood/livelihood-project.jpg"
-                  alt="Self-initiated rural projects"
+                  alt="Self-initiated community projects"
                   fill
                   sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover"
@@ -267,10 +261,10 @@ export default function Home() {
 
           <div className="grid grid-cols-2 gap-6 border-t border-[var(--border-soft)] pt-10 lg:grid-cols-4">
             {[
-              ['80+', 'Health Camps Conducted'],
-              ['3,000+', 'Financial Literacy Training'],
-              ['2,800+', 'Food Packets Distributed'],
-              ['300+', 'Women Trained in Employability Skills'],
+              ['306+', 'Health Camps over 3 years'],
+              ['14,143+', 'Women reached via financial literacy over 3 years'],
+              ['2,800+', 'Nutrition packets over 3 years'],
+              ['300+', 'Women trained in employability skills over 3 years'],
             ].map(([value, label]) => (
               <StatBlock key={label} value={value} label={label} />
             ))}
@@ -284,7 +278,7 @@ export default function Home() {
           <PartnerMarquee />
 
           <p className="text-center text-sm">
-            Working together with <span className="font-semibold text-[var(--navy)]">14+ organisations</span> across
+            Working together with <span className="font-semibold text-[var(--navy)]">organisations</span> across
             Maharashtra and beyond.
           </p>
         </div>
@@ -342,14 +336,13 @@ export default function Home() {
             </h2>
             <p className="text-white/75">
               Your contribution directly funds health camps, education programmes, skill training, and financial literacy
-              that transform lives across rural India.
+              that transform lives across India.
             </p>
 
             <ul className="space-y-3 pt-1">
               {[
                 'Tax exemption under Section 80G',
                 '100% funds go to field programmes',
-                'FCRA registered – international donations accepted',
                 'Transparent impact reporting to all donors',
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-white/85">

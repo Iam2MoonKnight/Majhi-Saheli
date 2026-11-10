@@ -11,7 +11,7 @@ import { createPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = createPageMetadata(
   'Contact Us',
-  'Get in touch with Mazi Saheli Charitable Trust — headquartered in Maharashtra, with programmes across eight districts.',
+  'Get in touch with Mazi Saheli Charitable Trust — headquartered in Maharashtra, with programmes across the state.',
 );
 
 const districtOffices = OPERATING_DISTRICTS;
@@ -197,7 +197,7 @@ export default function Contact() {
             </div>
 
             <p className="absolute bottom-5 left-0 right-0 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--text-muted)]">
-              MSCT Network — 8 Districts
+              MSCT Network — Maharashtra
             </p>
           </div>
         </div>

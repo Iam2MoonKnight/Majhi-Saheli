@@ -15,10 +15,9 @@ const NAVIGATE = [
 const FOCUS_AREAS = [
   { href: '/focus-areas/health', label: 'Health' },
   { href: '/focus-areas/education', label: 'Education' },
-  { href: '/focus-areas/livelihood', label: 'Livelihood' },
+  { href: '/focus-areas/livelihood', label: 'Community Development through Livelihood' },
   { href: '/focus-areas/nutrition', label: 'Nutrition' },
   { href: '/focus-areas/women-empowerment', label: 'Women Empowerment' },
-  { href: '/focus-areas/community-development', label: 'Community Development' },
 ];
 
 const SOCIALS: { label: string; icon: IconName }[] = [
@@ -51,7 +50,7 @@ export default function Footer() {
             </div>
 
             <p className="text-sm leading-relaxed text-[var(--text-muted)]">
-              Let&rsquo;s build a better tomorrow. Empowering rural women and communities across Maharashtra through
+              Let&rsquo;s build a better tomorrow. Empowering communities across Maharashtra through
               education, health, livelihood and community-led development.
             </p>
 

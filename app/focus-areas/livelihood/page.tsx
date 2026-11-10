@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
-  'Livelihood Development',
-  'Explore Mazi Saheli Charitable Trust livelihood development programmes.',
+  'Community Development through Livelihood',
+  'Explore Mazi Saheli Charitable Trust community development and livelihood programmes.',
 );
 
 export default function LivelihoodPage() {
@@ -16,7 +16,7 @@ export default function LivelihoodPage() {
           <Link href="/" className="mb-4 inline-flex items-center text-white/80 hover:text-white transition-colors">
             <span className="mr-2">←</span> Back to Home
           </Link>
-          <h1 className="font-heading text-5xl font-bold text-white mt-4">💼 Livelihood Development</h1>
+          <h1 className="font-heading text-5xl font-bold text-white mt-4">💼 Community Development through Livelihood</h1>
           <p className="mt-4 text-lg text-white/85 max-w-2xl">
             Empowering communities through financial literacy, entrepreneurship, and sustainable livelihoods.
           </p>
@@ -36,15 +36,15 @@ export default function LivelihoodPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>3,000+ people</strong> trained in financial literacy in 2025-26</span>
+                    <span><strong>14,143+ women</strong> reached through financial literacy over 3 years</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>300+ women</strong> trained in employability skills in 2025-26</span>
+                    <span><strong>300+ women</strong> trained in employability skills over 3 years</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>4,333 women</strong> reached through financial literacy in 2024-25</span>
+                    <span><strong>11</strong> kitchen gardens established since 2023</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
@@ -109,30 +109,33 @@ export default function LivelihoodPage() {
       {/* Content Placeholder */}
       <section className="py-16 bg-[var(--navy)]">
         <div className="editorial-section space-y-8">
-          <h2 className="font-heading text-4xl font-bold text-white">Detailed Content</h2>
+          <h2 className="font-heading text-4xl font-bold text-white">Community Development through Livelihood</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 shadow-sm">
-              <p className="font-heading text-2xl font-bold text-[var(--navy)]">3,000+</p>
-              <p className="mt-2 text-sm text-[var(--text-muted)]">Trained in financial literacy (2025-26)</p>
+              <p className="font-heading text-2xl font-bold text-[var(--navy)]">14,143+</p>
+              <p className="mt-2 text-sm text-[var(--text-muted)]">Women reached through financial literacy over 3 years</p>
             </div>
             <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 shadow-sm">
               <p className="font-heading text-2xl font-bold text-[var(--navy)]">300+</p>
-              <p className="mt-2 text-sm text-[var(--text-muted)]">Women trained in employability skills (2025-26)</p>
+              <p className="mt-2 text-sm text-[var(--text-muted)]">Women trained in employability skills over 3 years</p>
             </div>
             <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 shadow-sm">
-              <p className="font-heading text-2xl font-bold text-[var(--navy)]">4,333</p>
-              <p className="mt-2 text-sm text-[var(--text-muted)]">Women reached in financial literacy (2024-25)</p>
+              <p className="font-heading text-2xl font-bold text-[var(--navy)]">11</p>
+              <p className="mt-2 text-sm text-[var(--text-muted)]">Kitchen gardens established since 2023</p>
             </div>
           </div>
           <ul className="list-inside list-disc space-y-2 text-sm leading-relaxed text-white/80">
             <li>Farmer IoT support, soil health, water conservation and sustainable farming.</li>
-            <li>Community-based eco-tourism and SHG group sales training.</li>
-            <li>PwD livelihood programme.</li>
+            <li>Community-based eco tourism and SHG group sales training.</li>
+            <li>Rainwater harvesting systems and kitchen gardens, with 11 gardens established since 2023.</li>
+            <li>Swachh Maharashtra Abhiyan 2.0, including 575 household surveys over 3 years.</li>
+            <li>Disability inclusion, including 10 wheelchairs distributed over 3 years and 300 Diversity &amp; Inclusion workshop participants over 3 years.</li>
+            <li>Community mobilization and self-help group governance.</li>
           </ul>
           <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
             <Image
               src="/field-images/livelihood/farmer-workshop.jpg"
-              alt="Community members gathered at a solar-powered rural farming project"
+              alt="Community members gathered at a solar-powered farming project"
               width={1600}
               height={900}
               className="min-h-48 w-full object-cover"
@@ -151,7 +154,7 @@ export default function LivelihoodPage() {
               { title: 'Education', url: '/focus-areas/education', icon: '📚' },
               { title: 'Nutrition', url: '/focus-areas/nutrition', icon: '🥗' },
               { title: 'Women Empowerment', url: '/focus-areas/women-empowerment', icon: '👩' },
-              { title: 'Community Development', url: '/focus-areas/community-development', icon: '🏘️' },
+              { title: 'Community Development through Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
             ].map((area) => (
               <Link key={area.url} href={area.url} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <p className="text-3xl mb-2">{area.icon}</p>

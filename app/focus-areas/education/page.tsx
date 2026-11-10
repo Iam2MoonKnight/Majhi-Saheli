@@ -18,7 +18,7 @@ export default function EducationPage() {
           </Link>
           <h1 className="font-heading text-5xl font-bold text-white mt-4">📚 Education & Skill Building</h1>
           <p className="mt-4 text-lg text-white/85 max-w-2xl">
-            Fostering learning and skill development across rural communities.
+            Fostering learning and skill development across communities.
           </p>
         </div>
       </section>
@@ -36,11 +36,11 @@ export default function EducationPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Dapoli Learning Centre</strong> served 30 children daily in 2024-25</span>
+                    <span><strong>118 children</strong> served at the learning centre since 2023</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Gyaan ka Sagar libraries</strong> catered to 88 students in 2023-24</span>
+                    <span><strong>Gyaan ka Sagar libraries</strong> supported learning in Palghar communities</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
@@ -90,7 +90,7 @@ export default function EducationPage() {
               },
               {
                 title: 'Teacher Training',
-                description: 'Capacity building for educators in rural schools',
+                description: 'Capacity building for educators in community schools',
               },
               {
                 title: 'Scholarship Support',
@@ -111,15 +111,15 @@ export default function EducationPage() {
         <div className="editorial-section space-y-8">
           <h2 className="font-heading text-4xl font-bold text-white">Detailed Content</h2>
           <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-white/80">
-            <li>Digital classrooms, computer labs and rural school infrastructure repair.</li>
+            <li>Digital classrooms, computer labs and school infrastructure repair.</li>
             <li>Baala painting, and toys and game box distribution to Anganwadi centres.</li>
-            <li>The Dapoli learning centre served 30 children daily in 2024-25.</li>
-            <li>Gyaan ka Sagar libraries in Barhanpur and two neighbouring Palghar villages catered to 88 students in 2023-24.</li>
+            <li>The learning centre has served 118 children since 2023.</li>
+            <li>Gyaan ka Sagar libraries in Barhanpur and neighbouring Palghar communities provide access to books and learning resources.</li>
           </ul>
           <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
             <Image
               src="/field-images/education/digital-learning.jpg"
-              alt="Students learning in a rural computer classroom"
+              alt="Students learning in a community computer classroom"
               width={1600}
               height={900}
               className="min-h-48 w-full object-cover"
@@ -135,10 +135,9 @@ export default function EducationPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
               { title: 'Health', url: '/focus-areas/health', icon: '🏥' },
-              { title: 'Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
               { title: 'Nutrition', url: '/focus-areas/nutrition', icon: '🥗' },
               { title: 'Women Empowerment', url: '/focus-areas/women-empowerment', icon: '👩' },
-              { title: 'Community Development', url: '/focus-areas/community-development', icon: '🏘️' },
+              { title: 'Community Development through Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
             ].map((area) => (
               <Link key={area.url} href={area.url} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <p className="text-3xl mb-2">{area.icon}</p>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Icon from './icons';
 
-const WORDS = ['Donate Now', 'Fund a Health Camp', 'Sponsor a Learning Centre', 'Support Rural Livelihoods'];
+const WORDS = ['Donate Now', 'Fund a Health Camp', 'Sponsor a Learning Centre', 'Support Community Livelihoods'];
 
 function Run() {
   return (

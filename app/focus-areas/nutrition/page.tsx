@@ -18,7 +18,7 @@ export default function NutritionPage() {
           </Link>
           <h1 className="font-heading text-5xl font-bold text-white mt-4">🥗 Nutrition & Food Security</h1>
           <p className="mt-4 text-lg text-white/85 max-w-2xl">
-            Promoting nutrition, food security, and sustainable agriculture in rural communities.
+            Promoting nutrition, food security, and sustainable agriculture in communities.
           </p>
         </div>
       </section>
@@ -31,16 +31,16 @@ export default function NutritionPage() {
               <h2 className="font-heading text-4xl font-bold text-[var(--navy)]">Our Impact</h2>
               <div className="space-y-4 text-[var(--text-muted)]">
                 <p>
-                  Our nutrition programs focus on improving food security and dietary diversity, particularly for children and mothers in rural areas.
+                  Our nutrition programs focus on improving food security and dietary diversity, particularly for children and mothers in underserved areas.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>2,800+ food packets</strong> and nutrition support distributed in 2025-26</span>
+                    <span><strong>2,800+ nutrition packets</strong> distributed over 3 years</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
-                    <span><strong>Kitchen gardens and rooftop water harvesting</strong> for 11 households in 2024-25</span>
+                    <span><strong>11 kitchen gardens</strong> established since 2023, alongside water harvesting</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-[var(--accent)] font-bold">•</span>
@@ -113,7 +113,7 @@ export default function NutritionPage() {
           <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 shadow-sm">
             <p className="font-heading text-3xl font-bold text-[var(--navy)]">2,800+</p>
             <p className="mt-2 text-sm text-[var(--text-muted)]">
-              Food packets and nutrition support distributed in 2025-26.
+              Nutrition packets distributed over 3 years.
             </p>
           </div>
           <div className="overflow-hidden rounded-2xl border border-[var(--border-soft)]">
@@ -135,10 +135,9 @@ export default function NutritionPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
               { title: 'Health', url: '/focus-areas/health', icon: '🏥' },
-              { title: 'Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
               { title: 'Education', url: '/focus-areas/education', icon: '📚' },
               { title: 'Women Empowerment', url: '/focus-areas/women-empowerment', icon: '👩' },
-              { title: 'Community Development', url: '/focus-areas/community-development', icon: '🏘️' },
+              { title: 'Community Development through Livelihood', url: '/focus-areas/livelihood', icon: '💼' },
             ].map((area) => (
               <Link key={area.url} href={area.url} className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-4 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <p className="text-3xl mb-2">{area.icon}</p>
